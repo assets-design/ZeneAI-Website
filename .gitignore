@@ -1,0 +1,38 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+build/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.cursor/
+.cursor-edge-crops/
+.cursor-edge-crops-fine/
+
+# Local backups
+Backup File/
+
+# Vite
+*.local
+
+# Test / tooling caches
+.playwright/
+coverage/
+*.tsbuildinfo
+
+# Optional local installs
+package-lock.json.bak

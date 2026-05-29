@@ -1,0 +1,211 @@
+/* Contact / section-scroll pilot — single scroll container, snap at section starts */
+
+html.section-scroll-active,
+html.section-scroll-active body {
+  overflow: hidden;
+  height: 100%;
+}
+
+.layout-section-scroll {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  overflow: hidden;
+  background: #000;
+}
+
+.layout-section-scroll > header {
+  flex-shrink: 0;
+}
+
+.section-scroll-root {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-type: y proximity;
+  scroll-behavior: auto;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.section-scroll-root::-webkit-scrollbar {
+  display: none;
+}
+
+.section-scroll-panel {
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1px;
+}
+
+.section-scroll-panel > :first-child {
+  width: 100%;
+}
+
+/* Hero — fill one viewport, main content vertically centered */
+.section-scroll-panel--hero {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  height: var(--section-viewport-h, 100%);
+  min-height: var(--section-viewport-h, 100%);
+  max-height: var(--section-viewport-h, 100%);
+  overflow: hidden;
+  justify-content: center;
+
+  --hero-text-headline: clamp(32px, 5vw, 72px);
+  --hero-text-body: clamp(18px, 2.2vw, 30px);
+  --contact-hero-padding-top: clamp(20px, 3vh, 48px);
+  --contact-hero-padding-bottom: clamp(16px, 2.5vh, 32px);
+  --contact-hero-title-to-subtitle: clamp(16px, 2.5vh, 40px);
+  --contact-hero-columns-gap: clamp(16px, 2vh, 32px);
+  --contact-hero-illustration-h: clamp(220px, 34vh, 414px);
+  --contact-hero-illustration-w: min(100%, clamp(320px, 42vw, 585px));
+}
+
+.section-scroll-panel--hero > :first-child {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: visible;
+}
+
+.section-scroll-panel--hero .contact-hero-panel-body {
+  flex: 0 1 auto;
+  width: 100%;
+}
+
+.section-scroll-panel--hero .contact-hero-panel-image {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+}
+
+.section-scroll-panel--hero .contact-hero-panel-image img {
+  max-height: var(--contact-hero-illustration-h);
+  width: var(--contact-hero-illustration-w);
+  object-fit: contain;
+}
+
+@media (max-width: 1279px) {
+  .contact-hero-content {
+    padding-top: calc(var(--contact-hero-apply-top) + 72px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-scroll-panel--hero > :first-child {
+    justify-content: flex-start;
+  }
+
+  .section-scroll-panel--hero .contact-hero-panel-body {
+    flex: 1;
+    min-height: 0;
+    height: 100%;
+    align-items: stretch;
+  }
+
+  .section-scroll-panel--hero .contact-hero-panel-body > :first-child {
+    align-self: stretch;
+  }
+
+  .section-scroll-panel--hero .contact-hero-panel-image {
+    align-self: stretch;
+    align-items: flex-end;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+  }
+}
+
+/* Form — natural height, scrolls freely into footer */
+.section-scroll-panel--form {
+  min-height: var(--section-viewport-h, 100%);
+  justify-content: flex-start;
+}
+
+.section-scroll-panel--form > :first-child {
+  flex: 0 0 auto;
+}
+
+/* Footer — normal document flow, no snap rules */
+.section-scroll-tail {
+  flex-shrink: 0;
+  width: 100%;
+  padding-top: 1px;
+  padding-bottom: 5px;
+}
+
+/* Reveal animations inside panels */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-48px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(48px);
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-scroll-root {
+    scroll-snap-type: none;
+  }
+
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

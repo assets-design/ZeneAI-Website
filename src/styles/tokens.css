@@ -1,0 +1,1215 @@
+/* ============================================================
+   DESIGN TOKENS — Zene AI
+   Source: Figma file itgCIed2YDmEN6B3Ks4o7y (get_variable_defs)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+:root {
+  /* --- Fonts (locked) --------------------------------------- */
+  --font-heading : 'Fira Sans Extra Condensed', sans-serif;
+  --font-body    : 'DM Sans', sans-serif;
+
+  /* --- Brand colors ---------------------------------------- */
+  --color-primary       : #0d6efd;
+  --color-primary-hover : #0a5cbf;
+  --color-secondary     : #00c5cc;
+  --color-accent        : #f97316;   /* orange — from Figma illustrations */
+  --color-zene-blue     : #177ec0;
+  --color-zene-cyan     : #78f3fa;
+  --color-zene-yellow   : #fef18b;
+  --color-zene-pink     : #fec9c9;
+  --color-zene-green    : #baf8d0;
+
+  /* --- Neutral / UI ---------------------------------------- */
+  --color-bg            : #ffffff;
+  --color-fg            : #111827;
+  --color-muted         : #6b7280;
+  --color-border        : #e5e7eb;
+  --color-surface       : #f9fafb;
+
+  /* --- Header (Figma Group 511 — node 967:1776) -------------- */
+  --gradient-header: linear-gradient(93.16deg, #177ec0 39.23%, #78f3fa 100%);
+  --header-max-width     : 1910px;
+  --header-announcement-h: 55px;
+  --header-announcement-padding-y: calc(10px * var(--header-font-scale));
+  --header-announcement-padding-x: 16px;
+  --header-announcement-line-height: 1.35;
+  --header-nav-h         : 88px;
+  --header-padding-x     : 115px;
+  --header-announcement-radius: 14px;
+  --header-nav-radius    : 20px;
+  --header-pdf-radius    : 72.5px;
+
+  /* Typography rule: render at 80% of Figma size (20% reduction) */
+  --header-font-scale           : 0.8;
+  --header-text-announcement    : calc(22px * var(--header-font-scale)); /* 17.6px */
+  --header-text-pdf             : calc(32px * var(--header-font-scale)); /* 25.6px */
+  --header-text-menu            : calc(42px * var(--header-font-scale)); /* 33.6px */
+  --header-text-nav-drawer      : calc(18px * var(--header-font-scale)); /* 14.4px */
+  --header-logo-w               : calc(214px * var(--header-font-scale));
+  --header-logo-h               : calc(44px * var(--header-font-scale));
+  --header-pdf-h                : calc(62px * var(--header-font-scale));
+  --header-pdf-min-w            : calc(204px * var(--header-font-scale));
+  --header-menu-icon-w          : calc(68px * var(--header-font-scale));
+  --header-menu-icon-h          : calc(16px * var(--header-font-scale));
+  --header-menu-line-h          : calc(2px * var(--header-font-scale));
+  --header-menu-line-short-w    : calc(49px * var(--header-font-scale));
+
+  /* Menu popup — Figma Group 512 (node 970:1790) */
+  --header-menu-popup-gap       : 0.5px;
+  --header-menu-popup-w         : calc(520px * var(--header-font-scale));
+  --header-menu-text            : calc(52px * var(--header-font-scale));
+  --header-menu-text-lh         : calc(62px * var(--header-font-scale));
+  --header-menu-padding-x       : calc(60px * var(--header-font-scale));
+  --header-menu-padding-y       : calc(63px * var(--header-font-scale));
+  --header-menu-item-gap        : calc(30px * var(--header-font-scale));
+
+  /* Footer — Figma Group 514 (node 977:2019) */
+  --footer-content-max-w        : 1680px;
+  --footer-padding-x            : 120px;
+  --footer-padding-top          : calc(30px * var(--header-font-scale));
+  --footer-padding-bottom       : calc(80px * var(--header-font-scale));
+  --footer-logo-w               : calc(331px * var(--header-font-scale));
+  --footer-logo-h               : calc(67px * var(--header-font-scale));
+  --footer-text-body            : calc(22px * var(--header-font-scale));
+  --footer-text-heading         : calc(42px * var(--header-font-scale));
+  --footer-tagline-gap          : calc(60px * var(--header-font-scale));
+  --footer-heading-link-gap     : calc(60px * var(--header-font-scale));
+  --footer-link-gap             : calc(30px * var(--header-font-scale));
+  --footer-section-gap          : calc(97px * var(--header-font-scale));
+  --footer-bottom-gap           : calc(30px * var(--header-font-scale));
+  --footer-col-gap              : calc(150px * var(--header-font-scale));
+  --footer-tagline-max-w        : calc(405px * var(--header-font-scale));
+
+  /* Apply Now button — Figma Group 491 (node 981:2034) */
+  --apply-btn-w                 : calc(375px * var(--header-font-scale));
+  --apply-btn-h                 : calc(140px * var(--header-font-scale));
+  --apply-btn-pill-w            : calc(329px * var(--header-font-scale));
+  --apply-btn-pill-h            : calc(84px * var(--header-font-scale));
+  --apply-btn-pill-top          : calc(28px * var(--header-font-scale));
+  --apply-btn-pill-radius       : calc(50px * var(--header-font-scale));
+  --apply-btn-pill-border       : calc(3px * var(--header-font-scale));
+  --apply-btn-text              : calc(42px * var(--header-font-scale));
+  --apply-btn-text-left         : calc(35px * var(--header-font-scale));
+  --apply-btn-circle-size       : calc(140px * var(--header-font-scale));
+  --apply-btn-circle-left       : calc(235px * var(--header-font-scale));
+  --apply-btn-student-size      : calc(79px * var(--header-font-scale));
+  --apply-btn-student-left      : calc(266px * var(--header-font-scale));
+  --apply-btn-student-top       : calc(31px * var(--header-font-scale));
+  --apply-btn-student-hover-size: calc(var(--apply-btn-circle-size) * 0.68);
+
+  /* Home hero — Figma Home frame 642:1122 (section card 642:1123) */
+  --hero-card-max-w             : 1910px;
+  --hero-card-min-h             : 950px;
+  --hero-card-radius            : 20px;
+  --hero-padding-x              : 120px;
+  --hero-text-eyebrow           : calc(22px * var(--header-font-scale));
+  --hero-text-headline          : calc(82px * var(--header-font-scale));
+  --hero-text-body              : calc(34px * var(--header-font-scale));
+  --hero-text-badge             : calc(22px * var(--header-font-scale));
+  --hero-decorative-w           : calc(872px * var(--header-font-scale));
+  --hero-decorative-h           : calc(194px * var(--header-font-scale));
+  --hero-robo-viewport-w        : calc(240px * var(--header-font-scale));
+  --hero-headline-max-w         : calc(1037px * var(--header-font-scale));
+  --hero-body-max-w             : calc(1295px * var(--header-font-scale));
+  --hero-body-offset-x          : calc(355px * var(--header-font-scale));
+  --hero-apply-top              : calc(29px * var(--header-font-scale));
+  --hero-apply-right            : calc(120px * var(--header-font-scale));
+  --hero-gap                    : 20px;
+  --hero-body-pb                : 40px;
+  --hero-badge-1-w              : 144px;
+  --hero-badge-1-h              : 116px;
+  --hero-badge-2-w              : 186px;
+  --hero-badge-2-h              : 121px;
+  --hero-badge-3-w              : 182px;
+  --hero-badge-3-h              : 114px;
+  --hero-badge-4-w              : 215px;
+  --hero-badge-4-h              : 118px;
+
+  /* Home section 2 — Built for every learner (642:1124) */
+  --section-gap                 : 20px;
+  --section-heading-line-height : 1.18;
+  --section-heading-line-gap    : calc(10px * var(--header-font-scale));
+  --section-card-max-w          : 1910px;
+  --section-card-radius         : 20px;
+  --section-padding-x           : 120px;
+  --section-padding-top         : 80px;
+  --section-padding-bottom      : 75px;
+  --section-heading-to-tabs     : calc(60px * var(--header-font-scale));
+  --section-tab-gap             : calc(60px * var(--header-font-scale));
+  --section-content-gap         : calc(30px * var(--header-font-scale));
+  --section-body-to-cta         : calc(76px * var(--header-font-scale));
+  --section-try-btn-radius      : calc(50px * var(--header-font-scale));
+  --section-dashboard-radius    : 6px;
+  --section-dashboard-gap       : calc(28px * var(--header-font-scale));
+  --section-text-max-w          : calc(946px * var(--header-font-scale));
+  --section-text-eyebrow        : calc(22px * var(--header-font-scale));
+  --section-text-heading        : calc(62px * var(--header-font-scale));
+  --section-text-title          : calc(52px * var(--header-font-scale));
+  --section-text-tab            : calc(42px * var(--header-font-scale));
+  --section-text-body           : calc(22px * var(--header-font-scale));
+  --section-highlight-h         : calc(74px * var(--header-font-scale));
+  --section-highlight-w         : calc(364px * var(--header-font-scale));
+  --section-tab-h               : calc(102px * var(--header-font-scale));
+  --section-tab-radius          : calc(72.5px * var(--header-font-scale));
+  --section-tab-english-w       : calc(425px * var(--header-font-scale));
+  --section-tab-code-w          : calc(461px * var(--header-font-scale));
+  --section-tab-edge-w          : calc(400px * var(--header-font-scale));
+  --section-dashboard-w         : 589px;
+  --section-dashboard-h         : 368px;
+  --section-try-btn-w           : calc(476px * var(--header-font-scale));
+  --section-try-btn-h           : calc(84px * var(--header-font-scale));
+  --section-try-btn-border      : calc(3px * var(--header-font-scale));
+
+  /* Home section 3 — See it in action (642:1125) */
+  --action-padding-top          : 60px;
+  --action-padding-bottom       : 85px;
+  --action-heading-max-w        : calc(1036px * var(--header-font-scale));
+  --action-heading-to-demo      : calc(60px * var(--header-font-scale));
+  --action-columns-gap          : 100px;
+  --action-feature-gap          : calc(60px * var(--header-font-scale));
+  --action-feature-img-w        : 188px;
+  --action-feature-img-h        : 125px;
+  --action-feature-text-gap     : calc(15px * var(--header-font-scale));
+  --action-demo-radius          : 20px;
+  --action-demo-h               : 553px;
+
+  /* Home section 4 — Why schools choose ZENE AI (642:1126) */
+  --why-padding-top             : 80px;
+  --why-columns-gap             : 50px;
+  --why-heading-to-list         : calc(46px * var(--header-font-scale));
+  --why-feature-gap             : calc(30px * var(--header-font-scale));
+  --why-icon-size               : calc(69.821px * var(--header-font-scale));
+  --why-icon-inner              : calc(38.607px * var(--header-font-scale));
+  --why-icon-text-gap           : calc(15px * var(--header-font-scale));
+  --why-illustration-w          : calc(652px * var(--header-font-scale));
+  --why-illustration-h          : calc(652px * var(--header-font-scale));
+  --why-illustration-scene-h    : auto;
+  --why-students-w              : calc(960px * var(--header-font-scale));
+  --why-students-h              : calc(493px * var(--header-font-scale));
+  --why-gif-offset-left         : calc(80px * var(--header-font-scale));
+  --why-gif-offset-top          : 15px;
+  --why-marquee-offset-top      : 15px;
+  --why-robot-w                 : calc(290px * var(--header-font-scale));
+  --why-robot-h                 : calc(382px * var(--header-font-scale));
+  --why-robot-bottom            : calc(40px * var(--header-font-scale));
+  --why-marquee-h               : calc(132px * var(--header-font-scale));
+  --why-marquee-radius          : 20px;
+  --why-marquee-bg              : #177ec0;
+  --why-marquee-text            : calc(62px * var(--header-font-scale));
+  --why-marquee-text-gap        : calc(48px * var(--header-font-scale));
+  --why-marquee-bottom          : calc(40px * var(--header-font-scale));
+
+  /* Home section 5 — How Zene AI works (642:1196) */
+  --how-padding-top             : 60px;
+  --how-padding-bottom          : 0;
+  --how-columns-gap             : calc(96px * var(--header-font-scale));
+  --how-left-max-w              : calc(688px * var(--header-font-scale));
+  --how-heading-to-body         : calc(30px * var(--header-font-scale));
+  --how-block-gap               : calc(30px * var(--header-font-scale));
+  --how-section-gap             : calc(30px * var(--header-font-scale));
+  --how-dashboard-video-w       : 679px;
+  --how-dashboard-video-h       : 420px;
+  --how-dashboard-video-radius  : calc(12px * var(--header-font-scale));
+  --how-lesson-img-w            : 679px;
+  --how-lesson-img-h            : 145px;
+  --how-lesson-img-radius       : calc(12px * var(--header-font-scale));
+
+  /* Home section 6 — What schools can now track (762:1685) */
+  --track-padding-top           : 80px;
+  --track-padding-bottom        : calc(232px * var(--header-font-scale));
+  --track-heading-to-cards      : calc(79px * var(--header-font-scale));
+  --track-columns-gap           : calc(80px * var(--header-font-scale));
+  --track-img-w                 : 323px;
+  --track-img-h                 : 216px;
+  --track-img-padding-x         : calc(56px * var(--header-font-scale));
+  --track-img-offset            : calc(117px * var(--header-font-scale));
+  --track-img-to-text           : calc(31px * var(--header-font-scale));
+  --track-text-max-w            : calc(434px * var(--header-font-scale));
+  --track-text-max-w-sm         : calc(384px * var(--header-font-scale));
+
+  /* Home section 7 — Become an AI-Ready School (765:1838 / 765:1839) */
+  --ai-ready-padding-top        : 60px;
+  --ai-ready-padding-bottom     : 80px;
+  --ai-ready-heading-max-w      : calc(425px * var(--header-font-scale));
+  --ai-ready-heading-to-diagram : calc(-8px * var(--header-font-scale));
+  --ai-ready-diagram-h          : calc(854px * var(--header-font-scale));
+
+  /* Home section 8 — Who Zene works with / onboarding (767:1875) */
+  --onboard-padding-top         : 60px;
+  --onboard-padding-bottom      : 120px;
+  --onboard-heading-max-w       : calc(1142px * var(--header-font-scale));
+  --onboard-body-max-w          : calc(1076px * var(--header-font-scale));
+  --onboard-copy-max-w          : calc(641px * var(--header-font-scale));
+  --onboard-eyebrow-to-heading  : calc(44px * var(--header-font-scale));
+  --onboard-heading-to-body     : calc(30px * var(--header-font-scale));
+  --onboard-body-to-cards       : calc(30px * var(--header-font-scale));
+  --onboard-columns-gap         : calc(80px * var(--header-font-scale));
+  --onboard-image-w             : calc(460px * var(--header-font-scale));
+  --onboard-image-h             : calc(307px * var(--header-font-scale));
+  --onboard-image-to-title      : calc(30px * var(--header-font-scale));
+  --onboard-title-to-body       : calc(15px * var(--header-font-scale));
+
+  /* Home section 9 — Testimonials (767:1951) */
+  --testimonial-padding-top         : 60px;
+  --testimonial-padding-bottom      : 80px;
+  --testimonial-heading-max-w       : calc(1342px * var(--header-font-scale));
+  --testimonial-eyebrow-to-heading  : calc(44px * var(--header-font-scale));
+  --testimonial-heading-to-carousel : calc(30px * var(--header-font-scale));
+  --testimonial-track-width         : 90%;
+  --testimonial-card-w              : calc(482px * var(--header-font-scale));
+  --testimonial-card-h              : calc(593px * var(--header-font-scale));
+  --testimonial-card-gap            : calc(45px * var(--header-font-scale));
+  --testimonial-card-radius         : 20px;
+  --testimonial-padding-x           : calc(45px * var(--header-font-scale));
+  --testimonial-quote-icon-w        : calc(82px * var(--header-font-scale));
+  --testimonial-quote-icon-h        : calc(53px * var(--header-font-scale));
+  --testimonial-quote-top           : calc(20px * var(--header-font-scale));
+  --testimonial-name-size           : calc(52px * var(--header-font-scale));
+  --testimonial-name-top            : calc(211px * var(--header-font-scale));
+  --testimonial-name-max-w          : calc(251px * var(--header-font-scale));
+  --testimonial-body-top            : calc(333px * var(--header-font-scale));
+  --testimonial-body-w              : calc(391px * var(--header-font-scale));
+  --testimonial-logo-w              : calc(86px * var(--header-font-scale));
+  --testimonial-logo-h              : calc(112px * var(--header-font-scale));
+  --testimonial-arrow-size          : calc(48px * var(--header-font-scale));
+  --testimonial-arrow-gap           : calc(15px * var(--header-font-scale));
+  --testimonial-arrow-to-track      : calc(20px * var(--header-font-scale));
+  --testimonial-fade-w              : calc(229px * var(--header-font-scale));
+
+  /* Home section 10 — Our cohort / partner schools (1023:1891) */
+  --cohort-padding-top              : 60px;
+  --cohort-padding-bottom           : 120px;
+  --cohort-heading-max-w            : calc(1002px * var(--header-font-scale));
+  --cohort-body-max-w               : calc(560px * var(--header-font-scale));
+  --cohort-eyebrow-to-heading       : calc(44px * var(--header-font-scale));
+  --cohort-heading-to-body          : calc(30px * var(--header-font-scale));
+  --cohort-body-to-logos            : calc(67px * var(--header-font-scale));
+  --cohort-logo-padding-x           : 100px;
+  --cohort-logo-row-gap             : calc(90px * var(--header-font-scale));
+  --cohort-logo-row-h               : calc(153px * var(--header-font-scale));
+  --cohort-grid-col-gap             : calc(40px * var(--header-font-scale));
+  --cohort-carousel-to-dots         : calc(24px * var(--header-font-scale));
+  --cohort-dot-size                 : calc(8px * var(--header-font-scale));
+  --cohort-dot-gap                  : calc(8px * var(--header-font-scale));
+  --cohort-logo-help-w              : calc(148px * var(--header-font-scale));
+  --cohort-logo-help-h              : calc(144px * var(--header-font-scale));
+  --cohort-logo-chist-w             : calc(216px * var(--header-font-scale));
+  --cohort-logo-chist-h             : calc(151px * var(--header-font-scale));
+  --cohort-logo-sancta-w            : calc(181px * var(--header-font-scale));
+  --cohort-logo-sancta-h            : calc(105px * var(--header-font-scale));
+  --cohort-logo-book-w              : calc(189px * var(--header-font-scale));
+  --cohort-logo-book-h              : calc(89px * var(--header-font-scale));
+  --cohort-logo-ssvm-w              : calc(207px * var(--header-font-scale));
+  --cohort-logo-ssvm-h              : calc(89px * var(--header-font-scale));
+  --cohort-logo-schechter-w         : calc(260px * var(--header-font-scale));
+  --cohort-logo-schechter-h         : calc(73px * var(--header-font-scale));
+  --cohort-logo-edgewater-w         : calc(141px * var(--header-font-scale));
+  --cohort-logo-edgewater-h         : calc(141px * var(--header-font-scale));
+  --cohort-logo-patricks-w          : calc(165px * var(--header-font-scale));
+  --cohort-logo-patricks-h          : calc(153px * var(--header-font-scale));
+  --cohort-logo-oak-w               : calc(135px * var(--header-font-scale));
+  --cohort-logo-oak-h               : calc(142px * var(--header-font-scale));
+  --cohort-logo-montfort-w          : calc(170px * var(--header-font-scale));
+  --cohort-logo-montfort-h          : calc(129px * var(--header-font-scale));
+  --about-partners-heading-word-gap : calc(8px * var(--header-font-scale));
+  --about-partners-heading-to-logos : calc(80px * var(--header-font-scale));
+  --about-highlight-h                 : calc(74px * var(--header-font-scale));
+  --about-highlight-pad-x             : calc(16px * var(--header-font-scale));
+  --about-real-progress-heading-max-w: calc(413px * var(--header-font-scale));
+  --about-skills-heading-max-w        : calc(455px * var(--header-font-scale));
+  --about-skills-yellow-py            : calc(40px * var(--header-font-scale));
+
+  /* Home section 11 — FAQ (975:1944) */
+  --faq-padding-top                 : 80px;
+  --faq-padding-bottom              : 80px;
+  --faq-heading-to-list             : calc(42px * var(--header-font-scale));
+  --faq-item-max-w                  : calc(1397px * var(--header-font-scale));
+  --faq-item-radius                 : calc(94.5px * var(--header-font-scale));
+  --faq-item-collapsed-h            : calc(124px * var(--header-font-scale));
+  --faq-item-expanded-min-h         : calc(169px * var(--header-font-scale));
+  --faq-item-gap                    : calc(15px * var(--header-font-scale));
+  --faq-item-padding-x              : calc(60px * var(--header-font-scale));
+  --faq-item-padding-y              : calc(30px * var(--header-font-scale));
+  --faq-item-padding-y-expanded     : calc(30px * var(--header-font-scale));
+  --faq-icon-w                      : calc(82px * var(--header-font-scale));
+  --faq-icon-h                      : calc(84px * var(--header-font-scale));
+  --faq-icon-gap                    : calc(30px * var(--header-font-scale));
+  --faq-question-size               : calc(32px * var(--header-font-scale));
+  --faq-answer-size                 : calc(20px * var(--header-font-scale));
+  --faq-question-to-answer          : calc(25px * var(--header-font-scale));
+  --faq-answer-max-w                : calc(812px * var(--header-font-scale));
+
+  /* Home section 12 — Apply CTA (1025:1892) */
+  --apply-cta-padding-top           : calc(102px * var(--header-font-scale));
+  --apply-cta-padding-bottom        : calc(120px * var(--header-font-scale));
+  --apply-cta-yellow-size           : calc(747px * var(--header-font-scale));
+  --apply-cta-student-circle-size   : calc(321px * var(--header-font-scale));
+  --apply-cta-student-face-size     : calc(157px * var(--header-font-scale));
+  --apply-cta-student-face-hover-size: calc(var(--apply-cta-student-circle-size) * 0.68);
+  --apply-cta-student-overlap       : calc(80px * var(--header-font-scale));
+  --apply-cta-stage-w               : calc(var(--apply-cta-yellow-size) + var(--apply-cta-student-circle-size) - var(--apply-cta-student-overlap));
+  --apply-cta-content-padding-x     : calc(80px * var(--header-font-scale));
+  --apply-cta-heading-max-w         : calc(455px * var(--header-font-scale));
+  --apply-cta-body-max-w            : calc(528px * var(--header-font-scale));
+  --apply-cta-heading-size          : calc(62px * var(--header-font-scale));
+  --apply-cta-body-size             : calc(22px * var(--header-font-scale));
+  --apply-cta-yellow-py             : calc(56px * var(--header-font-scale));
+  --apply-cta-heading-to-body       : calc(30px * var(--header-font-scale));
+  --apply-cta-body-to-btn           : calc(40px * var(--header-font-scale));
+  --apply-cta-btn-w                 : calc(476px * var(--header-font-scale));
+  --apply-cta-btn-h                 : calc(84px * var(--header-font-scale));
+  --apply-cta-btn-radius            : calc(50px * var(--header-font-scale));
+  --apply-cta-btn-border            : calc(3px * var(--header-font-scale));
+  --apply-cta-btn-text-size         : calc(42px * var(--header-font-scale));
+  --apply-cta-btn-padding-x         : calc(56px * var(--header-font-scale));
+  --apply-cta-btn-arrow-size        : calc(35px * var(--header-font-scale));
+  --about-skills-body-max-w         : calc(601px * var(--header-font-scale));
+
+  /* Contact page hero — Figma 1039:1895 / 642:2089 */
+  --contact-hero-min-h              : auto;
+  --contact-hero-padding-top        : 80px;
+  --contact-hero-padding-bottom     : 80px;
+  --contact-hero-columns-gap        : calc(40px * var(--header-font-scale));
+  --contact-hero-apply-to-image-gap : 100px;
+  --contact-hero-apply-top          : 30px;
+  --contact-hero-apply-right        : 50px;
+  --contact-hero-subtitle-max-w     : calc(874px * var(--header-font-scale));
+  --contact-hero-title-to-subtitle  : calc(80px * var(--header-font-scale));
+  --contact-hero-illustration-w     : calc(585px * var(--header-font-scale));
+  --contact-hero-illustration-h     : calc(414px * var(--header-font-scale));
+
+  /* Contact page form — Figma 1041:1897 / 642:2090 */
+  --contact-form-padding-top        : 80px;
+  --contact-form-padding-bottom     : 80px;
+  --contact-form-max-w              : calc(1680px * var(--header-font-scale));
+  --contact-form-col-gap            : calc(24px * var(--header-font-scale));
+  --contact-form-row-gap            : calc(60px * var(--header-font-scale));
+  --contact-form-field-h            : calc(66px * var(--header-font-scale));
+  --contact-form-field-radius       : calc(50px * var(--header-font-scale));
+  --contact-form-field-padding-x    : calc(30px * var(--header-font-scale));
+  --contact-form-field-padding-y    : 0px;
+  --contact-form-field-line-height  : var(--contact-form-field-h);
+  --contact-form-field-text         : calc(28px * var(--header-font-scale));
+  --contact-form-chevron-w          : calc(10px * var(--header-font-scale));
+  --contact-form-chevron-h          : calc(17px * var(--header-font-scale));
+  --contact-form-button-gap         : calc(80px * var(--header-font-scale));
+  --contact-form-button-w           : calc(391px * var(--header-font-scale));
+  --contact-form-button-h           : calc(84px * var(--header-font-scale));
+  --contact-form-button-radius      : calc(50px * var(--header-font-scale));
+  --contact-form-button-text        : calc(42px * var(--header-font-scale));
+  --contact-form-info-gap           : calc(160px * var(--header-font-scale));
+  --contact-info-gap                : calc(48px * var(--header-font-scale));
+  --contact-info-icon-gap           : calc(24px * var(--header-font-scale));
+  --contact-info-text-size          : calc(28px * var(--header-font-scale));
+  --contact-info-text-offset-y      : calc(28px * var(--header-font-scale));
+  --contact-info-line-gap           : calc(21px * var(--header-font-scale));
+  --contact-info-phone-icon-w       : calc(138px * var(--header-font-scale));
+  --contact-info-phone-icon-h       : calc(143px * var(--header-font-scale));
+  --contact-info-email-icon-w       : calc(153px * var(--header-font-scale));
+  --contact-info-email-icon-h       : calc(133px * var(--header-font-scale));
+  --contact-info-address-icon-w     : calc(129px * var(--header-font-scale));
+  --contact-info-address-icon-h     : calc(161px * var(--header-font-scale));
+
+  /* 404 page (1029:1894) */
+  --not-found-padding-top           : calc(60px * var(--header-font-scale));
+  --not-found-padding-bottom        : calc(80px * var(--header-font-scale));
+  --not-found-columns-gap           : calc(40px * var(--header-font-scale));
+  --not-found-title-size            : calc(82px * var(--header-font-scale));
+  --not-found-subtitle-size         : calc(38px * var(--header-font-scale));
+  --not-found-body-size             : calc(28px * var(--header-font-scale));
+  --not-found-title-max-w           : calc(747px * var(--header-font-scale));
+  --not-found-subtitle-max-w        : calc(634px * var(--header-font-scale));
+  --not-found-body-max-w            : calc(972px * var(--header-font-scale));
+  --not-found-title-to-subtitle     : calc(46px * var(--header-font-scale));
+  --not-found-subtitle-to-body      : calc(68px * var(--header-font-scale));
+  --not-found-body-paragraph-gap    : calc(28px * var(--header-font-scale));
+  --not-found-img-wrap-w            : calc(496px * var(--header-font-scale));
+  --not-found-img-wrap-h            : calc(608px * var(--header-font-scale));
+  --not-found-img-scale-w           : 196%;
+  --not-found-img-scale-h           : 187%;
+  --not-found-img-offset-y          : -52%;
+
+  /* Thank you page — Figma 1044:1941 / 1044:1899 */
+  --thank-you-padding-top           : calc(80px * var(--header-font-scale));
+  --thank-you-padding-bottom        : calc(80px * var(--header-font-scale));
+  --thank-you-columns-gap           : calc(40px * var(--header-font-scale));
+  --thank-you-title-size            : calc(82px * var(--header-font-scale));
+  --thank-you-subtitle-size         : calc(38px * var(--header-font-scale));
+  --thank-you-body-size             : calc(28px * var(--header-font-scale));
+  --thank-you-title-max-w           : calc(567px * var(--header-font-scale));
+  --thank-you-subtitle-max-w        : calc(567px * var(--header-font-scale));
+  --thank-you-body-max-w            : calc(895px * var(--header-font-scale));
+  --thank-you-title-to-subtitle     : calc(46px * var(--header-font-scale));
+  --thank-you-subtitle-to-body      : calc(68px * var(--header-font-scale));
+  --thank-you-body-paragraph-gap    : calc(28px * var(--header-font-scale));
+  --thank-you-img-wrap-w            : calc(567px * var(--header-font-scale));
+  --thank-you-img-wrap-h            : calc(613px * var(--header-font-scale));
+  --thank-you-img-scale-w           : 105.87%;
+  --thank-you-img-scale-h           : 100.03%;
+  --thank-you-img-offset-x          : 0.07%;
+  --thank-you-img-offset-y          : -0.01%;
+
+  /* About page hero — Figma 1047:2176 / 1047:1943 */
+  --about-hero-padding-top          : 80px;
+  --about-hero-padding-bottom       : 80px;
+  --about-hero-columns-gap          : calc(40px * var(--header-font-scale));
+  --about-hero-row-gap              : calc(32px * var(--header-font-scale));
+  --about-hero-text-offset-top      : calc(var(--apply-btn-h) + 24px);
+  --about-hero-text-max-w           : calc(1130px * var(--header-font-scale));
+  --about-hero-title-size           : calc(82px * var(--header-font-scale));
+  --about-hero-subtitle-size        : calc(38px * var(--header-font-scale));
+  --about-hero-title-max-w          : calc(1130px * var(--header-font-scale));
+  --about-hero-subtitle-max-w       : calc(1074px * var(--header-font-scale));
+  --about-hero-title-to-subtitle    : calc(62px * var(--header-font-scale));
+  --about-hero-subtitle-indent      : 16.67%;
+  --about-hero-robot-margin-top     : 0px;
+  --about-hero-apply-margin-right   : 50px;
+  --about-hero-robot-wrap-w         : calc(287px * var(--header-font-scale));
+  --about-hero-robot-wrap-h         : calc(377px * var(--header-font-scale));
+  --about-hero-robot-scale-w        : 399.17%;
+  --about-hero-robot-scale-h        : 170.89%;
+  --about-hero-robot-offset-x       : -149.27%;
+  --about-hero-robot-offset-y       : -70.89%;
+
+  /* About page — Why we exist — Figma 1054:2191 / 1047:1944 */
+  --about-why-padding-top           : 80px;
+  --about-why-padding-bottom        : 80px;
+  --about-why-columns-gap           : calc(40px * var(--header-font-scale));
+  --about-why-row-gap               : calc(32px * var(--header-font-scale));
+  --about-why-heading-size          : calc(62px * var(--header-font-scale));
+  --about-why-heading-word-gap      : calc(8px * var(--header-font-scale));
+  --about-why-exist-highlight-h     : calc(74px * var(--header-font-scale));
+  --about-why-exist-highlight-pad-x : calc(16px * var(--header-font-scale));
+  --about-why-heading-to-body       : calc(30px * var(--header-font-scale));
+  --about-why-body-size             : calc(22px * var(--header-font-scale));
+  --about-why-body-max-w            : calc(697px * var(--header-font-scale));
+  --about-why-body-to-tagline       : calc(48px * var(--header-font-scale));
+  --about-why-tagline-size          : calc(38px * var(--header-font-scale));
+  --about-why-tagline-max-w         : calc(539px * var(--header-font-scale));
+  --about-why-illustration-w        : calc(629px * var(--header-font-scale));
+  --about-why-illustration-h        : calc(654px * var(--header-font-scale));
+
+  /* About page — What Zene AI brings — Figma 1055:2192 / 1047:1946 */
+  --about-brings-padding-top        : 80px;
+  --about-brings-padding-bottom     : 80px;
+  --about-brings-heading-size       : calc(62px * var(--header-font-scale));
+  --about-brings-heading-max-w      : calc(563px * var(--header-font-scale));
+  --about-brings-heading-to-grid    : calc(48px * var(--header-font-scale));
+  --about-brings-grid-gap-x         : calc(24px * var(--header-font-scale));
+  --about-brings-grid-gap-y         : calc(40px * var(--header-font-scale));
+  --about-brings-stagger-offset     : calc(107px * var(--header-font-scale));
+  --about-brings-feature-img-w      : calc(323px * var(--header-font-scale));
+  --about-brings-feature-img-h      : calc(216px * var(--header-font-scale));
+  --about-brings-feature-img-to-label: calc(30px * var(--header-font-scale));
+  --about-brings-label-size         : calc(22px * var(--header-font-scale));
+  --about-brings-label-max-w        : calc(376px * var(--header-font-scale));
+  --about-brings-carousel-to-dots   : calc(24px * var(--header-font-scale));
+  --about-brings-dot-size           : calc(8px * var(--header-font-scale));
+  --about-brings-dot-gap            : calc(8px * var(--header-font-scale));
+
+  /* English AI page — Figma 1060:2193 */
+  --english-ai-hero-padding-top          : 80px;
+  --english-ai-hero-padding-bottom       : 80px;
+  --english-ai-hero-columns-gap          : calc(40px * var(--header-font-scale));
+  --english-ai-hero-row-gap              : calc(32px * var(--header-font-scale));
+  --english-ai-hero-eyebrow-to-content   : calc(14px * var(--header-font-scale));
+  --english-ai-hero-title-size           : calc(82px * var(--header-font-scale));
+  --english-ai-hero-title-max-w          : calc(972px * var(--header-font-scale));
+  --english-ai-hero-body-size            : calc(22px * var(--header-font-scale));
+  --english-ai-hero-body-max-w           : calc(850px * var(--header-font-scale));
+  --english-ai-hero-title-to-body        : calc(30px * var(--header-font-scale));
+  --english-ai-hero-illustration-w       : calc(781px * var(--header-font-scale));
+  --english-ai-hero-illustration-h       : calc(487px * var(--header-font-scale));
+  --english-ai-hero-robot-wrap-w         : calc(287px * var(--header-font-scale));
+  --english-ai-hero-robot-wrap-h         : calc(377px * var(--header-font-scale));
+  --english-ai-hero-robot-scale-w        : 399.17%;
+  --english-ai-hero-robot-scale-h        : 170.89%;
+  --english-ai-hero-robot-offset-x       : -149.27%;
+  --english-ai-hero-robot-offset-y       : -70.89%;
+  --english-ai-hero-robot-left           : 31.6%;
+  --english-ai-hero-robot-top            : 0.9%;
+  --english-ai-hero-illustration-margin-top: calc(var(--apply-btn-h) + 32px);
+
+  --english-ai-heading-max-w             : calc(1133px * var(--header-font-scale));
+  --english-ai-highlight-h               : calc(74px * var(--header-font-scale));
+  --english-ai-highlight-pad-x           : calc(16px * var(--header-font-scale));
+  --english-ai-hero-eyebrow-to-apply     : calc(16px * var(--header-font-scale));
+
+  --english-ai-platform-padding-top      : 80px;
+  --english-ai-platform-padding-bottom   : 80px;
+  --english-ai-platform-eyebrow-to-content: calc(14px * var(--header-font-scale));
+  --english-ai-platform-columns-gap      : calc(90px * var(--header-font-scale));
+  --english-ai-platform-row-gap          : calc(30px * var(--header-font-scale));
+  --english-ai-platform-body-max-w       : calc(697px * var(--header-font-scale));
+  --english-ai-platform-heading-to-body  : calc(30px * var(--header-font-scale));
+  --english-ai-platform-tagline-size     : calc(38px * var(--header-font-scale));
+  --english-ai-platform-tagline-max-w    : calc(505px * var(--header-font-scale));
+  --english-ai-platform-mockup-w         : calc(902px * var(--header-font-scale));
+  --english-ai-platform-mockup-h         : calc(434px * var(--header-font-scale));
+
+  --english-ai-grid-padding-top          : 80px;
+  --english-ai-grid-padding-bottom       : 80px;
+  --english-ai-grid-eyebrow-to-heading   : calc(14px * var(--header-font-scale));
+  --english-ai-grid-heading-to-subtitle  : calc(30px * var(--header-font-scale));
+  --english-ai-grid-subtitle-max-w       : calc(1043px * var(--header-font-scale));
+  --english-ai-grid-subtitle-to-items    : calc(30px * var(--header-font-scale));
+  --english-ai-grid-gap-x                : calc(24px * var(--header-font-scale));
+  --english-ai-grid-gap-y                : calc(40px * var(--header-font-scale));
+  --english-ai-grid-img-w                : calc(213px * var(--header-font-scale));
+  --english-ai-grid-img-h                : calc(142px * var(--header-font-scale));
+  --english-ai-grid-img-to-title         : calc(30px * var(--header-font-scale));
+  --english-ai-grid-title-to-body        : calc(14px * var(--header-font-scale));
+  --english-ai-grid-copy-max-w           : calc(425px * var(--header-font-scale));
+  --english-ai-grid-items-to-footer      : calc(48px * var(--header-font-scale));
+  --english-ai-grid-carousel-to-dots     : calc(24px * var(--header-font-scale));
+  --english-ai-grid-dot-size             : calc(8px * var(--header-font-scale));
+  --english-ai-grid-dot-gap              : calc(8px * var(--header-font-scale));
+
+  --english-ai-comparison-padding-top    : 80px;
+  --english-ai-comparison-padding-bottom : 80px;
+  --english-ai-comparison-eyebrow-to-heading: calc(14px * var(--header-font-scale));
+  --english-ai-comparison-heading-to-subtitle: calc(30px * var(--header-font-scale));
+  --english-ai-comparison-subtitle-max-w : calc(631px * var(--header-font-scale));
+  --english-ai-comparison-subtitle-to-table: calc(30px * var(--header-font-scale));
+  --english-ai-comparison-table-min-w    : calc(680px * var(--header-font-scale));
+  --english-ai-comparison-table-radius   : calc(12px * var(--header-font-scale));
+  --english-ai-comparison-role-col       : calc(140px * var(--header-font-scale));
+  --english-ai-comparison-header-h       : calc(64px * var(--header-font-scale));
+  --english-ai-comparison-row-py         : calc(24px * var(--header-font-scale));
+  --english-ai-comparison-cell-px        : calc(24px * var(--header-font-scale));
+  --english-ai-comparison-col-gap        : calc(24px * var(--header-font-scale));
+  --english-ai-comparison-mobile-card-gap: calc(16px * var(--header-font-scale));
+  --english-ai-comparison-mobile-label-size: calc(18px * var(--header-font-scale));
+  --english-ai-comparison-mobile-label-py: calc(14px * var(--header-font-scale));
+  --english-ai-comparison-mobile-body-py : calc(16px * var(--header-font-scale));
+  --english-ai-comparison-mobile-block-gap: calc(16px * var(--header-font-scale));
+  --english-ai-comparison-mobile-text-gap: calc(8px * var(--header-font-scale));
+
+  --english-ai-action-subtitle-max-w     : calc(875px * var(--header-font-scale));
+  --english-ai-action-heading-to-subtitle: calc(30px * var(--header-font-scale));
+  --english-ai-action-demo-h             : 522px;
+
+  --english-ai-curriculum-padding-top    : 80px;
+  --english-ai-curriculum-padding-bottom : 80px;
+  --english-ai-curriculum-eyebrow-to-heading: calc(14px * var(--header-font-scale));
+  --english-ai-curriculum-heading-to-subtitle: calc(30px * var(--header-font-scale));
+  --english-ai-curriculum-subtitle-max-w : calc(688px * var(--header-font-scale));
+  --english-ai-curriculum-subtitle-to-items: calc(30px * var(--header-font-scale));
+  --english-ai-curriculum-gap-x          : calc(24px * var(--header-font-scale));
+  --english-ai-curriculum-gap-y            : calc(40px * var(--header-font-scale));
+  --english-ai-curriculum-copy-max-w       : calc(496px * var(--header-font-scale));
+
+  --spacing-sm : 8px;
+  --spacing-md : 16px;
+  --spacing-lg : 24px;
+  --spacing-xl : 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+
+  /* --- Border radius --------------------------------------- */
+  --radius    : 4px;
+  --radius-lg : 8px;
+  --radius-xl : 12px;
+  --radius-2xl: 16px;
+  --radius-full: 9999px;
+
+  /* --- Shadows --------------------------------------------- */
+  --shadow-sm : 0 1px 4px rgba(0,0,0,0.08);
+  --shadow-md : 0 2px 12px rgba(0,0,0,0.12);
+  --shadow-lg : 0 4px 24px rgba(0,0,0,0.16);
+
+  /* --- Typography scale ------------------------------------ */
+  --text-xs   : 0.75rem;
+  --text-sm   : 0.875rem;
+  --text-base : 1rem;
+  --text-lg   : 1.125rem;
+  --text-xl   : 1.25rem;
+  --text-2xl  : 1.5rem;
+  --text-3xl  : 1.875rem;
+  --text-4xl  : 2.25rem;
+  --text-5xl  : 3rem;
+  --text-6xl  : 3.75rem;
+
+  /* --- Z-index --------------------------------------------- */
+  --z-header  : 100;
+  --z-modal   : 200;
+  --z-toast   : 300;
+}
+
+/* --- Tablet (≤1023px) ------------------------------------- */
+@media (max-width: 1023px) {
+  :root {
+    --header-font-scale           : 0.72;
+    --header-announcement-h       : 48px;
+    --header-announcement-padding-y: calc(12px * var(--header-font-scale));
+    --header-announcement-padding-x: 20px;
+    --header-nav-h                : 76px;
+    --header-logo-w               : calc(180px * var(--header-font-scale));
+    --header-logo-h               : calc(37px * var(--header-font-scale));
+    --header-pdf-h                : calc(52px * var(--header-font-scale));
+    --header-pdf-min-w            : calc(160px * var(--header-font-scale));
+    --header-text-pdf             : calc(26px * var(--header-font-scale));
+    --header-text-menu            : calc(32px * var(--header-font-scale));
+    --header-menu-text            : calc(42px * var(--header-font-scale));
+    --header-menu-text-lh         : calc(50px * var(--header-font-scale));
+
+    --section-padding-x           : 48px;
+    --section-padding-top           : 56px;
+    --section-padding-bottom        : 56px;
+    --hero-padding-x                : 48px;
+    --footer-padding-x              : 48px;
+    --cohort-logo-padding-x         : 32px;
+
+    --section-tab-gap               : 20px;
+    --section-heading-to-tabs       : 40px;
+    --section-tab-h                 : calc(84px * var(--header-font-scale));
+    --section-tab-english-w         : calc(320px * var(--header-font-scale));
+    --section-tab-code-w            : calc(340px * var(--header-font-scale));
+    --section-tab-edge-w            : calc(300px * var(--header-font-scale));
+    --section-try-btn-w             : min(100%, calc(400px * var(--header-font-scale)));
+    --section-dashboard-w           : 100%;
+    --section-dashboard-h           : 280px;
+
+    --action-columns-gap            : 48px;
+    --action-demo-h                 : 380px;
+    --how-columns-gap               : 48px;
+    --track-columns-gap             : 40px;
+    --track-img-padding-x           : calc(24px * var(--header-font-scale));
+    --track-img-offset              : 0px;
+    --track-padding-bottom          : calc(120px * var(--header-font-scale));
+    --onboard-columns-gap           : 48px;
+    --why-marquee-bottom            : calc(32px * var(--header-font-scale));
+    --why-marquee-offset-top        : 15px;
+
+    --ai-ready-diagram-h            : calc(620px * var(--header-font-scale));
+
+    --testimonial-track-width       : 100%;
+    --testimonial-card-w            : calc(340px * var(--header-font-scale));
+    --testimonial-card-h            : calc(420px * var(--header-font-scale));
+    --testimonial-fade-w            : calc(80px * var(--header-font-scale));
+    --testimonial-name-top          : calc(150px * var(--header-font-scale));
+    --testimonial-body-top          : calc(240px * var(--header-font-scale));
+    --testimonial-body-w            : calc(280px * var(--header-font-scale));
+
+    --faq-item-padding-x            : calc(32px * var(--header-font-scale));
+    --faq-item-radius               : calc(48px * var(--header-font-scale));
+    --faq-item-collapsed-h          : auto;
+    --faq-icon-w                    : calc(56px * var(--header-font-scale));
+    --faq-icon-h                    : calc(58px * var(--header-font-scale));
+    --faq-question-size             : calc(24px * var(--header-font-scale));
+
+    --apply-cta-yellow-size         : min(calc(100vw - 96px), calc(620px * var(--header-font-scale)));
+    --apply-cta-student-circle-size : calc(260px * var(--header-font-scale));
+    --apply-cta-student-face-size   : calc(128px * var(--header-font-scale));
+    --apply-cta-student-overlap     : calc(64px * var(--header-font-scale));
+    --apply-cta-content-padding-x   : calc(40px * var(--header-font-scale));
+    --apply-cta-heading-size        : calc(44px * var(--header-font-scale));
+    --apply-cta-body-size           : calc(20px * var(--header-font-scale));
+    --apply-cta-yellow-py           : calc(44px * var(--header-font-scale));
+    --apply-cta-heading-max-w       : min(100%, calc(380px * var(--header-font-scale)));
+    --apply-cta-body-max-w          : min(100%, calc(420px * var(--header-font-scale)));
+    --apply-cta-heading-to-body     : calc(20px * var(--header-font-scale));
+    --apply-cta-body-to-btn         : calc(28px * var(--header-font-scale));
+    --apply-cta-btn-w               : min(100%, calc(360px * var(--header-font-scale)));
+    --apply-cta-btn-text-size       : calc(28px * var(--header-font-scale));
+    --apply-cta-btn-padding-x       : calc(28px * var(--header-font-scale));
+    --apply-cta-btn-arrow-size      : calc(28px * var(--header-font-scale));
+
+    --apply-btn-w                   : calc(280px * var(--header-font-scale));
+    --apply-btn-h                   : calc(104px * var(--header-font-scale));
+    --apply-btn-pill-w              : calc(246px * var(--header-font-scale));
+    --apply-btn-pill-h              : calc(62px * var(--header-font-scale));
+    --apply-btn-circle-size         : calc(104px * var(--header-font-scale));
+    --apply-btn-circle-left         : calc(176px * var(--header-font-scale));
+    --apply-btn-student-size        : calc(58px * var(--header-font-scale));
+    --apply-btn-student-left        : calc(199px * var(--header-font-scale));
+    --apply-btn-text                : calc(32px * var(--header-font-scale));
+
+    --not-found-title-size          : calc(56px * var(--header-font-scale));
+    --not-found-subtitle-size       : calc(28px * var(--header-font-scale));
+    --not-found-body-size           : calc(22px * var(--header-font-scale));
+    --not-found-img-wrap-w          : min(100%, calc(380px * var(--header-font-scale)));
+    --not-found-img-wrap-h          : calc(466px * var(--header-font-scale));
+    --not-found-title-to-subtitle   : calc(28px * var(--header-font-scale));
+    --not-found-subtitle-to-body    : calc(36px * var(--header-font-scale));
+
+    --thank-you-padding-top         : calc(56px * var(--header-font-scale));
+    --thank-you-padding-bottom      : calc(56px * var(--header-font-scale));
+    --thank-you-columns-gap         : calc(24px * var(--header-font-scale));
+    --thank-you-title-size          : calc(56px * var(--header-font-scale));
+    --thank-you-subtitle-size       : calc(28px * var(--header-font-scale));
+    --thank-you-body-size           : calc(22px * var(--header-font-scale));
+    --thank-you-title-max-w         : 100%;
+    --thank-you-subtitle-max-w      : 100%;
+    --thank-you-body-max-w          : 100%;
+    --thank-you-img-wrap-w          : min(100%, calc(340px * var(--header-font-scale)));
+    --thank-you-img-wrap-h          : calc(368px * var(--header-font-scale));
+    --thank-you-title-to-subtitle   : calc(28px * var(--header-font-scale));
+    --thank-you-subtitle-to-body    : calc(36px * var(--header-font-scale));
+
+    --about-hero-padding-top        : calc(48px * var(--header-font-scale));
+    --about-hero-padding-bottom     : calc(48px * var(--header-font-scale));
+    --about-hero-columns-gap        : calc(24px * var(--header-font-scale));
+    --about-hero-row-gap            : calc(24px * var(--header-font-scale));
+    --about-hero-text-offset-top    : calc(var(--apply-btn-h) + 16px);
+    --about-hero-text-max-w         : 100%;
+    --about-hero-title-size         : calc(56px * var(--header-font-scale));
+    --about-hero-subtitle-size      : calc(28px * var(--header-font-scale));
+    --about-hero-title-max-w        : 100%;
+    --about-hero-subtitle-max-w     : 100%;
+    --about-hero-title-to-subtitle  : calc(28px * var(--header-font-scale));
+    --about-hero-subtitle-indent    : 16.67%;
+    --about-hero-robot-margin-top   : 0px;
+    --about-hero-robot-wrap-w       : calc(200px * var(--header-font-scale));
+    --about-hero-robot-wrap-h       : calc(260px * var(--header-font-scale));
+
+    --about-why-padding-top         : calc(48px * var(--header-font-scale));
+    --about-why-padding-bottom      : calc(48px * var(--header-font-scale));
+    --about-why-columns-gap         : calc(24px * var(--header-font-scale));
+    --about-why-row-gap             : calc(28px * var(--header-font-scale));
+    --about-why-heading-size        : calc(48px * var(--header-font-scale));
+    --about-why-exist-highlight-h   : calc(58px * var(--header-font-scale));
+    --about-why-exist-highlight-pad-x: calc(12px * var(--header-font-scale));
+    --about-why-heading-to-body     : calc(24px * var(--header-font-scale));
+    --about-why-body-size           : calc(20px * var(--header-font-scale));
+    --about-why-body-max-w          : 100%;
+    --about-why-body-to-tagline     : calc(28px * var(--header-font-scale));
+    --about-why-tagline-size        : calc(28px * var(--header-font-scale));
+    --about-why-tagline-max-w       : 100%;
+    --about-why-illustration-w      : min(100%, calc(360px * var(--header-font-scale)));
+    --about-why-illustration-h      : calc(374px * var(--header-font-scale));
+
+    --about-brings-padding-top      : calc(48px * var(--header-font-scale));
+    --about-brings-padding-bottom   : calc(48px * var(--header-font-scale));
+    --about-brings-heading-size     : calc(48px * var(--header-font-scale));
+    --about-brings-heading-max-w    : 100%;
+    --about-brings-heading-to-grid  : calc(32px * var(--header-font-scale));
+    --about-brings-grid-gap-x       : calc(20px * var(--header-font-scale));
+    --about-brings-grid-gap-y       : calc(32px * var(--header-font-scale));
+    --about-brings-stagger-offset   : 0px;
+    --about-brings-feature-img-w    : min(100%, calc(280px * var(--header-font-scale)));
+    --about-brings-feature-img-h    : calc(187px * var(--header-font-scale));
+    --about-brings-feature-img-to-label: calc(24px * var(--header-font-scale));
+    --about-brings-label-size       : calc(20px * var(--header-font-scale));
+    --about-brings-label-max-w      : 100%;
+
+    --english-ai-hero-padding-top        : calc(48px * var(--header-font-scale));
+    --english-ai-hero-padding-bottom     : calc(48px * var(--header-font-scale));
+    --english-ai-hero-columns-gap        : calc(24px * var(--header-font-scale));
+    --english-ai-hero-row-gap              : calc(24px * var(--header-font-scale));
+    --english-ai-hero-title-size           : calc(56px * var(--header-font-scale));
+    --english-ai-hero-title-max-w          : 100%;
+    --english-ai-hero-body-max-w           : 100%;
+    --english-ai-hero-illustration-w       : min(100%, calc(520px * var(--header-font-scale)));
+    --english-ai-hero-illustration-h       : calc(324px * var(--header-font-scale));
+    --english-ai-hero-robot-wrap-w         : calc(200px * var(--header-font-scale));
+    --english-ai-hero-robot-wrap-h         : calc(260px * var(--header-font-scale));
+    --english-ai-hero-illustration-margin-top: calc(var(--apply-btn-h) + 16px);
+    --english-ai-hero-eyebrow-to-apply        : calc(12px * var(--header-font-scale));
+    --english-ai-hero-title-to-body           : calc(20px * var(--header-font-scale));
+    --english-ai-hero-body-size               : calc(20px * var(--header-font-scale));
+    --english-ai-heading-max-w                : 100%;
+    --english-ai-highlight-h                    : calc(58px * var(--header-font-scale));
+    --english-ai-highlight-pad-x                : calc(12px * var(--header-font-scale));
+
+    --english-ai-platform-padding-top      : calc(48px * var(--header-font-scale));
+    --english-ai-platform-padding-bottom   : calc(48px * var(--header-font-scale));
+    --english-ai-platform-mockup-w         : 100%;
+    --english-ai-platform-mockup-h         : calc(320px * var(--header-font-scale));
+    --english-ai-platform-tagline-size     : calc(28px * var(--header-font-scale));
+    --english-ai-platform-tagline-max-w    : 100%;
+
+    --english-ai-grid-padding-top          : calc(48px * var(--header-font-scale));
+    --english-ai-grid-padding-bottom       : calc(48px * var(--header-font-scale));
+    --english-ai-grid-subtitle-max-w       : 100%;
+    --english-ai-grid-copy-max-w           : 100%;
+    --english-ai-grid-gap-y                : calc(32px * var(--header-font-scale));
+    --english-ai-grid-img-w                : min(100%, calc(213px * var(--header-font-scale)));
+    --english-ai-grid-img-h                : calc(142px * var(--header-font-scale));
+    --english-ai-grid-carousel-to-dots     : calc(20px * var(--header-font-scale));
+
+    --english-ai-comparison-padding-top    : calc(48px * var(--header-font-scale));
+    --english-ai-comparison-padding-bottom : calc(48px * var(--header-font-scale));
+    --english-ai-comparison-subtitle-max-w : 100%;
+    --english-ai-comparison-table-min-w    : calc(560px * var(--header-font-scale));
+    --english-ai-comparison-role-col       : calc(120px * var(--header-font-scale));
+    --english-ai-comparison-header-h       : calc(56px * var(--header-font-scale));
+    --english-ai-comparison-cell-px        : calc(20px * var(--header-font-scale));
+    --english-ai-comparison-row-py         : calc(20px * var(--header-font-scale));
+
+    --english-ai-action-subtitle-max-w     : 100%;
+    --english-ai-action-demo-h             : 380px;
+
+    --english-ai-curriculum-padding-top    : calc(48px * var(--header-font-scale));
+    --english-ai-curriculum-padding-bottom : calc(48px * var(--header-font-scale));
+    --english-ai-curriculum-subtitle-max-w : 100%;
+    --english-ai-curriculum-copy-max-w     : 100%;
+
+    --about-highlight-h             : calc(58px * var(--header-font-scale));
+    --about-highlight-pad-x         : calc(12px * var(--header-font-scale));
+    --about-partners-heading-to-logos: calc(56px * var(--header-font-scale));
+    --about-real-progress-heading-max-w: 100%;
+    --about-skills-heading-max-w      : 100%;
+    --about-skills-body-max-w         : 100%;
+    --about-skills-yellow-py          : calc(32px * var(--header-font-scale));
+    --about-hero-subtitle-indent      : 8%;
+    --ai-ready-heading-max-w          : 100%;
+    --testimonial-heading-to-carousel : calc(24px * var(--header-font-scale));
+    --cohort-padding-top              : calc(48px * var(--header-font-scale));
+    --cohort-padding-bottom           : calc(80px * var(--header-font-scale));
+
+    --contact-hero-min-h            : auto;
+    --contact-hero-padding-top      : 56px;
+    --contact-hero-padding-bottom   : 56px;
+    --contact-hero-apply-to-image-gap: 80px;
+    --contact-hero-title-to-subtitle: calc(32px * var(--header-font-scale));
+    --contact-hero-illustration-w   : min(100%, calc(460px * var(--header-font-scale)));
+    --contact-hero-illustration-h   : calc(326px * var(--header-font-scale));
+
+    --contact-form-padding-top      : 56px;
+    --contact-form-padding-bottom   : 56px;
+    --contact-form-row-gap          : calc(32px * var(--header-font-scale));
+    --contact-form-field-h          : 52px;
+    --contact-form-field-padding-y  : 0px;
+    --contact-form-field-line-height: 52px;
+    --contact-form-field-text       : calc(22px * var(--header-font-scale));
+    --contact-form-button-gap       : calc(48px * var(--header-font-scale));
+    --contact-form-button-w         : min(100%, calc(340px * var(--header-font-scale)));
+    --contact-form-button-h         : calc(72px * var(--header-font-scale));
+    --contact-form-button-text      : calc(32px * var(--header-font-scale));
+    --contact-form-info-gap         : calc(80px * var(--header-font-scale));
+    --contact-info-text-size        : calc(22px * var(--header-font-scale));
+    --contact-info-text-offset-y    : calc(16px * var(--header-font-scale));
+    --contact-info-phone-icon-w     : calc(110px * var(--header-font-scale));
+    --contact-info-phone-icon-h     : calc(114px * var(--header-font-scale));
+    --contact-info-email-icon-w     : calc(122px * var(--header-font-scale));
+    --contact-info-email-icon-h     : calc(106px * var(--header-font-scale));
+    --contact-info-address-icon-w   : calc(103px * var(--header-font-scale));
+    --contact-info-address-icon-h   : calc(128px * var(--header-font-scale));
+  }
+}
+
+/* --- Mobile (≤639px) -------------------------------------- */
+@media (max-width: 639px) {
+  :root {
+    --header-font-scale           : 0.62;
+    --header-announcement-h       : 44px;
+    --header-announcement-padding-y: calc(14px * var(--header-font-scale));
+    --header-announcement-padding-x: 16px;
+    --header-announcement-line-height: 1.4;
+    --header-nav-h                : 64px;
+    --header-logo-w               : calc(140px * var(--header-font-scale));
+    --header-logo-h               : calc(29px * var(--header-font-scale));
+    --header-pdf-h                : calc(44px * var(--header-font-scale));
+    --header-pdf-min-w            : calc(120px * var(--header-font-scale));
+    --header-text-announcement    : calc(14px * var(--header-font-scale));
+    --header-text-pdf             : calc(20px * var(--header-font-scale));
+    --header-text-menu            : calc(24px * var(--header-font-scale));
+    --header-menu-text            : calc(32px * var(--header-font-scale));
+    --header-menu-text-lh         : calc(40px * var(--header-font-scale));
+    --header-menu-icon-w          : calc(48px * var(--header-font-scale));
+    --header-menu-padding-x       : calc(32px * var(--header-font-scale));
+    --header-menu-padding-y       : calc(40px * var(--header-font-scale));
+    --header-menu-item-gap        : calc(20px * var(--header-font-scale));
+
+    --section-padding-x           : 20px;
+    --section-padding-top           : 40px;
+    --section-padding-bottom        : 40px;
+    --section-heading-line-height   : 1.22;
+    --section-heading-line-gap      : 8px;
+    --hero-padding-x                : 20px;
+    --footer-padding-x              : 20px;
+    --cohort-logo-padding-x         : 12px;
+    --cohort-logo-row-gap             : calc(40px * var(--header-font-scale));
+    --cohort-grid-col-gap             : calc(16px * var(--header-font-scale));
+    --cohort-carousel-to-dots         : calc(20px * var(--header-font-scale));
+
+    --hero-text-headline          : calc(42px * var(--header-font-scale));
+    --hero-text-body              : calc(20px * var(--header-font-scale));
+    --hero-robo-viewport-w        : calc(160px * var(--header-font-scale));
+    --hero-decorative-h           : calc(130px * var(--header-font-scale));
+    --hero-body-pb                : 24px;
+
+    --section-text-heading        : calc(36px * var(--header-font-scale));
+    --section-text-title          : calc(28px * var(--header-font-scale));
+    --section-text-tab            : calc(22px * var(--header-font-scale));
+    --section-tab-h                 : calc(64px * var(--header-font-scale));
+    --section-tab-english-w         : 100%;
+    --section-tab-code-w            : 100%;
+    --section-tab-edge-w            : 100%;
+    --section-tab-gap               : 12px;
+    --section-try-btn-w             : 100%;
+    --section-try-btn-h             : calc(64px * var(--header-font-scale));
+    --section-dashboard-h           : 220px;
+
+    --action-padding-top            : 40px;
+    --action-padding-bottom         : 48px;
+    --action-columns-gap            : 32px;
+    --action-demo-h                 : 260px;
+    --action-feature-img-w          : 120px;
+    --action-feature-img-h          : 80px;
+
+    --why-marquee-text              : calc(36px * var(--header-font-scale));
+    --why-marquee-bottom            : calc(24px * var(--header-font-scale));
+    --why-marquee-offset-top        : 0px;
+    --why-students-w                : min(100%, calc(640px * var(--header-font-scale)));
+    --why-gif-offset-left           : 0px;
+
+    --how-dashboard-video-h         : 240px;
+    --how-lesson-img-h              : 100px;
+    --track-img-w                   : 240px;
+    --track-img-h                   : 160px;
+    --track-padding-top             : 48px;
+    --track-padding-bottom          : calc(80px * var(--header-font-scale));
+
+    --ai-ready-diagram-h            : calc(480px * var(--header-font-scale));
+    --ai-ready-padding-bottom       : 48px;
+
+    --onboard-padding-bottom        : 64px;
+    --onboard-image-w               : 100%;
+    --onboard-image-h               : auto;
+
+    --testimonial-card-w            : calc(280px * var(--header-font-scale));
+    --testimonial-card-h            : calc(360px * var(--header-font-scale));
+    --testimonial-padding-x         : calc(24px * var(--header-font-scale));
+    --testimonial-name-top          : calc(120px * var(--header-font-scale));
+    --testimonial-body-top          : calc(200px * var(--header-font-scale));
+    --testimonial-body-w            : calc(230px * var(--header-font-scale));
+    --testimonial-arrow-size        : calc(36px * var(--header-font-scale));
+    --testimonial-fade-w            : calc(48px * var(--header-font-scale));
+
+    --faq-padding-top               : 48px;
+    --faq-padding-bottom            : 48px;
+    --faq-item-padding-x            : calc(20px * var(--header-font-scale));
+    --faq-item-padding-y            : calc(20px * var(--header-font-scale));
+    --faq-item-radius               : calc(24px * var(--header-font-scale));
+    --faq-icon-w                    : calc(44px * var(--header-font-scale));
+    --faq-icon-h                    : calc(46px * var(--header-font-scale));
+    --faq-icon-gap                  : calc(16px * var(--header-font-scale));
+    --faq-question-size             : calc(18px * var(--header-font-scale));
+    --faq-answer-size               : calc(16px * var(--header-font-scale));
+
+    --apply-cta-padding-top         : calc(40px * var(--header-font-scale));
+    --apply-cta-padding-bottom      : calc(56px * var(--header-font-scale));
+    --apply-cta-yellow-size         : min(calc(100vw - 40px), 420px);
+    --apply-cta-student-circle-size : calc(200px * var(--header-font-scale));
+    --apply-cta-student-face-size   : calc(96px * var(--header-font-scale));
+    --apply-cta-student-overlap     : calc(48px * var(--header-font-scale));
+    --apply-cta-content-padding-x   : calc(28px * var(--header-font-scale));
+    --apply-cta-heading-size        : 24px;
+    --apply-cta-body-size           : 16px;
+    --apply-cta-yellow-py           : 32px;
+    --apply-cta-heading-max-w       : min(100%, 300px);
+    --apply-cta-body-max-w          : min(100%, 320px);
+    --apply-cta-heading-to-body     : 16px;
+    --apply-cta-body-to-btn         : 24px;
+    --apply-cta-btn-w               : min(100%, 300px);
+    --apply-cta-btn-h               : calc(60px * var(--header-font-scale));
+    --apply-cta-btn-text-size       : 18px;
+    --apply-cta-btn-padding-x       : 20px;
+    --apply-cta-btn-arrow-size      : 22px;
+
+    --apply-btn-w                   : min(100%, calc(240px * var(--header-font-scale)));
+    --apply-btn-h                   : calc(88px * var(--header-font-scale));
+    --apply-btn-pill-w              : calc(210px * var(--header-font-scale));
+    --apply-btn-pill-h              : calc(52px * var(--header-font-scale));
+    --apply-btn-pill-top            : calc(18px * var(--header-font-scale));
+    --apply-btn-circle-size         : calc(88px * var(--header-font-scale));
+    --apply-btn-circle-left         : calc(152px * var(--header-font-scale));
+    --apply-btn-student-size        : calc(48px * var(--header-font-scale));
+    --apply-btn-student-left        : calc(172px * var(--header-font-scale));
+    --apply-btn-student-top         : calc(20px * var(--header-font-scale));
+    --apply-btn-text                : calc(24px * var(--header-font-scale));
+    --apply-btn-text-left           : calc(24px * var(--header-font-scale));
+
+    --not-found-padding-top         : calc(40px * var(--header-font-scale));
+    --not-found-padding-bottom      : calc(48px * var(--header-font-scale));
+    --not-found-columns-gap         : calc(24px * var(--header-font-scale));
+    --not-found-title-size          : calc(36px * var(--header-font-scale));
+    --not-found-subtitle-size       : calc(22px * var(--header-font-scale));
+    --not-found-body-size           : calc(18px * var(--header-font-scale));
+    --not-found-img-wrap-w          : min(100%, calc(280px * var(--header-font-scale)));
+    --not-found-img-wrap-h          : calc(340px * var(--header-font-scale));
+    --not-found-title-to-subtitle   : calc(20px * var(--header-font-scale));
+    --not-found-subtitle-to-body    : calc(24px * var(--header-font-scale));
+    --not-found-body-paragraph-gap  : calc(16px * var(--header-font-scale));
+
+    --thank-you-padding-top         : calc(40px * var(--header-font-scale));
+    --thank-you-padding-bottom      : calc(48px * var(--header-font-scale));
+    --thank-you-columns-gap         : calc(24px * var(--header-font-scale));
+    --thank-you-title-size          : calc(36px * var(--header-font-scale));
+    --thank-you-subtitle-size       : calc(22px * var(--header-font-scale));
+    --thank-you-body-size           : calc(18px * var(--header-font-scale));
+    --thank-you-title-max-w         : 100%;
+    --thank-you-subtitle-max-w      : 100%;
+    --thank-you-body-max-w          : 100%;
+    --thank-you-img-wrap-w          : 100%;
+    --thank-you-img-wrap-h          : 380px;
+    --thank-you-title-to-subtitle   : calc(20px * var(--header-font-scale));
+    --thank-you-subtitle-to-body    : calc(24px * var(--header-font-scale));
+    --thank-you-body-paragraph-gap  : calc(16px * var(--header-font-scale));
+
+    --about-hero-padding-top        : calc(32px * var(--header-font-scale));
+    --about-hero-padding-bottom     : calc(40px * var(--header-font-scale));
+    --about-hero-columns-gap        : calc(16px * var(--header-font-scale));
+    --about-hero-row-gap            : calc(20px * var(--header-font-scale));
+    --about-hero-text-offset-top    : calc(var(--apply-btn-h) + 12px);
+    --about-hero-text-max-w         : 100%;
+    --about-hero-title-size         : calc(36px * var(--header-font-scale));
+    --about-hero-subtitle-size      : calc(20px * var(--header-font-scale));
+    --about-hero-title-max-w        : 100%;
+    --about-hero-subtitle-max-w     : 100%;
+    --about-hero-title-to-subtitle  : calc(16px * var(--header-font-scale));
+    --about-hero-subtitle-indent    : 0%;
+    --about-hero-robot-margin-top   : calc(8px * var(--header-font-scale));
+    --about-hero-robot-wrap-w       : calc(140px * var(--header-font-scale));
+    --about-hero-robot-wrap-h       : calc(184px * var(--header-font-scale));
+
+    --about-why-padding-top         : calc(32px * var(--header-font-scale));
+    --about-why-padding-bottom      : calc(40px * var(--header-font-scale));
+    --about-why-columns-gap         : calc(16px * var(--header-font-scale));
+    --about-why-row-gap             : calc(24px * var(--header-font-scale));
+    --about-why-heading-size        : calc(36px * var(--header-font-scale));
+    --about-why-exist-highlight-h   : calc(44px * var(--header-font-scale));
+    --about-why-exist-highlight-pad-x: calc(10px * var(--header-font-scale));
+    --about-why-heading-to-body     : calc(16px * var(--header-font-scale));
+    --about-why-body-size           : calc(16px * var(--header-font-scale));
+    --about-why-body-max-w          : 100%;
+    --about-why-body-to-tagline     : calc(20px * var(--header-font-scale));
+    --about-why-tagline-size        : calc(20px * var(--header-font-scale));
+    --about-why-tagline-max-w       : 100%;
+    --about-why-illustration-w      : min(100%, calc(280px * var(--header-font-scale)));
+    --about-why-illustration-h      : calc(290px * var(--header-font-scale));
+
+    --about-brings-padding-top      : calc(32px * var(--header-font-scale));
+    --about-brings-padding-bottom   : calc(40px * var(--header-font-scale));
+    --about-brings-heading-size     : calc(36px * var(--header-font-scale));
+    --about-brings-heading-max-w    : 100%;
+    --about-brings-heading-to-grid  : calc(24px * var(--header-font-scale));
+    --about-brings-grid-gap-x       : calc(16px * var(--header-font-scale));
+    --about-brings-grid-gap-y       : calc(28px * var(--header-font-scale));
+    --about-brings-stagger-offset   : 0px;
+    --about-brings-feature-img-w    : min(100%, calc(260px * var(--header-font-scale)));
+    --about-brings-feature-img-h    : calc(174px * var(--header-font-scale));
+    --about-brings-feature-img-to-label: calc(20px * var(--header-font-scale));
+    --about-brings-label-size       : calc(16px * var(--header-font-scale));
+    --about-brings-label-max-w      : 100%;
+    --about-brings-carousel-to-dots : calc(20px * var(--header-font-scale));
+    --about-brings-dot-size         : calc(8px * var(--header-font-scale));
+    --about-brings-dot-gap          : calc(8px * var(--header-font-scale));
+
+    --english-ai-hero-padding-top        : calc(32px * var(--header-font-scale));
+    --english-ai-hero-padding-bottom     : calc(40px * var(--header-font-scale));
+    --english-ai-hero-columns-gap        : calc(16px * var(--header-font-scale));
+    --english-ai-hero-row-gap              : calc(20px * var(--header-font-scale));
+    --english-ai-hero-title-size           : calc(36px * var(--header-font-scale));
+    --english-ai-hero-title-max-w          : 100%;
+    --english-ai-hero-body-size            : calc(16px * var(--header-font-scale));
+    --english-ai-hero-body-max-w           : 100%;
+    --english-ai-hero-illustration-w       : 100%;
+    --english-ai-hero-illustration-h       : calc(240px * var(--header-font-scale));
+    --english-ai-hero-robot-wrap-w         : calc(140px * var(--header-font-scale));
+    --english-ai-hero-robot-wrap-h         : calc(184px * var(--header-font-scale));
+    --english-ai-hero-illustration-margin-top: 0px;
+    --english-ai-hero-eyebrow-to-apply        : calc(12px * var(--header-font-scale));
+    --english-ai-hero-title-to-body           : calc(16px * var(--header-font-scale));
+    --english-ai-hero-eyebrow-to-content      : calc(12px * var(--header-font-scale));
+    --english-ai-heading-max-w                : 100%;
+    --english-ai-highlight-h                    : calc(44px * var(--header-font-scale));
+    --english-ai-highlight-pad-x                : calc(10px * var(--header-font-scale));
+
+    --english-ai-platform-padding-top      : calc(32px * var(--header-font-scale));
+    --english-ai-platform-padding-bottom   : calc(40px * var(--header-font-scale));
+    --english-ai-platform-mockup-w         : 100%;
+    --english-ai-platform-mockup-h         : calc(220px * var(--header-font-scale));
+    --english-ai-platform-tagline-size     : calc(20px * var(--header-font-scale));
+    --english-ai-platform-tagline-max-w    : 100%;
+
+    --english-ai-grid-padding-top          : calc(32px * var(--header-font-scale));
+    --english-ai-grid-padding-bottom       : calc(40px * var(--header-font-scale));
+    --english-ai-grid-subtitle-max-w       : 100%;
+    --english-ai-grid-copy-max-w           : 100%;
+    --english-ai-grid-img-w                : min(100%, calc(213px * var(--header-font-scale)));
+    --english-ai-grid-img-h                : calc(142px * var(--header-font-scale));
+    --english-ai-grid-gap-y                : calc(28px * var(--header-font-scale));
+    --english-ai-grid-items-to-footer      : calc(32px * var(--header-font-scale));
+    --english-ai-grid-carousel-to-dots     : calc(20px * var(--header-font-scale));
+
+    --english-ai-comparison-padding-top    : calc(32px * var(--header-font-scale));
+    --english-ai-comparison-padding-bottom : calc(40px * var(--header-font-scale));
+    --english-ai-comparison-subtitle-max-w : 100%;
+    --english-ai-comparison-mobile-card-gap: calc(12px * var(--header-font-scale));
+    --english-ai-comparison-mobile-label-size: calc(16px * var(--header-font-scale));
+    --english-ai-comparison-mobile-label-py: calc(12px * var(--header-font-scale));
+    --english-ai-comparison-mobile-body-py : calc(14px * var(--header-font-scale));
+    --english-ai-comparison-mobile-block-gap: calc(14px * var(--header-font-scale));
+
+    --english-ai-action-subtitle-max-w     : 100%;
+    --english-ai-action-demo-h             : 260px;
+
+    --english-ai-curriculum-padding-top    : calc(32px * var(--header-font-scale));
+    --english-ai-curriculum-padding-bottom : calc(40px * var(--header-font-scale));
+    --english-ai-curriculum-subtitle-max-w : 100%;
+    --english-ai-curriculum-copy-max-w     : 100%;
+    --english-ai-curriculum-gap-y            : calc(28px * var(--header-font-scale));
+
+    --about-highlight-h             : calc(44px * var(--header-font-scale));
+    --about-highlight-pad-x         : calc(10px * var(--header-font-scale));
+    --about-partners-heading-to-logos: calc(40px * var(--header-font-scale));
+    --about-real-progress-heading-max-w: 100%;
+    --about-skills-heading-max-w      : 100%;
+    --about-skills-body-max-w         : 100%;
+    --about-skills-yellow-py          : calc(28px * var(--header-font-scale));
+    --about-hero-text-offset-top      : 0px;
+    --ai-ready-heading-max-w          : 100%;
+    --testimonial-padding-top         : calc(40px * var(--header-font-scale));
+    --testimonial-heading-to-carousel : calc(24px * var(--header-font-scale));
+    --cohort-padding-top              : calc(40px * var(--header-font-scale));
+    --cohort-padding-bottom           : calc(64px * var(--header-font-scale));
+
+    --contact-hero-min-h            : auto;
+    --contact-hero-padding-top      : 40px;
+    --contact-hero-padding-bottom   : 48px;
+    --contact-hero-apply-to-image-gap: 48px;
+    --contact-hero-title-to-subtitle: calc(20px * var(--header-font-scale));
+    --contact-hero-illustration-w   : min(100%, calc(320px * var(--header-font-scale)));
+    --contact-hero-illustration-h   : calc(226px * var(--header-font-scale));
+
+    --contact-form-padding-top      : 40px;
+    --contact-form-padding-bottom   : 48px;
+    --contact-form-col-gap          : calc(16px * var(--header-font-scale));
+    --contact-form-row-gap          : calc(20px * var(--header-font-scale));
+    --contact-form-field-h          : 44px;
+    --contact-form-field-padding-x  : calc(20px * var(--header-font-scale));
+    --contact-form-field-padding-y  : 0px;
+    --contact-form-field-line-height: 44px;
+    --contact-form-field-text       : 16px;
+    --contact-form-button-gap       : calc(32px * var(--header-font-scale));
+    --contact-form-button-w         : 100%;
+    --contact-form-button-h         : calc(56px * var(--header-font-scale));
+    --contact-form-button-text      : calc(24px * var(--header-font-scale));
+    --contact-form-info-gap         : calc(48px * var(--header-font-scale));
+    --contact-info-gap                : calc(32px * var(--header-font-scale));
+    --contact-info-icon-gap           : calc(16px * var(--header-font-scale));
+    --contact-info-text-size        : calc(16px * var(--header-font-scale));
+    --contact-info-text-offset-y    : calc(8px * var(--header-font-scale));
+    --contact-info-line-gap           : calc(12px * var(--header-font-scale));
+    --contact-info-phone-icon-w     : calc(80px * var(--header-font-scale));
+    --contact-info-phone-icon-h     : calc(83px * var(--header-font-scale));
+    --contact-info-email-icon-w     : calc(88px * var(--header-font-scale));
+    --contact-info-email-icon-h     : calc(77px * var(--header-font-scale));
+    --contact-info-address-icon-w   : calc(75px * var(--header-font-scale));
+    --contact-info-address-icon-h   : calc(94px * var(--header-font-scale));
+  }
+}
+
+/* --- Dark mode (future) ----------------------------------- */
+[data-theme='dark'] {
+  --color-bg      : #0a0f1e;
+  --color-fg      : #f9fafb;
+  --color-muted   : #9ca3af;
+  --color-border  : #1f2937;
+  --color-surface : #111827;
+}

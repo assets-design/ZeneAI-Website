@@ -1,0 +1,236 @@
+/* ============================================================
+   GLOBAL STYLES — Zene AI
+   ============================================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Section titles — extra breathing room between wrapped/stacked lines */
+@layer utilities {
+  :is(h1, h2, h3).font-heading.font-medium.uppercase.leading-none {
+    line-height: var(--section-heading-line-height);
+  }
+
+  :is(h1, h2, h3).font-heading > .block + .block {
+    margin-top: var(--section-heading-line-gap);
+  }
+}
+
+/* Animated 50/50 conic border — seamless 360° loop on pill buttons */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotating-split-border-angle {
+  to { --border-angle: 360deg; }
+}
+
+/* --- Base layer ------------------------------------------- */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    -webkit-font-smoothing : antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior        : smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background : var(--color-bg);
+    color      : var(--color-fg);
+    line-height: 1.6;
+    overflow-x : hidden;
+  }
+
+  /* Headings — Fira Sans Extra Condensed */
+  h1, h2, h3, h4, h5, h6 {
+    font-family   : var(--font-heading);
+    font-weight   : 700;
+    line-height   : 1.1;
+    letter-spacing: -0.02em;
+    color         : var(--color-fg);
+    margin        : 0;
+  }
+
+  h1 { font-size: var(--text-6xl); font-weight: 800; }
+  h2 { font-size: var(--text-5xl); }
+  h3 { font-size: var(--text-4xl); letter-spacing: 0; }
+  h4 { font-size: var(--text-3xl); font-weight: 600; letter-spacing: 0; }
+  h5 { font-size: var(--text-2xl); font-weight: 600; letter-spacing: 0; }
+  h6 { font-size: var(--text-xl);  font-weight: 500; letter-spacing: 0; }
+
+  /* Paragraphs — DM Sans */
+  p {
+    font-family: var(--font-body);
+    font-size  : var(--text-base);
+    line-height: 1.65;
+    margin     : 0;
+  }
+
+  a {
+    color          : var(--color-primary);
+    text-decoration: none;
+    transition     : color 0.2s;
+  }
+
+  a:hover { color: var(--color-primary-hover); }
+
+  img, svg { display: block; max-width: 100%; }
+
+  button { cursor: pointer; font-family: var(--font-body); }
+}
+
+/* --- Component layer -------------------------------------- */
+@layer components {
+  .container {
+    width    : 100%;
+    max-width: 1280px;
+    margin   : 0 auto;
+    padding  : 0 var(--spacing-lg);
+  }
+
+  @media (max-width: 768px) {
+    .container { padding: 0 var(--spacing-md); }
+  }
+
+  /* 50% #177EC0 + 50% #78F3FA — connected ring, rotates around full pill */
+  .rotating-split-border {
+    --border-angle: 0deg;
+    border-style: solid;
+    border-color: transparent;
+    background:
+      linear-gradient(#ffffff, #ffffff) padding-box,
+      conic-gradient(
+        from var(--border-angle),
+        #177EC0 0deg 180deg,
+        #78F3FA 180deg 360deg
+      ) border-box;
+    animation: rotating-split-border-angle 2.5s linear infinite;
+  }
+
+  .contact-form-field {
+    -webkit-appearance: none;
+    appearance        : none;
+    overflow          : visible;
+  }
+
+  .contact-form-field::placeholder {
+    line-height: inherit;
+    opacity    : 0.5;
+  }
+
+  select.contact-form-field {
+    background-color: #fff;
+  }
+
+  /* Code Monkey hero — 60/40 layout, larger type, illustration in right column */
+  .program-hero--code-monkey {
+    --english-ai-hero-title-size: calc(82px * var(--header-font-scale));
+    --code-monkey-hero-eyebrow-size: calc(24px * var(--header-font-scale));
+    --code-monkey-hero-body-size: calc(24px * var(--header-font-scale));
+    --code-monkey-hero-eyebrow-to-heading: calc(20px * var(--header-font-scale));
+    --code-monkey-hero-text-offset-top: calc(var(--apply-btn-h) + 8px);
+    --code-monkey-hero-illustration-margin-top: calc(24px * var(--header-font-scale));
+    --english-ai-hero-illustration-w: 100%;
+    --english-ai-hero-illustration-h: calc(520px * var(--header-font-scale));
+    --english-ai-hero-title-to-body: calc(32px * var(--header-font-scale));
+    --english-ai-hero-robot-wrap-w: calc(287px * var(--header-font-scale) * 0.7);
+    --english-ai-hero-robot-wrap-h: calc(377px * var(--header-font-scale) * 0.7);
+  }
+
+  @media (max-width: 1279px) {
+    .program-hero--code-monkey {
+      --english-ai-hero-title-size: calc(64px * var(--header-font-scale));
+      --code-monkey-hero-body-size: calc(20px * var(--header-font-scale));
+      --code-monkey-hero-text-offset-top: 0px;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .program-hero--code-monkey {
+      --english-ai-hero-illustration-h: calc(386px * var(--header-font-scale));
+      --english-ai-hero-robot-wrap-w: calc(200px * var(--header-font-scale) * 0.7);
+      --english-ai-hero-robot-wrap-h: calc(260px * var(--header-font-scale) * 0.7);
+    }
+  }
+
+  @media (max-width: 639px) {
+    .program-hero--code-monkey {
+      --english-ai-hero-title-size: calc(36px * var(--header-font-scale));
+      --code-monkey-hero-eyebrow-size: calc(16px * var(--header-font-scale));
+      --code-monkey-hero-body-size: calc(16px * var(--header-font-scale));
+      --english-ai-hero-illustration-h: calc(286px * var(--header-font-scale));
+      --code-monkey-hero-illustration-margin-top: calc(16px * var(--header-font-scale));
+      --english-ai-hero-robot-wrap-w: calc(140px * var(--header-font-scale) * 0.7);
+      --english-ai-hero-robot-wrap-h: calc(184px * var(--header-font-scale) * 0.7);
+    }
+  }
+
+  /* Code Monkey platform section — tagline one line per sentence */
+  .program-platform--code-monkey {
+    --code-monkey-platform-tagline-size: calc(30px * var(--header-font-scale));
+  }
+
+  @media (max-width: 1279px) {
+    .program-platform--code-monkey {
+      --code-monkey-platform-tagline-size: calc(26px * var(--header-font-scale));
+    }
+  }
+
+  @media (max-width: 639px) {
+    .program-platform--code-monkey {
+      --code-monkey-platform-tagline-size: calc(18px * var(--header-font-scale));
+    }
+  }
+
+  /* Full viewport white cards on desktop — standard pages only */
+  @media (min-width: 1280px) {
+    #main-content:not(.section-scroll-root) > section {
+      display: block;
+      width: 100%;
+      min-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    #main-content:not(.section-scroll-root) > section:first-of-type {
+      padding-top: 5px;
+    }
+
+    #main-content:not(.section-scroll-root) > section + section {
+      padding-top: 5px;
+    }
+
+    #main-content:not(.section-scroll-root) > section > :first-child {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      min-height: 100dvh;
+      box-sizing: border-box;
+    }
+  }
+}
+
+/* Hero robot video — top-left, crop encoded edge lines */
+.hero-robot-video {
+  isolation: isolate;
+  background: #fff;
+}
+
+.hero-robot-video__media {
+  display: block;
+  width: 106%;
+  height: 106%;
+  max-width: none;
+  object-fit: cover;
+  object-position: left top;
+  transform: translate(-3%, -3%);
+  border: 0;
+  outline: 0;
+  background: transparent;
+}
