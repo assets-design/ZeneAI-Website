@@ -205,7 +205,7 @@ export function EnglishAiFeatureGridSection({
       data-node-id={sectionNodeId}
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div

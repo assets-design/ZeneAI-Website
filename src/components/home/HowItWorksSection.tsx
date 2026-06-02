@@ -50,6 +50,115 @@ function FeatureBlock({
   )
 }
 
+type HowItWorksRightColumnProps = {
+  isCustomProgram: boolean
+  isCodeMonkey: boolean
+  isTheEdge: boolean
+  fillLessonImage?: boolean
+  duplicateSet?: boolean
+}
+
+function HowItWorksRightColumn({
+  isCustomProgram,
+  isCodeMonkey,
+  isTheEdge,
+  fillLessonImage = false,
+  duplicateSet = false,
+}: HowItWorksRightColumnProps) {
+  const lessonDescription = isTheEdge
+    ? 'Easy-to-use tools to deploy curriculum and monitor student engagement.'
+    : isCodeMonkey
+      ? 'Weekly lesson plans aligned to your textbook. Adjust, assign, done.'
+      : 'Create, push, and track lessons without technical complexity. Full visibility from planning to delivery to review.'
+
+  const dashboardDescription = isTheEdge
+    ? 'A centralized hub to manage lessons, track progress, and provide feedback.'
+    : 'Track lesson progress, student activity, and analytics from one place. Manage Grades 1–12 with rankings, completion rates, and engagement data — all in real time.'
+
+  return (
+    <>
+      <div className="how-dashboard-block min-h-0 shrink-0">
+        <FeatureBlock
+          title="Teacher Dashboard"
+          description={isCodeMonkey ? '' : dashboardDescription}
+          titleNodeId="642:1264"
+          bodyNodeId="642:1265"
+          normalCaseBody={isCustomProgram}
+          showDescription={!isCodeMonkey}
+        >
+          <div
+            className="how-dashboard-media w-full overflow-hidden"
+            style={{
+              maxWidth: 'var(--how-dashboard-video-w)',
+              height: 'var(--how-dashboard-video-h)',
+              borderRadius: 'var(--how-dashboard-video-radius)',
+            }}
+            data-node-id="642:1272"
+          >
+            <video
+              src={TEACHER_DASHBOARD_VIDEO}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="size-full object-cover"
+              aria-label="Zene teacher dashboard overview"
+            />
+          </div>
+        </FeatureBlock>
+      </div>
+
+      <article
+        className={cn(
+          'how-lesson-block flex min-h-0 min-w-0 flex-col',
+          fillLessonImage && 'how-lesson-block--fill',
+        )}
+        style={{ gap: 'var(--how-block-gap)' }}
+        aria-hidden={duplicateSet ? true : undefined}
+      >
+        <h3
+          className="font-heading font-medium uppercase leading-none text-black"
+          style={{ fontSize: 'var(--section-text-tab)' }}
+          data-node-id="642:1273"
+        >
+          Lesson Management
+        </h3>
+        <p
+          className={cn(
+            'font-body font-normal leading-normal text-black',
+            isCustomProgram ? 'normal-case' : 'capitalize',
+          )}
+          style={{
+            fontSize: 'var(--section-text-body)',
+            fontVariationSettings: "'opsz' 14",
+          }}
+          data-node-id="642:1274"
+        >
+          {lessonDescription}
+        </p>
+        <div
+          className={cn(
+            'how-lesson-img-wrap min-h-0 overflow-hidden',
+            fillLessonImage && 'how-lesson-img-wrap--fill',
+          )}
+        >
+          <img
+            src="/assets/figma/home/section-5/lesson-management.png"
+            alt={duplicateSet ? '' : 'Zene lesson management interface'}
+            aria-hidden={duplicateSet ? true : undefined}
+            className="how-lesson-img block w-full object-cover object-top"
+            style={{
+              maxWidth: 'var(--how-lesson-img-w)',
+              height: fillLessonImage ? undefined : 'var(--how-lesson-img-h)',
+            }}
+            data-node-id="642:1275"
+          />
+        </div>
+      </article>
+    </>
+  )
+}
+
 type HowItWorksSectionProps = {
   variant?: 'home' | 'english-ai' | 'code-monkey' | 'the-edge'
 }
@@ -66,18 +175,30 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
       ? 'code-monkey-how-heading'
       : 'how-it-works-heading'
 
+  const useScrollableRightColumn = isEnglishAi || isCodeMonkey
+
+  const rightColumnProps = {
+    isCustomProgram,
+    isCodeMonkey,
+    isTheEdge,
+  }
+
   return (
     <section
-      className="w-full px-[5px] pt-[5px]"
+      id="how-it-works"
+      className={cn(
+        'w-full px-[5px] pt-[5px]',
+        useScrollableRightColumn && 'how-it-works-section--scrollable',
+      )}
       aria-labelledby={headingId}
       data-node-id={isProgramPage ? '1060:2200' : '642:1196'}
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="how-it-works-card relative mx-auto flex w-full min-h-0 flex-col overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
-          className="grid min-w-0 items-start xl:grid-cols-[minmax(0,var(--how-left-max-w))_1fr]"
+          className="how-it-works-grid grid min-h-0 min-w-0 flex-1 items-start xl:grid-cols-[minmax(0,var(--how-left-max-w))_1fr]"
           style={{
             gap: 'var(--how-columns-gap)',
             paddingLeft: 'var(--section-padding-x)',
@@ -87,7 +208,7 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
           }}
         >
           {/* Left — intro copy */}
-          <div className="min-w-0">
+          <div className="how-it-works-left min-w-0">
             <p
               className={cn('font-body text-black', !isCustomProgram && 'uppercase')}
               style={{
@@ -124,9 +245,8 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
                     }}
                     data-node-id="1060:2328"
                   >
-                    The Edge
-                  </span>{' '}
-                  works.
+                    Zene Works.
+                  </span>
                 </>
               ) : isCodeMonkey ? (
                 <>
@@ -175,7 +295,7 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
               data-node-id={isProgramPage ? '1060:2219' : '760:1684'}
             >
               {isTheEdge
-                ? 'Track leadership development, student activity, and skill acquisition from one place. Your teacher is in control — The Edge runs the development track.'
+                ? 'Our platform is designed to be intuitive for teachers and impactful for students.'
                 : isCodeMonkey
                   ? 'A teacher dashboard, lesson plans by week, and per-student reports. Your teacher is in control — Zene runs the practice.'
                   : isEnglishAi
@@ -185,77 +305,33 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
           </div>
 
           {/* Right — Teacher Dashboard + Lesson Management */}
-          <div className="flex min-w-0 flex-col" style={{ gap: 'var(--how-section-gap)' }}>
-            <FeatureBlock
-              title="Teacher Dashboard"
-              description={
-                isCustomProgram
-                  ? ''
-                  : 'Track lesson progress, student activity, and analytics from one place. Manage Grades 1–12 with rankings, completion rates, and engagement data — all in real time.'
-              }
-              titleNodeId="642:1264"
-              bodyNodeId="642:1265"
-              normalCaseBody={isCustomProgram}
-              showDescription={!isCustomProgram}
-            >
-              <div
-                className="w-full overflow-hidden"
-                style={{
-                  maxWidth: 'var(--how-dashboard-video-w)',
-                  height: 'var(--how-dashboard-video-h)',
-                  borderRadius: 'var(--how-dashboard-video-radius)',
-                }}
-                data-node-id="642:1272"
-              >
-                <video
-                  src={TEACHER_DASHBOARD_VIDEO}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="size-full object-cover"
-                  aria-label="Zene teacher dashboard overview"
-                />
+          {useScrollableRightColumn ? (
+            <div className="how-it-works-right-scroll min-h-0 min-w-0">
+              <div className="how-it-works-right-set how-it-works-right-set--primary">
+                <div
+                  className="how-it-works-right flex min-h-0 min-w-0 flex-col"
+                  style={{ gap: 'var(--how-section-gap)' }}
+                >
+                  <HowItWorksRightColumn {...rightColumnProps} fillLessonImage />
+                </div>
               </div>
-            </FeatureBlock>
-
-            <article className="flex min-w-0 flex-col" style={{ gap: 'var(--how-block-gap)' }}>
-              <h3
-                className="font-heading font-medium uppercase leading-none text-black"
-                style={{ fontSize: 'var(--section-text-tab)' }}
-                data-node-id="642:1273"
-              >
-                Lesson Management
-              </h3>
-              <p
-                className={cn(
-                  'font-body font-normal leading-normal text-black',
-                  isCustomProgram ? 'normal-case' : 'capitalize',
-                )}
-                style={{
-                  fontSize: 'var(--section-text-body)',
-                  fontVariationSettings: "'opsz' 14",
-                }}
-                data-node-id="642:1274"
-              >
-                {isTheEdge
-                  ? 'Weekly lesson plans aligned to your programme. Adjust, assign, done.'
-                  : isCodeMonkey
-                    ? 'Weekly lesson plans aligned to your textbook. Adjust, assign, done.'
-                    : 'Create, push, and track lessons without technical complexity. Full visibility from planning to delivery to review.'}
-              </p>
-              <img
-                src="/assets/figma/home/section-5/lesson-management.png"
-                alt="Zene lesson management interface"
-                className="block w-full object-cover object-top rounded-t-[var(--how-lesson-img-radius)]"
-                style={{
-                  maxWidth: 'var(--how-lesson-img-w)',
-                  height: 'var(--how-lesson-img-h)',
-                }}
-                data-node-id="642:1275"
-              />
-            </article>
-          </div>
+              <div className="how-it-works-right-set how-it-works-right-set--duplicate" aria-hidden="true">
+                <div
+                  className="how-it-works-right flex min-h-0 min-w-0 flex-col"
+                  style={{ gap: 'var(--how-section-gap)' }}
+                >
+                  <HowItWorksRightColumn {...rightColumnProps} duplicateSet />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div
+              className="how-it-works-right flex min-h-0 min-w-0 flex-col"
+              style={{ gap: 'var(--how-section-gap)' }}
+            >
+              <HowItWorksRightColumn {...rightColumnProps} />
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -79,8 +79,12 @@ function WhySchoolsIllustration() {
     <img
       src={whySchoolsGif}
       alt="Students learning with Zene AI"
-      className="block h-auto w-full max-w-[var(--why-students-w)] object-contain object-left"
-      style={{ marginTop: 'var(--why-gif-offset-top)' }}
+      className="section-fit-media why-students-media block h-auto object-contain object-left-bottom"
+      style={{
+        width: 'var(--why-students-w)',
+        maxHeight: 'var(--why-students-h)',
+        marginTop: 'var(--why-gif-offset-top)',
+      }}
       data-node-id="642:1294"
     />
   )
@@ -89,12 +93,13 @@ function WhySchoolsIllustration() {
 export function WhySchoolsSection() {
   return (
     <section
+      id="why-schools"
       className="w-full px-[5px] pt-[5px]"
       aria-labelledby="why-schools-heading"
       data-node-id="642:1126"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
@@ -138,7 +143,7 @@ export function WhySchoolsSection() {
             </div>
 
             <div
-              className="relative z-[1] flex min-w-0 justify-start xl:-ml-[var(--why-gif-offset-left)]"
+              className="why-illustration-col relative z-[1] flex min-h-0 min-w-0 items-end justify-start overflow-visible xl:-ml-[var(--why-gif-offset-left)]"
             >
               <WhySchoolsIllustration />
             </div>

@@ -3,7 +3,7 @@ import heroRobotVideo from '@/data/left right_01.mp4'
 export function HeroRobotVideo() {
   return (
     <div
-      className="hero-robot-video shrink-0 overflow-hidden"
+      className="hero-robot-video shrink-0"
       style={{
         width: 'var(--hero-decorative-w)',
         height: 'var(--hero-decorative-h)',

@@ -128,14 +128,14 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
   return (
     <section
       className={cn(
-        'w-full px-[5px]',
+        'w-full px-[5px] pt-[5px]',
         panel && 'section-scroll-panel section-scroll-panel--form',
       )}
       aria-labelledby="contact-form-heading"
       data-node-id="1041:1897"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
         data-node-id="642:2090"
       >

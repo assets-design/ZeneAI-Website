@@ -8,12 +8,12 @@ export function AboutWhyExistSection() {
       data-node-id="1054:2191"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
         data-node-id="1047:1944"
       >
         <div
-          className="grid min-w-0 grid-cols-1 items-center gap-x-[var(--about-why-columns-gap)] gap-y-[var(--about-why-row-gap)] sm:grid-cols-[minmax(0,1fr)_auto]"
+          className="grid min-w-0 grid-cols-1 items-center gap-x-[var(--about-why-columns-gap)] gap-y-[var(--about-why-row-gap)] sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]"
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',
@@ -78,13 +78,13 @@ export function AboutWhyExistSection() {
           </div>
 
           <div
-            className="flex w-full min-w-0 items-center justify-center sm:w-auto sm:justify-end"
+            className="flex w-full min-w-0 items-center justify-center"
             data-node-id="1047:2071"
           >
             <img
               src={whyExistIllustration}
               alt="Students collaborating with Zene AI around a laptop in a futuristic classroom"
-              className="h-auto w-full max-w-[var(--about-why-illustration-w)] object-contain"
+              className="mx-auto h-auto w-full max-w-[var(--about-why-illustration-w)] object-contain"
               style={{ maxHeight: 'var(--about-why-illustration-h)' }}
             />
           </div>

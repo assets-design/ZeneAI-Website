@@ -1,18 +1,23 @@
 import { ContactFormSection } from '@/components/contact/ContactFormSection'
 import { ContactHeroSection } from '@/components/contact/ContactHeroSection'
-import { Footer } from '@/components/Footer/Footer'
-import { useSectionReveal } from '@/hooks/useSectionReveal'
+import { ScrollPageDesktop, useDesktopScrollPage } from '@/components/Layout/ScrollPageDesktop'
 
 export function ContactPage() {
-  useSectionReveal()
+  const isDesktop = useDesktopScrollPage()
+
+  if (!isDesktop) {
+    return (
+      <>
+        <ContactHeroSection />
+        <ContactFormSection />
+      </>
+    )
+  }
 
   return (
-    <>
+    <ScrollPageDesktop pageClass="program-page-scroll--contact">
       <ContactHeroSection panel />
       <ContactFormSection panel />
-      <section className="section-scroll-tail px-[5px]" aria-label="Site footer">
-        <Footer />
-      </section>
-    </>
+    </ScrollPageDesktop>
   )
 }

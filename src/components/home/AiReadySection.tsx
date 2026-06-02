@@ -72,10 +72,11 @@ export function AiReadySection() {
       data-node-id="765:1838"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="ai-ready-card relative mx-auto flex h-full min-h-0 w-full flex-col overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
+          className="shrink-0"
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',
@@ -114,7 +115,7 @@ export function AiReadySection() {
 
         {/* Full-bleed diagram — Figma 765:1839 */}
         <div
-          className="relative w-full"
+          className="ai-ready-diagram relative w-full min-h-0"
           style={{
             height: 'var(--ai-ready-diagram-h)',
             marginTop: 'var(--ai-ready-heading-to-diagram)',
@@ -220,14 +221,15 @@ export function AiReadySection() {
             Parents see exactly which skills their child is building — and what&apos;s next.
           </StakeholderBody>
 
-          {/* Center headset — Figma inset 45.78% / 36.93% / 16.51% */}
+          {/* Center headset — sized to diagram focal area (765:1733) */}
           <div
             className="absolute"
             style={{
-              top: '45.78%',
-              bottom: '16.51%',
-              left: '36.93%',
-              right: '36.93%',
+              top: 'var(--ai-ready-headset-top)',
+              bottom: 'var(--ai-ready-headset-bottom)',
+              left: 'var(--ai-ready-headset-left)',
+              right: 'var(--ai-ready-headset-right)',
+              transform: 'translateY(var(--ai-ready-headset-offset-y))',
             }}
             data-node-id="765:1733"
           >

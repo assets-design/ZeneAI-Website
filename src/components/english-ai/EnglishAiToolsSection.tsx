@@ -111,51 +111,35 @@ const CODE_MONKEY_TOOLS = [
 const THE_EDGE_TOOLS = [
   {
     image: toolConversation,
-    title: 'Assessment Beyond Opinion',
-    body: 'Growth is measured through observable behaviours — not teacher impressions. Scored and added to a downloadable leadership profile.',
+    title: 'Baseline assessments',
+    body: 'Start with a clear picture of where every student is today.',
     imageNodeId: '1060:2254',
     titleNodeId: '1060:2273',
     bodyNodeId: '1060:2274',
   },
   {
     image: toolPronunciation,
-    title: 'Real-World Experience, Not Just Theory',
-    body: 'Entrepreneurship track, internship track, and a real job board. Students graduate with a portfolio of experiences.',
+    title: 'Scaffolded growth tracking',
+    body: 'Watch skills grow through structured, level-based milestones.',
     imageNodeId: '1060:2246',
     titleNodeId: '1060:2259',
     bodyNodeId: '1060:2260',
   },
   {
     image: toolReading,
-    title: 'Skills That Matter In College And Careers',
-    body: '5 pillars, 24 skills — mapped to what colleges and employers actually look for.',
+    title: 'Multi-rater verification',
+    body: 'Validate growth with feedback from teachers, peers, and mentors.',
     imageNodeId: '1060:2256',
     titleNodeId: '1060:2299',
     bodyNodeId: '1060:2300',
   },
   {
     image: toolSpontaneous,
-    title: 'No Extra Staff Required',
-    body: 'Teacher training in 90 minutes. Resources pre-loaded. Student onboarding automatic.',
+    title: 'Capstone projects',
+    body: 'Turn learning into impact with real-world application.',
     imageNodeId: '1060:2250',
     titleNodeId: '1060:2266',
     bodyNodeId: '1060:2267',
-  },
-  {
-    image: toolGrammar,
-    title: 'Real-Time Engagement Data',
-    body: 'Real-time data on skill acquisition and engagement — intervention planned before disengagement happens.',
-    imageNodeId: '1060:2248',
-    titleNodeId: '1060:2263',
-    bodyNodeId: '1060:2264',
-  },
-  {
-    image: toolVocabulary,
-    title: 'Content Students Engage With',
-    body: '200+ videos, infographics, workshops, and activities — content students actually engage with all year.',
-    imageNodeId: '1060:2252',
-    titleNodeId: '1060:2270',
-    bodyNodeId: '1060:2271',
   },
 ] as const
 
@@ -172,7 +156,7 @@ export function EnglishAiToolsSection({ variant = 'english-ai' }: EnglishAiTools
     <EnglishAiFeatureGridSection
       variant={variant}
       sectionNodeId="1060:2196"
-      eyebrow={isTheEdge ? 'Four Ways' : isCodeMonkey ? 'Skills' : 'The tools inside the lab'}
+      eyebrow={isTheEdge ? 'Beyond personality tests' : isCodeMonkey ? 'Skills' : 'The tools inside the lab'}
       eyebrowNodeId="1060:2236"
       headingId={
         isTheEdge ? 'the-edge-tools-heading' : isCodeMonkey ? 'code-monkey-tools-heading' : 'english-ai-tools-heading'
@@ -181,7 +165,7 @@ export function EnglishAiToolsSection({ variant = 'english-ai' }: EnglishAiTools
       heading={
         isTheEdge ? (
           <>
-            Four ways{' '}
+            Multi-rater.{' '}
             <span
               className="inline-flex items-center bg-zene-cyan"
               style={{
@@ -190,9 +174,8 @@ export function EnglishAiToolsSection({ variant = 'english-ai' }: EnglishAiTools
                 paddingRight: 'var(--english-ai-highlight-pad-x)',
               }}
             >
-              The Edge
-            </span>{' '}
-            redefines student development.
+              Research-backed.
+            </span>
           </>
         ) : isCodeMonkey ? (
           <>
@@ -229,13 +212,15 @@ export function EnglishAiToolsSection({ variant = 'english-ai' }: EnglishAiTools
       }
       subtitle={
         isTheEdge
-          ? undefined
+          ? 'Four ways The Edge redefines student growth.'
           : isCodeMonkey
             ? 'Six core skills. One adaptive engine. Each student moves at their own pace, every session.'
             : 'Speaking-first AI tools — each one giving every student the daily practice classroom time cannot.'
       }
       subtitleNodeId="1060:2215"
       items={[...items]}
+      footer={isTheEdge ? 'Life skills stop being a slogan. They become a transcript.' : undefined}
+      footerNodeId={isTheEdge ? '1060:2278' : undefined}
       carouselAriaLabel={
         isTheEdge ? 'The Edge development features' : isCodeMonkey ? 'Code Monkey skills' : 'English AI speaking tools'
       }

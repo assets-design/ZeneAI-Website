@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:deploy": "vite build && powershell -ExecutionPolicy Bypass -File scripts/package-deploy.ps1",
     "preview": "vite preview",
     "serve": "node server.cjs"
   },

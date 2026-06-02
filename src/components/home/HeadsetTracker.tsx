@@ -1,8 +1,9 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 const MAX_EYE_X = 7
 const MAX_EYE_Y = 5
 const BOTTOM_DEAD_ZONE = 0.65
+const EYE_TRACK_TRANSITION = 'transform 0.005s linear'
 
 export type EyeOffset = { x: number; y: number }
 
@@ -12,16 +13,9 @@ function clamp(value: number, min: number, max: number) {
 
 export function useHeadsetTracking() {
   const [eyeOffset, setEyeOffset] = useState<EyeOffset>({ x: 0, y: 0 })
-  const rafRef = useRef<number | null>(null)
-  const pendingRef = useRef<EyeOffset>({ x: 0, y: 0 })
 
   const applyOffset = useCallback((next: EyeOffset) => {
-    pendingRef.current = next
-    if (rafRef.current !== null) return
-    rafRef.current = requestAnimationFrame(() => {
-      rafRef.current = null
-      setEyeOffset(pendingRef.current)
-    })
+    setEyeOffset(next)
   }, [])
 
   const handleMouseMove = useCallback(
@@ -104,7 +98,7 @@ export function HeadsetTracker({ eyeOffset }: HeadsetTrackerProps) {
             d={LEFT_EYE_PUPIL}
             fill="#0197DA"
             transform={`translate(${eyeOffset.x} ${eyeOffset.y})`}
-            style={{ transition: 'transform 0.12s ease-out' }}
+            style={{ transition: EYE_TRACK_TRANSITION }}
           />
         </g>
         <g clipPath="url(#headset-right-eye-socket)">
@@ -112,7 +106,7 @@ export function HeadsetTracker({ eyeOffset }: HeadsetTrackerProps) {
             d={RIGHT_EYE_PUPIL}
             fill="#0197DA"
             transform={`translate(${eyeOffset.x} ${eyeOffset.y})`}
-            style={{ transition: 'transform 0.12s ease-out' }}
+            style={{ transition: EYE_TRACK_TRANSITION }}
           />
         </g>
       </svg>

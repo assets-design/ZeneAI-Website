@@ -61,27 +61,35 @@ const CODE_MONKEY_ITEMS = [
 const THE_EDGE_ITEMS = [
   {
     image: curriculumNcf,
-    title: 'Your pillars stay.',
-    body: 'Communication, resilience, financial literacy, entrepreneurship, and active citizenship — five pillars, 24 skills.',
+    title: 'Code Monkey',
+    body: 'Computational thinking and coding skills through game-based learning.',
     imageNodeId: '1060:2340',
     titleNodeId: '1060:2285',
     bodyNodeId: '1060:2286',
   },
   {
     image: curriculumCefr,
-    title: 'Your grades stay.',
-    body: 'Built for Grades 6–12 — one structured programme from middle school to graduation.',
+    title: 'English AI',
+    body: 'Speaking-first English practice with AI feedback for every student.',
     imageNodeId: '1060:2341',
     titleNodeId: '1060:2287',
     bodyNodeId: '1060:2288',
   },
   {
     image: curriculumTextbook,
-    title: 'Your frameworks stay.',
-    body: 'Backed by UNICEF, OECD, and WEF frameworks — mapped to what colleges and employers look for.',
+    title: 'Public Speaking',
+    body: 'Confidence, clarity, and presentation skills developed through structured practice.',
     imageNodeId: '1060:2342',
     titleNodeId: '1060:2289',
     bodyNodeId: '1060:2290',
+  },
+  {
+    image: curriculumNcf,
+    title: 'Young Leaders',
+    body: 'Leadership fundamentals for middle and high school students.',
+    imageNodeId: '1060:2343',
+    titleNodeId: '1060:2291',
+    bodyNodeId: '1060:2292',
   },
 ] as const
 
@@ -268,7 +276,7 @@ export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAi
       data-node-id="1060:2202"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
@@ -287,7 +295,7 @@ export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAi
             }}
             data-node-id="1060:2244"
           >
-            {isTheEdge ? 'The Edge Courses' : isCodeMonkey ? 'Adapted to Your School' : 'Mapped to your school, page by page'}
+            {isTheEdge ? 'The Edge courses' : isCodeMonkey ? 'Adapted to Your School' : 'Mapped to your school, page by page'}
           </p>
 
           <h2
@@ -334,25 +342,25 @@ export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAi
             )}
           </h2>
 
-          <p
-            className={cn(
-              'font-body font-normal leading-normal text-black',
-              isCustomProgram ? 'normal-case' : 'capitalize',
-            )}
-            style={{
-              fontSize: 'var(--section-text-body)',
-              fontVariationSettings: "'opsz' 14",
-              maxWidth: 'var(--english-ai-curriculum-subtitle-max-w)',
-              marginTop: 'var(--english-ai-curriculum-heading-to-subtitle)',
-            }}
-            data-node-id="1060:2220"
-          >
-            {isTheEdge
-              ? 'Structured leadership modules from middle school to graduation — mapped to UNICEF, OECD, and WEF frameworks.'
-              : isCodeMonkey
+          {!isTheEdge ? (
+            <p
+              className={cn(
+                'font-body font-normal leading-normal text-black',
+                isCustomProgram ? 'normal-case' : 'capitalize',
+              )}
+              style={{
+                fontSize: 'var(--section-text-body)',
+                fontVariationSettings: "'opsz' 14",
+                maxWidth: 'var(--english-ai-curriculum-subtitle-max-w)',
+                marginTop: 'var(--english-ai-curriculum-heading-to-subtitle)',
+              }}
+              data-node-id="1060:2220"
+            >
+              {isCodeMonkey
                 ? 'We map Zene to your existing curriculum. No replacing books. No fighting your scope and sequence.'
                 : 'Zene does not ask you to change your English curriculum. Every activity maps to the chapter your students are already studying.'}
-          </p>
+            </p>
+          ) : null}
 
           <div style={{ marginTop: 'var(--english-ai-curriculum-subtitle-to-items)' }}>
             <CurriculumMobileCarousel
@@ -367,7 +375,12 @@ export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAi
               normalCaseBody={isCustomProgram}
             />
 
-            <div className="hidden min-w-0 grid-cols-1 gap-x-[var(--english-ai-curriculum-gap-x)] gap-y-[var(--english-ai-curriculum-gap-y)] sm:grid sm:grid-cols-2 lg:grid-cols-3">
+            <div
+              className={cn(
+                'hidden min-w-0 grid-cols-1 gap-x-[var(--english-ai-curriculum-gap-x)] gap-y-[var(--english-ai-curriculum-gap-y)] sm:grid sm:grid-cols-2',
+                isTheEdge ? 'lg:grid-cols-4' : 'lg:grid-cols-3',
+              )}
+            >
               {items.map(item => (
                 <CurriculumItem key={item.titleNodeId} {...item} normalCaseBody={isCustomProgram} />
               ))}

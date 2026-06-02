@@ -1,37 +1,76 @@
 import heroRobot from '@/assets/figma/english-ai/hero-robot.png'
 import heroStudents from '@/assets/figma/english-ai/hero-students.png'
+import theEdgeHeroIllustration from '@/assets/figma/the-edge/hero-illustration.png'
+import theEdgeHeroLogoOverlay from '@/assets/figma/the-edge/hero-logo-overlay.png'
 import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
 import { cn } from '@/lib/utils'
 
 import type { ProgramVariant } from '@/types/program'
-import { isCustomProgramVariant } from '@/types/program'
 
 type EnglishAiHeroSectionProps = {
   variant?: ProgramVariant
 }
 
-function CodeMonkeyHeroIllustration() {
+function TheEdgeHeroIllustration() {
   return (
     <div
-      className="relative mx-auto w-full max-w-full shrink-0"
+      className="the-edge-hero-illustration relative mx-auto w-full max-w-full shrink-0 bg-transparent lg:mx-0 lg:w-auto"
       style={{
         width: 'var(--english-ai-hero-illustration-w)',
         height: 'var(--english-ai-hero-illustration-h)',
-        marginTop: 'var(--code-monkey-hero-illustration-margin-top)',
+      }}
+      data-node-id="1060:2209"
+    >
+      <img
+        src={theEdgeHeroIllustration}
+        alt=""
+        aria-hidden
+        className="absolute inset-0 size-full object-contain object-bottom"
+        data-node-id="1100:2107"
+      />
+      <div
+        className="the-edge-hero-logo absolute overflow-hidden"
+        style={{
+          width: 'var(--the-edge-hero-logo-w)',
+          height: 'var(--the-edge-hero-logo-h)',
+          left: 'var(--the-edge-hero-logo-left)',
+          top: 'var(--the-edge-hero-logo-top)',
+        }}
+        data-node-id="1100:2154"
+      >
+        <img
+          src={theEdgeHeroLogoOverlay}
+          alt="Students collaborating around the Zene leadership platform"
+          className="size-full object-contain"
+        />
+      </div>
+    </div>
+  )
+}
+
+function EnglishAiHeroIllustration() {
+  return (
+    <div
+      className="english-ai-hero-illustration relative mx-auto w-full max-w-full shrink-0 lg:mx-0 lg:w-auto"
+      style={{
+        width: 'var(--english-ai-hero-illustration-w)',
+        height: 'var(--english-ai-hero-illustration-h)',
       }}
       data-node-id="1060:2209"
     >
       <img
         src={heroStudents}
-        alt="Students learning with Zene AI Code Monkey"
-        className="absolute inset-0 size-full object-contain"
+        alt="Students learning English with Zene AI"
+        className="absolute inset-0 size-full object-contain object-bottom"
         data-node-id="1060:2211"
       />
       <div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
+        className="absolute overflow-hidden"
         style={{
           width: 'var(--english-ai-hero-robot-wrap-w)',
           height: 'var(--english-ai-hero-robot-wrap-h)',
+          left: 'var(--english-ai-hero-robot-left)',
+          top: 'var(--english-ai-hero-robot-top)',
         }}
         data-node-id="1060:2210"
       >
@@ -55,7 +94,6 @@ function CodeMonkeyHeroIllustration() {
 export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSectionProps) {
   const isCodeMonkey = variant === 'code-monkey'
   const isTheEdge = variant === 'the-edge'
-  const isCustomProgram = isCustomProgramVariant(variant)
   const headingId = isCodeMonkey
     ? 'code-monkey-hero-heading'
     : isTheEdge
@@ -63,26 +101,11 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
       : 'english-ai-hero-heading'
 
   const headingContent = isTheEdge ? (
-    <>
-      <span className="block">Every student leaves with</span>
-      <span className="block">
-        <span
-          className="inline-flex items-center bg-zene-cyan"
-          style={{
-            minHeight: 'var(--english-ai-highlight-h)',
-            paddingLeft: 'var(--english-ai-highlight-pad-x)',
-            paddingRight: 'var(--english-ai-highlight-pad-x)',
-          }}
-        >
-          documented proof
-        </span>
-      </span>
-      <span className="block">of who they are becoming.</span>
-    </>
+    <>Every student leaves with documented proof of who they are becoming.</>
   ) : isCodeMonkey ? (
     <>
-      <span className="block whitespace-nowrap">Where every student finds</span>
-      <span className="block whitespace-nowrap">
+      <span className="block whitespace-nowrap max-xl:whitespace-normal">Where every student finds</span>
+      <span className="block whitespace-nowrap max-xl:whitespace-normal">
         <span
           className="inline-flex items-center bg-zene-cyan"
           style={{
@@ -110,21 +133,32 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
   const bodyContent = isTheEdge
     ? 'A research-backed life-readiness program that builds communication, critical thinking, employability, citizenship, and personal development — and gives every student a downloadable leadership profile.'
     : isCodeMonkey
-    ? 'Zene.ai is an AI-powered English program built for Indian classrooms. Every student speaks, listens, reads, and writes — every session. Every skill, measured.'
-    : 'Cambridge research: it takes 200 hours to move up one CEFR level and most of those hours are passive listening. Zene turns them into active speaking practice, individually graded for every student.'
+      ? 'Zene.ai is an AI-powered English program built for Indian classrooms. Every student speaks, listens, reads, and writes — every session. Every skill, measured.'
+      : 'Cambridge research: it takes 200 hours to move up one CEFR level and most of those hours are passive listening. Zene turns them into active speaking practice, individually graded for every student.'
+
+  const eyebrowContent = isTheEdge
+    ? 'Life-readiness for Grades 6–12'
+    : isCodeMonkey
+      ? 'For Schools · Grades 3–10'
+      : 'The AI English Speaking Lab'
 
   return (
     <section
-      className={cn('w-full px-[5px] pt-[5px]', isCustomProgram && 'program-hero--code-monkey')}
+      id={isTheEdge ? 'the-edge-hero' : isCodeMonkey ? 'code-monkey-hero' : 'english-ai-hero'}
+      className={cn(
+        'w-full px-[5px]',
+        (isCodeMonkey || variant === 'english-ai') && 'program-hero--english-ai',
+        isCodeMonkey && 'program-hero--code-monkey',
+      )}
       aria-labelledby={headingId}
       data-node-id="1060:2194"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto flex w-full min-h-0 flex-col overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
-          className="relative"
+          className="program-hero-body relative flex min-h-0 flex-1 flex-col"
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',
@@ -132,85 +166,38 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
             paddingBottom: 'var(--english-ai-hero-padding-bottom)',
           }}
         >
-          {isCustomProgram ? (
+          {isTheEdge ? (
             <div
-              className="relative z-[1] grid min-w-0 grid-cols-1 items-start gap-x-[var(--english-ai-hero-columns-gap)] gap-y-[var(--english-ai-hero-row-gap)] xl:grid-cols-[60%_40%]"
+              className="program-hero-inner flex min-h-0 flex-1 flex-col"
+              style={{ gap: 'var(--hero-gap)' }}
             >
-              <div className="order-2 min-w-0 xl:order-1 xl:pt-[var(--code-monkey-hero-text-offset-top)]">
-                <p
-                  className="font-body text-black"
-                  style={{
-                    fontSize: 'var(--code-monkey-hero-eyebrow-size)',
-                    fontVariationSettings: "'opsz' 14",
-                  }}
-                  data-node-id="1060:2225"
-                >
-                  {isTheEdge ? 'Life-readiness for Grades 6–12' : 'For Schools · Grades 3–10'}
-                </p>
-
-                <h1
-                  id={headingId}
-                  className="section-heading max-w-none font-heading font-medium uppercase text-black"
-                  style={{
-                    fontSize: 'var(--english-ai-hero-title-size)',
-                    marginTop: 'var(--code-monkey-hero-eyebrow-to-heading)',
-                  }}
-                  data-node-id="1060:2203"
-                >
-                  {headingContent}
-                </h1>
-
-                <p
-                  className="normal-case font-body font-normal leading-normal text-black"
-                  style={{
-                    fontSize: 'var(--code-monkey-hero-body-size)',
-                    fontVariationSettings: "'opsz' 14",
-                    maxWidth: 'var(--english-ai-hero-body-max-w)',
-                    marginTop: 'var(--english-ai-hero-title-to-body)',
-                  }}
-                  data-node-id="1060:2204"
-                >
-                  {bodyContent}
-                </p>
+              <div className="program-hero-top-row flex min-w-0 items-end justify-end">
+                <div className="hero-apply-slot shrink-0">
+                  <ApplyNowButton className="max-w-full shrink-0" />
+                </div>
               </div>
-
-              <div className="order-1 flex w-full min-w-0 flex-col items-end xl:order-2">
-                <ApplyNowButton className="max-w-full shrink-0" />
-                <CodeMonkeyHeroIllustration />
-              </div>
-            </div>
-          ) : (
-            <>
-              <div
-                className="flex justify-end lg:absolute lg:right-[var(--section-padding-x)] lg:top-[var(--english-ai-hero-padding-top)] lg:z-[3]"
-                data-node-id="1060:2233"
-              >
-                <ApplyNowButton className="max-w-full shrink-0" />
-              </div>
-
-              <p
-                className="font-body uppercase text-black lg:mt-0 lg:max-w-[calc(100%-var(--apply-btn-w)-24px)]"
-                style={{
-                  fontSize: 'var(--section-text-eyebrow)',
-                  fontVariationSettings: "'opsz' 14",
-                  marginTop: 'var(--english-ai-hero-eyebrow-to-apply)',
-                }}
-                data-node-id="1060:2225"
-              >
-                The AI English Speaking Lab
-              </p>
 
               <div
-                className="relative z-[1] grid min-w-0 grid-cols-1 items-start gap-x-[var(--english-ai-hero-columns-gap)] gap-y-[var(--english-ai-hero-row-gap)] lg:grid-cols-[minmax(0,1fr)_auto]"
-                style={{ marginTop: 'var(--english-ai-hero-eyebrow-to-content)' }}
+                className="relative z-[1] grid min-h-0 min-w-0 flex-1 grid-cols-1 items-end gap-x-[var(--english-ai-hero-columns-gap)] gap-y-[var(--english-ai-hero-row-gap)] sm:grid-cols-[minmax(0,1fr)_auto] xl:grid-cols-[60%_40%]"
               >
-                <div className="min-w-0">
+                <div className="min-w-0 self-center xl:self-auto">
+                  <p
+                    className="font-body text-black"
+                    style={{
+                      fontSize: 'var(--section-text-eyebrow)',
+                      fontVariationSettings: "'opsz' 14",
+                    }}
+                    data-node-id="1060:2225"
+                  >
+                    {eyebrowContent}
+                  </p>
+
                   <h1
                     id={headingId}
-                    className="section-heading font-heading font-medium uppercase text-black"
+                    className="section-heading max-w-none font-heading font-medium uppercase text-black"
                     style={{
                       fontSize: 'var(--english-ai-hero-title-size)',
-                      maxWidth: 'var(--english-ai-hero-title-max-w)',
+                      marginTop: 'var(--english-ai-hero-eyebrow-to-heading)',
                     }}
                     data-node-id="1060:2203"
                   >
@@ -218,7 +205,89 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
                   </h1>
 
                   <p
-                    className="capitalize font-body font-normal leading-normal text-black"
+                    className="normal-case font-body font-normal leading-normal text-black"
+                    style={{
+                      fontSize: 'var(--english-ai-hero-body-size)',
+                      fontVariationSettings: "'opsz' 14",
+                      maxWidth: 'var(--english-ai-hero-body-max-w)',
+                      marginTop: 'var(--english-ai-hero-title-to-body)',
+                    }}
+                    data-node-id="1060:2204"
+                  >
+                    {bodyContent}
+                  </p>
+
+                  <p
+                    className="normal-case font-body font-semibold leading-normal text-black"
+                    style={{
+                      fontSize: 'var(--english-ai-hero-body-size)',
+                      fontVariationSettings: "'opsz' 14",
+                      maxWidth: 'var(--english-ai-hero-body-max-w)',
+                      marginTop: 'var(--english-ai-hero-title-to-body)',
+                    }}
+                  >
+                    Trusted by Georgetown SCIP and 40+ global institutions.
+                  </p>
+                </div>
+
+                <div className="flex w-full min-w-0 items-end justify-center sm:justify-end">
+                  <TheEdgeHeroIllustration />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div
+              className="program-hero-inner flex min-h-0 flex-1 flex-col"
+              style={{ gap: 'var(--hero-gap)' }}
+            >
+              <div className="program-hero-top-row flex min-w-0 items-end justify-end">
+                <div className="hero-apply-slot shrink-0">
+                  <ApplyNowButton className="max-w-full shrink-0" />
+                </div>
+              </div>
+
+              <div
+                className="program-hero-content-grid relative z-[1] grid min-h-0 min-w-0 flex-1 grid-cols-1 items-end gap-x-[var(--english-ai-hero-columns-gap)] gap-y-[var(--english-ai-hero-row-gap)] sm:grid-cols-[minmax(0,1fr)_auto] xl:grid-cols-[58%_42%]"
+              >
+                <div className="min-w-0 self-center xl:self-auto">
+                  <p
+                    className={cn(
+                      'font-body text-black',
+                      !isCodeMonkey && 'uppercase',
+                    )}
+                    style={{
+                      fontSize: isCodeMonkey
+                        ? 'var(--code-monkey-hero-eyebrow-size)'
+                        : 'var(--section-text-eyebrow)',
+                      fontVariationSettings: "'opsz' 14",
+                    }}
+                    data-node-id="1060:2225"
+                  >
+                    {eyebrowContent}
+                  </p>
+
+                  <h1
+                    id={headingId}
+                    className="section-heading max-w-none font-heading font-medium uppercase text-black"
+                    style={{
+                      fontSize: 'var(--english-ai-hero-title-size)',
+                      maxWidth: isCodeMonkey ? undefined : 'var(--english-ai-hero-title-max-w)',
+                      marginTop: isCodeMonkey
+                        ? 'var(--code-monkey-hero-eyebrow-to-heading)'
+                        : 'var(--english-ai-hero-eyebrow-to-heading)',
+                    }}
+                    data-node-id="1060:2203"
+                  >
+                    {headingContent}
+                  </h1>
+
+                  <p
+                    className={cn(
+                      'font-body leading-normal text-black',
+                      isCodeMonkey
+                        ? 'normal-case font-medium'
+                        : 'capitalize font-medium',
+                    )}
                     style={{
                       fontSize: 'var(--english-ai-hero-body-size)',
                       fontVariationSettings: "'opsz' 14",
@@ -231,46 +300,11 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
                   </p>
                 </div>
 
-                <div
-                  className="relative mx-auto w-full max-w-full shrink-0 sm:mt-[var(--english-ai-hero-illustration-margin-top)] lg:mx-0 lg:w-auto"
-                  style={{
-                    width: 'var(--english-ai-hero-illustration-w)',
-                    height: 'var(--english-ai-hero-illustration-h)',
-                  }}
-                  data-node-id="1060:2209"
-                >
-                  <img
-                    src={heroStudents}
-                    alt="Students learning English with Zene AI"
-                    className="absolute inset-0 size-full object-contain"
-                    data-node-id="1060:2211"
-                  />
-                  <div
-                    className="absolute overflow-hidden"
-                    style={{
-                      width: 'var(--english-ai-hero-robot-wrap-w)',
-                      height: 'var(--english-ai-hero-robot-wrap-h)',
-                      left: 'var(--english-ai-hero-robot-left)',
-                      top: 'var(--english-ai-hero-robot-top)',
-                    }}
-                    data-node-id="1060:2210"
-                  >
-                    <img
-                      src={heroRobot}
-                      alt=""
-                      aria-hidden
-                      className="absolute max-w-none object-cover"
-                      style={{
-                        width: 'var(--english-ai-hero-robot-scale-w)',
-                        height: 'var(--english-ai-hero-robot-scale-h)',
-                        left: 'var(--english-ai-hero-robot-offset-x)',
-                        top: 'var(--english-ai-hero-robot-offset-y)',
-                      }}
-                    />
-                  </div>
+                <div className="flex w-full min-w-0 items-end justify-center sm:justify-end">
+                  <EnglishAiHeroIllustration />
                 </div>
               </div>
-            </>
+            </div>
           )}
         </div>
       </div>

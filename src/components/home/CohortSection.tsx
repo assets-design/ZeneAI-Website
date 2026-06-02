@@ -359,16 +359,18 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
 
   return (
     <>
-      <p
-        className={cn('font-body text-black', !isCustomProgram && 'uppercase')}
-        style={{
-          fontSize: 'var(--section-text-eyebrow)',
-          fontVariationSettings: "'opsz' 14",
-        }}
-        data-node-id="975:1931"
-      >
-        {isCustomProgram ? 'Partners' : 'Our cohort'}
-      </p>
+      {variant !== 'the-edge' ? (
+        <p
+          className={cn('font-body text-black', !isCustomProgram && 'uppercase')}
+          style={{
+            fontSize: 'var(--section-text-eyebrow)',
+            fontVariationSettings: "'opsz' 14",
+          }}
+          data-node-id="975:1931"
+        >
+          {isCustomProgram ? 'Partners' : 'Our cohort'}
+        </p>
+      ) : null}
 
       <h2
         id={variant === 'the-edge' ? 'the-edge-cohort-heading' : 'cohort-heading'}
@@ -376,7 +378,7 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
         style={{
           fontSize: 'var(--section-text-heading)',
           maxWidth: 'var(--cohort-heading-max-w)',
-          marginTop: 'var(--cohort-eyebrow-to-heading)',
+          marginTop: variant === 'the-edge' ? undefined : 'var(--cohort-eyebrow-to-heading)',
         }}
         data-node-id="975:1932"
       >
@@ -397,23 +399,20 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
         )}
       </h2>
 
-      <p
-        className={cn(
-          'font-body font-normal leading-normal text-black',
-          variant === 'the-edge' ? 'normal-case' : 'capitalize',
-        )}
-        style={{
-          fontSize: 'var(--section-text-body)',
-          fontVariationSettings: "'opsz' 14",
-          maxWidth: 'var(--cohort-body-max-w)',
-          marginTop: 'var(--cohort-heading-to-body)',
-        }}
-        data-node-id="975:1928"
-      >
-        {variant === 'the-edge'
-          ? 'Trusted by Georgetown University, Alliance College-Ready Public Schools, and 100+ institutions worldwide.'
-          : 'Trusted by visionary schools across India and the US.'}
-      </p>
+      {variant !== 'the-edge' ? (
+        <p
+          className="capitalize font-body font-normal leading-normal text-black"
+          style={{
+            fontSize: 'var(--section-text-body)',
+            fontVariationSettings: "'opsz' 14",
+            maxWidth: 'var(--cohort-body-max-w)',
+            marginTop: 'var(--cohort-heading-to-body)',
+          }}
+          data-node-id="975:1928"
+        >
+          Trusted by visionary schools across India and the US.
+        </p>
+      ) : null}
     </>
   )
 }
@@ -437,11 +436,12 @@ export function CohortSection({ variant = 'home' }: CohortSectionProps) {
       data-node-id={variant === 'about' ? '642:1330' : '1023:1891'}
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="cohort-card relative mx-auto flex h-full min-h-0 w-full flex-col overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
         data-node-id={variant === 'about' ? '642:1330' : '975:1926'}
       >
         <div
+          className="cohort-card-inner"
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',

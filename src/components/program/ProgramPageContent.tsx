@@ -10,6 +10,13 @@ import { CohortSection } from '@/components/home/CohortSection'
 import { FaqSection } from '@/components/home/FaqSection'
 import { HowItWorksSection } from '@/components/home/HowItWorksSection'
 import { OnboardingSection } from '@/components/home/OnboardingSection'
+import { TheEdgeBeyondClassroomSection } from '@/components/the-edge/TheEdgeBeyondClassroomSection'
+import { TheEdgeComparisonSection } from '@/components/the-edge/TheEdgeComparisonSection'
+import { TheEdgeCoursesSection } from '@/components/the-edge/TheEdgeCoursesSection'
+import { TheEdgeFrameworkSection } from '@/components/the-edge/TheEdgeFrameworkSection'
+import { TheEdgeMultiRaterSection } from '@/components/the-edge/TheEdgeMultiRaterSection'
+import { TheEdgePlatformSection } from '@/components/the-edge/TheEdgePlatformSection'
+import { TheEdgeTestimonialsSection } from '@/components/the-edge/TheEdgeTestimonialsSection'
 import type { ProgramVariant } from '@/types/program'
 
 type ProgramPageContentProps = {
@@ -34,6 +41,24 @@ function getCohortVariant(program: ProgramVariant): 'home' | 'code-monkey' | 'th
 
 export function ProgramPageContent({ program = 'english-ai' }: ProgramPageContentProps) {
   const pageVariant = getPageVariant(program)
+
+  if (program === 'the-edge') {
+    return (
+      <>
+        <EnglishAiHeroSection variant={pageVariant} />
+        <TheEdgeFrameworkSection />
+        <TheEdgePlatformSection />
+        <TheEdgeMultiRaterSection />
+        <TheEdgeCoursesSection />
+        <TheEdgeBeyondClassroomSection />
+        <TheEdgeTestimonialsSection />
+        <TheEdgeComparisonSection />
+        <HowItWorksSection variant={pageVariant} />
+        <ApplyCtaSection variant={pageVariant} />
+      </>
+    )
+  }
+
   const cohortVariant = getCohortVariant(program)
 
   return (

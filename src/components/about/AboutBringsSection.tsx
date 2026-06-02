@@ -199,7 +199,7 @@ export function AboutBringsSection() {
       data-node-id="1055:2192"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
         data-node-id="1047:1946"
       >
@@ -221,7 +221,19 @@ export function AboutBringsSection() {
             data-node-id="1047:2037"
           >
             <span className="block">What Zene AI</span>
-            <span className="block">brings to schools</span>
+            <span className="block">
+              brings to{' '}
+              <span
+                className="inline-flex items-center bg-zene-cyan"
+                style={{
+                  minHeight: 'var(--about-brings-highlight-h)',
+                  paddingLeft: 'var(--about-brings-highlight-pad-x)',
+                  paddingRight: 'var(--about-brings-highlight-pad-x)',
+                }}
+              >
+                schools
+              </span>
+            </span>
           </h2>
 
           <AboutBringsMobileCarousel features={FEATURES} />

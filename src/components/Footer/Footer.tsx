@@ -14,7 +14,7 @@ const FOOTER_COLUMNS = [
     links: [
       { label: 'About Us', href: '/about', nodeId: '975:2526' },
       { label: 'Careers', href: '#careers', nodeId: '975:2527' },
-      { label: 'Blogs', href: '#blogs', nodeId: '975:2528' },
+      { label: 'Blogs', href: '/blog', nodeId: '975:2528' },
     ],
   },
   {

@@ -20,7 +20,7 @@ export function ApplyNowButton({
       href={href}
       onClick={onClick}
       className={cn(
-        'relative inline-block max-w-full text-black no-underline transition-none hover:text-black',
+        'apply-now-btn relative inline-block shrink-0 text-black no-underline transition-none hover:text-black',
         className,
       )}
       style={{
@@ -51,7 +51,7 @@ export function ApplyNowButton({
         />
 
         <span
-          className="relative z-[1] flex h-full items-center font-heading uppercase leading-none"
+          className="relative z-[1] flex h-full items-center whitespace-nowrap font-heading uppercase leading-none"
           style={{
             paddingLeft: 'var(--apply-btn-text-left)',
             fontSize: 'var(--apply-btn-text)',
@@ -63,13 +63,13 @@ export function ApplyNowButton({
       </span>
 
       <StudentFaceCircle
-        className="absolute top-0 z-[3] pointer-events-none"
+        className="absolute top-0 z-[3]"
         style={{ left: 'var(--apply-btn-circle-left)' }}
         size="var(--apply-btn-circle-size)"
         studentSize="var(--apply-btn-student-size)"
         studentHoverSize="var(--apply-btn-student-hover-size)"
         hovered={pillHovered}
-        selfHover={false}
+        selfHover
         nodeId="I981:2035;414:593"
         innerNodeId="I981:2035;414:594"
       />

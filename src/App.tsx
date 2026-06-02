@@ -5,6 +5,7 @@ import { CodeMonkeyPage } from '@/pages/CodeMonkeyPage'
 import { EnglishAiPage } from '@/pages/EnglishAiPage'
 import { TheEdgePage } from '@/pages/TheEdgePage'
 import { AppLayout } from '@/components/Layout/AppLayout'
+import { BlogPage } from '@/pages/BlogPage'
 import { ContactPage } from '@/pages/ContactPage'
 import { HomePage } from '@/pages/HomePage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
@@ -18,7 +19,7 @@ function App() {
         <Route
           path="/"
           element={
-            <AppLayout>
+            <AppLayout sectionScroll>
               <HomePage />
             </AppLayout>
           }
@@ -26,7 +27,7 @@ function App() {
         <Route
           path="/about"
           element={
-            <AppLayout>
+            <AppLayout sectionScroll>
               <AboutPage />
             </AppLayout>
           }
@@ -34,7 +35,7 @@ function App() {
         <Route
           path="/english-ai"
           element={
-            <AppLayout>
+            <AppLayout sectionScroll>
               <EnglishAiPage />
             </AppLayout>
           }
@@ -42,7 +43,7 @@ function App() {
         <Route
           path="/code-monkey"
           element={
-            <AppLayout>
+            <AppLayout sectionScroll>
               <CodeMonkeyPage />
             </AppLayout>
           }
@@ -50,8 +51,16 @@ function App() {
         <Route
           path="/the-edge"
           element={
-            <AppLayout>
+            <AppLayout sectionScroll>
               <TheEdgePage />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/blog"
+          element={
+            <AppLayout sectionScroll>
+              <BlogPage />
             </AppLayout>
           }
         />
@@ -66,7 +75,7 @@ function App() {
         <Route
           path="/thank-you"
           element={
-            <AppLayout showAnnouncement={false} pinHeader>
+            <AppLayout showAnnouncement={false} pinHeader sectionScroll>
               <ThankYouPage />
             </AppLayout>
           }
@@ -74,7 +83,7 @@ function App() {
         <Route
           path="*"
           element={
-            <AppLayout>
+            <AppLayout sectionScroll>
               <NotFoundPage />
             </AppLayout>
           }

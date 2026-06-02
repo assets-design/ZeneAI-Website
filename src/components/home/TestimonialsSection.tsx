@@ -100,10 +100,11 @@ export function TestimonialsSection({ variant = 'home' }: TestimonialsSectionPro
       data-node-id={variant === 'about' ? '642:1343' : '767:1951'}
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="testimonials-card relative mx-auto flex h-full min-h-0 w-full flex-col overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
+          className="shrink-0"
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',
@@ -114,7 +115,7 @@ export function TestimonialsSection({ variant = 'home' }: TestimonialsSectionPro
         </div>
 
         <div
-          className="flex justify-center"
+          className="testimonials-carousel-wrap flex justify-center"
           style={{ paddingBottom: 'var(--testimonial-padding-bottom)' }}
         >
           <TestimonialCarousel items={TESTIMONIALS} />

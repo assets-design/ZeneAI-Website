@@ -9,29 +9,32 @@ export function AboutHeroSection() {
       data-node-id="1047:2176"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
         data-node-id="1047:1943"
       >
         <div
-          className="relative"
+          className="about-hero-inner relative flex flex-col"
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',
             paddingTop: 'var(--about-hero-padding-top)',
             paddingBottom: 'var(--about-hero-padding-bottom)',
+            gap: 'var(--hero-gap)',
           }}
         >
           <div
-            className="mb-[var(--section-gap)] flex justify-end sm:absolute sm:right-0 sm:top-0 sm:z-[3] sm:mb-0"
+            className="about-hero-top-row flex min-w-0 items-end justify-end"
             style={{ marginRight: 'var(--about-hero-apply-margin-right)' }}
             data-node-id="1047:2005"
           >
-            <ApplyNowButton className="max-w-full shrink-0" />
+            <div className="hero-apply-slot shrink-0">
+              <ApplyNowButton className="max-w-full shrink-0" />
+            </div>
           </div>
 
           <div
-            className="relative z-[1] grid min-w-0 grid-cols-1 items-end gap-x-[var(--about-hero-columns-gap)] gap-y-[var(--about-hero-row-gap)] sm:grid-cols-[minmax(0,1fr)_auto] sm:pt-[var(--about-hero-text-offset-top)]"
+            className="relative z-[1] grid min-w-0 grid-cols-1 items-end gap-x-[var(--about-hero-columns-gap)] gap-y-[var(--about-hero-row-gap)] sm:grid-cols-[minmax(0,1fr)_auto]"
           >
             <div className="min-w-0">
               <h1

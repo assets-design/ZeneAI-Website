@@ -111,51 +111,43 @@ const CODE_MONKEY_GAINS = [
 const THE_EDGE_GAINS = [
   {
     image: gainEveryStudent,
-    title: 'Unique leadership profile',
-    body: 'Unique leadership profile per student based on activities, reflections, and project outcomes.',
+    title: 'Personal development',
+    body: 'Self-awareness, goal-setting, time management, and resilience — measured and documented.',
     imageNodeId: '1060:2247',
     titleNodeId: '1060:2261',
     bodyNodeId: '1060:2262',
   },
   {
     image: gainPronunciation,
-    title: 'Multi-rater assessment',
-    body: 'Peer feedback, project outcomes, and facilitator observations combined.',
+    title: 'Communication',
+    body: 'Writing, speaking, and active listening developed through structured practice and feedback.',
     imageNodeId: '1060:2251',
     titleNodeId: '1060:2268',
     bodyNodeId: '1060:2269',
   },
   {
     image: gainReading,
-    title: 'Real-time engagement data',
-    body: 'Real-time data on skill acquisition and engagement — intervention planned before disengagement happens.',
+    title: 'Critical thinking',
+    body: 'Problem-solving, analysis, and decision-making assessed through scaffolded growth.',
     imageNodeId: '1060:2255',
     titleNodeId: '1060:2275',
     bodyNodeId: '1060:2280',
   },
   {
     image: gainGrammar,
-    title: 'Rich content library',
-    body: '200+ videos, infographics, workshops, and activities — content students actually engage with all year.',
+    title: 'Financial literacy',
+    body: 'Practical money skills and entrepreneurial thinking built into every module.',
     imageNodeId: '1060:2249',
     titleNodeId: '1060:2276',
     bodyNodeId: '1060:2281',
   },
   {
     image: gainData,
-    title: 'Documented proof',
-    body: 'Skills transcript, CRM for extracurriculars, and downloadable leadership report — documented proof for college and job applications.',
+    title: 'Active citizenship',
+    body: 'Community engagement and civic responsibility measured with documented proof.',
     imageNodeId: '1060:2253',
     titleNodeId: '1060:2277',
     bodyNodeId: '1060:2297',
-  },
-  {
-    image: gainHardware,
-    title: 'Leadership profile reports',
-    body: 'A leadership profile report is generated after every module — non-academic growth measured with the same rigour as academic performance.',
-    imageNodeId: '1060:2257',
-    titleNodeId: '1060:2279',
-    bodyNodeId: '1060:2298',
   },
 ] as const
 
@@ -179,7 +171,7 @@ export function EnglishAiGainsSection({ variant = 'english-ai' }: EnglishAiGains
     <EnglishAiFeatureGridSection
       variant={variant}
       sectionNodeId="1060:2197"
-      eyebrow={isTheEdge ? 'Five Things' : isCodeMonkey ? 'Outcomes' : 'What changes in your school'}
+      eyebrow={isTheEdge ? 'The framework' : isCodeMonkey ? 'Outcomes' : 'What changes in your school'}
       eyebrowNodeId="1060:2240"
       headingId={
         isTheEdge ? 'the-edge-gains-heading' : isCodeMonkey ? 'code-monkey-gains-heading' : 'english-ai-gains-heading'
@@ -188,11 +180,11 @@ export function EnglishAiGainsSection({ variant = 'english-ai' }: EnglishAiGains
       heading={
         isTheEdge ? (
           <>
-            Five things that make{' '}
+            Five pillars.{' '}
             <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
-              The Edge
+              Every skill a graduate
             </span>{' '}
-            unlike any other programme.
+            needs.
           </>
         ) : (
           <>
@@ -209,7 +201,11 @@ export function EnglishAiGainsSection({ variant = 'english-ai' }: EnglishAiGains
         )
       }
       subtitle={
-        isCustomProgram ? undefined : 'Zene does not replace your English curriculum. It amplifies it.'
+        isTheEdge
+          ? 'What colleges admit. What employers hire. What life demands.'
+          : isCustomProgram
+            ? undefined
+            : 'Zene does not replace your English curriculum. It amplifies it.'
       }
       subtitleNodeId="1060:2216"
       items={[...items]}

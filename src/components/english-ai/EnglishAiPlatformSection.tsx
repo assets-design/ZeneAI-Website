@@ -18,11 +18,16 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
       : 'english-ai-platform-heading'
   return (
     <section
-      className={cn('w-full px-[5px] pt-[5px]', isCustomProgram && 'program-platform--code-monkey')}      aria-labelledby={headingId}
+      className={cn(
+        'w-full px-[5px] pt-[5px]',
+        isCodeMonkey && 'program-platform--code-monkey',
+        !isCustomProgram && 'program-platform--english-ai',
+      )}
+      aria-labelledby={headingId}
       data-node-id="1060:2195"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
@@ -118,7 +123,7 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
                 data-node-id="1060:2214"
               >
                 {isTheEdge
-                  ? 'Communication, resilience, financial literacy, entrepreneurship, and active citizenship — one structured programme from middle school to graduation. A leadership profile report is generated after every module. Non-academic growth is measured with the same rigour as academic performance.'
+                  ? 'The only platform that tracks and measures leadership development in real-time. Students build a verifiable portfolio of growth that goes beyond grades.'
                   : isCodeMonkey
                   ? 'Speaking, listening, reading, writing, grammar, vocabulary. Zene runs the individual practice — your teacher runs the class.'
                   : 'Speaking, listening, reading, writing, vocabulary, grammar, and pronunciation — all in one place. Personalised paths are assigned based on current ability. Progress is visible in real time for students, teachers, and parents.'}
@@ -141,10 +146,10 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
               {isTheEdge ? (
                 <>
                   <span className="block whitespace-nowrap max-md:whitespace-normal">
-                    Built to develop leaders.
+                    Skills development,
                   </span>
                   <span className="block whitespace-nowrap max-md:whitespace-normal">
-                    Designed to prove it with data.
+                    tracked from A to Z.
                   </span>
                 </>
               ) : isCodeMonkey ? (                <>

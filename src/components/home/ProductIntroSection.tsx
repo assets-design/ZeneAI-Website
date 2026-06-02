@@ -49,56 +49,70 @@ const TABS: {
 const PRODUCT_PANEL_CONTENT = {
   title: 'AI Speaking Lab',
   subtitle: 'The speaking practice your classroom timetable cannot provide.',
-  body: `One teacher cannot give 1-on-1 speaking practice to 30 students in 40 minutes. Zene does every day, for every student, across seven skill blocks: Speaking, Reading, Grammar, Phonics, Vocabulary, Comprehension, and Live Conversation.
-
-Mapped to NCF and NEP 2020. Runs on the devices your school already owns. No language-lab room required.`,
+  bodyParagraphs: [
+    'One teacher cannot give 1-on-1 speaking practice to 30 students in 40 minutes. Zene does every day, for every student, across seven skill blocks: Speaking, Reading, Grammar, Phonics, Vocabulary, Comprehension, and Live Conversation.',
+    'Mapped to NCF and NEP 2020. Runs on the devices your school already owns. No language-lab room required.',
+  ],
   video: '/assets/figma/00%20How%20to%20get%20started_.mp4',
 }
 
 function ProductTabPanel() {
   return (
     <div
-      className="grid items-start xl:grid-cols-[minmax(0,1fr)_var(--section-dashboard-w)]"
+      className="product-tab-panel grid min-h-0 flex-1 items-stretch xl:grid-cols-[minmax(0,1fr)_var(--section-dashboard-w)]"
       style={{ gap: 'var(--section-dashboard-gap)' }}
     >
-      <div className="flex flex-col" style={{ gap: 'var(--section-content-gap)' }}>
-        <h3
-          className="font-heading font-medium uppercase leading-none text-black"
-          style={{ fontSize: 'var(--section-text-title)' }}
-          data-node-id="642:1150"
+      <div className="product-tab-copy flex h-full min-h-0 min-w-0 flex-col">
+        <div
+          className="flex shrink-0 flex-col"
+          style={{ gap: 'var(--section-content-gap)' }}
         >
-          {PRODUCT_PANEL_CONTENT.title}
-        </h3>
-        <p
-          className="capitalize font-body font-medium text-black"
-          style={{
-            fontSize: 'var(--section-text-body)',
-            fontVariationSettings: "'opsz' 14",
-          }}
-          data-node-id="642:1151"
-        >
-          {PRODUCT_PANEL_CONTENT.subtitle}
-        </p>
-        <p
-          className="whitespace-pre-line capitalize font-body font-normal leading-normal text-black"
-          style={{
-            fontSize: 'var(--section-text-body)',
-            fontVariationSettings: "'opsz' 14",
-            maxWidth: 'var(--section-text-max-w)',
-          }}
-          data-node-id="676:2685"
-        >
-          {PRODUCT_PANEL_CONTENT.body}
-        </p>
-        <TryFreeSessionButton
-          className="shrink-0"
-          style={{
-            marginTop: 'calc(var(--section-body-to-cta) - var(--section-content-gap))',
-          }}
+          <h3
+            className="font-heading font-medium uppercase leading-none text-black"
+            style={{ fontSize: 'var(--section-text-title)' }}
+            data-node-id="642:1150"
+          >
+            {PRODUCT_PANEL_CONTENT.title}
+          </h3>
+          <p
+            className="capitalize font-body font-medium text-black"
+            style={{
+              fontSize: 'var(--section-text-body)',
+              fontVariationSettings: "'opsz' 14",
+            }}
+            data-node-id="642:1151"
+          >
+            {PRODUCT_PANEL_CONTENT.subtitle}
+          </p>
+          <div
+            className="product-tab-body flex flex-col"
+            style={{ gap: 'var(--section-body-paragraph-gap)' }}
+          >
+            {PRODUCT_PANEL_CONTENT.bodyParagraphs.map((paragraph, index) => (
+              <p
+                key={index}
+                className="capitalize font-body font-normal leading-normal text-black"
+                style={{
+                  fontSize: 'var(--section-text-body)',
+                  fontVariationSettings: "'opsz' 14",
+                  maxWidth: 'var(--section-text-max-w)',
+                }}
+                data-node-id={index === 0 ? '676:2685' : undefined}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+        <div
+          className="min-h-0 flex-1"
+          style={{ minHeight: 'var(--section-body-to-cta)' }}
+          aria-hidden
         />
+        <TryFreeSessionButton className="shrink-0" />
       </div>
       <div
-        className="w-full overflow-hidden shadow-[0_0_2px_rgba(0,0,0,0.25)] xl:w-[var(--section-dashboard-w)] xl:max-w-[var(--section-dashboard-w)] xl:shrink-0"
+        className="product-tab-media w-full overflow-hidden shadow-[0_0_2px_rgba(0,0,0,0.25)] xl:w-[var(--section-dashboard-w)] xl:max-w-[var(--section-dashboard-w)] xl:shrink-0"
         style={{
           height: 'var(--section-dashboard-h)',
           borderRadius: 'var(--section-dashboard-radius)',
@@ -124,16 +138,17 @@ export function ProductIntroSection() {
 
   return (
     <section
+      id="product-intro"
       className="w-full px-[5px] pt-[5px]"
       aria-labelledby="product-intro-heading"
       data-node-id="642:1124"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="product-intro-card section-card-shell relative mx-auto flex h-full min-h-0 w-full flex-col overflow-hidden bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
-          className="flex flex-col"
+          className="product-intro-inner flex min-h-0 flex-1 flex-col"
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',
@@ -143,7 +158,7 @@ export function ProductIntroSection() {
           }}
         >
           {/* Section header */}
-          <div data-node-id="751:523">
+          <div className="shrink-0" data-node-id="751:523">
             <p
               className="font-body uppercase text-black"
               style={{
@@ -173,7 +188,7 @@ export function ProductIntroSection() {
 
           {/* Product tabs */}
           <div
-            className="flex flex-col items-stretch sm:flex-row sm:flex-wrap sm:items-center"
+            className="flex shrink-0 flex-col items-stretch sm:flex-row sm:flex-wrap sm:items-center"
             style={{
               gap: 'var(--section-tab-gap)',
               marginTop: 'calc(var(--section-heading-to-tabs) - var(--section-gap))',

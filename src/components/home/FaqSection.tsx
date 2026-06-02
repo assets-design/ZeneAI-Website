@@ -199,7 +199,6 @@ function FaqItem({
   questionNodeId,
   answerNodeId,
   iconNodeId,
-  icon,
   isOpen,
   onToggle,
   normalCaseBody = false,
@@ -228,7 +227,7 @@ function FaqItem({
         data-node-id={barNodeId}
       >
         <img
-          src={icon}
+          src={isOpen ? rubikExpanded : rubikCube}
           alt=""
           aria-hidden
           className="shrink-0 object-contain"
@@ -288,7 +287,11 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
   const items = isTheEdge ? THE_EDGE_FAQ_ITEMS : isCodeMonkey ? CODE_MONKEY_FAQ_ITEMS : FAQ_ITEMS
   const headingId = isTheEdge ? 'the-edge-faq-heading' : isCodeMonkey ? 'code-monkey-faq-heading' : 'faq-heading'
 
-  const [openIndex, setOpenIndex] = useState(0)
+  const [openIndex, setOpenIndex] = useState(-1)
+
+  const handleToggle = (index: number) => {
+    setOpenIndex(prev => (prev === index ? -1 : index))
+  }
 
   const highlightStyle = {
     minHeight: 'var(--english-ai-highlight-h)',
@@ -304,11 +307,12 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
       data-node-id="975:1944"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto flex h-full min-h-0 w-full flex-col overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
         data-node-id="975:1945"
       >
         <div
+          className="section-card-inner flex min-h-0 flex-1 flex-col"
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',
@@ -359,7 +363,7 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
           </h2>
 
           <div
-            className="flex flex-col"
+            className="section-faq-list flex flex-col"
             style={{
               marginTop: 'var(--faq-heading-to-list)',
               gap: 'var(--faq-item-gap)',
@@ -370,7 +374,7 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
                 key={item.nodeId}
                 {...item}
                 isOpen={openIndex === index}
-                onToggle={() => setOpenIndex(openIndex === index ? -1 : index)}
+                onToggle={() => handleToggle(index)}
                 normalCaseBody={isCustomProgram}
               />
             ))}

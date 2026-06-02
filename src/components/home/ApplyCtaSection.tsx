@@ -23,30 +23,30 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
   return (
     <section
       id={isAbout ? undefined : 'apply'}
-      className="w-full px-[5px] pt-[5px]"
+      className={cn('w-full px-[5px] pt-[5px]', isTheEdge && 'apply-cta-section--the-edge')}
       aria-labelledby={headingId}
-      data-node-id={isAbout ? '642:1331' : '1025:1892'}
+      data-node-id={isAbout ? '642:1331' : isTheEdge ? '1134:3546' : '1025:1892'}
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="apply-cta-card relative mx-auto flex h-full min-h-0 w-full flex-col overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
-        data-node-id={isAbout ? '642:1331' : '975:1976'}
+        data-node-id={isAbout ? '642:1331' : isTheEdge ? '1134:3547' : '975:1976'}
       >
         <div
-          className="flex justify-center px-[var(--section-padding-x)] sm:px-0"
+          className="apply-cta-inner flex justify-center px-[var(--section-padding-x)] sm:px-0"
           style={{
             paddingTop: 'var(--apply-cta-padding-top)',
             paddingBottom: 'var(--apply-cta-padding-bottom)',
           }}
         >
           <div
-            className="relative flex w-full max-w-[var(--apply-cta-stage-w)] flex-col items-center sm:block sm:min-h-[var(--apply-cta-yellow-size)]"
+            className="apply-cta-stage relative mx-auto flex w-full max-w-[var(--apply-cta-stage-w)] flex-col items-center sm:flex-row sm:justify-center sm:min-h-[var(--apply-cta-yellow-size)]"
             style={{
               width: 'min(100%, var(--apply-cta-stage-w))',
             }}
           >
             <div
-              className="relative mx-auto flex aspect-square shrink-0 flex-col items-center justify-center overflow-hidden rounded-full bg-zene-yellow text-center sm:absolute sm:left-0 sm:top-0"
+              className="apply-cta-yellow relative mx-auto flex aspect-square shrink-0 flex-col items-center justify-center overflow-hidden rounded-full bg-zene-yellow text-center sm:mx-0"
               style={{
                 width: 'var(--apply-cta-yellow-size)',
                 maxWidth: '100%',
@@ -55,7 +55,7 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
                 paddingTop: 'var(--apply-cta-yellow-py)',
                 paddingBottom: 'var(--apply-cta-yellow-py)',
               }}
-              data-node-id={isAbout ? '642:1355' : '975:1977'}
+              data-node-id={isAbout ? '642:1355' : isTheEdge ? '1134:3548' : '975:1977'}
             >
               <h2
                 id={headingId}
@@ -64,7 +64,7 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
                   fontSize: 'var(--apply-cta-heading-size)',
                   maxWidth: 'var(--apply-cta-heading-max-w)',
                 }}
-                data-node-id={isAbout ? '642:1357' : '975:1978'}
+                data-node-id={isAbout ? '642:1357' : isTheEdge ? '1134:3549' : '975:1978'}
               >
                 {isAbout ? (
                   <>
@@ -73,8 +73,8 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
                   </>
                 ) : isTheEdge ? (
                   <>
-                    <span className="block sm:whitespace-nowrap">Your students have the potential.</span>
-                    <span className="block sm:whitespace-nowrap">The Edge builds the proof.</span>
+                    <span className="block sm:whitespace-nowrap">Apply to the AY</span>
+                    <span className="block sm:whitespace-nowrap">2026–27 Cohort</span>
                   </>
                 ) : isCodeMonkey ? (
                   <>
@@ -92,7 +92,7 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
               <p
                 className={cn(
                   'mx-auto font-body font-normal leading-normal text-black',
-                  isTheEdge || isCodeMonkey ? 'normal-case' : 'capitalize',
+                  isCodeMonkey ? 'normal-case' : 'capitalize',
                 )}
                 style={{
                   fontSize: 'var(--apply-cta-body-size)',
@@ -100,12 +100,12 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
                   maxWidth: 'var(--apply-cta-body-max-w)',
                   marginTop: 'var(--apply-cta-heading-to-body)',
                 }}
-                data-node-id={isAbout ? '642:1358' : '975:1979'}
+                data-node-id={isAbout ? '642:1358' : isTheEdge ? '1134:3550' : '975:1979'}
               >
                 {isAbout
                   ? 'From AI English speaking to coding and leadership — a complete future-ready skill set, trusted by schools across India'
                   : isTheEdge
-                    ? 'Trusted by Georgetown University, Alliance College-Ready Public Schools, and 100+ institutions worldwide. Every student leaves with documented proof of who they are becoming.'
+                    ? '5-minute application. Selection decisions after a call with your school team.'
                     : isCodeMonkey
                       ? 'Limited seats. Decisions rolling. Apply before the cohort closes.'
                       : '5-minute application. Selection decisions after a call with your school team.'}
@@ -122,13 +122,13 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
             </div>
 
             <StudentFaceCircle
-              className="relative z-[2] -mt-[var(--apply-cta-student-overlap)] sm:absolute sm:right-[calc(-1*var(--apply-cta-student-overlap))] sm:top-1/2 sm:mt-0 sm:-translate-y-1/2"
+              className="apply-cta-student relative z-[2] shrink-0 sm:mx-0"
               size="var(--apply-cta-student-circle-size)"
               studentSize="var(--apply-cta-student-face-size)"
               studentHoverSize="var(--apply-cta-student-face-hover-size)"
               hovered={buttonHover}
-              nodeId={isAbout ? '642:1359' : '64:258'}
-              innerNodeId={isAbout ? '642:1359' : '64:256'}
+              nodeId={isAbout ? '642:1359' : isTheEdge ? '1134:3551' : '64:258'}
+              innerNodeId={isAbout ? '642:1359' : isTheEdge ? '64:256' : '64:256'}
             />
           </div>
         </div>

@@ -144,7 +144,7 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
       data-node-id={isProgramPage ? '1060:2201' : '767:1875'}
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
@@ -178,15 +178,15 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
             }}
             data-node-id={isProgramPage ? '1060:2345' : '767:1877'}
           >
-            We onboard a limited{' '}
+            We onboard{' '}
             <span
               className={isCustomProgram ? 'inline-flex items-center bg-zene-cyan' : 'bg-[#78F3FA]'}
               style={isCustomProgram ? highlightStyle : undefined}
               data-node-id={isProgramPage ? '1060:2344' : '767:1879'}
             >
-              number of schools
+              a limited number
             </span>{' '}
-            each year. Here&apos;s how we choose.
+            of schools each year. Here&apos;s how we choose.
           </h2>
 
           <p

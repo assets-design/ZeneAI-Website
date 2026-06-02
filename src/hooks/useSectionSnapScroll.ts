@@ -1,22 +1,96 @@
 import { useEffect } from 'react'
 import { useSectionScroll } from '@/contexts/SectionScrollContext'
+import { useSectionScrollDesktop } from '@/hooks/useSectionScrollDesktop'
 
 const SNAP_LOCK_MS = 750
 const EDGE_THRESHOLD = 48
+const PANEL_SELECTOR = '.section-scroll-panel'
+const FOOTER_SELECTOR = '.section-scroll-tail'
 
-function getSnapPanels(root: HTMLElement) {
-  return Array.from(
-    root.querySelectorAll<HTMLElement>('.section-scroll-panel--hero, .section-scroll-panel--form'),
-  )
+function getSectionStep(root: HTMLElement): number {
+  const cssVar = getComputedStyle(root).getPropertyValue('--section-viewport-h').trim()
+  const parsed = parseFloat(cssVar)
+  if (!Number.isNaN(parsed) && parsed > 0) return parsed
+  return root.clientHeight
 }
 
-/** Snap wheel only between hero and form — form body + footer scroll freely. */
+function getPanels(root: HTMLElement): HTMLElement[] {
+  return Array.from(root.querySelectorAll<HTMLElement>(PANEL_SELECTOR))
+}
+
+function getPanelTop(index: number, step: number): number {
+  return index * step
+}
+
+function getPanelIndex(scrollTop: number, step: number, maxIndex: number): number {
+  if (step <= 0) return 0
+  return Math.max(0, Math.min(maxIndex, Math.round(scrollTop / step)))
+}
+
+function getFooterTop(root: HTMLElement): number | null {
+  const footer = root.querySelector<HTMLElement>(FOOTER_SELECTOR)
+  return footer?.offsetTop ?? null
+}
+
+function isFormFreeScrollZone(
+  root: HTMLElement,
+  panels: HTMLElement[],
+  scrollTop: number,
+  footerTop: number | null,
+): boolean {
+  const formIndex = panels.findIndex(panel =>
+    panel.classList.contains('section-scroll-panel--form'),
+  )
+  if (formIndex < 0 || footerTop == null) return false
+
+  const formTop = getPanelTop(formIndex, getSectionStep(root))
+  return scrollTop > formTop + EDGE_THRESHOLD && scrollTop < footerTop - EDGE_THRESHOLD
+}
+
+function shouldUseNestedScroll(event: WheelEvent, root: HTMLElement): boolean {
+  const delta = event.deltaY
+  let el = event.target instanceof HTMLElement ? event.target : null
+
+  while (el && el !== root) {
+    if (el.classList.contains('section-faq-list')) {
+      const { scrollTop, scrollHeight, clientHeight } = el
+      if (scrollHeight <= clientHeight + 1) break
+      const atTop = scrollTop <= 0
+      const atBottom = scrollTop + clientHeight >= scrollHeight - 1
+      if ((delta < 0 && !atTop) || (delta > 0 && !atBottom)) return true
+      break
+    }
+
+    const { overflowY } = getComputedStyle(el)
+    if (
+      (overflowY === 'auto' || overflowY === 'scroll') &&
+      el.scrollHeight > el.clientHeight + 1
+    ) {
+      const atTop = el.scrollTop <= 0
+      const atBottom = el.scrollTop + el.clientHeight >= el.scrollHeight - 1
+      if ((delta < 0 && !atTop) || (delta > 0 && !atBottom)) return true
+    }
+
+    el = el.parentElement
+  }
+
+  return false
+}
+
+/** Smooth wheel snap between full-viewport panels; footer scrolls freely. */
 export function useSectionSnapScroll() {
   const sectionScroll = useSectionScroll()
+  const isDesktop = useSectionScrollDesktop()
 
   useEffect(() => {
     const root = sectionScroll?.scrollRef.current
-    if (!sectionScroll?.enabled || !root) return undefined
+    if (!sectionScroll?.enabled || !isDesktop || !root) return undefined
+
+    const layout = root.closest('.layout-section-scroll')
+    if (!(layout instanceof HTMLElement)) return undefined
+
+    const scrollRoot = root
+    const scrollLayout = layout
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reducedMotion) return undefined
@@ -31,91 +105,86 @@ export function useSectionSnapScroll() {
     function scrollToTop(top: number) {
       locked = true
       window.clearTimeout(lockTimer)
-      const maxTop = Math.max(0, root.scrollHeight - root.clientHeight)
-      root.scrollTo({ top: Math.min(Math.max(0, top), maxTop), behavior: 'smooth' })
+      const maxTop = Math.max(0, scrollRoot.scrollHeight - scrollRoot.clientHeight)
+      scrollRoot.scrollTo({ top: Math.min(Math.max(0, top), maxTop), behavior: 'smooth' })
       lockTimer = window.setTimeout(releaseLock, SNAP_LOCK_MS)
     }
 
     function onWheel(event: WheelEvent) {
+      const target = event.target
+      if (!(target instanceof Node)) return
+      if (!scrollLayout.contains(target)) return
+
       if (locked) {
         event.preventDefault()
         return
       }
 
-      const panels = getSnapPanels(root)
-      const hero = panels[0]
-      const form = panels[1]
-      if (!hero || !form) return
+      if (shouldUseNestedScroll(event, scrollRoot)) return
 
-      const scrollTop = root.scrollTop
+      const panels = getPanels(scrollRoot)
+      if (panels.length === 0) return
+
       const delta = event.deltaY
       if (Math.abs(delta) < 1) return
 
-      const heroTop = hero.offsetTop
-      const formTop = form.offsetTop
+      const step = getSectionStep(scrollRoot)
+      const scrollTop = scrollRoot.scrollTop
+      const footerTop = getFooterTop(scrollRoot)
+      const lastIndex = panels.length - 1
 
-      // Past form start — free scroll through form and footer
-      if (scrollTop > formTop + EDGE_THRESHOLD) {
+      if (footerTop != null && scrollTop >= footerTop - EDGE_THRESHOLD) {
+        if (delta < 0 && scrollTop <= footerTop + EDGE_THRESHOLD) {
+          event.preventDefault()
+          scrollToTop(getPanelTop(lastIndex, step))
+        }
         return
       }
 
-      // Stuck between hero and form
-      if (scrollTop > heroTop + 4 && scrollTop < formTop - 4) {
-        event.preventDefault()
-        scrollToTop(delta > 0 ? formTop : heroTop)
+      if (isFormFreeScrollZone(scrollRoot, panels, scrollTop, footerTop)) {
         return
       }
 
-      // Hero or form top edge
-      if (scrollTop < formTop - EDGE_THRESHOLD) {
-        event.preventDefault()
-        if (delta > 0) scrollToTop(formTop)
-        else scrollToTop(heroTop)
+      event.preventDefault()
+
+      const currentIndex = getPanelIndex(scrollTop, step, lastIndex)
+      const currentTop = getPanelTop(currentIndex, step)
+
+      if (delta > 0) {
+        if (scrollTop > currentTop + EDGE_THRESHOLD) {
+          if (currentIndex < lastIndex) {
+            scrollToTop(getPanelTop(currentIndex + 1, step))
+          } else if (footerTop != null) {
+            scrollToTop(footerTop)
+          }
+          return
+        }
+
+        if (currentIndex < lastIndex) {
+          scrollToTop(getPanelTop(currentIndex + 1, step))
+        } else if (footerTop != null) {
+          scrollToTop(footerTop)
+        }
         return
       }
 
-      // Form top — scroll up returns to hero
-      if (scrollTop <= formTop + EDGE_THRESHOLD && delta < 0) {
-        event.preventDefault()
-        scrollToTop(heroTop)
+      if (scrollTop > currentTop + EDGE_THRESHOLD) {
+        scrollToTop(currentTop)
+        return
+      }
+
+      if (currentIndex > 0) {
+        scrollToTop(getPanelTop(currentIndex - 1, step))
+      } else {
+        scrollToTop(0)
       }
     }
 
-    function onScrollEnd() {
-      if (locked) return
-
-      const panels = getSnapPanels(root)
-      const hero = panels[0]
-      const form = panels[1]
-      if (!hero || !form) return
-
-      const scrollTop = root.scrollTop
-      const heroTop = hero.offsetTop
-      const formTop = form.offsetTop
-
-      if (scrollTop > formTop + EDGE_THRESHOLD) return
-
-      if (scrollTop > heroTop + 4 && scrollTop < formTop - 4) {
-        scrollToTop(scrollTop > (heroTop + formTop) / 2 ? formTop : heroTop)
-      }
-    }
-
-    let scrollEndTimer = 0
-    function onScroll() {
-      window.clearTimeout(scrollEndTimer)
-      scrollEndTimer = window.setTimeout(onScrollEnd, 120)
-    }
-
-    root.addEventListener('wheel', onWheel, { passive: false })
-    root.addEventListener('scroll', onScroll, { passive: true })
-    root.addEventListener('scrollend', onScrollEnd)
+    document.addEventListener('wheel', onWheel, { passive: false, capture: true })
 
     return () => {
-      root.removeEventListener('wheel', onWheel)
-      root.removeEventListener('scroll', onScroll)
-      root.removeEventListener('scrollend', onScrollEnd)
+      document.removeEventListener('wheel', onWheel, { capture: true })
       window.clearTimeout(lockTimer)
-      window.clearTimeout(scrollEndTimer)
     }
-  }, [sectionScroll])
+  }, [sectionScroll, isDesktop])
 }

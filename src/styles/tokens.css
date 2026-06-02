@@ -41,26 +41,30 @@
   --header-nav-radius    : 20px;
   --header-pdf-radius    : 72.5px;
 
-  /* Typography rule: render at 80% of Figma size (20% reduction) */
+  /* Typography: Figma × 0.8 base, then −20% type / −10% media on top */
   --header-font-scale           : 0.8;
-  --header-text-announcement    : calc(22px * var(--header-font-scale)); /* 17.6px */
-  --header-text-pdf             : calc(32px * var(--header-font-scale)); /* 25.6px */
-  --header-text-menu            : calc(42px * var(--header-font-scale)); /* 33.6px */
-  --header-text-nav-drawer      : calc(18px * var(--header-font-scale)); /* 14.4px */
-  --header-logo-w               : calc(214px * var(--header-font-scale));
-  --header-logo-h               : calc(44px * var(--header-font-scale));
+  --text-scale                  : 0.8;
+  --media-scale                 : 0.9;
+  --type-size                   : calc(var(--header-font-scale) * var(--text-scale));
+  --media-size                  : calc(var(--header-font-scale) * var(--media-scale));
+  --header-text-announcement    : calc(22px * var(--type-size)); /* 17.6px */
+  --header-text-pdf             : calc(32px * var(--type-size)); /* 25.6px */
+  --header-text-menu            : calc(42px * var(--type-size)); /* 33.6px */
+  --header-text-nav-drawer      : calc(18px * var(--type-size)); /* 14.4px */
+  --header-logo-w               : calc(214px * var(--media-size));
+  --header-logo-h               : calc(44px * var(--media-size));
   --header-pdf-h                : calc(62px * var(--header-font-scale));
   --header-pdf-min-w            : calc(204px * var(--header-font-scale));
-  --header-menu-icon-w          : calc(68px * var(--header-font-scale));
-  --header-menu-icon-h          : calc(16px * var(--header-font-scale));
+  --header-menu-icon-w          : calc(68px * var(--media-size));
+  --header-menu-icon-h          : calc(16px * var(--media-size));
   --header-menu-line-h          : calc(2px * var(--header-font-scale));
   --header-menu-line-short-w    : calc(49px * var(--header-font-scale));
 
   /* Menu popup — Figma Group 512 (node 970:1790) */
   --header-menu-popup-gap       : 0.5px;
   --header-menu-popup-w         : calc(520px * var(--header-font-scale));
-  --header-menu-text            : calc(52px * var(--header-font-scale));
-  --header-menu-text-lh         : calc(62px * var(--header-font-scale));
+  --header-menu-text            : calc(52px * var(--type-size));
+  --header-menu-text-lh         : calc(62px * var(--type-size));
   --header-menu-padding-x       : calc(60px * var(--header-font-scale));
   --header-menu-padding-y       : calc(63px * var(--header-font-scale));
   --header-menu-item-gap        : calc(30px * var(--header-font-scale));
@@ -70,10 +74,10 @@
   --footer-padding-x            : 120px;
   --footer-padding-top          : calc(30px * var(--header-font-scale));
   --footer-padding-bottom       : calc(80px * var(--header-font-scale));
-  --footer-logo-w               : calc(331px * var(--header-font-scale));
-  --footer-logo-h               : calc(67px * var(--header-font-scale));
-  --footer-text-body            : calc(22px * var(--header-font-scale));
-  --footer-text-heading         : calc(42px * var(--header-font-scale));
+  --footer-logo-w               : calc(331px * var(--media-size));
+  --footer-logo-h               : calc(67px * var(--media-size));
+  --footer-text-body            : calc(22px * var(--type-size));
+  --footer-text-heading         : calc(42px * var(--type-size));
   --footer-tagline-gap          : calc(60px * var(--header-font-scale));
   --footer-heading-link-gap     : calc(60px * var(--header-font-scale));
   --footer-link-gap             : calc(30px * var(--header-font-scale));
@@ -90,11 +94,11 @@
   --apply-btn-pill-top          : calc(28px * var(--header-font-scale));
   --apply-btn-pill-radius       : calc(50px * var(--header-font-scale));
   --apply-btn-pill-border       : calc(3px * var(--header-font-scale));
-  --apply-btn-text              : calc(42px * var(--header-font-scale));
-  --apply-btn-text-left         : calc(35px * var(--header-font-scale));
+  --apply-btn-text              : calc(42px * var(--type-size));
+  --apply-btn-text-left         : calc(35px * var(--type-size));
   --apply-btn-circle-size       : calc(140px * var(--header-font-scale));
-  --apply-btn-circle-left       : calc(235px * var(--header-font-scale));
-  --apply-btn-student-size      : calc(79px * var(--header-font-scale));
+  --apply-btn-circle-left       : calc(var(--apply-btn-w) - var(--apply-btn-circle-size));
+  --apply-btn-student-size      : calc(79px * var(--media-size));
   --apply-btn-student-left      : calc(266px * var(--header-font-scale));
   --apply-btn-student-top       : calc(31px * var(--header-font-scale));
   --apply-btn-student-hover-size: calc(var(--apply-btn-circle-size) * 0.68);
@@ -104,28 +108,37 @@
   --hero-card-min-h             : 950px;
   --hero-card-radius            : 20px;
   --hero-padding-x              : 120px;
-  --hero-text-eyebrow           : calc(22px * var(--header-font-scale));
-  --hero-text-headline          : calc(82px * var(--header-font-scale));
-  --hero-text-body              : calc(34px * var(--header-font-scale));
-  --hero-text-badge             : calc(22px * var(--header-font-scale));
-  --hero-decorative-w           : calc(872px * var(--header-font-scale));
-  --hero-decorative-h           : calc(194px * var(--header-font-scale));
-  --hero-robo-viewport-w        : calc(240px * var(--header-font-scale));
+  --hero-text-eyebrow           : calc(22px * var(--type-size));
+  --hero-text-headline          : calc(82px * var(--type-size));
+  --hero-text-body              : calc(34px * var(--type-size));
+  --hero-text-badge             : calc(22px * var(--type-size));
+  --hero-decorative-w           : min(calc(480px * var(--media-size)), 42vw);
+  --hero-decorative-h           : max(var(--apply-btn-h), calc(150px * var(--media-size)));
+  --hero-robo-viewport-w        : calc(240px * var(--media-size));
   --hero-headline-max-w         : calc(1037px * var(--header-font-scale));
   --hero-body-max-w             : calc(1295px * var(--header-font-scale));
   --hero-body-offset-x          : calc(355px * var(--header-font-scale));
   --hero-apply-top              : calc(29px * var(--header-font-scale));
   --hero-apply-right            : calc(120px * var(--header-font-scale));
-  --hero-gap                    : 20px;
-  --hero-body-pb                : 40px;
-  --hero-badge-1-w              : 144px;
-  --hero-badge-1-h              : 116px;
-  --hero-badge-2-w              : 186px;
-  --hero-badge-2-h              : 121px;
-  --hero-badge-3-w              : 182px;
-  --hero-badge-3-h              : 114px;
-  --hero-badge-4-w              : 215px;
-  --hero-badge-4-h              : 118px;
+  --hero-apply-offset-top       : 24px;
+  --hero-top-row-offset-top     : 12px;
+  --hero-robot-offset-top       : 8px;
+  --hero-top-row-min-h          : max(var(--apply-btn-h), var(--hero-decorative-h));
+  --hero-inner-padding-top      : var(--hero-gap);
+  --hero-gap                    : 15px;
+  --hero-body-pb                : 0px;
+  --hero-content-to-badges      : 16px;
+  --hero-badge-1-w              : calc(144px * var(--media-scale) / var(--header-font-scale));
+  --hero-badge-1-h              : calc(116px * var(--media-scale) / var(--header-font-scale));
+  --hero-badge-2-w              : calc(186px * var(--media-scale) / var(--header-font-scale));
+  --hero-badge-2-h              : calc(121px * var(--media-scale) / var(--header-font-scale));
+  --hero-badge-3-w              : calc(182px * var(--media-scale) / var(--header-font-scale));
+  --hero-badge-3-h              : calc(114px * var(--media-scale) / var(--header-font-scale));
+  --hero-badge-4-w              : calc(215px * var(--media-scale) / var(--header-font-scale));
+  --hero-badge-4-h              : calc(118px * var(--media-scale) / var(--header-font-scale));
+  --hero-badge-carousel-to-dots : calc(20px * var(--header-font-scale));
+  --hero-badge-dot-size         : calc(10px * var(--header-font-scale));
+  --hero-badge-dot-gap          : calc(10px * var(--header-font-scale));
 
   /* Home section 2 — Built for every learner (642:1124) */
   --section-gap                 : 20px;
@@ -133,22 +146,27 @@
   --section-heading-line-gap    : calc(10px * var(--header-font-scale));
   --section-card-max-w          : 1910px;
   --section-card-radius         : 20px;
+  --section-card-gap            : 5px;
+  /* Flat top corners; rounded bottom-left + bottom-right only */
+  --section-card-shell-radius   : 0 0 var(--section-card-radius) var(--section-card-radius);
+  --hero-card-shell-radius      : 0 0 var(--hero-card-radius) var(--hero-card-radius);
   --section-padding-x           : 120px;
   --section-padding-top         : 80px;
   --section-padding-bottom      : 75px;
   --section-heading-to-tabs     : calc(60px * var(--header-font-scale));
   --section-tab-gap             : calc(60px * var(--header-font-scale));
   --section-content-gap         : calc(30px * var(--header-font-scale));
+  --section-body-paragraph-gap  : calc(12px * var(--header-font-scale));
   --section-body-to-cta         : calc(76px * var(--header-font-scale));
   --section-try-btn-radius      : calc(50px * var(--header-font-scale));
   --section-dashboard-radius    : 6px;
-  --section-dashboard-gap       : calc(28px * var(--header-font-scale));
-  --section-text-max-w          : calc(946px * var(--header-font-scale));
-  --section-text-eyebrow        : calc(22px * var(--header-font-scale));
-  --section-text-heading        : calc(62px * var(--header-font-scale));
-  --section-text-title          : calc(52px * var(--header-font-scale));
-  --section-text-tab            : calc(42px * var(--header-font-scale));
-  --section-text-body           : calc(22px * var(--header-font-scale));
+  --section-dashboard-gap       : calc(28px * var(--media-size));
+  --section-text-max-w          : calc(946px * var(--type-size));
+  --section-text-eyebrow        : calc(22px * var(--type-size));
+  --section-text-heading        : calc(62px * var(--type-size));
+  --section-text-title          : calc(52px * var(--type-size));
+  --section-text-tab            : calc(42px * var(--type-size));
+  --section-text-body           : calc(22px * var(--type-size));
   --section-highlight-h         : calc(74px * var(--header-font-scale));
   --section-highlight-w         : calc(364px * var(--header-font-scale));
   --section-tab-h               : calc(102px * var(--header-font-scale));
@@ -156,8 +174,8 @@
   --section-tab-english-w       : calc(425px * var(--header-font-scale));
   --section-tab-code-w          : calc(461px * var(--header-font-scale));
   --section-tab-edge-w          : calc(400px * var(--header-font-scale));
-  --section-dashboard-w         : 589px;
-  --section-dashboard-h         : 368px;
+  --section-dashboard-w         : calc(589px * var(--media-scale) / var(--header-font-scale));
+  --section-dashboard-h         : calc(368px * var(--media-scale) / var(--header-font-scale));
   --section-try-btn-w           : calc(476px * var(--header-font-scale));
   --section-try-btn-h           : calc(84px * var(--header-font-scale));
   --section-try-btn-border      : calc(3px * var(--header-font-scale));
@@ -169,36 +187,36 @@
   --action-heading-to-demo      : calc(60px * var(--header-font-scale));
   --action-columns-gap          : 100px;
   --action-feature-gap          : calc(60px * var(--header-font-scale));
-  --action-feature-img-w        : 188px;
-  --action-feature-img-h        : 125px;
-  --action-feature-text-gap     : calc(15px * var(--header-font-scale));
+  --action-feature-img-w        : calc(188px * var(--media-scale) / var(--header-font-scale));
+  --action-feature-img-h        : calc(125px * var(--media-scale) / var(--header-font-scale));
+  --action-feature-text-gap     : calc(15px * var(--type-size));
   --action-demo-radius          : 20px;
-  --action-demo-h               : 553px;
+  --action-demo-h               : calc(553px * var(--media-scale) / var(--header-font-scale));
 
   /* Home section 4 — Why schools choose ZENE AI (642:1126) */
   --why-padding-top             : 80px;
   --why-columns-gap             : 50px;
   --why-heading-to-list         : calc(46px * var(--header-font-scale));
   --why-feature-gap             : calc(30px * var(--header-font-scale));
-  --why-icon-size               : calc(69.821px * var(--header-font-scale));
-  --why-icon-inner              : calc(38.607px * var(--header-font-scale));
-  --why-icon-text-gap           : calc(15px * var(--header-font-scale));
-  --why-illustration-w          : calc(652px * var(--header-font-scale));
-  --why-illustration-h          : calc(652px * var(--header-font-scale));
+  --why-icon-size               : calc(69.821px * var(--media-size));
+  --why-icon-inner              : calc(38.607px * var(--media-size));
+  --why-icon-text-gap           : calc(15px * var(--type-size));
+  --why-illustration-w          : calc(652px * var(--media-size));
+  --why-illustration-h          : calc(652px * var(--media-size));
   --why-illustration-scene-h    : auto;
-  --why-students-w              : calc(960px * var(--header-font-scale));
-  --why-students-h              : calc(493px * var(--header-font-scale));
-  --why-gif-offset-left         : calc(80px * var(--header-font-scale));
+  --why-students-w              : calc(960px * var(--media-size));
+  --why-students-h              : calc(493px * var(--media-size));
+  --why-gif-offset-left         : calc(80px * var(--media-size));
   --why-gif-offset-top          : 15px;
   --why-marquee-offset-top      : 15px;
-  --why-robot-w                 : calc(290px * var(--header-font-scale));
-  --why-robot-h                 : calc(382px * var(--header-font-scale));
-  --why-robot-bottom            : calc(40px * var(--header-font-scale));
+  --why-robot-w                 : calc(290px * var(--media-size));
+  --why-robot-h                 : calc(382px * var(--media-size));
+  --why-robot-bottom            : calc(40px * var(--media-size));
   --why-marquee-h               : calc(132px * var(--header-font-scale));
   --why-marquee-radius          : 20px;
   --why-marquee-bg              : #177ec0;
-  --why-marquee-text            : calc(62px * var(--header-font-scale));
-  --why-marquee-text-gap        : calc(48px * var(--header-font-scale));
+  --why-marquee-text            : calc(62px * var(--type-size));
+  --why-marquee-text-gap        : calc(48px * var(--type-size));
   --why-marquee-bottom          : calc(40px * var(--header-font-scale));
 
   /* Home section 5 — How Zene AI works (642:1196) */
@@ -209,32 +227,37 @@
   --how-heading-to-body         : calc(30px * var(--header-font-scale));
   --how-block-gap               : calc(30px * var(--header-font-scale));
   --how-section-gap             : calc(30px * var(--header-font-scale));
-  --how-dashboard-video-w       : 679px;
-  --how-dashboard-video-h       : 420px;
-  --how-dashboard-video-radius  : calc(12px * var(--header-font-scale));
-  --how-lesson-img-w            : 679px;
-  --how-lesson-img-h            : 145px;
-  --how-lesson-img-radius       : calc(12px * var(--header-font-scale));
+  --how-dashboard-video-w       : calc(679px * var(--media-scale) / var(--header-font-scale));
+  --how-dashboard-video-h       : calc(420px * var(--media-scale) / var(--header-font-scale));
+  --how-dashboard-video-radius  : calc(12px * var(--media-size));
+  --how-lesson-img-w            : calc(679px * var(--media-scale) / var(--header-font-scale));
+  --how-lesson-img-h            : calc(145px * var(--media-scale) / var(--header-font-scale));
+  --how-lesson-img-radius       : calc(12px * var(--media-size));
 
   /* Home section 6 — What schools can now track (762:1685) */
   --track-padding-top           : 80px;
   --track-padding-bottom        : calc(232px * var(--header-font-scale));
   --track-heading-to-cards      : calc(79px * var(--header-font-scale));
   --track-columns-gap           : calc(80px * var(--header-font-scale));
-  --track-img-w                 : 323px;
-  --track-img-h                 : 216px;
-  --track-img-padding-x         : calc(56px * var(--header-font-scale));
-  --track-img-offset            : calc(117px * var(--header-font-scale));
-  --track-img-to-text           : calc(31px * var(--header-font-scale));
-  --track-text-max-w            : calc(434px * var(--header-font-scale));
-  --track-text-max-w-sm         : calc(384px * var(--header-font-scale));
+  --track-img-w                 : calc(323px * var(--media-scale) / var(--header-font-scale));
+  --track-img-h                 : calc(216px * var(--media-scale) / var(--header-font-scale));
+  --track-img-padding-x         : calc(56px * var(--media-size));
+  --track-img-offset            : calc(117px * var(--media-size));
+  --track-img-to-text           : calc(31px * var(--media-size));
+  --track-text-max-w            : calc(434px * var(--type-size));
+  --track-text-max-w-sm         : calc(384px * var(--type-size));
 
   /* Home section 7 — Become an AI-Ready School (765:1838 / 765:1839) */
   --ai-ready-padding-top        : 60px;
   --ai-ready-padding-bottom     : 80px;
   --ai-ready-heading-max-w      : calc(425px * var(--header-font-scale));
-  --ai-ready-heading-to-diagram : calc(-8px * var(--header-font-scale));
-  --ai-ready-diagram-h          : calc(854px * var(--header-font-scale));
+  --ai-ready-heading-to-diagram : calc(-8px * var(--media-size));
+  --ai-ready-diagram-h          : calc(854px * var(--media-size));
+  --ai-ready-headset-top        : 43%;
+  --ai-ready-headset-bottom     : 7%;
+  --ai-ready-headset-left       : 24%;
+  --ai-ready-headset-right      : 24%;
+  --ai-ready-headset-offset-y   : 50px;
 
   /* Home section 8 — Who Zene works with / onboarding (767:1875) */
   --onboard-padding-top         : 60px;
@@ -246,9 +269,9 @@
   --onboard-heading-to-body     : calc(30px * var(--header-font-scale));
   --onboard-body-to-cards       : calc(30px * var(--header-font-scale));
   --onboard-columns-gap         : calc(80px * var(--header-font-scale));
-  --onboard-image-w             : calc(460px * var(--header-font-scale));
-  --onboard-image-h             : calc(307px * var(--header-font-scale));
-  --onboard-image-to-title      : calc(30px * var(--header-font-scale));
+  --onboard-image-w             : calc(460px * var(--media-size));
+  --onboard-image-h             : calc(307px * var(--media-size));
+  --onboard-image-to-title      : calc(30px * var(--media-size));
   --onboard-title-to-body       : calc(15px * var(--header-font-scale));
 
   /* Home section 9 — Testimonials (767:1951) */
@@ -258,22 +281,22 @@
   --testimonial-eyebrow-to-heading  : calc(44px * var(--header-font-scale));
   --testimonial-heading-to-carousel : calc(30px * var(--header-font-scale));
   --testimonial-track-width         : 90%;
-  --testimonial-card-w              : calc(482px * var(--header-font-scale));
-  --testimonial-card-h              : calc(593px * var(--header-font-scale));
+  --testimonial-card-w              : calc(482px * var(--media-size));
+  --testimonial-card-h              : calc(593px * var(--media-size));
   --testimonial-card-gap            : calc(45px * var(--header-font-scale));
   --testimonial-card-radius         : 20px;
   --testimonial-padding-x           : calc(45px * var(--header-font-scale));
-  --testimonial-quote-icon-w        : calc(82px * var(--header-font-scale));
-  --testimonial-quote-icon-h        : calc(53px * var(--header-font-scale));
+  --testimonial-quote-icon-w        : calc(82px * var(--media-size));
+  --testimonial-quote-icon-h        : calc(53px * var(--media-size));
   --testimonial-quote-top           : calc(20px * var(--header-font-scale));
-  --testimonial-name-size           : calc(52px * var(--header-font-scale));
+  --testimonial-name-size           : calc(52px * var(--type-size));
   --testimonial-name-top            : calc(211px * var(--header-font-scale));
   --testimonial-name-max-w          : calc(251px * var(--header-font-scale));
   --testimonial-body-top            : calc(333px * var(--header-font-scale));
   --testimonial-body-w              : calc(391px * var(--header-font-scale));
-  --testimonial-logo-w              : calc(86px * var(--header-font-scale));
-  --testimonial-logo-h              : calc(112px * var(--header-font-scale));
-  --testimonial-arrow-size          : calc(48px * var(--header-font-scale));
+  --testimonial-logo-w              : calc(86px * var(--media-size));
+  --testimonial-logo-h              : calc(112px * var(--media-size));
+  --testimonial-arrow-size          : calc(48px * var(--type-size));
   --testimonial-arrow-gap           : calc(15px * var(--header-font-scale));
   --testimonial-arrow-to-track      : calc(20px * var(--header-font-scale));
   --testimonial-fade-w              : calc(229px * var(--header-font-scale));
@@ -287,32 +310,32 @@
   --cohort-heading-to-body          : calc(30px * var(--header-font-scale));
   --cohort-body-to-logos            : calc(67px * var(--header-font-scale));
   --cohort-logo-padding-x           : 100px;
-  --cohort-logo-row-gap             : calc(90px * var(--header-font-scale));
-  --cohort-logo-row-h               : calc(153px * var(--header-font-scale));
+  --cohort-logo-row-gap             : calc(90px * var(--media-size));
+  --cohort-logo-row-h               : calc(153px * var(--media-size));
   --cohort-grid-col-gap             : calc(40px * var(--header-font-scale));
   --cohort-carousel-to-dots         : calc(24px * var(--header-font-scale));
-  --cohort-dot-size                 : calc(8px * var(--header-font-scale));
+  --cohort-dot-size                 : calc(8px * var(--type-size));
   --cohort-dot-gap                  : calc(8px * var(--header-font-scale));
-  --cohort-logo-help-w              : calc(148px * var(--header-font-scale));
-  --cohort-logo-help-h              : calc(144px * var(--header-font-scale));
-  --cohort-logo-chist-w             : calc(216px * var(--header-font-scale));
-  --cohort-logo-chist-h             : calc(151px * var(--header-font-scale));
-  --cohort-logo-sancta-w            : calc(181px * var(--header-font-scale));
-  --cohort-logo-sancta-h            : calc(105px * var(--header-font-scale));
-  --cohort-logo-book-w              : calc(189px * var(--header-font-scale));
-  --cohort-logo-book-h              : calc(89px * var(--header-font-scale));
-  --cohort-logo-ssvm-w              : calc(207px * var(--header-font-scale));
-  --cohort-logo-ssvm-h              : calc(89px * var(--header-font-scale));
-  --cohort-logo-schechter-w         : calc(260px * var(--header-font-scale));
-  --cohort-logo-schechter-h         : calc(73px * var(--header-font-scale));
-  --cohort-logo-edgewater-w         : calc(141px * var(--header-font-scale));
-  --cohort-logo-edgewater-h         : calc(141px * var(--header-font-scale));
-  --cohort-logo-patricks-w          : calc(165px * var(--header-font-scale));
-  --cohort-logo-patricks-h          : calc(153px * var(--header-font-scale));
-  --cohort-logo-oak-w               : calc(135px * var(--header-font-scale));
-  --cohort-logo-oak-h               : calc(142px * var(--header-font-scale));
-  --cohort-logo-montfort-w          : calc(170px * var(--header-font-scale));
-  --cohort-logo-montfort-h          : calc(129px * var(--header-font-scale));
+  --cohort-logo-help-w              : calc(148px * var(--media-size));
+  --cohort-logo-help-h              : calc(144px * var(--media-size));
+  --cohort-logo-chist-w             : calc(216px * var(--media-size));
+  --cohort-logo-chist-h             : calc(151px * var(--media-size));
+  --cohort-logo-sancta-w            : calc(181px * var(--media-size));
+  --cohort-logo-sancta-h            : calc(105px * var(--media-size));
+  --cohort-logo-book-w              : calc(189px * var(--media-size));
+  --cohort-logo-book-h              : calc(89px * var(--media-size));
+  --cohort-logo-ssvm-w              : calc(207px * var(--media-size));
+  --cohort-logo-ssvm-h              : calc(89px * var(--media-size));
+  --cohort-logo-schechter-w         : calc(260px * var(--media-size));
+  --cohort-logo-schechter-h         : calc(73px * var(--media-size));
+  --cohort-logo-edgewater-w         : calc(141px * var(--media-size));
+  --cohort-logo-edgewater-h         : calc(141px * var(--media-size));
+  --cohort-logo-patricks-w          : calc(165px * var(--media-size));
+  --cohort-logo-patricks-h          : calc(153px * var(--media-size));
+  --cohort-logo-oak-w               : calc(135px * var(--media-size));
+  --cohort-logo-oak-h               : calc(142px * var(--media-size));
+  --cohort-logo-montfort-w          : calc(170px * var(--media-size));
+  --cohort-logo-montfort-h          : calc(129px * var(--media-size));
   --about-partners-heading-word-gap : calc(8px * var(--header-font-scale));
   --about-partners-heading-to-logos : calc(80px * var(--header-font-scale));
   --about-highlight-h                 : calc(74px * var(--header-font-scale));
@@ -333,11 +356,11 @@
   --faq-item-padding-x              : calc(60px * var(--header-font-scale));
   --faq-item-padding-y              : calc(30px * var(--header-font-scale));
   --faq-item-padding-y-expanded     : calc(30px * var(--header-font-scale));
-  --faq-icon-w                      : calc(82px * var(--header-font-scale));
-  --faq-icon-h                      : calc(84px * var(--header-font-scale));
-  --faq-icon-gap                    : calc(30px * var(--header-font-scale));
-  --faq-question-size               : calc(32px * var(--header-font-scale));
-  --faq-answer-size                 : calc(20px * var(--header-font-scale));
+  --faq-icon-w                      : calc(82px * var(--media-size));
+  --faq-icon-h                      : calc(84px * var(--media-size));
+  --faq-icon-gap                    : calc(30px * var(--media-size));
+  --faq-question-size               : calc(32px * var(--type-size));
+  --faq-answer-size                 : calc(20px * var(--type-size));
   --faq-question-to-answer          : calc(25px * var(--header-font-scale));
   --faq-answer-max-w                : calc(812px * var(--header-font-scale));
 
@@ -345,40 +368,40 @@
   --apply-cta-padding-top           : calc(102px * var(--header-font-scale));
   --apply-cta-padding-bottom        : calc(120px * var(--header-font-scale));
   --apply-cta-yellow-size           : calc(747px * var(--header-font-scale));
-  --apply-cta-student-circle-size   : calc(321px * var(--header-font-scale));
-  --apply-cta-student-face-size     : calc(157px * var(--header-font-scale));
+  --apply-cta-student-circle-size   : calc(321px * var(--media-size));
+  --apply-cta-student-face-size     : calc(157px * var(--media-size));
   --apply-cta-student-face-hover-size: calc(var(--apply-cta-student-circle-size) * 0.68);
-  --apply-cta-student-overlap       : calc(80px * var(--header-font-scale));
-  --apply-cta-stage-w               : calc(var(--apply-cta-yellow-size) + var(--apply-cta-student-circle-size) - var(--apply-cta-student-overlap));
+  --apply-cta-student-overlap       : 0px;
+  --apply-cta-stage-w               : calc(var(--apply-cta-yellow-size) + var(--apply-cta-student-circle-size));
   --apply-cta-content-padding-x     : calc(80px * var(--header-font-scale));
-  --apply-cta-heading-max-w         : calc(455px * var(--header-font-scale));
-  --apply-cta-body-max-w            : calc(528px * var(--header-font-scale));
-  --apply-cta-heading-size          : calc(62px * var(--header-font-scale));
-  --apply-cta-body-size             : calc(22px * var(--header-font-scale));
+  --apply-cta-heading-max-w         : calc(455px * var(--type-size));
+  --apply-cta-body-max-w            : calc(528px * var(--type-size));
+  --apply-cta-heading-size          : calc(62px * var(--type-size));
+  --apply-cta-body-size             : calc(22px * var(--type-size));
   --apply-cta-yellow-py             : calc(56px * var(--header-font-scale));
-  --apply-cta-heading-to-body       : calc(30px * var(--header-font-scale));
-  --apply-cta-body-to-btn           : calc(40px * var(--header-font-scale));
+  --apply-cta-heading-to-body       : calc(30px * var(--type-size));
+  --apply-cta-body-to-btn           : calc(40px * var(--type-size));
   --apply-cta-btn-w                 : calc(476px * var(--header-font-scale));
   --apply-cta-btn-h                 : calc(84px * var(--header-font-scale));
   --apply-cta-btn-radius            : calc(50px * var(--header-font-scale));
   --apply-cta-btn-border            : calc(3px * var(--header-font-scale));
-  --apply-cta-btn-text-size         : calc(42px * var(--header-font-scale));
+  --apply-cta-btn-text-size         : calc(42px * var(--type-size));
   --apply-cta-btn-padding-x         : calc(56px * var(--header-font-scale));
-  --apply-cta-btn-arrow-size        : calc(35px * var(--header-font-scale));
+  --apply-cta-btn-arrow-size        : calc(35px * var(--type-size));
   --about-skills-body-max-w         : calc(601px * var(--header-font-scale));
 
   /* Contact page hero — Figma 1039:1895 / 642:2089 */
   --contact-hero-min-h              : auto;
-  --contact-hero-padding-top        : 80px;
+  --contact-hero-padding-top        : calc(var(--header-nav-h) + var(--hero-gap));
   --contact-hero-padding-bottom     : 80px;
   --contact-hero-columns-gap        : calc(40px * var(--header-font-scale));
   --contact-hero-apply-to-image-gap : 100px;
-  --contact-hero-apply-top          : 30px;
+  --contact-hero-apply-top          : calc(40px * var(--header-font-scale));
   --contact-hero-apply-right        : 50px;
-  --contact-hero-subtitle-max-w     : calc(874px * var(--header-font-scale));
-  --contact-hero-title-to-subtitle  : calc(80px * var(--header-font-scale));
-  --contact-hero-illustration-w     : calc(585px * var(--header-font-scale));
-  --contact-hero-illustration-h     : calc(414px * var(--header-font-scale));
+  --contact-hero-subtitle-max-w     : calc(874px * var(--type-size));
+  --contact-hero-title-to-subtitle  : calc(80px * var(--type-size));
+  --contact-hero-illustration-w     : calc(585px * var(--media-size));
+  --contact-hero-illustration-h     : calc(414px * var(--media-size));
 
   /* Contact page form — Figma 1041:1897 / 642:2090 */
   --contact-form-padding-top        : 80px;
@@ -391,83 +414,112 @@
   --contact-form-field-padding-x    : calc(30px * var(--header-font-scale));
   --contact-form-field-padding-y    : 0px;
   --contact-form-field-line-height  : var(--contact-form-field-h);
-  --contact-form-field-text         : calc(28px * var(--header-font-scale));
+  --contact-form-field-text         : calc(28px * var(--type-size));
   --contact-form-chevron-w          : calc(10px * var(--header-font-scale));
   --contact-form-chevron-h          : calc(17px * var(--header-font-scale));
   --contact-form-button-gap         : calc(80px * var(--header-font-scale));
   --contact-form-button-w           : calc(391px * var(--header-font-scale));
   --contact-form-button-h           : calc(84px * var(--header-font-scale));
   --contact-form-button-radius      : calc(50px * var(--header-font-scale));
-  --contact-form-button-text        : calc(42px * var(--header-font-scale));
+  --contact-form-button-text        : calc(42px * var(--type-size));
   --contact-form-info-gap           : calc(160px * var(--header-font-scale));
   --contact-info-gap                : calc(48px * var(--header-font-scale));
   --contact-info-icon-gap           : calc(24px * var(--header-font-scale));
-  --contact-info-text-size          : calc(28px * var(--header-font-scale));
-  --contact-info-text-offset-y      : calc(28px * var(--header-font-scale));
+  --contact-info-text-size          : calc(28px * var(--type-size));
+  --contact-info-text-offset-y      : calc(28px * var(--type-size));
   --contact-info-line-gap           : calc(21px * var(--header-font-scale));
-  --contact-info-phone-icon-w       : calc(138px * var(--header-font-scale));
-  --contact-info-phone-icon-h       : calc(143px * var(--header-font-scale));
-  --contact-info-email-icon-w       : calc(153px * var(--header-font-scale));
-  --contact-info-email-icon-h       : calc(133px * var(--header-font-scale));
-  --contact-info-address-icon-w     : calc(129px * var(--header-font-scale));
-  --contact-info-address-icon-h     : calc(161px * var(--header-font-scale));
+  --contact-info-phone-icon-w       : calc(138px * var(--media-size));
+  --contact-info-phone-icon-h       : calc(143px * var(--media-size));
+  --contact-info-email-icon-w       : calc(153px * var(--media-size));
+  --contact-info-email-icon-h       : calc(133px * var(--media-size));
+  --contact-info-address-icon-w     : calc(129px * var(--media-size));
+  --contact-info-address-icon-h     : calc(161px * var(--media-size));
 
-  /* 404 page (1029:1894) */
-  --not-found-padding-top           : calc(60px * var(--header-font-scale));
+  /* 404 page — Figma 1029:1893 / 735:1743 */
+  --not-found-padding-top           : calc(var(--header-nav-h) + var(--hero-gap));
   --not-found-padding-bottom        : calc(80px * var(--header-font-scale));
   --not-found-columns-gap           : calc(40px * var(--header-font-scale));
-  --not-found-title-size            : calc(82px * var(--header-font-scale));
-  --not-found-subtitle-size         : calc(38px * var(--header-font-scale));
-  --not-found-body-size             : calc(28px * var(--header-font-scale));
+  --not-found-card-min-h            : calc(950px * var(--media-size));
+  --not-found-title-size            : calc(82px * var(--type-size));
+  --not-found-subtitle-size         : calc(38px * var(--type-size));
+  --not-found-body-size             : calc(28px * var(--type-size));
   --not-found-title-max-w           : calc(747px * var(--header-font-scale));
-  --not-found-subtitle-max-w        : calc(634px * var(--header-font-scale));
+  --not-found-subtitle-max-w        : calc(634px * var(--type-size));
   --not-found-body-max-w            : calc(972px * var(--header-font-scale));
-  --not-found-title-to-subtitle     : calc(46px * var(--header-font-scale));
-  --not-found-subtitle-to-body      : calc(68px * var(--header-font-scale));
+  --not-found-title-to-subtitle     : calc(46px * var(--type-size));
+  --not-found-subtitle-to-body      : calc(68px * var(--type-size));
   --not-found-body-paragraph-gap    : calc(28px * var(--header-font-scale));
-  --not-found-img-wrap-w            : calc(496px * var(--header-font-scale));
-  --not-found-img-wrap-h            : calc(608px * var(--header-font-scale));
-  --not-found-img-scale-w           : 196%;
-  --not-found-img-scale-h           : 187%;
-  --not-found-img-offset-y          : -52%;
+  --not-found-img-wrap-w            : calc(466px * var(--media-size));
+  --not-found-img-wrap-h            : calc(609px * var(--media-size));
+  --not-found-img-scale-w           : 195.57%;
+  --not-found-img-scale-h           : 187.2%;
+  --not-found-img-offset-y          : -51.99%;
 
-  /* Thank you page — Figma 1044:1941 / 1044:1899 */
-  --thank-you-padding-top           : calc(80px * var(--header-font-scale));
+  /* Thank you page — Figma 1162:768 / 735:1648 */
+  --thank-you-padding-top           : calc(var(--header-nav-h) + var(--hero-gap));
   --thank-you-padding-bottom        : calc(80px * var(--header-font-scale));
   --thank-you-columns-gap           : calc(40px * var(--header-font-scale));
-  --thank-you-title-size            : calc(82px * var(--header-font-scale));
-  --thank-you-subtitle-size         : calc(38px * var(--header-font-scale));
-  --thank-you-body-size             : calc(28px * var(--header-font-scale));
-  --thank-you-title-max-w           : calc(567px * var(--header-font-scale));
-  --thank-you-subtitle-max-w        : calc(567px * var(--header-font-scale));
+  --thank-you-card-min-h            : calc(950px * var(--media-size));
+  --thank-you-title-size            : calc(82px * var(--type-size));
+  --thank-you-subtitle-size         : calc(38px * var(--type-size));
+  --thank-you-body-size             : calc(28px * var(--type-size));
+  --thank-you-title-max-w           : calc(405px * var(--header-font-scale));
+  --thank-you-subtitle-max-w        : calc(567px * var(--type-size));
   --thank-you-body-max-w            : calc(895px * var(--header-font-scale));
-  --thank-you-title-to-subtitle     : calc(46px * var(--header-font-scale));
-  --thank-you-subtitle-to-body      : calc(68px * var(--header-font-scale));
+  --thank-you-title-to-subtitle     : calc(46px * var(--type-size));
+  --thank-you-subtitle-to-body      : calc(68px * var(--type-size));
   --thank-you-body-paragraph-gap    : calc(28px * var(--header-font-scale));
-  --thank-you-img-wrap-w            : calc(567px * var(--header-font-scale));
-  --thank-you-img-wrap-h            : calc(613px * var(--header-font-scale));
+  --thank-you-img-wrap-w            : calc(567px * var(--media-size));
+  --thank-you-img-wrap-h            : calc(613px * var(--media-size));
   --thank-you-img-scale-w           : 105.87%;
   --thank-you-img-scale-h           : 100.03%;
   --thank-you-img-offset-x          : 0.07%;
   --thank-you-img-offset-y          : -0.01%;
+
+  /* Blog page — Figma 1165:779 / 1147:3586 */
+  --blog-section-card-gap           : 1px;
+  --blog-padding-top                : 8px;
+  --blog-padding-bottom             : calc(80px * var(--header-font-scale));
+  --blog-eyebrow-to-heading         : calc(44px * var(--type-size));
+  --blog-heading-to-body            : calc(40px * var(--type-size));
+  --blog-body-to-cards              : calc(54px * var(--type-size));
+  --blog-header-gap                 : calc(32px * var(--header-font-scale));
+  --blog-heading-max-w              : calc(1003px * var(--header-font-scale));
+  --blog-body-max-w                 : calc(1087px * var(--header-font-scale));
+  --blog-avatar-size                : calc(140px * var(--media-size));
+  --blog-avatar-student-size        : calc(79px * var(--media-size));
+  --blog-avatar-student-left        : calc(31px * var(--media-size));
+  --blog-avatar-student-top         : calc(31px * var(--media-size));
+  --blog-cards-gap                  : calc(40px * var(--header-font-scale));
+  --blog-card-image-w               : calc(387px * var(--media-size));
+  --blog-card-image-h               : calc(258px * var(--media-size));
+  --blog-card-image-radius          : 12px;
+  --blog-card-image-to-title        : calc(30px * var(--type-size));
+  --blog-card-title-to-body         : calc(12px * var(--type-size));
+  --blog-card-body-to-cta           : calc(26px * var(--type-size));
+  --blog-card-title-size            : calc(22px * var(--type-size));
+  --blog-card-body-size             : calc(22px * var(--type-size));
+  --blog-card-cta-size              : calc(22px * var(--type-size));
+  --blog-card-title-max-w           : calc(353px * var(--header-font-scale));
+  --blog-card-body-max-w            : calc(481px * var(--header-font-scale));
 
   /* About page hero — Figma 1047:2176 / 1047:1943 */
   --about-hero-padding-top          : 80px;
   --about-hero-padding-bottom       : 80px;
   --about-hero-columns-gap          : calc(40px * var(--header-font-scale));
   --about-hero-row-gap              : calc(32px * var(--header-font-scale));
-  --about-hero-text-offset-top      : calc(var(--apply-btn-h) + 24px);
-  --about-hero-text-max-w           : calc(1130px * var(--header-font-scale));
-  --about-hero-title-size           : calc(82px * var(--header-font-scale));
-  --about-hero-subtitle-size        : calc(38px * var(--header-font-scale));
+  --about-hero-text-offset-top      : 0px;
+  --about-hero-text-max-w           : calc(1130px * var(--type-size));
+  --about-hero-title-size           : calc(82px * var(--type-size));
+  --about-hero-subtitle-size        : calc(38px * var(--type-size));
   --about-hero-title-max-w          : calc(1130px * var(--header-font-scale));
-  --about-hero-subtitle-max-w       : calc(1074px * var(--header-font-scale));
-  --about-hero-title-to-subtitle    : calc(62px * var(--header-font-scale));
+  --about-hero-subtitle-max-w       : calc(1074px * var(--type-size));
+  --about-hero-title-to-subtitle    : calc(62px * var(--type-size));
   --about-hero-subtitle-indent      : 16.67%;
   --about-hero-robot-margin-top     : 0px;
   --about-hero-apply-margin-right   : 50px;
-  --about-hero-robot-wrap-w         : calc(287px * var(--header-font-scale));
-  --about-hero-robot-wrap-h         : calc(377px * var(--header-font-scale));
+  --about-hero-robot-wrap-w         : calc(287px * var(--media-size));
+  --about-hero-robot-wrap-h         : calc(377px * var(--media-size));
   --about-hero-robot-scale-w        : 399.17%;
   --about-hero-robot-scale-h        : 170.89%;
   --about-hero-robot-offset-x       : -149.27%;
@@ -476,37 +528,39 @@
   /* About page — Why we exist — Figma 1054:2191 / 1047:1944 */
   --about-why-padding-top           : 80px;
   --about-why-padding-bottom        : 80px;
-  --about-why-columns-gap           : calc(40px * var(--header-font-scale));
+  --about-why-columns-gap           : calc(48px * var(--header-font-scale));
   --about-why-row-gap               : calc(32px * var(--header-font-scale));
-  --about-why-heading-size          : calc(62px * var(--header-font-scale));
+  --about-why-heading-size          : calc(62px * var(--type-size));
   --about-why-heading-word-gap      : calc(8px * var(--header-font-scale));
   --about-why-exist-highlight-h     : calc(74px * var(--header-font-scale));
   --about-why-exist-highlight-pad-x : calc(16px * var(--header-font-scale));
   --about-why-heading-to-body       : calc(30px * var(--header-font-scale));
-  --about-why-body-size             : calc(22px * var(--header-font-scale));
+  --about-why-body-size             : calc(22px * var(--type-size));
   --about-why-body-max-w            : calc(697px * var(--header-font-scale));
   --about-why-body-to-tagline       : calc(48px * var(--header-font-scale));
-  --about-why-tagline-size          : calc(38px * var(--header-font-scale));
+  --about-why-tagline-size          : calc(38px * var(--type-size));
   --about-why-tagline-max-w         : calc(539px * var(--header-font-scale));
-  --about-why-illustration-w        : calc(629px * var(--header-font-scale));
-  --about-why-illustration-h        : calc(654px * var(--header-font-scale));
+  --about-why-illustration-w        : min(100%, calc(720px * var(--media-size)));
+  --about-why-illustration-h        : calc(748px * var(--media-size));
 
   /* About page — What Zene AI brings — Figma 1055:2192 / 1047:1946 */
   --about-brings-padding-top        : 80px;
   --about-brings-padding-bottom     : 80px;
-  --about-brings-heading-size       : calc(62px * var(--header-font-scale));
+  --about-brings-heading-size       : calc(62px * var(--type-size));
   --about-brings-heading-max-w      : calc(563px * var(--header-font-scale));
+  --about-brings-highlight-h          : calc(74px * var(--header-font-scale));
+  --about-brings-highlight-pad-x      : calc(16px * var(--header-font-scale));
   --about-brings-heading-to-grid    : calc(48px * var(--header-font-scale));
   --about-brings-grid-gap-x         : calc(24px * var(--header-font-scale));
   --about-brings-grid-gap-y         : calc(40px * var(--header-font-scale));
   --about-brings-stagger-offset     : calc(107px * var(--header-font-scale));
-  --about-brings-feature-img-w      : calc(323px * var(--header-font-scale));
-  --about-brings-feature-img-h      : calc(216px * var(--header-font-scale));
-  --about-brings-feature-img-to-label: calc(30px * var(--header-font-scale));
-  --about-brings-label-size         : calc(22px * var(--header-font-scale));
+  --about-brings-feature-img-w      : min(100%, calc(520px * var(--media-size)));
+  --about-brings-feature-img-h      : calc(347px * var(--media-size));
+  --about-brings-feature-img-to-label: calc(30px * var(--media-size));
+  --about-brings-label-size         : calc(22px * var(--type-size));
   --about-brings-label-max-w        : calc(376px * var(--header-font-scale));
   --about-brings-carousel-to-dots   : calc(24px * var(--header-font-scale));
-  --about-brings-dot-size           : calc(8px * var(--header-font-scale));
+  --about-brings-dot-size           : calc(8px * var(--type-size));
   --about-brings-dot-gap            : calc(8px * var(--header-font-scale));
 
   /* English AI page — Figma 1060:2193 */
@@ -515,22 +569,23 @@
   --english-ai-hero-columns-gap          : calc(40px * var(--header-font-scale));
   --english-ai-hero-row-gap              : calc(32px * var(--header-font-scale));
   --english-ai-hero-eyebrow-to-content   : calc(14px * var(--header-font-scale));
-  --english-ai-hero-title-size           : calc(82px * var(--header-font-scale));
+  --english-ai-hero-eyebrow-to-heading   : calc(20px * var(--header-font-scale));
+  --english-ai-hero-title-size           : calc(82px * var(--type-size));
   --english-ai-hero-title-max-w          : calc(972px * var(--header-font-scale));
-  --english-ai-hero-body-size            : calc(22px * var(--header-font-scale));
+  --english-ai-hero-body-size            : calc(28px * var(--type-size));
   --english-ai-hero-body-max-w           : calc(850px * var(--header-font-scale));
   --english-ai-hero-title-to-body        : calc(30px * var(--header-font-scale));
-  --english-ai-hero-illustration-w       : calc(781px * var(--header-font-scale));
-  --english-ai-hero-illustration-h       : calc(487px * var(--header-font-scale));
-  --english-ai-hero-robot-wrap-w         : calc(287px * var(--header-font-scale));
-  --english-ai-hero-robot-wrap-h         : calc(377px * var(--header-font-scale));
+  --english-ai-hero-illustration-w       : calc(781px * var(--media-size));
+  --english-ai-hero-illustration-h       : calc(487px * var(--media-size));
+  --english-ai-hero-robot-wrap-w         : calc(287px * var(--media-size));
+  --english-ai-hero-robot-wrap-h         : calc(377px * var(--media-size));
   --english-ai-hero-robot-scale-w        : 399.17%;
   --english-ai-hero-robot-scale-h        : 170.89%;
   --english-ai-hero-robot-offset-x       : -149.27%;
   --english-ai-hero-robot-offset-y       : -70.89%;
   --english-ai-hero-robot-left           : 31.6%;
   --english-ai-hero-robot-top            : 0.9%;
-  --english-ai-hero-illustration-margin-top: calc(var(--apply-btn-h) + 32px);
+  --english-ai-hero-illustration-margin-top: 0px;
 
   --english-ai-heading-max-w             : calc(1133px * var(--header-font-scale));
   --english-ai-highlight-h               : calc(74px * var(--header-font-scale));
@@ -544,7 +599,7 @@
   --english-ai-platform-row-gap          : calc(30px * var(--header-font-scale));
   --english-ai-platform-body-max-w       : calc(697px * var(--header-font-scale));
   --english-ai-platform-heading-to-body  : calc(30px * var(--header-font-scale));
-  --english-ai-platform-tagline-size     : calc(38px * var(--header-font-scale));
+  --english-ai-platform-tagline-size     : calc(38px * var(--type-size));
   --english-ai-platform-tagline-max-w    : calc(505px * var(--header-font-scale));
   --english-ai-platform-mockup-w         : calc(902px * var(--header-font-scale));
   --english-ai-platform-mockup-h         : calc(434px * var(--header-font-scale));
@@ -552,27 +607,27 @@
   --english-ai-grid-padding-top          : 80px;
   --english-ai-grid-padding-bottom       : 80px;
   --english-ai-grid-eyebrow-to-heading   : calc(14px * var(--header-font-scale));
-  --english-ai-grid-heading-to-subtitle  : calc(30px * var(--header-font-scale));
-  --english-ai-grid-subtitle-max-w       : calc(1043px * var(--header-font-scale));
-  --english-ai-grid-subtitle-to-items    : calc(30px * var(--header-font-scale));
+  --english-ai-grid-heading-to-subtitle  : calc(30px * var(--type-size));
+  --english-ai-grid-subtitle-max-w       : calc(1043px * var(--type-size));
+  --english-ai-grid-subtitle-to-items    : calc(30px * var(--type-size));
   --english-ai-grid-gap-x                : calc(24px * var(--header-font-scale));
   --english-ai-grid-gap-y                : calc(40px * var(--header-font-scale));
-  --english-ai-grid-img-w                : calc(213px * var(--header-font-scale));
-  --english-ai-grid-img-h                : calc(142px * var(--header-font-scale));
-  --english-ai-grid-img-to-title         : calc(30px * var(--header-font-scale));
+  --english-ai-grid-img-w                : calc(213px * var(--media-size));
+  --english-ai-grid-img-h                : calc(142px * var(--media-size));
+  --english-ai-grid-img-to-title         : calc(30px * var(--media-size));
   --english-ai-grid-title-to-body        : calc(14px * var(--header-font-scale));
   --english-ai-grid-copy-max-w           : calc(425px * var(--header-font-scale));
   --english-ai-grid-items-to-footer      : calc(48px * var(--header-font-scale));
   --english-ai-grid-carousel-to-dots     : calc(24px * var(--header-font-scale));
-  --english-ai-grid-dot-size             : calc(8px * var(--header-font-scale));
+  --english-ai-grid-dot-size             : calc(8px * var(--type-size));
   --english-ai-grid-dot-gap              : calc(8px * var(--header-font-scale));
 
   --english-ai-comparison-padding-top    : 80px;
   --english-ai-comparison-padding-bottom : 80px;
   --english-ai-comparison-eyebrow-to-heading: calc(14px * var(--header-font-scale));
-  --english-ai-comparison-heading-to-subtitle: calc(30px * var(--header-font-scale));
-  --english-ai-comparison-subtitle-max-w : calc(631px * var(--header-font-scale));
-  --english-ai-comparison-subtitle-to-table: calc(30px * var(--header-font-scale));
+  --english-ai-comparison-heading-to-subtitle: calc(30px * var(--type-size));
+  --english-ai-comparison-subtitle-max-w : calc(631px * var(--type-size));
+  --english-ai-comparison-subtitle-to-table: calc(30px * var(--type-size));
   --english-ai-comparison-table-min-w    : calc(680px * var(--header-font-scale));
   --english-ai-comparison-table-radius   : calc(12px * var(--header-font-scale));
   --english-ai-comparison-role-col       : calc(140px * var(--header-font-scale));
@@ -581,22 +636,22 @@
   --english-ai-comparison-cell-px        : calc(24px * var(--header-font-scale));
   --english-ai-comparison-col-gap        : calc(24px * var(--header-font-scale));
   --english-ai-comparison-mobile-card-gap: calc(16px * var(--header-font-scale));
-  --english-ai-comparison-mobile-label-size: calc(18px * var(--header-font-scale));
+  --english-ai-comparison-mobile-label-size: calc(18px * var(--type-size));
   --english-ai-comparison-mobile-label-py: calc(14px * var(--header-font-scale));
   --english-ai-comparison-mobile-body-py : calc(16px * var(--header-font-scale));
   --english-ai-comparison-mobile-block-gap: calc(16px * var(--header-font-scale));
-  --english-ai-comparison-mobile-text-gap: calc(8px * var(--header-font-scale));
+  --english-ai-comparison-mobile-text-gap: calc(8px * var(--type-size));
 
-  --english-ai-action-subtitle-max-w     : calc(875px * var(--header-font-scale));
-  --english-ai-action-heading-to-subtitle: calc(30px * var(--header-font-scale));
-  --english-ai-action-demo-h             : 522px;
+  --english-ai-action-subtitle-max-w     : calc(875px * var(--type-size));
+  --english-ai-action-heading-to-subtitle: calc(30px * var(--type-size));
+  --english-ai-action-demo-h             : calc(522px * var(--media-scale) / var(--header-font-scale));
 
   --english-ai-curriculum-padding-top    : 80px;
   --english-ai-curriculum-padding-bottom : 80px;
   --english-ai-curriculum-eyebrow-to-heading: calc(14px * var(--header-font-scale));
-  --english-ai-curriculum-heading-to-subtitle: calc(30px * var(--header-font-scale));
-  --english-ai-curriculum-subtitle-max-w : calc(688px * var(--header-font-scale));
-  --english-ai-curriculum-subtitle-to-items: calc(30px * var(--header-font-scale));
+  --english-ai-curriculum-heading-to-subtitle: calc(30px * var(--type-size));
+  --english-ai-curriculum-subtitle-max-w : calc(688px * var(--type-size));
+  --english-ai-curriculum-subtitle-to-items: calc(30px * var(--type-size));
   --english-ai-curriculum-gap-x          : calc(24px * var(--header-font-scale));
   --english-ai-curriculum-gap-y            : calc(40px * var(--header-font-scale));
   --english-ai-curriculum-copy-max-w       : calc(496px * var(--header-font-scale));
@@ -621,19 +676,20 @@
   --shadow-lg : 0 4px 24px rgba(0,0,0,0.16);
 
   /* --- Typography scale ------------------------------------ */
-  --text-xs   : 0.75rem;
-  --text-sm   : 0.875rem;
-  --text-base : 1rem;
-  --text-lg   : 1.125rem;
-  --text-xl   : 1.25rem;
-  --text-2xl  : 1.5rem;
-  --text-3xl  : 1.875rem;
-  --text-4xl  : 2.25rem;
-  --text-5xl  : 3rem;
-  --text-6xl  : 3.75rem;
+  --text-xs   : 0.6rem;
+  --text-sm   : 0.7rem;
+  --text-base : 0.8rem;
+  --text-lg   : 0.9rem;
+  --text-xl   : 1rem;
+  --text-2xl  : 1.2rem;
+  --text-3xl  : 1.5rem;
+  --text-4xl  : 1.8rem;
+  --text-5xl  : 2.4rem;
+  --text-6xl  : 3rem;
 
   /* --- Z-index --------------------------------------------- */
   --z-header  : 100;
+  --z-floating: 90;
   --z-modal   : 200;
   --z-toast   : 300;
 }
@@ -646,14 +702,14 @@
     --header-announcement-padding-y: calc(12px * var(--header-font-scale));
     --header-announcement-padding-x: 20px;
     --header-nav-h                : 76px;
-    --header-logo-w               : calc(180px * var(--header-font-scale));
-    --header-logo-h               : calc(37px * var(--header-font-scale));
+    --header-logo-w               : calc(180px * var(--media-size));
+    --header-logo-h               : calc(37px * var(--media-size));
     --header-pdf-h                : calc(52px * var(--header-font-scale));
     --header-pdf-min-w            : calc(160px * var(--header-font-scale));
-    --header-text-pdf             : calc(26px * var(--header-font-scale));
-    --header-text-menu            : calc(32px * var(--header-font-scale));
-    --header-menu-text            : calc(42px * var(--header-font-scale));
-    --header-menu-text-lh         : calc(50px * var(--header-font-scale));
+    --header-text-pdf             : calc(26px * var(--type-size));
+    --header-text-menu            : calc(32px * var(--type-size));
+    --header-menu-text            : calc(42px * var(--type-size));
+    --header-menu-text-lh         : calc(50px * var(--type-size));
 
     --section-padding-x           : 48px;
     --section-padding-top           : 56px;
@@ -670,24 +726,24 @@
     --section-tab-edge-w            : calc(300px * var(--header-font-scale));
     --section-try-btn-w             : min(100%, calc(400px * var(--header-font-scale)));
     --section-dashboard-w           : 100%;
-    --section-dashboard-h           : 280px;
+    --section-dashboard-h           : calc(280px * var(--media-scale) / var(--header-font-scale));
 
     --action-columns-gap            : 48px;
-    --action-demo-h                 : 380px;
+    --action-demo-h                 : calc(380px * var(--media-scale) / var(--header-font-scale));
     --how-columns-gap               : 48px;
     --track-columns-gap             : 40px;
-    --track-img-padding-x           : calc(24px * var(--header-font-scale));
+    --track-img-padding-x           : calc(24px * var(--media-size));
     --track-img-offset              : 0px;
     --track-padding-bottom          : calc(120px * var(--header-font-scale));
     --onboard-columns-gap           : 48px;
     --why-marquee-bottom            : calc(32px * var(--header-font-scale));
     --why-marquee-offset-top        : 15px;
 
-    --ai-ready-diagram-h            : calc(620px * var(--header-font-scale));
+    --ai-ready-diagram-h            : calc(620px * var(--media-size));
 
     --testimonial-track-width       : 100%;
-    --testimonial-card-w            : calc(340px * var(--header-font-scale));
-    --testimonial-card-h            : calc(420px * var(--header-font-scale));
+    --testimonial-card-w            : calc(340px * var(--media-size));
+    --testimonial-card-h            : calc(420px * var(--media-size));
     --testimonial-fade-w            : calc(80px * var(--header-font-scale));
     --testimonial-name-top          : calc(150px * var(--header-font-scale));
     --testimonial-body-top          : calc(240px * var(--header-font-scale));
@@ -696,120 +752,139 @@
     --faq-item-padding-x            : calc(32px * var(--header-font-scale));
     --faq-item-radius               : calc(48px * var(--header-font-scale));
     --faq-item-collapsed-h          : auto;
-    --faq-icon-w                    : calc(56px * var(--header-font-scale));
-    --faq-icon-h                    : calc(58px * var(--header-font-scale));
-    --faq-question-size             : calc(24px * var(--header-font-scale));
+    --faq-icon-w                    : calc(56px * var(--media-size));
+    --faq-icon-h                    : calc(58px * var(--media-size));
+    --faq-question-size             : calc(24px * var(--type-size));
 
     --apply-cta-yellow-size         : min(calc(100vw - 96px), calc(620px * var(--header-font-scale)));
-    --apply-cta-student-circle-size : calc(260px * var(--header-font-scale));
-    --apply-cta-student-face-size   : calc(128px * var(--header-font-scale));
-    --apply-cta-student-overlap     : calc(64px * var(--header-font-scale));
+    --apply-cta-student-circle-size : calc(260px * var(--media-size));
+    --apply-cta-student-face-size   : calc(128px * var(--media-size));
+    --apply-cta-student-overlap     : 0px;
     --apply-cta-content-padding-x   : calc(40px * var(--header-font-scale));
-    --apply-cta-heading-size        : calc(44px * var(--header-font-scale));
-    --apply-cta-body-size           : calc(20px * var(--header-font-scale));
+    --apply-cta-heading-size        : calc(44px * var(--type-size));
+    --apply-cta-body-size           : calc(20px * var(--type-size));
     --apply-cta-yellow-py           : calc(44px * var(--header-font-scale));
-    --apply-cta-heading-max-w       : min(100%, calc(380px * var(--header-font-scale)));
-    --apply-cta-body-max-w          : min(100%, calc(420px * var(--header-font-scale)));
-    --apply-cta-heading-to-body     : calc(20px * var(--header-font-scale));
-    --apply-cta-body-to-btn         : calc(28px * var(--header-font-scale));
+    --apply-cta-heading-max-w       : min(100%, calc(380px * var(--type-size)));
+    --apply-cta-body-max-w          : min(100%, calc(420px * var(--type-size)));
+    --apply-cta-heading-to-body     : calc(20px * var(--type-size));
+    --apply-cta-body-to-btn         : calc(28px * var(--type-size));
     --apply-cta-btn-w               : min(100%, calc(360px * var(--header-font-scale)));
-    --apply-cta-btn-text-size       : calc(28px * var(--header-font-scale));
+    --apply-cta-btn-text-size       : calc(28px * var(--type-size));
     --apply-cta-btn-padding-x       : calc(28px * var(--header-font-scale));
-    --apply-cta-btn-arrow-size      : calc(28px * var(--header-font-scale));
+    --apply-cta-btn-arrow-size      : calc(28px * var(--type-size));
 
-    --apply-btn-w                   : calc(280px * var(--header-font-scale));
-    --apply-btn-h                   : calc(104px * var(--header-font-scale));
+    --apply-btn-w                   : min(100%, calc(260px * var(--header-font-scale)));
+    --apply-btn-h                   : calc(96px * var(--header-font-scale));
     --apply-btn-pill-w              : calc(246px * var(--header-font-scale));
-    --apply-btn-pill-h              : calc(62px * var(--header-font-scale));
-    --apply-btn-circle-size         : calc(104px * var(--header-font-scale));
-    --apply-btn-circle-left         : calc(176px * var(--header-font-scale));
-    --apply-btn-student-size        : calc(58px * var(--header-font-scale));
-    --apply-btn-student-left        : calc(199px * var(--header-font-scale));
-    --apply-btn-text                : calc(32px * var(--header-font-scale));
+    --apply-btn-pill-h              : calc(58px * var(--header-font-scale));
+    --apply-btn-circle-size         : calc(96px * var(--header-font-scale));
+    --apply-btn-circle-left         : calc(var(--apply-btn-w) - var(--apply-btn-circle-size));
+    --hero-decorative-w             : min(calc(320px * var(--media-size)), 40vw);
+    --hero-content-to-badges      : 12px;
+    --apply-btn-student-size        : calc(58px * var(--media-size));
+    --apply-btn-student-left        : calc(199px * var(--media-size));
+    --apply-btn-text                : calc(32px * var(--type-size));
 
-    --not-found-title-size          : calc(56px * var(--header-font-scale));
-    --not-found-subtitle-size       : calc(28px * var(--header-font-scale));
-    --not-found-body-size           : calc(22px * var(--header-font-scale));
-    --not-found-img-wrap-w          : min(100%, calc(380px * var(--header-font-scale)));
-    --not-found-img-wrap-h          : calc(466px * var(--header-font-scale));
-    --not-found-title-to-subtitle   : calc(28px * var(--header-font-scale));
-    --not-found-subtitle-to-body    : calc(36px * var(--header-font-scale));
+    --not-found-title-size          : calc(56px * var(--type-size));
+    --not-found-subtitle-size       : calc(28px * var(--type-size));
+    --not-found-body-size           : calc(22px * var(--type-size));
+    --not-found-img-wrap-w          : min(100%, calc(380px * var(--media-size)));
+    --not-found-img-wrap-h          : calc(466px * var(--media-size));
+    --not-found-title-to-subtitle   : calc(28px * var(--type-size));
+    --not-found-subtitle-to-body    : calc(36px * var(--type-size));
+    --not-found-card-min-h          : calc(720px * var(--media-size));
 
-    --thank-you-padding-top         : calc(56px * var(--header-font-scale));
+    --thank-you-padding-top         : calc(var(--header-nav-h) + var(--hero-gap));
     --thank-you-padding-bottom      : calc(56px * var(--header-font-scale));
     --thank-you-columns-gap         : calc(24px * var(--header-font-scale));
-    --thank-you-title-size          : calc(56px * var(--header-font-scale));
-    --thank-you-subtitle-size       : calc(28px * var(--header-font-scale));
-    --thank-you-body-size           : calc(22px * var(--header-font-scale));
+    --thank-you-title-size          : calc(56px * var(--type-size));
+    --thank-you-subtitle-size       : calc(28px * var(--type-size));
+    --thank-you-body-size           : calc(22px * var(--type-size));
     --thank-you-title-max-w         : 100%;
     --thank-you-subtitle-max-w      : 100%;
     --thank-you-body-max-w          : 100%;
-    --thank-you-img-wrap-w          : min(100%, calc(340px * var(--header-font-scale)));
-    --thank-you-img-wrap-h          : calc(368px * var(--header-font-scale));
-    --thank-you-title-to-subtitle   : calc(28px * var(--header-font-scale));
-    --thank-you-subtitle-to-body    : calc(36px * var(--header-font-scale));
+    --thank-you-img-wrap-w          : min(100%, calc(340px * var(--media-size)));
+    --thank-you-img-wrap-h          : calc(368px * var(--media-size));
+    --thank-you-title-to-subtitle   : calc(28px * var(--type-size));
+    --thank-you-subtitle-to-body    : calc(36px * var(--type-size));
+    --thank-you-card-min-h          : calc(720px * var(--media-size));
+
+    --blog-padding-top              : 8px;
+    --blog-padding-bottom           : calc(56px * var(--header-font-scale));
+    --blog-eyebrow-to-heading       : calc(28px * var(--type-size));
+    --blog-heading-to-body          : calc(24px * var(--type-size));
+    --blog-body-to-cards            : calc(40px * var(--type-size));
+    --blog-card-image-w             : min(100%, calc(340px * var(--media-size)));
+    --blog-card-image-h             : calc(226px * var(--media-size));
+    --blog-avatar-size              : calc(120px * var(--media-size));
+    --blog-avatar-student-size      : calc(68px * var(--media-size));
+    --blog-avatar-student-left      : calc(26px * var(--media-size));
+    --blog-avatar-student-top       : calc(26px * var(--media-size));
 
     --about-hero-padding-top        : calc(48px * var(--header-font-scale));
     --about-hero-padding-bottom     : calc(48px * var(--header-font-scale));
     --about-hero-columns-gap        : calc(24px * var(--header-font-scale));
     --about-hero-row-gap            : calc(24px * var(--header-font-scale));
-    --about-hero-text-offset-top    : calc(var(--apply-btn-h) + 16px);
+    --about-hero-text-offset-top    : 0px;
     --about-hero-text-max-w         : 100%;
-    --about-hero-title-size         : calc(56px * var(--header-font-scale));
-    --about-hero-subtitle-size      : calc(28px * var(--header-font-scale));
+    --about-hero-title-size         : calc(56px * var(--type-size));
+    --about-hero-subtitle-size      : calc(28px * var(--type-size));
     --about-hero-title-max-w        : 100%;
     --about-hero-subtitle-max-w     : 100%;
-    --about-hero-title-to-subtitle  : calc(28px * var(--header-font-scale));
+    --about-hero-title-to-subtitle  : calc(28px * var(--type-size));
     --about-hero-subtitle-indent    : 16.67%;
     --about-hero-robot-margin-top   : 0px;
-    --about-hero-robot-wrap-w       : calc(200px * var(--header-font-scale));
-    --about-hero-robot-wrap-h       : calc(260px * var(--header-font-scale));
+    --about-hero-robot-wrap-w       : calc(200px * var(--media-size));
+    --about-hero-robot-wrap-h       : calc(260px * var(--media-size));
 
     --about-why-padding-top         : calc(48px * var(--header-font-scale));
     --about-why-padding-bottom      : calc(48px * var(--header-font-scale));
-    --about-why-columns-gap         : calc(24px * var(--header-font-scale));
+    --about-why-columns-gap         : calc(32px * var(--header-font-scale));
     --about-why-row-gap             : calc(28px * var(--header-font-scale));
-    --about-why-heading-size        : calc(48px * var(--header-font-scale));
+    --about-why-heading-size        : calc(48px * var(--type-size));
     --about-why-exist-highlight-h   : calc(58px * var(--header-font-scale));
     --about-why-exist-highlight-pad-x: calc(12px * var(--header-font-scale));
     --about-why-heading-to-body     : calc(24px * var(--header-font-scale));
-    --about-why-body-size           : calc(20px * var(--header-font-scale));
+    --about-why-body-size           : calc(20px * var(--type-size));
     --about-why-body-max-w          : 100%;
     --about-why-body-to-tagline     : calc(28px * var(--header-font-scale));
-    --about-why-tagline-size        : calc(28px * var(--header-font-scale));
+    --about-why-tagline-size        : calc(28px * var(--type-size));
     --about-why-tagline-max-w       : 100%;
-    --about-why-illustration-w      : min(100%, calc(360px * var(--header-font-scale)));
-    --about-why-illustration-h      : calc(374px * var(--header-font-scale));
+    --about-why-illustration-w      : min(100%, calc(480px * var(--media-size)));
+    --about-why-illustration-h      : calc(500px * var(--media-size));
 
     --about-brings-padding-top      : calc(48px * var(--header-font-scale));
     --about-brings-padding-bottom   : calc(48px * var(--header-font-scale));
-    --about-brings-heading-size     : calc(48px * var(--header-font-scale));
+    --about-brings-heading-size     : calc(48px * var(--type-size));
     --about-brings-heading-max-w    : 100%;
+    --about-brings-highlight-h      : calc(58px * var(--header-font-scale));
+    --about-brings-highlight-pad-x  : calc(12px * var(--header-font-scale));
     --about-brings-heading-to-grid  : calc(32px * var(--header-font-scale));
     --about-brings-grid-gap-x       : calc(20px * var(--header-font-scale));
     --about-brings-grid-gap-y       : calc(32px * var(--header-font-scale));
     --about-brings-stagger-offset   : 0px;
-    --about-brings-feature-img-w    : min(100%, calc(280px * var(--header-font-scale)));
-    --about-brings-feature-img-h    : calc(187px * var(--header-font-scale));
-    --about-brings-feature-img-to-label: calc(24px * var(--header-font-scale));
-    --about-brings-label-size       : calc(20px * var(--header-font-scale));
+    --about-brings-feature-img-w    : min(100%, calc(400px * var(--media-size)));
+    --about-brings-feature-img-h    : calc(267px * var(--media-size));
+    --about-brings-feature-img-to-label: calc(24px * var(--media-size));
+    --about-brings-label-size       : calc(20px * var(--type-size));
     --about-brings-label-max-w      : 100%;
 
     --english-ai-hero-padding-top        : calc(48px * var(--header-font-scale));
     --english-ai-hero-padding-bottom     : calc(48px * var(--header-font-scale));
     --english-ai-hero-columns-gap        : calc(24px * var(--header-font-scale));
     --english-ai-hero-row-gap              : calc(24px * var(--header-font-scale));
-    --english-ai-hero-title-size           : calc(56px * var(--header-font-scale));
+    --english-ai-hero-title-size           : calc(56px * var(--type-size));
     --english-ai-hero-title-max-w          : 100%;
     --english-ai-hero-body-max-w           : 100%;
-    --english-ai-hero-illustration-w       : min(100%, calc(520px * var(--header-font-scale)));
-    --english-ai-hero-illustration-h       : calc(324px * var(--header-font-scale));
-    --english-ai-hero-robot-wrap-w         : calc(200px * var(--header-font-scale));
-    --english-ai-hero-robot-wrap-h         : calc(260px * var(--header-font-scale));
-    --english-ai-hero-illustration-margin-top: calc(var(--apply-btn-h) + 16px);
+    --english-ai-hero-illustration-w       : min(100%, calc(520px * var(--media-size)));
+    --english-ai-hero-illustration-h       : calc(324px * var(--media-size));
+    --english-ai-hero-robot-wrap-w         : calc(200px * var(--media-size));
+    --english-ai-hero-robot-wrap-h         : calc(260px * var(--media-size));
+    --english-ai-hero-illustration-margin-top: 0px;
+    --english-ai-hero-eyebrow-to-heading: calc(16px * var(--header-font-scale));
     --english-ai-hero-eyebrow-to-apply        : calc(12px * var(--header-font-scale));
     --english-ai-hero-title-to-body           : calc(20px * var(--header-font-scale));
-    --english-ai-hero-body-size               : calc(20px * var(--header-font-scale));
+    --english-ai-hero-body-size               : calc(24px * var(--type-size));
     --english-ai-heading-max-w                : 100%;
     --english-ai-highlight-h                    : calc(58px * var(--header-font-scale));
     --english-ai-highlight-pad-x                : calc(12px * var(--header-font-scale));
@@ -818,7 +893,7 @@
     --english-ai-platform-padding-bottom   : calc(48px * var(--header-font-scale));
     --english-ai-platform-mockup-w         : 100%;
     --english-ai-platform-mockup-h         : calc(320px * var(--header-font-scale));
-    --english-ai-platform-tagline-size     : calc(28px * var(--header-font-scale));
+    --english-ai-platform-tagline-size     : calc(28px * var(--type-size));
     --english-ai-platform-tagline-max-w    : 100%;
 
     --english-ai-grid-padding-top          : calc(48px * var(--header-font-scale));
@@ -826,8 +901,8 @@
     --english-ai-grid-subtitle-max-w       : 100%;
     --english-ai-grid-copy-max-w           : 100%;
     --english-ai-grid-gap-y                : calc(32px * var(--header-font-scale));
-    --english-ai-grid-img-w                : min(100%, calc(213px * var(--header-font-scale)));
-    --english-ai-grid-img-h                : calc(142px * var(--header-font-scale));
+    --english-ai-grid-img-w                : min(100%, calc(213px * var(--media-size)));
+    --english-ai-grid-img-h                : calc(142px * var(--media-size));
     --english-ai-grid-carousel-to-dots     : calc(20px * var(--header-font-scale));
 
     --english-ai-comparison-padding-top    : calc(48px * var(--header-font-scale));
@@ -840,7 +915,7 @@
     --english-ai-comparison-row-py         : calc(20px * var(--header-font-scale));
 
     --english-ai-action-subtitle-max-w     : 100%;
-    --english-ai-action-demo-h             : 380px;
+    --english-ai-action-demo-h             : calc(380px * var(--media-scale) / var(--header-font-scale));
 
     --english-ai-curriculum-padding-top    : calc(48px * var(--header-font-scale));
     --english-ai-curriculum-padding-bottom : calc(48px * var(--header-font-scale));
@@ -861,12 +936,12 @@
     --cohort-padding-bottom           : calc(80px * var(--header-font-scale));
 
     --contact-hero-min-h            : auto;
-    --contact-hero-padding-top      : 56px;
+    --contact-hero-padding-top      : calc(var(--header-nav-h) + var(--hero-gap));
     --contact-hero-padding-bottom   : 56px;
     --contact-hero-apply-to-image-gap: 80px;
-    --contact-hero-title-to-subtitle: calc(32px * var(--header-font-scale));
-    --contact-hero-illustration-w   : min(100%, calc(460px * var(--header-font-scale)));
-    --contact-hero-illustration-h   : calc(326px * var(--header-font-scale));
+    --contact-hero-title-to-subtitle: calc(32px * var(--type-size));
+    --contact-hero-illustration-w   : min(100%, calc(460px * var(--media-size)));
+    --contact-hero-illustration-h   : calc(326px * var(--media-size));
 
     --contact-form-padding-top      : 56px;
     --contact-form-padding-bottom   : 56px;
@@ -874,20 +949,20 @@
     --contact-form-field-h          : 52px;
     --contact-form-field-padding-y  : 0px;
     --contact-form-field-line-height: 52px;
-    --contact-form-field-text       : calc(22px * var(--header-font-scale));
+    --contact-form-field-text       : calc(22px * var(--type-size));
     --contact-form-button-gap       : calc(48px * var(--header-font-scale));
     --contact-form-button-w         : min(100%, calc(340px * var(--header-font-scale)));
     --contact-form-button-h         : calc(72px * var(--header-font-scale));
-    --contact-form-button-text      : calc(32px * var(--header-font-scale));
+    --contact-form-button-text      : calc(32px * var(--type-size));
     --contact-form-info-gap         : calc(80px * var(--header-font-scale));
-    --contact-info-text-size        : calc(22px * var(--header-font-scale));
-    --contact-info-text-offset-y    : calc(16px * var(--header-font-scale));
-    --contact-info-phone-icon-w     : calc(110px * var(--header-font-scale));
-    --contact-info-phone-icon-h     : calc(114px * var(--header-font-scale));
-    --contact-info-email-icon-w     : calc(122px * var(--header-font-scale));
-    --contact-info-email-icon-h     : calc(106px * var(--header-font-scale));
-    --contact-info-address-icon-w   : calc(103px * var(--header-font-scale));
-    --contact-info-address-icon-h   : calc(128px * var(--header-font-scale));
+    --contact-info-text-size        : calc(22px * var(--type-size));
+    --contact-info-text-offset-y    : calc(16px * var(--type-size));
+    --contact-info-phone-icon-w     : calc(110px * var(--media-size));
+    --contact-info-phone-icon-h     : calc(114px * var(--media-size));
+    --contact-info-email-icon-w     : calc(122px * var(--media-size));
+    --contact-info-email-icon-h     : calc(106px * var(--media-size));
+    --contact-info-address-icon-w   : calc(103px * var(--media-size));
+    --contact-info-address-icon-h   : calc(128px * var(--media-size));
   }
 }
 
@@ -900,16 +975,16 @@
     --header-announcement-padding-x: 16px;
     --header-announcement-line-height: 1.4;
     --header-nav-h                : 64px;
-    --header-logo-w               : calc(140px * var(--header-font-scale));
-    --header-logo-h               : calc(29px * var(--header-font-scale));
+    --header-logo-w               : calc(140px * var(--media-size));
+    --header-logo-h               : calc(29px * var(--media-size));
     --header-pdf-h                : calc(44px * var(--header-font-scale));
     --header-pdf-min-w            : calc(120px * var(--header-font-scale));
-    --header-text-announcement    : calc(14px * var(--header-font-scale));
-    --header-text-pdf             : calc(20px * var(--header-font-scale));
-    --header-text-menu            : calc(24px * var(--header-font-scale));
-    --header-menu-text            : calc(32px * var(--header-font-scale));
-    --header-menu-text-lh         : calc(40px * var(--header-font-scale));
-    --header-menu-icon-w          : calc(48px * var(--header-font-scale));
+    --header-text-announcement    : calc(14px * var(--type-size));
+    --header-text-pdf             : calc(20px * var(--type-size));
+    --header-text-menu            : calc(24px * var(--type-size));
+    --header-menu-text            : calc(32px * var(--type-size));
+    --header-menu-text-lh         : calc(40px * var(--type-size));
+    --header-menu-icon-w          : calc(48px * var(--media-size));
     --header-menu-padding-x       : calc(32px * var(--header-font-scale));
     --header-menu-padding-y       : calc(40px * var(--header-font-scale));
     --header-menu-item-gap        : calc(20px * var(--header-font-scale));
@@ -922,19 +997,25 @@
     --hero-padding-x                : 20px;
     --footer-padding-x              : 20px;
     --cohort-logo-padding-x         : 12px;
-    --cohort-logo-row-gap             : calc(40px * var(--header-font-scale));
+    --cohort-logo-row-gap             : calc(40px * var(--media-size));
     --cohort-grid-col-gap             : calc(16px * var(--header-font-scale));
     --cohort-carousel-to-dots         : calc(20px * var(--header-font-scale));
 
-    --hero-text-headline          : calc(42px * var(--header-font-scale));
-    --hero-text-body              : calc(20px * var(--header-font-scale));
-    --hero-robo-viewport-w        : calc(160px * var(--header-font-scale));
-    --hero-decorative-h           : calc(130px * var(--header-font-scale));
-    --hero-body-pb                : 24px;
+    --hero-text-headline          : calc(42px * var(--type-size));
+    --hero-text-body              : calc(20px * var(--type-size));
+    --hero-robo-viewport-w        : calc(220px * var(--media-size));
+    --hero-decorative-w           : min(var(--hero-robo-viewport-w), 54vw);
+    --hero-decorative-h           : max(var(--apply-btn-h), calc(160px * var(--media-size)));
+    --hero-body-pb                : 0px;
+    --hero-content-to-badges      : 8px;
+    --hero-gap                    : 12px;
+    --hero-top-row-offset-top     : clamp(36px, 7vw, 56px);
+    --hero-robot-offset-top       : clamp(16px, 3vw, 24px);
+    --hero-apply-offset-top       : clamp(44px, 9vw, 68px);
 
-    --section-text-heading        : calc(36px * var(--header-font-scale));
-    --section-text-title          : calc(28px * var(--header-font-scale));
-    --section-text-tab            : calc(22px * var(--header-font-scale));
+    --section-text-heading        : calc(36px * var(--type-size));
+    --section-text-title          : calc(28px * var(--type-size));
+    --section-text-tab            : calc(22px * var(--type-size));
     --section-tab-h                 : calc(64px * var(--header-font-scale));
     --section-tab-english-w         : 100%;
     --section-tab-code-w            : 100%;
@@ -942,42 +1023,42 @@
     --section-tab-gap               : 12px;
     --section-try-btn-w             : 100%;
     --section-try-btn-h             : calc(64px * var(--header-font-scale));
-    --section-dashboard-h           : 220px;
+    --section-dashboard-h           : calc(220px * var(--media-scale) / var(--header-font-scale));
 
     --action-padding-top            : 40px;
     --action-padding-bottom         : 48px;
     --action-columns-gap            : 32px;
-    --action-demo-h                 : 260px;
-    --action-feature-img-w          : 120px;
-    --action-feature-img-h          : 80px;
+    --action-demo-h                 : calc(260px * var(--media-scale) / var(--header-font-scale));
+    --action-feature-img-w          : calc(120px * var(--media-scale) / var(--header-font-scale));
+    --action-feature-img-h          : calc(80px * var(--media-scale) / var(--header-font-scale));
 
-    --why-marquee-text              : calc(36px * var(--header-font-scale));
+    --why-marquee-text              : calc(36px * var(--type-size));
     --why-marquee-bottom            : calc(24px * var(--header-font-scale));
     --why-marquee-offset-top        : 0px;
-    --why-students-w                : min(100%, calc(640px * var(--header-font-scale)));
+    --why-students-w                : min(100%, calc(640px * var(--media-size)));
     --why-gif-offset-left           : 0px;
 
-    --how-dashboard-video-h         : 240px;
-    --how-lesson-img-h              : 100px;
-    --track-img-w                   : 240px;
-    --track-img-h                   : 160px;
+    --how-dashboard-video-h         : calc(240px * var(--media-scale) / var(--header-font-scale));
+    --how-lesson-img-h              : calc(100px * var(--media-scale) / var(--header-font-scale));
+    --track-img-w                   : calc(240px * var(--media-scale) / var(--header-font-scale));
+    --track-img-h                   : calc(160px * var(--media-scale) / var(--header-font-scale));
     --track-padding-top             : 48px;
     --track-padding-bottom          : calc(80px * var(--header-font-scale));
 
-    --ai-ready-diagram-h            : calc(480px * var(--header-font-scale));
+    --ai-ready-diagram-h            : calc(480px * var(--media-size));
     --ai-ready-padding-bottom       : 48px;
 
     --onboard-padding-bottom        : 64px;
     --onboard-image-w               : 100%;
     --onboard-image-h               : auto;
 
-    --testimonial-card-w            : calc(280px * var(--header-font-scale));
-    --testimonial-card-h            : calc(360px * var(--header-font-scale));
+    --testimonial-card-w            : calc(280px * var(--media-size));
+    --testimonial-card-h            : calc(360px * var(--media-size));
     --testimonial-padding-x         : calc(24px * var(--header-font-scale));
     --testimonial-name-top          : calc(120px * var(--header-font-scale));
     --testimonial-body-top          : calc(200px * var(--header-font-scale));
     --testimonial-body-w            : calc(230px * var(--header-font-scale));
-    --testimonial-arrow-size        : calc(36px * var(--header-font-scale));
+    --testimonial-arrow-size        : calc(36px * var(--type-size));
     --testimonial-fade-w            : calc(48px * var(--header-font-scale));
 
     --faq-padding-top               : 48px;
@@ -985,18 +1066,18 @@
     --faq-item-padding-x            : calc(20px * var(--header-font-scale));
     --faq-item-padding-y            : calc(20px * var(--header-font-scale));
     --faq-item-radius               : calc(24px * var(--header-font-scale));
-    --faq-icon-w                    : calc(44px * var(--header-font-scale));
-    --faq-icon-h                    : calc(46px * var(--header-font-scale));
-    --faq-icon-gap                  : calc(16px * var(--header-font-scale));
-    --faq-question-size             : calc(18px * var(--header-font-scale));
-    --faq-answer-size               : calc(16px * var(--header-font-scale));
+    --faq-icon-w                    : calc(44px * var(--media-size));
+    --faq-icon-h                    : calc(46px * var(--media-size));
+    --faq-icon-gap                  : calc(16px * var(--media-size));
+    --faq-question-size             : calc(18px * var(--type-size));
+    --faq-answer-size               : calc(16px * var(--type-size));
 
     --apply-cta-padding-top         : calc(40px * var(--header-font-scale));
     --apply-cta-padding-bottom      : calc(56px * var(--header-font-scale));
     --apply-cta-yellow-size         : min(calc(100vw - 40px), 420px);
-    --apply-cta-student-circle-size : calc(200px * var(--header-font-scale));
-    --apply-cta-student-face-size   : calc(96px * var(--header-font-scale));
-    --apply-cta-student-overlap     : calc(48px * var(--header-font-scale));
+    --apply-cta-student-circle-size : calc(200px * var(--media-size));
+    --apply-cta-student-face-size   : calc(96px * var(--media-size));
+    --apply-cta-student-overlap     : 0px;
     --apply-cta-content-padding-x   : calc(28px * var(--header-font-scale));
     --apply-cta-heading-size        : 24px;
     --apply-cta-body-size           : 16px;
@@ -1011,107 +1092,129 @@
     --apply-cta-btn-padding-x       : 20px;
     --apply-cta-btn-arrow-size      : 22px;
 
-    --apply-btn-w                   : min(100%, calc(240px * var(--header-font-scale)));
-    --apply-btn-h                   : calc(88px * var(--header-font-scale));
-    --apply-btn-pill-w              : calc(210px * var(--header-font-scale));
-    --apply-btn-pill-h              : calc(52px * var(--header-font-scale));
-    --apply-btn-pill-top            : calc(18px * var(--header-font-scale));
-    --apply-btn-circle-size         : calc(88px * var(--header-font-scale));
-    --apply-btn-circle-left         : calc(152px * var(--header-font-scale));
-    --apply-btn-student-size        : calc(48px * var(--header-font-scale));
-    --apply-btn-student-left        : calc(172px * var(--header-font-scale));
-    --apply-btn-student-top         : calc(20px * var(--header-font-scale));
-    --apply-btn-text                : calc(24px * var(--header-font-scale));
-    --apply-btn-text-left           : calc(24px * var(--header-font-scale));
+    --apply-btn-w                   : min(100%, calc(200px * var(--header-font-scale)));
+    --apply-btn-h                   : calc(72px * var(--header-font-scale));
+    --apply-btn-pill-w              : min(calc(172px * var(--header-font-scale)), calc(var(--apply-btn-w) - var(--apply-btn-circle-size) * 0.15));
+    --apply-btn-pill-h              : calc(44px * var(--header-font-scale));
+    --apply-btn-pill-top            : calc(14px * var(--header-font-scale));
+    --apply-btn-circle-size         : calc(72px * var(--header-font-scale));
+    --apply-btn-circle-left         : calc(var(--apply-btn-w) - var(--apply-btn-circle-size));
+    --apply-btn-student-size        : calc(48px * var(--media-size));
+    --apply-btn-student-left        : calc(172px * var(--media-size));
+    --apply-btn-student-top         : calc(20px * var(--media-size));
+    --apply-btn-text                : calc(24px * var(--type-size));
+    --apply-btn-text-left           : calc(24px * var(--type-size));
+    --hero-top-row-offset-top       : clamp(40px, 8vw, 60px);
+    --hero-robot-offset-top         : clamp(20px, 4vw, 28px);
+    --hero-apply-offset-top         : clamp(52px, 11vw, 76px);
 
-    --not-found-padding-top         : calc(40px * var(--header-font-scale));
+    --not-found-padding-top         : calc(var(--header-nav-h) + var(--hero-gap));
     --not-found-padding-bottom      : calc(48px * var(--header-font-scale));
     --not-found-columns-gap         : calc(24px * var(--header-font-scale));
-    --not-found-title-size          : calc(36px * var(--header-font-scale));
-    --not-found-subtitle-size       : calc(22px * var(--header-font-scale));
-    --not-found-body-size           : calc(18px * var(--header-font-scale));
-    --not-found-img-wrap-w          : min(100%, calc(280px * var(--header-font-scale)));
-    --not-found-img-wrap-h          : calc(340px * var(--header-font-scale));
-    --not-found-title-to-subtitle   : calc(20px * var(--header-font-scale));
-    --not-found-subtitle-to-body    : calc(24px * var(--header-font-scale));
+    --not-found-title-size          : calc(36px * var(--type-size));
+    --not-found-subtitle-size       : calc(22px * var(--type-size));
+    --not-found-body-size           : calc(18px * var(--type-size));
+    --not-found-img-wrap-w          : min(100%, calc(280px * var(--media-size)));
+    --not-found-img-wrap-h          : calc(340px * var(--media-size));
+    --not-found-title-to-subtitle   : calc(20px * var(--type-size));
+    --not-found-subtitle-to-body    : calc(24px * var(--type-size));
     --not-found-body-paragraph-gap  : calc(16px * var(--header-font-scale));
+    --not-found-card-min-h          : auto;
 
-    --thank-you-padding-top         : calc(40px * var(--header-font-scale));
+    --thank-you-padding-top         : calc(var(--header-nav-h) + var(--hero-gap));
     --thank-you-padding-bottom      : calc(48px * var(--header-font-scale));
     --thank-you-columns-gap         : calc(24px * var(--header-font-scale));
-    --thank-you-title-size          : calc(36px * var(--header-font-scale));
-    --thank-you-subtitle-size       : calc(22px * var(--header-font-scale));
-    --thank-you-body-size           : calc(18px * var(--header-font-scale));
+    --thank-you-title-size          : calc(36px * var(--type-size));
+    --thank-you-subtitle-size       : calc(22px * var(--type-size));
+    --thank-you-body-size           : calc(18px * var(--type-size));
     --thank-you-title-max-w         : 100%;
     --thank-you-subtitle-max-w      : 100%;
     --thank-you-body-max-w          : 100%;
     --thank-you-img-wrap-w          : 100%;
     --thank-you-img-wrap-h          : 380px;
-    --thank-you-title-to-subtitle   : calc(20px * var(--header-font-scale));
-    --thank-you-subtitle-to-body    : calc(24px * var(--header-font-scale));
+    --thank-you-title-to-subtitle   : calc(20px * var(--type-size));
+    --thank-you-subtitle-to-body    : calc(24px * var(--type-size));
     --thank-you-body-paragraph-gap  : calc(16px * var(--header-font-scale));
+    --thank-you-card-min-h          : auto;
+
+    --blog-padding-top              : 8px;
+    --blog-padding-bottom           : calc(48px * var(--header-font-scale));
+    --blog-eyebrow-to-heading       : calc(20px * var(--type-size));
+    --blog-heading-to-body          : calc(16px * var(--type-size));
+    --blog-body-to-cards            : calc(32px * var(--type-size));
+    --blog-card-image-w             : 100%;
+    --blog-card-image-h             : calc(200px * var(--media-size));
+    --blog-card-title-size          : calc(18px * var(--type-size));
+    --blog-card-body-size           : calc(18px * var(--type-size));
+    --blog-card-cta-size            : calc(18px * var(--type-size));
+    --blog-avatar-size              : calc(100px * var(--media-size));
+    --blog-avatar-student-size      : calc(56px * var(--media-size));
+    --blog-avatar-student-left      : calc(22px * var(--media-size));
+    --blog-avatar-student-top       : calc(22px * var(--media-size));
 
     --about-hero-padding-top        : calc(32px * var(--header-font-scale));
     --about-hero-padding-bottom     : calc(40px * var(--header-font-scale));
     --about-hero-columns-gap        : calc(16px * var(--header-font-scale));
     --about-hero-row-gap            : calc(20px * var(--header-font-scale));
-    --about-hero-text-offset-top    : calc(var(--apply-btn-h) + 12px);
+    --about-hero-text-offset-top    : 0px;
     --about-hero-text-max-w         : 100%;
-    --about-hero-title-size         : calc(36px * var(--header-font-scale));
-    --about-hero-subtitle-size      : calc(20px * var(--header-font-scale));
+    --about-hero-title-size         : calc(36px * var(--type-size));
+    --about-hero-subtitle-size      : calc(20px * var(--type-size));
     --about-hero-title-max-w        : 100%;
     --about-hero-subtitle-max-w     : 100%;
-    --about-hero-title-to-subtitle  : calc(16px * var(--header-font-scale));
+    --about-hero-title-to-subtitle  : calc(16px * var(--type-size));
     --about-hero-subtitle-indent    : 0%;
-    --about-hero-robot-margin-top   : calc(8px * var(--header-font-scale));
-    --about-hero-robot-wrap-w       : calc(140px * var(--header-font-scale));
-    --about-hero-robot-wrap-h       : calc(184px * var(--header-font-scale));
+    --about-hero-robot-margin-top   : calc(8px * var(--media-size));
+    --about-hero-robot-wrap-w       : calc(140px * var(--media-size));
+    --about-hero-robot-wrap-h       : calc(184px * var(--media-size));
 
     --about-why-padding-top         : calc(32px * var(--header-font-scale));
     --about-why-padding-bottom      : calc(40px * var(--header-font-scale));
-    --about-why-columns-gap         : calc(16px * var(--header-font-scale));
+    --about-why-columns-gap         : calc(24px * var(--header-font-scale));
     --about-why-row-gap             : calc(24px * var(--header-font-scale));
-    --about-why-heading-size        : calc(36px * var(--header-font-scale));
+    --about-why-heading-size        : calc(36px * var(--type-size));
     --about-why-exist-highlight-h   : calc(44px * var(--header-font-scale));
     --about-why-exist-highlight-pad-x: calc(10px * var(--header-font-scale));
     --about-why-heading-to-body     : calc(16px * var(--header-font-scale));
-    --about-why-body-size           : calc(16px * var(--header-font-scale));
+    --about-why-body-size           : calc(16px * var(--type-size));
     --about-why-body-max-w          : 100%;
     --about-why-body-to-tagline     : calc(20px * var(--header-font-scale));
-    --about-why-tagline-size        : calc(20px * var(--header-font-scale));
+    --about-why-tagline-size        : calc(20px * var(--type-size));
     --about-why-tagline-max-w       : 100%;
-    --about-why-illustration-w      : min(100%, calc(280px * var(--header-font-scale)));
-    --about-why-illustration-h      : calc(290px * var(--header-font-scale));
+    --about-why-illustration-w      : min(100%, calc(320px * var(--media-size)));
+    --about-why-illustration-h      : calc(334px * var(--media-size));
 
     --about-brings-padding-top      : calc(32px * var(--header-font-scale));
     --about-brings-padding-bottom   : calc(40px * var(--header-font-scale));
-    --about-brings-heading-size     : calc(36px * var(--header-font-scale));
+    --about-brings-heading-size     : calc(36px * var(--type-size));
     --about-brings-heading-max-w    : 100%;
+    --about-brings-highlight-h      : calc(44px * var(--header-font-scale));
+    --about-brings-highlight-pad-x  : calc(10px * var(--header-font-scale));
     --about-brings-heading-to-grid  : calc(24px * var(--header-font-scale));
     --about-brings-grid-gap-x       : calc(16px * var(--header-font-scale));
     --about-brings-grid-gap-y       : calc(28px * var(--header-font-scale));
     --about-brings-stagger-offset   : 0px;
-    --about-brings-feature-img-w    : min(100%, calc(260px * var(--header-font-scale)));
-    --about-brings-feature-img-h    : calc(174px * var(--header-font-scale));
-    --about-brings-feature-img-to-label: calc(20px * var(--header-font-scale));
-    --about-brings-label-size       : calc(16px * var(--header-font-scale));
+    --about-brings-feature-img-w    : min(100%, calc(360px * var(--media-size)));
+    --about-brings-feature-img-h    : calc(240px * var(--media-size));
+    --about-brings-feature-img-to-label: calc(20px * var(--media-size));
+    --about-brings-label-size       : calc(16px * var(--type-size));
     --about-brings-label-max-w      : 100%;
     --about-brings-carousel-to-dots : calc(20px * var(--header-font-scale));
-    --about-brings-dot-size         : calc(8px * var(--header-font-scale));
+    --about-brings-dot-size         : calc(8px * var(--type-size));
     --about-brings-dot-gap          : calc(8px * var(--header-font-scale));
 
     --english-ai-hero-padding-top        : calc(32px * var(--header-font-scale));
     --english-ai-hero-padding-bottom     : calc(40px * var(--header-font-scale));
     --english-ai-hero-columns-gap        : calc(16px * var(--header-font-scale));
     --english-ai-hero-row-gap              : calc(20px * var(--header-font-scale));
-    --english-ai-hero-title-size           : calc(36px * var(--header-font-scale));
+    --english-ai-hero-title-size           : calc(36px * var(--type-size));
     --english-ai-hero-title-max-w          : 100%;
-    --english-ai-hero-body-size            : calc(16px * var(--header-font-scale));
+    --english-ai-hero-body-size            : calc(18px * var(--type-size));
     --english-ai-hero-body-max-w           : 100%;
     --english-ai-hero-illustration-w       : 100%;
-    --english-ai-hero-illustration-h       : calc(240px * var(--header-font-scale));
-    --english-ai-hero-robot-wrap-w         : calc(140px * var(--header-font-scale));
-    --english-ai-hero-robot-wrap-h         : calc(184px * var(--header-font-scale));
+    --english-ai-hero-illustration-h       : calc(240px * var(--media-size));
+    --english-ai-hero-robot-wrap-w         : calc(140px * var(--media-size));
+    --english-ai-hero-robot-wrap-h         : calc(184px * var(--media-size));
     --english-ai-hero-illustration-margin-top: 0px;
     --english-ai-hero-eyebrow-to-apply        : calc(12px * var(--header-font-scale));
     --english-ai-hero-title-to-body           : calc(16px * var(--header-font-scale));
@@ -1124,15 +1227,15 @@
     --english-ai-platform-padding-bottom   : calc(40px * var(--header-font-scale));
     --english-ai-platform-mockup-w         : 100%;
     --english-ai-platform-mockup-h         : calc(220px * var(--header-font-scale));
-    --english-ai-platform-tagline-size     : calc(20px * var(--header-font-scale));
+    --english-ai-platform-tagline-size     : calc(20px * var(--type-size));
     --english-ai-platform-tagline-max-w    : 100%;
 
     --english-ai-grid-padding-top          : calc(32px * var(--header-font-scale));
     --english-ai-grid-padding-bottom       : calc(40px * var(--header-font-scale));
     --english-ai-grid-subtitle-max-w       : 100%;
     --english-ai-grid-copy-max-w           : 100%;
-    --english-ai-grid-img-w                : min(100%, calc(213px * var(--header-font-scale)));
-    --english-ai-grid-img-h                : calc(142px * var(--header-font-scale));
+    --english-ai-grid-img-w                : min(100%, calc(213px * var(--media-size)));
+    --english-ai-grid-img-h                : calc(142px * var(--media-size));
     --english-ai-grid-gap-y                : calc(28px * var(--header-font-scale));
     --english-ai-grid-items-to-footer      : calc(32px * var(--header-font-scale));
     --english-ai-grid-carousel-to-dots     : calc(20px * var(--header-font-scale));
@@ -1141,13 +1244,13 @@
     --english-ai-comparison-padding-bottom : calc(40px * var(--header-font-scale));
     --english-ai-comparison-subtitle-max-w : 100%;
     --english-ai-comparison-mobile-card-gap: calc(12px * var(--header-font-scale));
-    --english-ai-comparison-mobile-label-size: calc(16px * var(--header-font-scale));
+    --english-ai-comparison-mobile-label-size: calc(16px * var(--type-size));
     --english-ai-comparison-mobile-label-py: calc(12px * var(--header-font-scale));
     --english-ai-comparison-mobile-body-py : calc(14px * var(--header-font-scale));
     --english-ai-comparison-mobile-block-gap: calc(14px * var(--header-font-scale));
 
     --english-ai-action-subtitle-max-w     : 100%;
-    --english-ai-action-demo-h             : 260px;
+    --english-ai-action-demo-h             : calc(260px * var(--media-scale) / var(--header-font-scale));
 
     --english-ai-curriculum-padding-top    : calc(32px * var(--header-font-scale));
     --english-ai-curriculum-padding-bottom : calc(40px * var(--header-font-scale));
@@ -1170,12 +1273,12 @@
     --cohort-padding-bottom           : calc(64px * var(--header-font-scale));
 
     --contact-hero-min-h            : auto;
-    --contact-hero-padding-top      : 40px;
+    --contact-hero-padding-top      : calc(var(--header-nav-h) + var(--hero-gap));
     --contact-hero-padding-bottom   : 48px;
     --contact-hero-apply-to-image-gap: 48px;
-    --contact-hero-title-to-subtitle: calc(20px * var(--header-font-scale));
-    --contact-hero-illustration-w   : min(100%, calc(320px * var(--header-font-scale)));
-    --contact-hero-illustration-h   : calc(226px * var(--header-font-scale));
+    --contact-hero-title-to-subtitle: calc(20px * var(--type-size));
+    --contact-hero-illustration-w   : min(100%, calc(320px * var(--media-size)));
+    --contact-hero-illustration-h   : calc(226px * var(--media-size));
 
     --contact-form-padding-top      : 40px;
     --contact-form-padding-bottom   : 48px;
@@ -1189,19 +1292,141 @@
     --contact-form-button-gap       : calc(32px * var(--header-font-scale));
     --contact-form-button-w         : 100%;
     --contact-form-button-h         : calc(56px * var(--header-font-scale));
-    --contact-form-button-text      : calc(24px * var(--header-font-scale));
+    --contact-form-button-text      : calc(24px * var(--type-size));
     --contact-form-info-gap         : calc(48px * var(--header-font-scale));
     --contact-info-gap                : calc(32px * var(--header-font-scale));
     --contact-info-icon-gap           : calc(16px * var(--header-font-scale));
-    --contact-info-text-size        : calc(16px * var(--header-font-scale));
-    --contact-info-text-offset-y    : calc(8px * var(--header-font-scale));
+    --contact-info-text-size        : calc(16px * var(--type-size));
+    --contact-info-text-offset-y    : calc(8px * var(--type-size));
     --contact-info-line-gap           : calc(12px * var(--header-font-scale));
-    --contact-info-phone-icon-w     : calc(80px * var(--header-font-scale));
-    --contact-info-phone-icon-h     : calc(83px * var(--header-font-scale));
-    --contact-info-email-icon-w     : calc(88px * var(--header-font-scale));
-    --contact-info-email-icon-h     : calc(77px * var(--header-font-scale));
-    --contact-info-address-icon-w   : calc(75px * var(--header-font-scale));
-    --contact-info-address-icon-h   : calc(94px * var(--header-font-scale));
+    --contact-info-phone-icon-w     : calc(80px * var(--media-size));
+    --contact-info-phone-icon-h     : calc(83px * var(--media-size));
+    --contact-info-email-icon-w     : calc(88px * var(--media-size));
+    --contact-info-email-icon-h     : calc(77px * var(--media-size));
+    --contact-info-address-icon-w   : calc(75px * var(--media-size));
+    --contact-info-address-icon-h   : calc(94px * var(--media-size));
+  }
+}
+
+/* --- 100vh white card fit (desktop ≥1280px) ---------------- */
+@media (min-width: 1280px) {
+  :root {
+    --section-media-max-h           : min(360px, 34dvh);
+    --section-media-max-h-lg        : min(420px, 40dvh);
+
+    /* Shared section typography & spacing */
+    --section-padding-top           : 52px;
+    --section-padding-bottom        : 52px;
+    --section-text-heading          : 48px;
+    --section-text-title            : 40px;
+    --section-text-body             : 17px;
+    --section-text-tab              : 34px;
+    --section-heading-to-tabs       : 36px;
+    --section-tab-gap               : 32px;
+    --section-tab-h                 : 72px;
+    --section-content-gap           : 24px;
+    --section-body-paragraph-gap    : 10px;
+    --section-body-to-cta           : 32px;
+    --section-dashboard-h           : min(280px, 26dvh);
+    --section-dashboard-gap         : 24px;
+
+    /* Hero */
+    --hero-text-headline            : 54px;
+    --hero-text-body                : 22px;
+    --hero-decorative-h             : max(var(--apply-btn-h), calc(150px * var(--media-size)));
+    --hero-decorative-w             : min(420px, 38vw);
+    --hero-body-pb                  : 0px;
+    --hero-gap                      : 15px;
+    --hero-top-row-offset-top       : 0px;
+    --hero-badge-1-w                : 124px;
+    --hero-badge-1-h                : 100px;
+    --hero-badge-2-w                : 154px;
+    --hero-badge-2-h                : 100px;
+    --hero-badge-3-w                : 151px;
+    --hero-badge-3-h                : 95px;
+    --hero-badge-4-w                : 178px;
+    --hero-badge-4-h                : 98px;
+
+    /* See it in action */
+    --action-padding-top            : 52px;
+    --action-padding-bottom         : 52px;
+    --action-heading-to-demo        : 36px;
+    --action-feature-img-w          : 143px;
+    --action-feature-img-h          : 95px;
+    --action-feature-gap            : 40px;
+    --action-demo-h                 : min(340px, 32dvh);
+
+    /* Why schools */
+    --why-padding-top               : 52px;
+    --why-heading-to-list           : 32px;
+    --why-feature-gap               : 22px;
+    --why-icon-size                 : 56px;
+    --why-students-w                : min(145%, calc(720px * var(--media-scale) / var(--header-font-scale)));
+    --why-students-h                : clamp(400px, 44dvh, 560px);
+    --why-gif-offset-left           : clamp(48px, 5vw, 96px);
+    --why-marquee-h                 : 80px;
+    --why-marquee-text              : 34px;
+    --why-marquee-text-gap          : 32px;
+    --why-marquee-bottom            : 24px;
+
+    /* How it works */
+    --how-padding-top               : 52px;
+    --how-columns-gap               : 56px;
+    --how-heading-to-body           : 24px;
+    --how-block-gap                 : 24px;
+    --how-dashboard-video-h         : min(300px, 28dvh);
+    --how-lesson-img-h              : 95px;
+
+    /* Tracking */
+    --track-padding-top             : 52px;
+    --track-padding-bottom          : 52px;
+    --track-heading-to-cards        : 40px;
+    --track-img-h                   : 165px;
+
+    /* AI Ready */
+    --ai-ready-padding-top          : 40px;
+    --ai-ready-padding-bottom       : 32px;
+    --ai-ready-diagram-h            : min(420px, 50dvh);
+    --ai-ready-headset-top          : 42%;
+    --ai-ready-headset-bottom       : 6%;
+    --ai-ready-headset-left         : 18%;
+    --ai-ready-headset-right        : 18%;
+    --ai-ready-headset-offset-y     : 24px;
+
+    /* Onboarding */
+    --onboard-padding-top           : 52px;
+    --onboard-padding-bottom        : 52px;
+    --onboard-eyebrow-to-heading    : 32px;
+    --onboard-heading-to-body       : 24px;
+    --onboard-body-to-cards         : 24px;
+    --onboard-image-h               : 190px;
+
+    /* Testimonials */
+    --testimonial-padding-top       : 40px;
+    --testimonial-padding-bottom    : 32px;
+    --testimonial-eyebrow-to-heading: 24px;
+    --testimonial-heading-to-carousel: 20px;
+    --testimonial-card-h            : min(420px, 48dvh);
+    --testimonial-name-size         : 36px;
+
+    /* Cohort */
+    --cohort-padding-top            : 40px;
+    --cohort-padding-bottom         : 32px;
+    --cohort-eyebrow-to-heading     : 32px;
+    --cohort-heading-to-body        : 24px;
+    --cohort-body-to-logos          : 40px;
+    --cohort-logo-row-h             : 56px;
+    --cohort-logo-row-gap           : 48px;
+
+    /* FAQ */
+    --faq-padding-top               : 52px;
+    --faq-padding-bottom            : 52px;
+    --faq-heading-to-list           : 32px;
+    --faq-item-collapsed-h          : 84px;
+    --faq-item-expanded-min-h       : 140px;
+    --faq-item-gap                  : 12px;
+    --faq-question-size             : 26px;
+    --faq-answer-size               : 16px;
   }
 }
 

@@ -23,7 +23,7 @@ html.section-scroll-active body {
   min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  scroll-snap-type: y proximity;
+  scroll-snap-type: none;
   scroll-behavior: auto;
   overscroll-behavior-y: contain;
   scrollbar-width: none;
@@ -47,6 +47,808 @@ html.section-scroll-active body {
   width: 100%;
 }
 
+/* Homepage — one full viewport per section */
+.section-scroll-panel--snap {
+  height: var(--section-viewport-h, 100%);
+  min-height: var(--section-viewport-h, 100%);
+  max-height: var(--section-viewport-h, 100%);
+  overflow: hidden;
+  justify-content: stretch;
+  padding-top: 0;
+}
+
+.section-scroll-panel--snap > section {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: stretch;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: 100%;
+  box-sizing: border-box;
+  /* Bottom inset must be >= radius so bottom corners render fully on black bg */
+  padding: 0 var(--section-card-gap) var(--section-card-radius);
+}
+
+.section-scroll-panel--snap > section > :first-child {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+/* Product intro — button bottom aligns with video; min gap above CTA */
+.section-scroll-panel--snap:has(#product-intro) {
+  --section-padding-bottom: 10px;
+  --section-body-paragraph-gap: clamp(8px, 1dvh, 12px);
+  --section-body-to-cta: clamp(24px, 3dvh, 40px);
+}
+
+.section-scroll-panel--snap:has(#product-intro) > section > .product-intro-card {
+  justify-content: flex-start;
+}
+
+.section-scroll-panel--snap .product-intro-inner {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+@media (min-width: 1280px) {
+  .section-scroll-panel--snap .product-tab-panel {
+    flex: 1 1 auto;
+    min-height: 0;
+    align-items: stretch;
+  }
+
+  .section-scroll-panel--snap .product-tab-copy {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .section-scroll-panel--snap .product-tab-media {
+    height: 100% !important;
+    min-height: 0;
+    align-self: stretch;
+  }
+}
+
+/* See it in action — left demo stretches to match right column bottom */
+.section-scroll-panel--snap:has(#see-it-in-action) {
+  --action-padding-top: clamp(24px, 3.5dvh, 44px);
+  --action-padding-bottom: 10px;
+  --action-heading-to-demo: clamp(16px, 2dvh, 36px);
+  --action-feature-gap: clamp(20px, 2.5dvh, 40px);
+}
+
+.section-scroll-panel--snap:has(#see-it-in-action) > section > .action-card {
+  justify-content: flex-start;
+}
+
+.section-scroll-panel--snap .action-inner {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.section-scroll-panel--snap .action-columns {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.section-scroll-panel--snap .action-left-col {
+  height: 100%;
+  min-height: 0;
+}
+
+.section-scroll-panel--snap .action-demo-media {
+  flex: 1 1 0;
+  min-height: 0;
+  height: auto !important;
+}
+
+@media (min-width: 1280px) {
+  .section-scroll-panel--snap .action-columns {
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .section-scroll-panel--snap .action-features-col {
+    height: 100%;
+    min-height: 0;
+  }
+}
+
+/* Why schools — larger right illustration in viewport */
+.section-scroll-panel--snap:has(#why-schools) {
+  --why-students-w: min(150%, clamp(520px, 42vw, 780px));
+  --why-students-h: clamp(360px, 42dvh, 540px);
+  --why-gif-offset-left: clamp(32px, 4vw, 72px);
+}
+
+.section-scroll-panel--snap .why-illustration-col {
+  overflow: visible;
+}
+
+.section-scroll-panel--snap .why-students-media {
+  max-width: none;
+}
+
+/* AI Ready — diagram fills remaining card height */
+.section-scroll-panel--snap .ai-ready-card {
+  justify-content: flex-start;
+}
+
+.section-scroll-panel--snap .ai-ready-diagram {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto !important;
+  margin-bottom: var(--ai-ready-padding-bottom);
+}
+
+/* Testimonials — carousel fills card */
+.section-scroll-panel--snap .testimonials-card {
+  justify-content: flex-start;
+}
+
+.section-scroll-panel--snap .testimonials-carousel-wrap {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  min-height: 0;
+}
+
+/* Apply CTA — snap panel layout (all program pages) */
+.section-scroll-panel--snap .apply-cta-card {
+  justify-content: center;
+}
+
+.section-scroll-panel--snap .apply-cta-inner {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  max-height: 100%;
+  overflow: hidden;
+  padding-top: var(--apply-cta-padding-top) !important;
+  padding-bottom: var(--apply-cta-padding-bottom) !important;
+}
+
+.section-scroll-panel--snap .apply-cta-stage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-height: 0 !important;
+  max-height: 100%;
+  width: var(--apply-cta-stage-w);
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.section-scroll-panel--snap .apply-cta-yellow {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  width: var(--apply-cta-yellow-size) !important;
+  height: var(--apply-cta-yellow-size) !important;
+  max-width: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.section-scroll-panel--snap .apply-cta-student {
+  position: relative !important;
+  top: auto !important;
+  right: auto !important;
+  margin-top: 0 !important;
+  margin-left: 0 !important;
+  transform: none !important;
+  flex-shrink: 0;
+}
+
+@media (max-width: 639px) {
+  .section-scroll-panel--snap .apply-cta-stage {
+    flex-direction: column;
+  }
+
+  .section-scroll-panel--snap .apply-cta-student {
+    margin-left: 0;
+    margin-top: 0;
+  }
+}
+
+/* Cohort — vertically balanced full card */
+.section-scroll-panel--snap .cohort-card {
+  justify-content: center;
+}
+
+.section-scroll-panel--snap .cohort-card-inner {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+
+/* Home hero — full-height card, badges flush to bottom */
+.section-scroll-panel--snap:first-child .hero-card {
+  justify-content: stretch;
+}
+
+/* All scroll pages — equal top/bottom inset on every section (desktop) */
+@media (min-width: 1280px) {
+  .program-page-scroll--home .section-scroll-panel--snap,
+  .program-page-scroll--the-edge .section-scroll-panel--snap,
+  .program-page-scroll--english-ai .section-scroll-panel--snap,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap,
+  .program-page-scroll--about .section-scroll-panel--snap,
+  .program-page-scroll--thank-you .section-scroll-panel--form,
+  .program-page-scroll--not-found .section-scroll-panel--form,
+  .program-page-scroll--blog .section-scroll-panel--form,
+  .program-page-scroll--contact .section-scroll-panel--hero,
+  .program-page-scroll--contact .section-scroll-panel--form {
+    --section-viewport-pad: clamp(16px, 2.5dvh, 32px);
+
+    --section-padding-top: var(--section-viewport-pad);
+    --section-padding-bottom: var(--section-viewport-pad);
+    --action-padding-top: var(--section-viewport-pad);
+    --action-padding-bottom: var(--section-viewport-pad);
+    --how-padding-top: var(--section-viewport-pad);
+    --how-padding-bottom: var(--section-viewport-pad);
+    --onboard-padding-top: var(--section-viewport-pad);
+    --onboard-padding-bottom: var(--section-viewport-pad);
+    --cohort-padding-top: var(--section-viewport-pad);
+    --cohort-padding-bottom: var(--section-viewport-pad);
+    --faq-padding-top: var(--section-viewport-pad);
+    --faq-padding-bottom: var(--section-viewport-pad);
+    --apply-cta-padding-top: var(--section-viewport-pad);
+    --apply-cta-padding-bottom: var(--section-viewport-pad);
+    --testimonial-padding-top: var(--section-viewport-pad);
+    --testimonial-padding-bottom: var(--section-viewport-pad);
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap {
+    --why-padding-top: var(--section-viewport-pad);
+    --track-padding-top: var(--section-viewport-pad);
+    --track-padding-bottom: var(--section-viewport-pad);
+    --ai-ready-padding-top: var(--section-viewport-pad);
+    --ai-ready-padding-bottom: var(--section-viewport-pad);
+    --hero-inner-padding-top: var(--section-viewport-pad);
+    --hero-top-row-offset-top: 24px;
+    --hero-robot-offset-top: 12px;
+    --hero-apply-offset-top: 32px;
+    --hero-body-pb: 0px;
+    --section-dashboard-h: min(280px, 26dvh);
+    --action-demo-h: min(340px, 32dvh);
+    --why-students-h: clamp(360px, 42dvh, 540px);
+    --ai-ready-diagram-h: min(420px, 50dvh);
+    --how-dashboard-video-h: min(300px, 28dvh);
+    --onboard-image-h: min(190px, 18dvh);
+    --testimonial-card-h: min(420px, 48dvh);
+    --track-img-h: min(165px, 16dvh);
+  }
+
+  .program-page-scroll--the-edge .section-scroll-panel--snap,
+  .program-page-scroll--english-ai .section-scroll-panel--snap,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap {
+    --english-ai-hero-padding-top: var(--section-viewport-pad);
+    --english-ai-hero-padding-bottom: var(--section-viewport-pad);
+    --english-ai-platform-padding-top: var(--section-viewport-pad);
+    --english-ai-platform-padding-bottom: var(--section-viewport-pad);
+    --english-ai-grid-padding-top: var(--section-viewport-pad);
+    --english-ai-grid-padding-bottom: var(--section-viewport-pad);
+    --english-ai-comparison-padding-top: var(--section-viewport-pad);
+    --english-ai-comparison-padding-bottom: var(--section-viewport-pad);
+    --english-ai-curriculum-padding-top: var(--section-viewport-pad);
+    --english-ai-curriculum-padding-bottom: var(--section-viewport-pad);
+    --code-monkey-hero-illustration-margin-top: 0px;
+    --english-ai-hero-illustration-h: clamp(220px, 36dvh, calc(520px * var(--media-size)));
+    --english-ai-platform-mockup-h: min(calc(434px * var(--header-font-scale)), 32dvh);
+    --the-edge-platform-mockup-h: min(calc(491px * var(--header-font-scale)), 36dvh);
+    --the-edge-multi-rater-image-h: min(calc(216px * var(--media-size)), 18dvh);
+    --the-edge-courses-card-image-h: min(calc(326px * var(--media-size)), 28dvh);
+    --the-edge-beyond-track-image-h: min(calc(307px * var(--media-size)), 26dvh);
+    --the-edge-testimonials-card-min-h: min(calc(593px * var(--media-size)), 52dvh);
+    --how-dashboard-video-h: min(calc(300px * var(--media-size)), 28dvh);
+    --english-ai-grid-img-h: min(calc(142px * var(--media-size)), 14dvh);
+    --how-dashboard-video-h: min(calc(300px * var(--media-size)), 28dvh);
+    --action-demo-h: min(calc(340px * var(--media-size)), 30dvh);
+    --onboard-image-h: min(calc(190px * var(--media-size)), 18dvh);
+    --testimonial-card-h: min(calc(420px * var(--media-size)), 44dvh);
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap {
+    --english-ai-platform-mockup-h: min(calc(520px * var(--header-font-scale)), 42dvh);
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works),
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) {
+    --how-padding-bottom: 0;
+    --how-section-gap: clamp(16px, 2dvh, 24px);
+    --how-block-gap: clamp(12px, 1.5dvh, 20px);
+    --how-dashboard-video-h: calc(320px * var(--media-size) / var(--header-font-scale));
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) > section > .how-it-works-card,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) > section > .how-it-works-card {
+    justify-content: stretch;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-grid,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-grid {
+    flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+    align-items: stretch;
+    padding-bottom: 0 !important;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-scroll,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-scroll {
+    min-height: 0;
+    height: 100%;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-scroll::-webkit-scrollbar,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--primary,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--primary {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    padding-bottom: var(--how-lesson-img-radius);
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--primary .how-it-works-right,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--primary .how-it-works-right {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--duplicate,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--duplicate {
+    padding-top: var(--how-section-gap);
+    padding-bottom: var(--how-lesson-img-radius);
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-lesson-block--fill,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-lesson-block--fill {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-lesson-img-wrap,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-lesson-img-wrap {
+    border-radius: var(--how-lesson-img-radius);
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-lesson-img-wrap--fill,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-lesson-img-wrap--fill {
+    flex: 1 1 auto;
+    min-height: var(--how-lesson-img-h);
+    margin-top: auto;
+    width: 100%;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--duplicate .how-lesson-img-wrap,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--duplicate .how-lesson-img-wrap {
+    width: 100%;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-lesson-img-wrap--fill .how-lesson-img,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-lesson-img-wrap--fill .how-lesson-img,
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--duplicate .how-lesson-img,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--duplicate .how-lesson-img {
+    max-width: none !important;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-lesson-img-wrap--fill .how-lesson-img {
+    height: 100% !important;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--duplicate .how-lesson-img,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-set--duplicate .how-lesson-img {
+    height: var(--how-lesson-img-h) !important;
+  }
+
+  .program-page-scroll--about .section-scroll-panel--snap {
+    --about-hero-padding-top: var(--section-viewport-pad);
+    --about-hero-padding-bottom: var(--section-viewport-pad);
+    --about-hero-text-offset-top: 0px;
+    --about-why-padding-top: var(--section-viewport-pad);
+    --about-why-padding-bottom: var(--section-viewport-pad);
+    --about-brings-padding-top: var(--section-viewport-pad);
+    --about-brings-padding-bottom: var(--section-viewport-pad);
+    --ai-ready-padding-top: var(--section-viewport-pad);
+    --ai-ready-padding-bottom: var(--section-viewport-pad);
+    --about-why-illustration-h: min(calc(748px * var(--media-size)), 50dvh);
+    --about-why-illustration-w: min(100%, calc(720px * var(--media-size)));
+    --about-brings-feature-img-h: min(calc(347px * var(--media-size)), 22dvh);
+    --about-brings-feature-img-w: min(100%, calc(520px * var(--media-size)));
+    --ai-ready-diagram-h: min(420px, 50dvh);
+    --testimonial-card-h: min(420px, 48dvh);
+  }
+
+  .program-page-scroll--contact .section-scroll-panel--hero,
+  .program-page-scroll--contact .section-scroll-panel--form {
+    --contact-hero-padding-top: calc(var(--header-nav-h) + var(--hero-gap));
+    --contact-hero-padding-bottom: var(--section-viewport-pad);
+    --contact-form-padding-top: var(--section-viewport-pad);
+    --contact-form-padding-bottom: var(--section-viewport-pad);
+    --contact-hero-illustration-h: clamp(220px, 34dvh, calc(414px * var(--media-size)));
+  }
+
+  .program-page-scroll--thank-you .section-scroll-panel--form {
+    --thank-you-panel-padding-top: var(--hero-gap);
+    --thank-you-panel-padding-bottom: var(--section-viewport-pad);
+  }
+
+  .program-page-scroll--thank-you > .section-scroll-panel--form {
+    padding-top: calc(var(--section-card-gap) + var(--header-nav-h)) !important;
+    padding-bottom: var(--section-card-gap) !important;
+  }
+
+  .program-page-scroll--not-found .section-scroll-panel--form {
+    --not-found-panel-padding-top: var(--hero-gap);
+    --not-found-panel-padding-bottom: var(--section-viewport-pad);
+  }
+
+  .program-page-scroll--not-found > .section-scroll-panel--form {
+    padding-top: calc(var(--section-card-gap) + var(--header-nav-h)) !important;
+    padding-bottom: var(--section-card-gap) !important;
+  }
+
+  .program-page-scroll--blog .section-scroll-panel--form {
+    --blog-panel-padding-top: 8px;
+    --blog-panel-padding-bottom: var(--section-viewport-pad);
+  }
+
+  .program-page-scroll--blog > .section-scroll-panel--form {
+    /* Nav overlaps announcement by 10px — reserve only visible nav height + card gap */
+    padding-top: calc(
+      var(--blog-section-card-gap, 1px) + var(--header-nav-h) - 10px
+    ) !important;
+    padding-bottom: var(--section-card-gap) !important;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap .hero-card-inner {
+    flex: 0 1 auto;
+    min-height: 0;
+    justify-content: center;
+    --hero-inner-padding-top: var(--section-viewport-pad);
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap > section,
+  .program-page-scroll--the-edge .section-scroll-panel--snap > section,
+  .program-page-scroll--english-ai .section-scroll-panel--snap > section,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap > section,
+  .program-page-scroll--about .section-scroll-panel--snap > section,
+  .program-page-scroll--contact > .section-scroll-panel--hero,
+  .program-page-scroll--contact > .section-scroll-panel--form {
+    padding-top: var(--section-card-gap) !important;
+    padding-bottom: var(--section-card-gap) !important;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap > section > :first-child,
+  .program-page-scroll--the-edge .section-scroll-panel--snap > section > :first-child,
+  .program-page-scroll--english-ai .section-scroll-panel--snap > section > :first-child,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap > section > :first-child,
+  .program-page-scroll--about .section-scroll-panel--snap > section > :first-child,
+  .program-page-scroll--contact .section-scroll-panel--hero > :first-child,
+  .program-page-scroll--contact .section-scroll-panel--form > :first-child {
+    justify-content: center;
+  }
+
+  .program-page-scroll--thank-you .section-scroll-panel--form .thank-you-card {
+    min-height: calc(
+      var(--section-viewport-h, 100vh) - var(--section-card-gap) - var(--header-nav-h) -
+        var(--section-card-gap)
+    );
+    justify-content: center;
+  }
+
+  .program-page-scroll--thank-you .section-scroll-panel--form .thank-you-panel-body {
+    align-items: center;
+  }
+
+  .program-page-scroll--thank-you .thank-you-panel-image {
+    justify-content: flex-end;
+    overflow: visible;
+  }
+
+  .program-page-scroll--not-found .section-scroll-panel--form .not-found-card {
+    min-height: calc(
+      var(--section-viewport-h, 100vh) - var(--section-card-gap) - var(--header-nav-h) -
+        var(--section-card-gap)
+    );
+    justify-content: center;
+  }
+
+  .program-page-scroll--not-found .section-scroll-panel--form .not-found-panel-body {
+    align-items: center;
+  }
+
+  .program-page-scroll--not-found .not-found-panel-image {
+    justify-content: flex-end;
+    overflow: visible;
+  }
+
+  .program-page-scroll--blog .section-scroll-panel--form .blog-card {
+    min-height: calc(
+      var(--section-viewport-h, 100vh) - var(--blog-section-card-gap, 1px) -
+        (var(--header-nav-h) - 10px) - var(--section-card-gap)
+    );
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap .section-card-inner,
+  .program-page-scroll--home .section-scroll-panel--snap .product-intro-inner,
+  .program-page-scroll--home .section-scroll-panel--snap .apply-cta-inner,
+  .program-page-scroll--home .section-scroll-panel--snap .cohort-card-inner,
+  .program-page-scroll--about .section-scroll-panel--snap .section-card-inner,
+  .program-page-scroll--about .section-scroll-panel--snap .product-intro-inner,
+  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-inner,
+  .program-page-scroll--about .section-scroll-panel--snap .cohort-card-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .program-hero-body,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .section-card-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-framework-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-platform-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-multi-rater-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-courses-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-beyond-classroom-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-testimonials-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-comparison-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .how-it-works-grid,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .apply-cta-inner,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .cohort-card-inner,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .program-hero-body,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .section-card-inner,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .apply-cta-inner,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .cohort-card-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .program-hero-body,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .section-card-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .apply-cta-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .cohort-card-inner,
+  .program-page-scroll--contact .contact-hero-body,
+  .program-page-scroll--contact .contact-hero-inner {
+    flex: 0 1 auto;
+    min-height: 0;
+    justify-content: flex-start;
+  }
+
+  .program-page-scroll--the-edge .section-scroll-panel--snap .program-hero-inner,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .program-hero-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .program-hero-inner {
+    flex: 0 1 auto;
+    min-height: 0;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-hero) .program-hero-body,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-hero) .program-hero-body {
+    justify-content: flex-start;
+    --english-ai-hero-padding-bottom: 0;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-hero) .program-hero-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-hero) .program-hero-inner {
+    flex: 1 1 auto;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-hero) .program-hero-content-grid,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-hero) .program-hero-content-grid {
+    align-items: end;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-hero) .english-ai-hero-illustration,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-hero) .english-ai-hero-illustration,
+  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#the-edge-hero) .the-edge-hero-illustration {
+    --english-ai-hero-illustration-h: clamp(
+      220px,
+      36dvh,
+      calc(487px * var(--media-size))
+    );
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:first-child .hero-card,
+  .program-page-scroll--home .section-scroll-panel--snap .apply-cta-card,
+  .program-page-scroll--home .section-scroll-panel--snap .cohort-card,
+  .program-page-scroll--home .section-scroll-panel--snap .testimonials-card,
+  .program-page-scroll--home .section-scroll-panel--snap .ai-ready-card,
+  .program-page-scroll--home .section-scroll-panel--snap:has(#product-intro) > section > .product-intro-card,
+  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-card,
+  .program-page-scroll--about .section-scroll-panel--snap .cohort-card,
+  .program-page-scroll--about .section-scroll-panel--snap .testimonials-card,
+  .program-page-scroll--about .section-scroll-panel--snap .ai-ready-card,
+  .program-page-scroll--about .section-scroll-panel--snap:has(#product-intro) > section > .product-intro-card,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .apply-cta-card,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .cohort-card,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .testimonials-card,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .apply-cta-card,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .cohort-card,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .testimonials-card,
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#product-intro) > section > .product-intro-card,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .apply-cta-card,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .cohort-card,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .testimonials-card,
+  .program-page-scroll--contact .section-scroll-panel--hero .contact-hero-card,
+  .program-page-scroll--contact .section-scroll-panel--form .section-card-shell {
+    justify-content: center;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#product-intro),
+  .program-page-scroll--about .section-scroll-panel--snap:has(#product-intro),
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#product-intro) {
+    --section-padding-bottom: var(--section-viewport-pad);
+    --section-body-paragraph-gap: clamp(8px, 1dvh, 12px);
+    --section-body-to-cta: clamp(24px, 3dvh, 40px);
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action),
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action),
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) {
+    --action-padding-top: var(--section-viewport-pad);
+    --action-padding-bottom: var(--section-viewport-pad);
+    --action-heading-to-demo: clamp(16px, 2dvh, 36px);
+    --action-feature-gap: clamp(20px, 2.5dvh, 40px);
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) > section > .action-card,
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) > section > .action-card,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) > section > .action-card {
+    justify-content: flex-start;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-inner,
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-inner {
+    flex: 1 1 auto;
+    min-height: 0;
+    justify-content: flex-start;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action),
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) {
+    --english-ai-action-heading-to-subtitle: clamp(8px, 1.2dvh, 20px);
+    --action-heading-to-demo: clamp(12px, 1.5dvh, 24px);
+    --action-columns-row-gap: clamp(12px, 1.5dvh, 20px);
+    --action-demo-h: clamp(
+      calc(400px * var(--media-size)),
+      44dvh,
+      calc(522px * var(--media-scale) / var(--header-font-scale))
+    );
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-columns,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-columns {
+    flex: 0 1 auto;
+    min-height: 0;
+    align-items: stretch;
+    grid-template-rows: auto auto;
+    row-gap: var(--action-columns-row-gap, var(--section-gap));
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-features-col,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-features-col {
+    height: auto;
+    min-height: 0;
+    align-self: start;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media {
+    flex: none;
+    min-height: var(--action-demo-h, var(--english-ai-action-demo-h));
+    height: auto;
+    align-self: stretch;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap .ai-ready-diagram,
+  .program-page-scroll--about .section-scroll-panel--snap .ai-ready-diagram {
+    flex: 0 1 auto;
+    height: var(--ai-ready-diagram-h) !important;
+    margin-bottom: 0;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#apply),
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#apply),
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#apply),
+  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#apply),
+  .program-page-scroll--about .section-scroll-panel--snap:last-of-type {
+    --apply-cta-padding-top: var(--section-viewport-pad);
+    --apply-cta-padding-bottom: var(--section-viewport-pad);
+    --apply-cta-yellow-size: calc(747px * var(--header-font-scale));
+    --apply-cta-student-circle-size: calc(321px * var(--media-size));
+    --apply-cta-student-face-size: calc(157px * var(--media-size));
+    --apply-cta-student-overlap: 0px;
+    --apply-cta-stage-w: calc(
+      var(--apply-cta-yellow-size) + var(--apply-cta-student-circle-size)
+    );
+    --apply-cta-content-padding-x: calc(80px * var(--header-font-scale));
+    --apply-cta-heading-size: calc(62px * var(--type-size));
+    --apply-cta-body-size: calc(22px * var(--type-size));
+    --apply-cta-yellow-py: calc(56px * var(--header-font-scale));
+    --apply-cta-heading-to-body: calc(30px * var(--type-size));
+    --apply-cta-body-to-btn: calc(40px * var(--type-size));
+    --apply-cta-btn-w: calc(476px * var(--header-font-scale));
+    --apply-cta-btn-h: calc(84px * var(--header-font-scale));
+    --apply-cta-btn-text-size: calc(42px * var(--type-size));
+    --apply-cta-btn-padding-x: calc(56px * var(--header-font-scale));
+    --apply-cta-btn-arrow-size: calc(35px * var(--type-size));
+    --apply-cta-heading-max-w: calc(455px * var(--type-size));
+    --apply-cta-body-max-w: calc(528px * var(--type-size));
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#faqs),
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#faqs),
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#faqs) {
+    --faq-heading-to-list: clamp(16px, 2dvh, 28px);
+    --faq-item-collapsed-h: clamp(68px, 8.5dvh, 96px);
+    --faq-item-expanded-min-h: clamp(100px, 12dvh, 140px);
+    --faq-item-gap: clamp(8px, 1dvh, 12px);
+    --faq-item-padding-x: clamp(24px, 3vw, 48px);
+    --faq-item-padding-y: clamp(16px, 2dvh, 24px);
+    --faq-item-radius: clamp(40px, 5dvh, 72px);
+    --faq-icon-w: clamp(48px, 6dvh, 64px);
+    --faq-icon-h: clamp(50px, 6.2dvh, 66px);
+    --faq-icon-gap: clamp(16px, 2dvh, 24px);
+    --faq-question-size: clamp(18px, 2.2dvh, 26px);
+    --faq-answer-size: clamp(14px, 1.6dvh, 18px);
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#faqs) .section-faq-list,
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#faqs) .section-faq-list,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#faqs) .section-faq-list {
+    flex: 0 1 auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#faqs) .section-faq-list,
+  .program-page-scroll--about .section-scroll-panel--snap:has(#faqs) .section-faq-list {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: min(420px, 48dvh);
+    overflow-y: auto;
+  }
+}
+
+.section-scroll-panel--snap .hero-card-inner {
+  flex: 1 1 auto;
+  min-height: 0;
+  --hero-inner-padding-top: calc(var(--header-nav-h) + var(--hero-gap));
+}
+
+.section-scroll-panel--snap .hero-top-row {
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+  min-height: max(var(--apply-btn-h), var(--hero-decorative-h));
+  align-items: flex-end;
+}
+
+.section-scroll-panel--snap .hero-robot-video {
+  overflow: visible;
+}
+
 /* Hero — fill one viewport, main content vertically centered */
 .section-scroll-panel--hero {
   scroll-snap-align: start;
@@ -59,7 +861,7 @@ html.section-scroll-active body {
 
   --hero-text-headline: clamp(32px, 5vw, 72px);
   --hero-text-body: clamp(18px, 2.2vw, 30px);
-  --contact-hero-padding-top: clamp(20px, 3vh, 48px);
+  --contact-hero-padding-top: calc(var(--header-nav-h) + var(--hero-gap));
   --contact-hero-padding-bottom: clamp(16px, 2.5vh, 32px);
   --contact-hero-title-to-subtitle: clamp(16px, 2.5vh, 40px);
   --contact-hero-columns-gap: clamp(16px, 2vh, 32px);
@@ -77,8 +879,14 @@ html.section-scroll-active body {
 }
 
 .section-scroll-panel--hero .contact-hero-panel-body {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
+  min-height: 0;
   width: 100%;
+}
+
+.section-scroll-panel--hero .contact-hero-content {
+  flex: 1 1 auto;
+  min-height: 0;
 }
 
 .section-scroll-panel--hero .contact-hero-panel-image {
@@ -94,10 +902,14 @@ html.section-scroll-active body {
   object-fit: contain;
 }
 
-@media (max-width: 1279px) {
-  .contact-hero-content {
-    padding-top: calc(var(--contact-hero-apply-top) + 72px);
-  }
+/* Thank you / 404 — min viewport section, scroll to footer */
+.program-page-scroll--thank-you .section-scroll-panel--form,
+.program-page-scroll--not-found .section-scroll-panel--form,
+.program-page-scroll--blog .section-scroll-panel--form {
+  min-height: var(--section-viewport-h, 100%);
+  height: auto;
+  max-height: none;
+  overflow: visible;
 }
 
 @media (min-width: 1280px) {
@@ -109,11 +921,7 @@ html.section-scroll-active body {
     flex: 1;
     min-height: 0;
     height: 100%;
-    align-items: stretch;
-  }
-
-  .section-scroll-panel--hero .contact-hero-panel-body > :first-child {
-    align-self: stretch;
+    justify-content: flex-start;
   }
 
   .section-scroll-panel--hero .contact-hero-panel-image {
@@ -121,6 +929,20 @@ html.section-scroll-active body {
     align-items: flex-end;
     justify-content: flex-end;
     margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 1279px) {
+  .thank-you-body {
+    --thank-you-padding-top: var(--hero-gap);
+  }
+
+  .not-found-body {
+    --not-found-padding-top: var(--hero-gap);
+  }
+
+  .blog-body {
+    --blog-padding-top: 8px;
   }
 }
 
@@ -195,6 +1017,109 @@ html.section-scroll-active body {
   transform: scale(1);
 }
 
+/* Tablet & mobile — white page chrome (no black gutters between sections) */
+@media (max-width: 1279px) {
+  #main-content:not(.section-scroll-root) {
+    background-color: #fff;
+  }
+
+  header.z-\[100\] {
+    background-color: #fff;
+  }
+}
+
+/* Site flow — normal stacked sections on tablet & mobile (no viewport panels) */
+@media (max-width: 1279px) {
+  .homepage-flow > section > :first-child,
+  .homepage-flow .hero-card,
+  .homepage-flow .hero-card-inner,
+  .homepage-flow .contact-hero-card,
+  .homepage-flow .contact-hero-inner,
+  .homepage-flow .program-hero-inner,
+  .homepage-flow .program-hero-body,
+  .homepage-flow .section-card-shell,
+  .homepage-flow .section-card-inner,
+  .homepage-flow .product-intro-card,
+  .homepage-flow .product-intro-inner,
+  .homepage-flow .action-card,
+  .homepage-flow .action-inner,
+  .homepage-flow .ai-ready-card,
+  .homepage-flow .testimonials-card,
+  .homepage-flow .cohort-card,
+  .homepage-flow .apply-cta-card,
+  .homepage-flow .apply-cta-inner {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    flex: none !important;
+  }
+
+  .homepage-flow .hero-card-inner {
+    --hero-inner-padding-top: clamp(28px, 5vw, 48px);
+    --hero-top-row-offset-top: clamp(32px, 6vw, 52px);
+    --hero-robot-offset-top: clamp(12px, 2.5vw, 20px);
+    --hero-apply-offset-top: clamp(40px, 8vw, 64px);
+  }
+
+  .homepage-flow .program-hero-body {
+    --english-ai-hero-padding-top: clamp(48px, 10vw, 72px);
+  }
+
+  .homepage-flow .program-hero-top-row .hero-apply-slot {
+    --hero-apply-offset-top: clamp(40px, 8vw, 64px);
+    margin-top: var(--hero-apply-offset-top);
+  }
+
+  .homepage-flow .contact-hero-top-row {
+    margin-top: var(--hero-top-row-offset-top);
+    min-height: var(--apply-btn-h);
+    align-items: flex-end;
+  }
+
+  .homepage-flow .hero-top-row {
+    min-height: max(var(--apply-btn-h), var(--hero-decorative-h));
+    align-items: flex-end;
+  }
+
+  .homepage-flow .program-hero-top-row,
+  .homepage-flow .about-hero-top-row {
+    min-height: 0;
+  }
+
+  .homepage-flow .product-tab-panel,
+  .homepage-flow .action-columns,
+  .homepage-flow .action-left-col,
+  .homepage-flow .testimonials-carousel-wrap,
+  .homepage-flow .product-intro-inner,
+  .homepage-flow .action-inner {
+    flex: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .homepage-flow .product-tab-media {
+    height: var(--section-dashboard-h) !important;
+  }
+
+  .homepage-flow .action-demo-media {
+    height: var(--action-demo-h) !important;
+  }
+
+  .homepage-flow .ai-ready-diagram {
+    height: var(--ai-ready-diagram-h) !important;
+  }
+
+  .homepage-flow .apply-cta-inner {
+    overflow: visible !important;
+  }
+
+  .homepage-flow #faqs .section-faq-list {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .section-scroll-root {
     scroll-snap-type: none;
@@ -207,5 +1132,119 @@ html.section-scroll-active body {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+/* Tablet & mobile — normal document scroll (no 100vh panels or snap) */
+@media (max-width: 1279px) {
+  html.section-scroll-active,
+  html.section-scroll-active body {
+    overflow: auto;
+    height: auto;
+  }
+
+  .layout-section-scroll {
+    display: block;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .section-scroll-root {
+    flex: none;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    overscroll-behavior: auto;
+  }
+
+  .section-scroll-panel,
+  .section-scroll-panel--snap,
+  .section-scroll-panel--hero,
+  .section-scroll-panel--form {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .section-scroll-panel--snap > section,
+  .section-scroll-panel--snap > section > :first-child {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: visible;
+    flex: none;
+    justify-content: flex-start;
+  }
+
+  .section-scroll-panel--snap .hero-card,
+  .section-scroll-panel--snap .hero-card-inner,
+  .section-scroll-panel--snap .product-intro-card,
+  .section-scroll-panel--snap .product-intro-inner,
+  .section-scroll-panel--snap .action-card,
+  .section-scroll-panel--snap .action-inner,
+  .section-scroll-panel--snap .ai-ready-card,
+  .section-scroll-panel--snap .testimonials-card,
+  .section-scroll-panel--snap .cohort-card,
+  .section-scroll-panel--snap .cohort-card-inner,
+  .section-scroll-panel--snap .apply-cta-card,
+  .section-scroll-panel--snap .apply-cta-inner,
+  .section-scroll-panel--snap .section-card-shell,
+  .section-scroll-panel--hero > :first-child,
+  .section-scroll-panel--form > :first-child,
+  .section-scroll-panel--hero .contact-hero-card,
+  .section-scroll-panel--hero .contact-hero-inner {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    flex: none !important;
+  }
+
+  .section-scroll-panel--snap .hero-card-inner {
+    --hero-inner-padding-top: var(--hero-gap);
+  }
+
+  .section-scroll-panel--snap .hero-top-row {
+    min-height: 0;
+  }
+
+  .section-scroll-panel--snap .contact-hero-card,
+  .section-scroll-panel--snap .contact-hero-inner,
+  .section-scroll-panel--snap .contact-hero-top-row,
+  .section-scroll-panel--snap .program-hero-inner,
+  .section-scroll-panel--snap .program-hero-top-row {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    flex: none !important;
+  }
+
+  .section-scroll-panel--snap .product-tab-panel,
+  .section-scroll-panel--snap .action-left-col,
+  .section-scroll-panel--snap .testimonials-carousel-wrap {
+    flex: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+  }
+
+  .section-scroll-panel--snap .product-tab-media {
+    height: var(--section-dashboard-h) !important;
+    flex: none !important;
+  }
+
+  .section-scroll-panel--snap .action-demo-media {
+    height: var(--action-demo-h) !important;
+    flex: none !important;
+  }
+
+  .section-scroll-panel--snap .ai-ready-diagram {
+    height: var(--ai-ready-diagram-h) !important;
+    flex: none !important;
+  }
+
+  .section-scroll-panel--snap .apply-cta-inner {
+    overflow: visible !important;
   }
 }

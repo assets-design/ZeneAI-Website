@@ -61,25 +61,25 @@ const THE_EDGE_ROWS = [
   {
     role: 'Student',
     roleNodeId: '1060:2311',
-    without: 'Leadership is treated as a personality trait — not a teachable skill set.',
+    without: 'Vague sense of skills. Hard to prove growth.',
     withoutNodeId: '1060:2309',
-    with: 'Observable, teachable behaviours — assessed and developed in every module.',
+    with: 'Verifiable portfolio. Clear career path.',
     withNodeId: '1060:2310',
   },
   {
     role: 'Teacher',
     roleNodeId: '1060:2314',
-    without: 'No structured way to measure life skills alongside academics.',
+    without: 'Subjective grading. High administrative burden.',
     withoutNodeId: '1060:2312',
-    with: 'Dashboard shows skill acquisition and student engagement in real time.',
+    with: 'Data-backed insights. Automated tracking.',
     withNodeId: '1060:2313',
   },
   {
     role: 'Principal',
     roleNodeId: '1060:2317',
-    without: 'Non-academic growth is anecdotal in board and parent conversations.',
+    without: 'Limited visibility into student outcomes.',
     withoutNodeId: '1060:2315',
-    with: 'Leadership profile reports and skills transcripts — board-defensible proof for every student.',
+    with: 'Comprehensive dashboard of school-wide growth.',
     withNodeId: '1060:2316',
   },
 ] as const
@@ -207,7 +207,7 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
       data-node-id="1060:2198"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
@@ -226,7 +226,7 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
             }}
             data-node-id="1060:2241"
           >
-            {isCustomProgram ? 'The Difference' : 'The difference, side by side'}
+            {isTheEdge ? 'The difference, side by side' : isCustomProgram ? 'The Difference' : 'The difference, side by side'}
           </p>
 
           <h2
@@ -242,10 +242,11 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
               'Without Zene. With Zene.'
             ) : isTheEdge ? (
               <>
-                What your school looks like, with and without{' '}
+                What your{' '}
                 <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
-                  The Edge.
-                </span>
+                  school looks like,
+                </span>{' '}
+                with and without The Edge.
               </>
             ) : (
               <>
@@ -266,9 +267,12 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
             )}
           </h2>
 
-          {isCustomProgram ? null : (
+          {isCodeMonkey ? null : isTheEdge || !isCustomProgram ? (
             <p
-              className="capitalize font-body font-normal leading-normal text-black"
+              className={cn(
+                'font-body font-normal leading-normal text-black',
+                isTheEdge || isCustomProgram ? 'normal-case' : 'capitalize',
+              )}
               style={{
                 fontSize: 'var(--section-text-body)',
                 fontVariationSettings: "'opsz' 14",
@@ -277,17 +281,19 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
               }}
               data-node-id="1060:2217"
             >
-              Three perspectives. Three everyday realities. One clear shift.
+              {isTheEdge ? 'Three perspectives. One clear shift.' : 'Three perspectives. Three everyday realities. One clear shift.'}
             </p>
-          )}
+          ) : null}
 
           <div
             className="flex flex-col md:hidden"
             style={{
               gap: 'var(--english-ai-comparison-mobile-card-gap)',
-              marginTop: isCustomProgram
+              marginTop: isCodeMonkey
                 ? 'var(--english-ai-comparison-heading-to-subtitle)'
-                : 'var(--english-ai-comparison-subtitle-to-table)',
+                : isTheEdge || !isCustomProgram
+                  ? 'var(--english-ai-comparison-subtitle-to-table)'
+                  : 'var(--english-ai-comparison-heading-to-subtitle)',
             }}
           >
             {rows.map(row => (
@@ -304,9 +310,11 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
           <div
             className="hidden overflow-x-auto md:block"
             style={{
-              marginTop: isCustomProgram
+              marginTop: isCodeMonkey
                 ? 'var(--english-ai-comparison-heading-to-subtitle)'
-                : 'var(--english-ai-comparison-subtitle-to-table)',
+                : isTheEdge || !isCustomProgram
+                  ? 'var(--english-ai-comparison-subtitle-to-table)'
+                  : 'var(--english-ai-comparison-heading-to-subtitle)',
             }}
           >
             <div
@@ -402,6 +410,20 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
               ))}
             </div>
           </div>
+
+          {isTheEdge ? (
+            <p
+              className="normal-case font-body font-normal leading-normal text-black"
+              style={{
+                fontSize: 'var(--section-text-body)',
+                fontVariationSettings: "'opsz' 14",
+                maxWidth: 'var(--english-ai-comparison-subtitle-max-w)',
+                marginTop: 'var(--english-ai-comparison-subtitle-to-table)',
+              }}
+            >
+              Life skills stop being a slogan. They become a transcript.
+            </p>
+          ) : null}
         </div>
       </div>
     </section>

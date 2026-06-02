@@ -1,7 +1,9 @@
 import { useRef, type ReactNode } from 'react'
+import { FloatingActions } from '@/components/Layout/FloatingActions'
 import { Footer } from '@/components/Footer/Footer'
 import { Header } from '@/components/Header/Header'
 import { SectionScrollProvider } from '@/contexts/SectionScrollContext'
+import { useSectionScrollDesktop } from '@/hooks/useSectionScrollDesktop'
 import { cn } from '@/lib/utils'
 
 type AppLayoutProps = {
@@ -18,35 +20,51 @@ export function AppLayout({
   sectionScroll = false,
 }: AppLayoutProps) {
   const scrollRef = useRef<HTMLElement>(null)
+  const isDesktop = useSectionScrollDesktop()
+  const useSnapScroll = sectionScroll && isDesktop
 
-  const layout = (
-    <>
-      <Header
-        showAnnouncement={showAnnouncement}
-        pinNav={pinHeader}
-        sectionScroll={sectionScroll}
-      />
-      <main
-        id="main-content"
-        ref={scrollRef}
-        className={cn(
-          'overflow-x-hidden bg-black',
-          sectionScroll && 'section-scroll-root',
-        )}
-      >
-        {children}
-      </main>
-      {!sectionScroll && <Footer />}
-    </>
+  const header = (
+    <Header
+      showAnnouncement={showAnnouncement}
+      pinNav={pinHeader}
+      sectionScroll={useSnapScroll}
+    />
   )
 
-  if (sectionScroll) {
+  if (useSnapScroll) {
     return (
       <SectionScrollProvider scrollRef={scrollRef}>
-        <div className="layout-section-scroll">{layout}</div>
+        <div className="layout-section-scroll">
+          {header}
+          <main
+            id="main-content"
+            ref={scrollRef}
+            className="section-scroll-root overflow-x-hidden bg-black"
+          >
+            {children}
+          </main>
+          <FloatingActions />
+        </div>
       </SectionScrollProvider>
     )
   }
 
-  return layout
+  return (
+    <>
+      {header}
+      <main
+        id="main-content"
+        ref={scrollRef}
+        className={cn(
+          'overflow-x-hidden',
+          useSnapScroll ? 'bg-black' : 'bg-white xl:bg-black',
+          sectionScroll && 'homepage-flow',
+        )}
+      >
+        {children}
+      </main>
+      <Footer />
+      <FloatingActions />
+    </>
+  )
 }

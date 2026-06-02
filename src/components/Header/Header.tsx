@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useSectionScroll } from '@/contexts/SectionScrollContext'
+import { isSectionScrollDesktopViewport } from '@/hooks/useSectionScrollDesktop'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
@@ -164,13 +165,14 @@ export function Header({
   return (
     <header
       className={cn(
-        'z-[100] w-full bg-black px-[5px] pt-[5px]',
+        'z-[100] w-full px-[5px] pt-[5px]',
+        sectionScroll ? 'bg-black' : 'bg-white xl:bg-black',
         sectionScroll ? 'shrink-0' : 'sticky top-0',
       )}
     >
       {/* Figma Group 511 — 1910×149, node 967:1776 */}
       <div className="relative mx-auto w-full max-w-header">
-        {/* Announcement bar — always sticky at top */}
+        {/* Announcement bar — always visible; sections align to its bottom edge */}
         {showAnnouncement ? (
         <div
           className="relative z-[2] flex items-center justify-center rounded-t-header-announcement bg-white shadow-[0_0_4px_rgba(0,0,0,0.25)]"
@@ -203,16 +205,30 @@ export function Header({
         </div>
         ) : null}
 
+        {/* Nav + menu — overlays sections on scroll pages (no layout gap when hidden) */}
+        <div
+          className={cn(
+            'relative w-full',
+            usesSectionScroll && 'absolute left-0 right-0 top-full z-[101]',
+          )}
+        >
         {/* Nav bar — fades out on scroll down, fades in on scroll up */}
         <div
           className={cn(
-            'grid transition-[grid-template-rows,opacity] duration-300 ease-in-out',
+            usesSectionScroll
+              ? 'transition-opacity duration-300 ease-in-out'
+              : 'grid transition-[grid-template-rows,opacity] duration-300 ease-in-out',
             pinNav || navVisible ? 'opacity-100' : 'opacity-0',
+            usesSectionScroll && !pinNav && !navVisible && 'pointer-events-none',
           )}
-          style={{ gridTemplateRows: pinNav || navVisible ? '1fr' : '0fr' }}
+          style={
+            usesSectionScroll
+              ? undefined
+              : { gridTemplateRows: pinNav || navVisible ? '1fr' : '0fr' }
+          }
           aria-hidden={!pinNav && !navVisible}
         >
-          <div className="min-h-0 overflow-hidden">
+          <div className={usesSectionScroll ? undefined : 'min-h-0 overflow-hidden'}>
             <div
               className={cn(
                 'flex h-header-nav items-center justify-between overflow-hidden bg-header-gradient px-6 sm:px-10 lg:px-[115px]',
@@ -292,7 +308,15 @@ export function Header({
                 onClick={() => {
                   setMenuOpen(false)
                   if (link.href === '/' && location.pathname === '/') {
-                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                    const root = sectionScrollContext?.scrollRef.current
+                    if (
+                      root?.classList.contains('section-scroll-root') &&
+                      isSectionScrollDesktopViewport()
+                    ) {
+                      root.scrollTo({ top: 0, behavior: 'smooth' })
+                    } else {
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }
                   }
                 }}
                 className="font-heading font-medium uppercase leading-none text-black no-underline hover:text-black"
@@ -306,6 +330,7 @@ export function Header({
               </Link>
             ))}
           </nav>
+        </div>
         </div>
       </div>
     </header>

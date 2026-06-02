@@ -18,30 +18,15 @@ export function ContactHeroSection({ panel = false }: ContactHeroSectionProps) {
     >
       <div
         className={cn(
-          'relative mx-auto flex w-full items-center',
-          panel ? 'h-full min-h-full' : 'overflow-hidden',
+          'contact-hero-card section-card-shell relative mx-auto flex w-full flex-col overflow-hidden bg-white',
+          panel && 'h-full min-h-0',
         )}
-        style={{
-          maxWidth: 'var(--section-card-max-w)',
-          minHeight: panel ? undefined : 'var(--contact-hero-min-h)',
-          borderRadius: 'var(--section-card-radius)',
-          backgroundColor: '#fff',
-        }}
+        style={{ maxWidth: 'var(--section-card-max-w)' }}
         data-node-id="642:2089"
       >
         <div
-          className="reveal absolute z-10"
-          style={{
-            top: 'var(--contact-hero-apply-top)',
-            right: 'var(--contact-hero-apply-right)',
-          }}
-        >
-          <ApplyNowButton className="max-w-full shrink-0" />
-        </div>
-
-        <div
           className={cn(
-            'contact-hero-content relative z-[1] grid w-full min-w-0 items-center gap-x-[var(--contact-hero-columns-gap)] gap-y-[var(--contact-hero-columns-gap)] max-xl:grid-cols-1 xl:grid-cols-2',
+            'contact-hero-inner relative z-[1] flex min-h-0 flex-1 flex-col',
             panel && 'contact-hero-panel-body',
           )}
           style={{
@@ -49,58 +34,67 @@ export function ContactHeroSection({ panel = false }: ContactHeroSectionProps) {
             paddingRight: 'var(--section-padding-x)',
             paddingTop: 'var(--contact-hero-padding-top)',
             paddingBottom: 'var(--contact-hero-padding-bottom)',
+            gap: 'var(--hero-gap)',
           }}
         >
-          <div className="flex min-w-0 flex-col justify-center xl:col-start-1 xl:row-start-1">
-            <h1
-              id="contact-hero-heading"
-              className="reveal-left font-heading font-medium uppercase leading-none text-black"
-              style={{ fontSize: 'var(--hero-text-headline)' }}
-              data-node-id="642:2091"
-            >
-              <span className="block">Bring AI-powered</span>
-              <span className="block w-max max-w-none whitespace-nowrap max-sm:whitespace-normal">
-                learning to your school
-              </span>
-            </h1>
-
-            <p
-              className="reveal-left capitalize font-heading font-normal leading-normal text-black"
-              style={{
-                fontSize: 'var(--hero-text-body)',
-                maxWidth: 'var(--contact-hero-subtitle-max-w)',
-                marginTop: 'var(--contact-hero-title-to-subtitle)',
-              }}
-              data-node-id="642:2098"
-            >
-              Let&apos;s help you introduce structured, future-ready programs that build
-              real-world skills for your students.
-            </p>
+          {/* Top row — Apply Now right (same pattern as homepage hero) */}
+          <div className="contact-hero-top-row flex min-w-0 items-end justify-end">
+            <div className="hero-apply-slot shrink-0 reveal">
+              <ApplyNowButton className="max-w-full shrink-0" />
+            </div>
           </div>
 
           <div
-            className={cn(
-              'flex w-full min-w-0 justify-center xl:col-start-2 xl:row-start-1 xl:justify-end',
-              panel && 'contact-hero-panel-image',
-            )}
-            data-node-id="642:2159"
+            className="contact-hero-content grid w-full min-w-0 items-center gap-x-[var(--contact-hero-columns-gap)] gap-y-[var(--contact-hero-columns-gap)] max-xl:grid-cols-1 xl:grid-cols-2"
           >
-            <img
-              src={contactHeroIllustration}
-              alt="Student working on a laptop beside a school program form"
+            <div className="flex min-w-0 flex-col justify-center xl:col-start-1 xl:row-start-1">
+              <h1
+                id="contact-hero-heading"
+                className="reveal-left font-heading font-medium uppercase leading-none text-black"
+                style={{ fontSize: 'var(--hero-text-headline)' }}
+                data-node-id="642:2091"
+              >
+                <span className="block">Bring AI-powered</span>
+                <span className="block w-max max-w-none whitespace-nowrap max-sm:whitespace-normal">
+                  learning to your school
+                </span>
+              </h1>
+
+              <p
+                className="reveal-left capitalize font-heading font-normal leading-normal text-black"
+                style={{
+                  fontSize: 'var(--hero-text-body)',
+                  maxWidth: 'var(--contact-hero-subtitle-max-w)',
+                  marginTop: 'var(--contact-hero-title-to-subtitle)',
+                }}
+                data-node-id="642:2098"
+              >
+                Let&apos;s help you introduce structured, future-ready programs that build
+                real-world skills for your students.
+              </p>
+            </div>
+
+            <div
               className={cn(
-                'reveal-right h-auto w-full max-w-full object-contain',
-                !panel && 'xl:mt-[var(--contact-hero-apply-to-image-gap)]',
+                'flex w-full min-w-0 justify-center xl:col-start-2 xl:row-start-1 xl:justify-end',
+                panel && 'contact-hero-panel-image',
               )}
-              style={
-                panel
-                  ? undefined
-                  : {
-                      width: 'var(--contact-hero-illustration-w)',
-                      maxHeight: 'var(--contact-hero-illustration-h)',
-                    }
-              }
-            />
+              data-node-id="642:2159"
+            >
+              <img
+                src={contactHeroIllustration}
+                alt="Student working on a laptop beside a school program form"
+                className="reveal-right h-auto w-full max-w-full object-contain"
+                style={
+                  panel
+                    ? undefined
+                    : {
+                        width: 'var(--contact-hero-illustration-w)',
+                        maxHeight: 'var(--contact-hero-illustration-h)',
+                      }
+                }
+              />
+            </div>
           </div>
         </div>
       </div>

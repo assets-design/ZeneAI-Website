@@ -34,7 +34,7 @@ function ActionFeature({
   textNodeId,
 }: (typeof FEATURES)[number]) {
   return (
-    <article className="min-w-0" data-node-id={nodeId}>
+    <article className="min-w-0 shrink-0" data-node-id={nodeId}>
       <img
         src={image}
         alt=""
@@ -66,25 +66,27 @@ function ActionFeature({
 export function SeeItInActionSection() {
   return (
     <section
+      id="see-it-in-action"
       className="w-full px-[5px] pt-[5px]"
       aria-labelledby="see-it-in-action-heading"
       data-node-id="642:1125"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--section-card-radius)] bg-white"
+        className="action-card section-card-shell relative mx-auto flex h-full min-h-0 w-full flex-col overflow-hidden bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
-          className="flex flex-col"
+          className="action-inner flex min-h-0 flex-1 flex-col"
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',
             paddingTop: 'var(--action-padding-top)',
             paddingBottom: 'var(--action-padding-bottom)',
+            gap: 'var(--section-gap)',
           }}
         >
           <p
-            className="font-body uppercase text-black"
+            className="shrink-0 font-body uppercase text-black"
             style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",
@@ -95,17 +97,14 @@ export function SeeItInActionSection() {
           </p>
 
           <div
-            className="grid min-w-0 items-start xl:grid-cols-[13fr_7fr]"
-            style={{
-              gap: 'var(--action-columns-gap)',
-              marginTop: 'var(--section-gap)',
-            }}
+            className="action-columns grid min-h-0 flex-1 items-stretch xl:grid-cols-[13fr_7fr]"
+            style={{ gap: 'var(--action-columns-gap)' }}
           >
-            {/* Left 70% — heading + main demo */}
-            <div className="min-w-0">
+            {/* Left — heading + demo stretches to match right column bottom */}
+            <div className="action-left-col flex min-h-0 min-w-0 flex-col">
               <h2
                 id="see-it-in-action-heading"
-                className="font-heading font-medium uppercase leading-none text-black"
+                className="shrink-0 font-heading font-medium uppercase leading-none text-black"
                 style={{
                   fontSize: 'var(--section-text-heading)',
                   maxWidth: '100%',
@@ -120,7 +119,7 @@ export function SeeItInActionSection() {
               </h2>
 
               <div
-                className="w-full overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.25)]"
+                className="action-demo-media min-h-0 w-full flex-1 overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.25)]"
                 style={{
                   height: 'var(--action-demo-h)',
                   marginTop: 'var(--action-heading-to-demo)',
@@ -131,14 +130,14 @@ export function SeeItInActionSection() {
                 <img
                   src="/assets/figma/home/section-3/main-comp.png"
                   alt="Zene AI speaking lab demo with student and robot"
-                  className="size-full object-cover"
+                  className="size-full object-contain"
                 />
               </div>
             </div>
 
-            {/* Right 30% — feature highlights */}
+            {/* Right — feature highlights */}
             <div
-              className="flex min-w-0 flex-col"
+              className="action-features-col flex min-h-0 min-w-0 flex-col"
               style={{ gap: 'var(--action-feature-gap)' }}
             >
               {FEATURES.map(feature => (

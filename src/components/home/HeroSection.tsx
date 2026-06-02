@@ -1,4 +1,5 @@
 import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
+import { HeroBadgesCarousel } from '@/components/home/HeroBadgesCarousel'
 import { HeroRobotVideo } from '@/components/home/HeroRobotVideo'
 
 const TRUST_BADGES = [
@@ -35,34 +36,29 @@ const TRUST_BADGES = [
 export function HeroSection() {
   return (
     <section
-      className="w-full px-[5px]"
+      className="hero-section w-full px-[5px]"
       aria-labelledby="hero-heading"
       data-node-id="642:1123"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden rounded-[var(--hero-card-radius)] bg-white pb-[var(--hero-gap)]"
+        className="hero-card hero-card-shell relative mx-auto flex h-full min-h-0 w-full flex-col overflow-hidden bg-white"
         style={{ maxWidth: 'var(--hero-card-max-w)' }}
       >
         <div
-          className="relative z-[1] flex flex-col"
+          className="hero-card-inner relative z-[1] flex min-h-0 flex-1 flex-col"
           style={{
             paddingLeft: 'var(--hero-padding-x)',
             paddingRight: 'var(--hero-padding-x)',
             gap: 'var(--hero-gap)',
-            paddingTop: 'var(--hero-gap)',
           }}
         >
-          {/* Top row — robot animation left, Apply Now right */}
+          {/* Top row — robot animation left, Apply Now right (same row, same offset) */}
           <div
-            className="flex items-start justify-between"
-            style={{
-              gap: 'var(--hero-gap)',
-              minHeight: 'var(--apply-btn-h)',
-            }}
+            className="hero-top-row flex min-w-0 items-end justify-between gap-[clamp(8px,2vw,var(--hero-gap))]"
           >
             <HeroRobotVideo />
-            <div className="shrink-0" data-node-id="780:2207">
-              <ApplyNowButton className="max-w-full" />
+            <div className="hero-apply-slot shrink-0" data-node-id="780:2207">
+              <ApplyNowButton />
             </div>
           </div>
 
@@ -107,10 +103,15 @@ export function HeroSection() {
             by AI, supervised by your teachers.
           </p>
 
-          {/* Trust badges */}
+          {/* Trust badges — carousel on mobile/tablet, grid on desktop */}
+          <HeroBadgesCarousel badges={TRUST_BADGES} />
+
           <ul
-            className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4"
-            style={{ gap: 'var(--hero-gap)' }}
+            className="hero-badges mt-auto hidden grid-cols-4 xl:grid"
+            style={{
+              gap: 'var(--hero-gap)',
+              paddingBottom: 0,
+            }}
           >
             {TRUST_BADGES.map(badge => (
               <li key={badge.text} className="flex flex-col items-center text-center">
@@ -125,7 +126,7 @@ export function HeroSection() {
                   style={{
                     fontSize: 'var(--hero-text-badge)',
                     fontVariationSettings: "'opsz' 14",
-                    maxWidth: 'calc(382px * var(--header-font-scale))',
+                    maxWidth: 'calc(382px * var(--type-size))',
                     marginTop: 'var(--hero-gap)',
                   }}
                 >
