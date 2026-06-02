@@ -115,7 +115,7 @@ export function TestimonialsSection({ variant = 'home' }: TestimonialsSectionPro
         </div>
 
         <div
-          className="testimonials-carousel-wrap flex justify-center"
+          className="testimonials-carousel-wrap flex justify-start"
           style={{ paddingBottom: 'var(--testimonial-padding-bottom)' }}
         >
           <TestimonialCarousel items={TESTIMONIALS} />

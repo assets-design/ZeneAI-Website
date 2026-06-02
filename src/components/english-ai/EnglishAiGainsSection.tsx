@@ -187,17 +187,17 @@ export function EnglishAiGainsSection({ variant = 'english-ai' }: EnglishAiGains
             needs.
           </>
         ) : (
-          <>
+          <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
             Six things your{' '}
             <span
-              className={isCustomProgram ? 'inline-flex items-center bg-zene-cyan' : 'inline-block bg-[#78F3FA]'}
+              className="inline-flex items-center bg-zene-cyan"
               style={highlightStyle}
               data-node-id="1060:2302"
             >
               English program
             </span>{' '}
             gains in one term.
-          </>
+          </span>
         )
       }
       subtitle={
@@ -215,6 +215,7 @@ export function EnglishAiGainsSection({ variant = 'english-ai' }: EnglishAiGains
           : "Your English program does not change. Your school's ability to measure it does."
       }
       footerNodeId="1060:2278"
+      footerAlign="center"
       carouselAriaLabel={
         isTheEdge ? 'The Edge programme features' : isCodeMonkey ? 'Code Monkey outcomes' : 'English program gains'
       }

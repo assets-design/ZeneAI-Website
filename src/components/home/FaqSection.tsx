@@ -3,14 +3,12 @@ import { cn } from '@/lib/utils'
 import rubikCube from '@/assets/figma/home/section-11/rubik-cube.png'
 import rubikExpanded from '@/assets/figma/home/section-11/rubik-expanded.png'
 
-const FAQ_ANSWER =
-  'Ages 6–18 — from block coding for young learners to leadership and English fluency for high schoolers.'
-
 const FAQ_ITEMS = [
   {
     number: '01',
-    question: 'What age group is Zene AI for?',
-    answer: FAQ_ANSWER,
+    question: 'What age group is Zene AI designed for?',
+    answer:
+      'Zene AI has been designed for students between ages 6–18. Programs are being tailored to each age group, from block-based coding for young beginners to leadership and English fluency practice for high schoolers. Every stage of a student\'s academic life is being covered.',
     nodeId: '975:1951',
     barNodeId: '975:1952',
     questionNodeId: '975:1953',
@@ -20,42 +18,62 @@ const FAQ_ITEMS = [
   },
   {
     number: '02',
-    question: 'How does AI personalise learning?',
-    answer: FAQ_ANSWER,
+    question: 'How is learning being personalized by the AI?',
+    answer:
+      'Each student\'s performance data is being analyzed in real time by the AI. Based on pronunciation scores, activity completion, and comprehension levels, a unique learning path is being created, so that neither time nor effort is ever wasted on what has already been mastered.',
     nodeId: '975:1956',
     barNodeId: '975:1957',
     questionNodeId: '975:1959',
+    answerNodeId: '975:1954',
     iconNodeId: '975:1960',
     icon: rubikCube,
   },
   {
     number: '03',
-    question: 'Is there a free trial available?',
-    answer: FAQ_ANSWER,
+    question: 'Is a free trial being offered?',
+    answer:
+      'Yes, a free demo session is being offered to all interested schools and students. The platform can be explored, a session can be experienced, and the full potential of AI English speaking practice can be seen before any commitment is made.',
     nodeId: '975:1961',
     barNodeId: '975:1962',
     questionNodeId: '975:1964',
+    answerNodeId: '975:1954',
     iconNodeId: '975:1965',
     icon: rubikCube,
   },
   {
     number: '04',
-    question: 'What subjects does Zene AI cover?',
-    answer: FAQ_ANSWER,
+    question: 'What subjects are being covered by Zene AI?',
+    answer:
+      'Three core skill areas are being addressed: English communication (through English AI), coding & digital literacy (through Code Monkey), and life & leadership skills (through The Edge). Together, a complete future-ready education is being delivered, all within one integrated platform.',
     nodeId: '975:1966',
     barNodeId: '975:1967',
     questionNodeId: '975:1969',
+    answerNodeId: '975:1954',
     iconNodeId: '975:1970',
     icon: rubikCube,
   },
   {
     number: '05',
-    question: 'Why AI over traditional English teaching?',
-    answer: FAQ_ANSWER,
+    question: 'Why is AI being used for English learning instead of traditional methods?',
+    answer:
+      'Traditional classroom instruction is limited by time and teacher availability. With AI English speaking practice, personalized feedback is being given instantly, pronunciation is being corrected in real time, and consistent practice is being made possible, every single day, at any hour.',
     nodeId: '975:1971',
     barNodeId: '975:1972',
     questionNodeId: '975:1974',
+    answerNodeId: '975:1954',
     iconNodeId: '975:1975',
+    icon: rubikCube,
+  },
+  {
+    number: '06',
+    question: 'How is English fluency being improved through Zene AI?',
+    answer:
+      'Fluency is being built through a combination of spontaneous speaking exercises, vocabulary activities, grammar games, AI conversation practice, and reading comprehension tools. Every session is being designed so that real-world communication confidence is being developed, not just test scores.',
+    nodeId: '975:1976',
+    barNodeId: '975:1977',
+    questionNodeId: '975:1978',
+    answerNodeId: '975:1954',
+    iconNodeId: '975:1979',
     icon: rubikCube,
   },
 ] as const
@@ -208,7 +226,7 @@ function FaqItem({
       <button
         type="button"
         className={cn(
-          'flex w-full max-w-[var(--faq-item-max-w)] border-0 text-left',
+          'faq-item-button flex w-full max-w-[var(--faq-item-max-w)] overflow-hidden border-0 text-left',
           isOpen ? 'items-start' : 'items-center max-sm:min-h-0 max-sm:py-[var(--faq-item-padding-y)]',
         )}
         style={{
@@ -287,10 +305,10 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
   const items = isTheEdge ? THE_EDGE_FAQ_ITEMS : isCodeMonkey ? CODE_MONKEY_FAQ_ITEMS : FAQ_ITEMS
   const headingId = isTheEdge ? 'the-edge-faq-heading' : isCodeMonkey ? 'code-monkey-faq-heading' : 'faq-heading'
 
-  const [openIndex, setOpenIndex] = useState(-1)
+  const [openIndex, setOpenIndex] = useState(0)
 
   const handleToggle = (index: number) => {
-    setOpenIndex(prev => (prev === index ? -1 : index))
+    setOpenIndex(index)
   }
 
   const highlightStyle = {
@@ -375,7 +393,7 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
                 {...item}
                 isOpen={openIndex === index}
                 onToggle={() => handleToggle(index)}
-                normalCaseBody={isCustomProgram}
+                normalCaseBody
               />
             ))}
           </div>

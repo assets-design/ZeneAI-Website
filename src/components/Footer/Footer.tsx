@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const FOOTER_COLUMNS = [
   {
     title: 'Programs',
@@ -13,7 +15,7 @@ const FOOTER_COLUMNS = [
     nodeId: '975:2524',
     links: [
       { label: 'About Us', href: '/about', nodeId: '975:2526' },
-      { label: 'Careers', href: '#careers', nodeId: '975:2527' },
+      { label: 'Careers', href: '/careers', nodeId: '975:2527' },
       { label: 'Blogs', href: '/blog', nodeId: '975:2528' },
     ],
   },
@@ -22,8 +24,8 @@ const FOOTER_COLUMNS = [
     nodeId: '975:2530',
     links: [
       { label: 'Get in Touch', href: '/contact', nodeId: '975:2532' },
-      { label: 'FAQs', href: '#faqs', nodeId: '975:2533' },
-      { label: 'privacy Policy', href: '#privacy', nodeId: '975:2534' },
+      { label: 'FAQs', href: '/faq', nodeId: '975:2533' },
+      { label: 'Privacy Policy', href: '/privacy-policy', nodeId: '975:2534' },
     ],
   },
 ] as const
@@ -95,14 +97,25 @@ export function Footer() {
                 >
                   {column.links.map(link => (
                     <li key={link.href}>
-                      <a
-                        href={link.href}
-                        className="font-body font-normal leading-normal text-white"
-                        style={bodyStyle}
-                        data-node-id={link.nodeId}
-                      >
-                        {link.label}
-                      </a>
+                      {link.href.startsWith('/') ? (
+                        <Link
+                          to={link.href}
+                          className="font-body font-normal leading-normal text-white no-underline"
+                          style={bodyStyle}
+                          data-node-id={link.nodeId}
+                        >
+                          {link.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={link.href}
+                          className="font-body font-normal leading-normal text-white"
+                          style={bodyStyle}
+                          data-node-id={link.nodeId}
+                        >
+                          {link.label}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>

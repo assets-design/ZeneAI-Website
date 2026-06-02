@@ -6,6 +6,7 @@ type TryFreeSessionButtonProps = {
   className?: string
   style?: CSSProperties
   label?: string
+  labelSize?: 'default' | 'long'
   onMouseEnter?: () => void
   onMouseLeave?: () => void
 }
@@ -15,9 +16,11 @@ export function TryFreeSessionButton({
   className,
   style,
   label = 'Try a Free Session',
+  labelSize = 'default',
   onMouseEnter,
   onMouseLeave,
 }: TryFreeSessionButtonProps) {
+  const isLongLabel = labelSize === 'long'
   return (
     <a
       href={href}
@@ -36,9 +39,14 @@ export function TryFreeSessionButton({
       onMouseLeave={onMouseLeave}
     >
       <span
-        className="relative z-[1] font-heading font-normal uppercase leading-none"
+        className={cn(
+          'relative z-[1] font-heading font-normal uppercase leading-none',
+          isLongLabel && 'whitespace-nowrap',
+        )}
         style={{
-          fontSize: 'var(--section-text-tab)',
+          fontSize: isLongLabel
+            ? 'var(--section-try-btn-label-long)'
+            : 'var(--section-text-tab)',
           paddingLeft: 'calc(56px * var(--header-font-scale))',
         }}
       >

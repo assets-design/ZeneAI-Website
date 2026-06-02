@@ -1,5 +1,9 @@
 import { Fragment } from 'react'
-import { AboutBringsSection } from '@/components/about/AboutBringsSection'
+import {
+  AboutBringsSection,
+  ABOUT_BRINGS_PRINCIPLES_CONTENT,
+  ABOUT_BRINGS_PRINCIPLES_FEATURES,
+} from '@/components/about/AboutBringsSection'
 import { AboutHeroSection } from '@/components/about/AboutHeroSection'
 import { AboutWhyExistSection } from '@/components/about/AboutWhyExistSection'
 import { SnapSectionsDesktop, useDesktopScrollPage } from '@/components/Layout/ScrollPageDesktop'
@@ -12,7 +16,14 @@ import { TestimonialsSection } from '@/components/home/TestimonialsSection'
 const ABOUT_SECTIONS = [
   { key: 'hero', render: () => <AboutHeroSection /> },
   { key: 'why-exist', render: () => <AboutWhyExistSection /> },
-  { key: 'brings', render: () => <AboutBringsSection /> },
+  { key: 'brings', render: () => <AboutBringsSection sectionId="about-brings" /> },
+  { key: 'brings-duplicate', render: () => (
+    <AboutBringsSection
+      sectionId="about-brings-duplicate"
+      features={ABOUT_BRINGS_PRINCIPLES_FEATURES}
+      content={ABOUT_BRINGS_PRINCIPLES_CONTENT}
+    />
+  ) },
   { key: 'product-intro', render: () => <ProductIntroSection /> },
   { key: 'ai-ready', render: () => <AiReadySection /> },
   { key: 'testimonials', render: () => <TestimonialsSection variant="about" /> },

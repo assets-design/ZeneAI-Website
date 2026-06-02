@@ -27,7 +27,7 @@ export function StartApplicationButton({
         height: 'var(--apply-cta-btn-h)',
         borderWidth: 'var(--apply-cta-btn-border)',
         borderRadius: 'var(--apply-cta-btn-radius)',
-        paddingLeft: 'var(--apply-cta-btn-padding-x)',
+        paddingLeft: 'var(--apply-cta-btn-padding-x-left)',
         paddingRight: 'var(--apply-cta-btn-padding-x)',
       }}
       onMouseEnter={onMouseEnter}
@@ -39,6 +39,7 @@ export function StartApplicationButton({
         className="relative z-[1] shrink-0 font-heading font-normal uppercase leading-none"
         style={{
           fontSize: 'var(--apply-cta-btn-text-size)',
+          marginRight: 'var(--apply-cta-btn-text-to-arrow)',
         }}
         data-node-id="I975:1981;420:1143"
       >

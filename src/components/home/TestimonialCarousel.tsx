@@ -89,19 +89,20 @@ export function TestimonialCarousel({ items }: TestimonialCarouselProps) {
 
   return (
     <div
-      className="relative mx-auto flex min-w-0 flex-col items-stretch gap-4 overflow-hidden px-[var(--section-padding-x)] sm:flex-row sm:items-center sm:px-0"
+      className="relative flex min-w-0 flex-col items-stretch overflow-hidden sm:flex-row sm:items-center"
       style={{
         width: 'var(--testimonial-track-width)',
         minHeight: 'var(--testimonial-card-h)',
         marginTop: 'var(--testimonial-heading-to-carousel)',
+        paddingLeft: 'var(--testimonial-carousel-pl)',
       }}
       data-node-id="767:1962"
     >
       <div
-        className="relative z-20 flex shrink-0 items-center justify-center overflow-hidden sm:justify-start"
+        className="relative z-20 flex shrink-0 items-center justify-start"
         style={{
           gap: 'var(--testimonial-arrow-gap)',
-          paddingRight: 'var(--testimonial-arrow-to-track)',
+          marginRight: 'var(--testimonial-arrow-to-track)',
           height: 'var(--testimonial-arrow-size)',
         }}
         data-node-id="770:2050"

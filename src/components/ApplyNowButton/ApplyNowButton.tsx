@@ -51,10 +51,11 @@ export function ApplyNowButton({
         />
 
         <span
-          className="relative z-[1] flex h-full items-center whitespace-nowrap font-heading uppercase leading-none"
+          className="relative z-[1] flex h-full items-center justify-center whitespace-nowrap font-heading uppercase leading-none"
           style={{
-            paddingLeft: 'var(--apply-btn-text-left)',
+            width: 'var(--apply-btn-text-zone-w)',
             fontSize: 'var(--apply-btn-text)',
+            lineHeight: 1,
           }}
           data-node-id="I981:2035;414:591"
         >

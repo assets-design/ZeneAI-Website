@@ -1,0 +1,245 @@
+import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
+import type { BlogPost } from '@/data/blogPosts'
+import { getAdjacentBlogPosts } from '@/data/blogPosts'
+import { cn } from '@/lib/utils'
+import { Link } from 'react-router-dom'
+
+const highlightStyle = {
+  minHeight: 'var(--english-ai-highlight-h)',
+  paddingLeft: 'var(--english-ai-highlight-pad-x)',
+  paddingRight: 'var(--english-ai-highlight-pad-x)',
+} as const
+
+type BlogPostSectionProps = {
+  post: BlogPost
+}
+
+function BlogPostNav({
+  prev,
+  next,
+}: {
+  prev: BlogPost | null
+  next: BlogPost | null
+}) {
+  if (!prev && !next) {
+    return null
+  }
+
+  return (
+    <nav
+      className="blog-post-nav grid min-w-0 grid-cols-1 gap-[var(--blog-post-nav-gap)] border-t border-black/10 pt-[var(--blog-post-nav-padding-top)] md:grid-cols-2"
+      aria-label="Blog post navigation"
+    >
+      {prev ? (
+        <Link
+          to={`/blog/${prev.slug}`}
+          className="blog-post-nav__link group flex min-w-0 flex-col items-start text-left"
+        >
+          <span
+            className="font-body uppercase text-black/60"
+            style={{
+              fontSize: 'var(--blog-post-nav-label-size)',
+              fontVariationSettings: "'opsz' 14",
+            }}
+          >
+            ← Previous
+          </span>
+          <span
+            className="capitalize font-body font-semibold leading-normal text-black group-hover:text-zene-blue"
+            style={{
+              fontSize: 'var(--blog-post-nav-title-size)',
+              fontVariationSettings: "'opsz' 14",
+              marginTop: 'var(--blog-post-nav-label-to-title)',
+            }}
+          >
+            {prev.title}
+          </span>
+        </Link>
+      ) : (
+        <div className="hidden md:block" aria-hidden />
+      )}
+
+      {next ? (
+        <Link
+          to={`/blog/${next.slug}`}
+          className="blog-post-nav__link group flex min-w-0 flex-col items-start text-left md:col-start-2 md:items-end md:text-right"
+        >
+          <span
+            className="font-body uppercase text-black/60"
+            style={{
+              fontSize: 'var(--blog-post-nav-label-size)',
+              fontVariationSettings: "'opsz' 14",
+            }}
+          >
+            Next →
+          </span>
+          <span
+            className="capitalize font-body font-semibold leading-normal text-black group-hover:text-zene-blue"
+            style={{
+              fontSize: 'var(--blog-post-nav-title-size)',
+              fontVariationSettings: "'opsz' 14",
+              marginTop: 'var(--blog-post-nav-label-to-title)',
+            }}
+          >
+            {next.title}
+          </span>
+        </Link>
+      ) : null}
+    </nav>
+  )
+}
+
+export function BlogPostSection({ post }: BlogPostSectionProps) {
+  const { prev, next } = getAdjacentBlogPosts(post.slug)
+
+  return (
+    <section
+      className="blog-post-page w-full px-[var(--section-card-gap)] pt-[var(--section-card-gap)]"
+      aria-labelledby="blog-post-heading"
+    >
+      <div
+        className="blog-card blog-post-card relative mx-auto w-full overflow-hidden section-card-shell bg-white"
+        style={{ maxWidth: 'var(--section-card-max-w)' }}
+      >
+        <div
+          className="blog-body blog-post-body"
+          style={{
+            paddingTop: 'var(--blog-padding-top)',
+            paddingBottom: 'var(--blog-padding-bottom)',
+          }}
+        >
+          <div className="blog-post-header blog-header grid min-w-0 grid-cols-1 items-start gap-[var(--blog-header-gap)] xl:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="min-w-0">
+              <p
+                className="font-body uppercase text-black"
+                style={{
+                  fontSize: 'var(--section-text-eyebrow)',
+                  fontVariationSettings: "'opsz' 14",
+                }}
+              >
+                <Link to="/blog" className="text-zene-blue underline underline-offset-2">
+                  The blogs
+                </Link>
+              </p>
+
+              <h1
+                id="blog-post-heading"
+                className="font-heading font-medium uppercase leading-none text-black"
+                style={{
+                  fontSize: 'var(--blog-post-title-size)',
+                  maxWidth: 'var(--blog-post-title-max-w)',
+                  marginTop: 'var(--blog-eyebrow-to-heading)',
+                }}
+              >
+                {post.title}
+              </h1>
+
+              <p
+                className="capitalize font-body font-normal leading-normal text-black/70"
+                style={{
+                  fontSize: 'var(--blog-post-meta-size)',
+                  fontVariationSettings: "'opsz' 14",
+                  marginTop: 'var(--blog-post-title-to-meta)',
+                }}
+              >
+                {post.published} · {post.readTime}
+              </p>
+            </div>
+
+            <div className="hero-apply-slot mx-auto shrink-0 self-start xl:mx-0">
+              <ApplyNowButton href="/contact" className="max-w-full shrink-0" />
+            </div>
+          </div>
+
+          <div
+            className="blog-post-feature-wrap w-full overflow-hidden"
+            style={{
+              marginTop: 'var(--blog-post-header-to-feature)',
+              borderRadius: 'var(--blog-card-image-radius)',
+              maxHeight: 'var(--blog-post-feature-h)',
+            }}
+          >
+            <img
+              src={post.image}
+              alt=""
+              className="h-full w-full object-cover"
+              style={{ minHeight: 'var(--blog-post-feature-h)' }}
+            />
+          </div>
+
+          <div
+            className="blog-post-content mx-auto w-full min-w-0"
+            style={{
+              maxWidth: 'var(--blog-post-content-max-w)',
+              marginTop: 'var(--blog-post-feature-to-content)',
+            }}
+          >
+            {post.sections.map((section, index) => (
+              <section
+                key={section.heading ?? `intro-${index}`}
+                className={cn(index > 0 && 'blog-post-section')}
+                style={
+                  index > 0
+                    ? { marginTop: 'var(--blog-post-section-gap)' }
+                    : undefined
+                }
+              >
+                {section.heading ? (
+                  <h2
+                    className="font-heading font-medium uppercase leading-none text-black"
+                    style={{
+                      fontSize: 'var(--blog-post-heading-size)',
+                      marginBottom: 'var(--blog-post-heading-to-body)',
+                    }}
+                  >
+                    {section.heading}
+                  </h2>
+                ) : null}
+
+                {section.paragraphs.map((paragraph, paragraphIndex) => (
+                  <p
+                    key={paragraphIndex}
+                    className="capitalize font-body font-normal leading-normal text-black"
+                    style={{
+                      fontSize: 'var(--blog-post-body-size)',
+                      fontVariationSettings: "'opsz' 14",
+                      marginTop:
+                        paragraphIndex > 0 || section.heading
+                          ? 'var(--blog-post-paragraph-gap)'
+                          : undefined,
+                    }}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </section>
+            ))}
+
+            <p
+              className="capitalize font-body font-normal leading-normal text-black"
+              style={{
+                fontSize: 'var(--blog-post-body-size)',
+                fontVariationSettings: "'opsz' 14",
+                marginTop: 'var(--blog-post-section-gap)',
+              }}
+            >
+              Ready to bring{' '}
+              <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                future-ready programs
+              </span>{' '}
+              to your school?{' '}
+              <Link
+                to="/contact"
+                className="text-zene-blue underline decoration-solid underline-offset-2"
+              >
+                Apply now →
+              </Link>
+            </p>
+
+            <BlogPostNav prev={prev} next={next} />
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

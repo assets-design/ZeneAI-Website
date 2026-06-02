@@ -287,7 +287,7 @@ export function Header({
           ref={menuRef}
           aria-hidden={!menuOpen || (!pinNav && !navVisible)}
           className={cn(
-            'absolute right-0 z-50 w-full border border-black bg-white shadow-[0_0_4px_rgba(0,0,0,0.25)] transition-opacity duration-300 ease-in-out md:w-[var(--header-menu-popup-w)]',
+            'absolute right-0 z-50 w-full rounded-[10px] border border-black bg-white shadow-[0_0_4px_rgba(0,0,0,0.25)] transition-opacity duration-300 ease-in-out md:w-[var(--header-menu-popup-w)]',
             menuOpen && (pinNav || navVisible) ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
           )}
           style={{ top: 'calc(100% + var(--header-menu-popup-gap))' }}

@@ -190,10 +190,7 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
           </h2>
 
           <p
-            className={cn(
-              'font-body font-normal leading-normal text-black',
-              isCustomProgram ? 'normal-case' : 'capitalize',
-            )}
+            className="normal-case font-body font-normal leading-normal text-black"
             style={{
               fontSize: 'var(--section-text-body)',
               fontVariationSettings: "'opsz' 14",
@@ -218,7 +215,7 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
                 key={item.nodeId}
                 {...item}
                 image={isProgramPage ? ENGLISH_AI_IMAGES[index] : onboardingClassroom}
-                normalCaseBody={isCustomProgram}
+                normalCaseBody
               />
             ))}
           </div>

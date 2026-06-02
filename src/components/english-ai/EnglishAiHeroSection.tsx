@@ -1,6 +1,5 @@
-import heroRobot from '@/assets/figma/english-ai/hero-robot.png'
-import heroStudents from '@/assets/figma/english-ai/hero-students.png'
 import theEdgeHeroIllustration from '@/assets/figma/the-edge/hero-illustration.png'
+import whySchoolsGif from '@/data/comp_04.gif'
 import theEdgeHeroLogoOverlay from '@/assets/figma/the-edge/hero-logo-overlay.png'
 import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
 import { cn } from '@/lib/utils'
@@ -48,46 +47,19 @@ function TheEdgeHeroIllustration() {
   )
 }
 
-function EnglishAiHeroIllustration() {
+function EnglishAiHeroGif() {
   return (
-    <div
-      className="english-ai-hero-illustration relative mx-auto w-full max-w-full shrink-0 lg:mx-0 lg:w-auto"
+    <img
+      src={whySchoolsGif}
+      alt="Students learning with Zene AI"
+      className="section-fit-media english-ai-hero-gif block h-auto object-contain object-left-bottom"
       style={{
         width: 'var(--english-ai-hero-illustration-w)',
-        height: 'var(--english-ai-hero-illustration-h)',
+        maxHeight: 'var(--english-ai-hero-illustration-h)',
+        marginTop: 'var(--english-ai-hero-illustration-margin-top)',
       }}
       data-node-id="1060:2209"
-    >
-      <img
-        src={heroStudents}
-        alt="Students learning English with Zene AI"
-        className="absolute inset-0 size-full object-contain object-bottom"
-        data-node-id="1060:2211"
-      />
-      <div
-        className="absolute overflow-hidden"
-        style={{
-          width: 'var(--english-ai-hero-robot-wrap-w)',
-          height: 'var(--english-ai-hero-robot-wrap-h)',
-          left: 'var(--english-ai-hero-robot-left)',
-          top: 'var(--english-ai-hero-robot-top)',
-        }}
-        data-node-id="1060:2210"
-      >
-        <img
-          src={heroRobot}
-          alt=""
-          aria-hidden
-          className="absolute max-w-none object-cover"
-          style={{
-            width: 'var(--english-ai-hero-robot-scale-w)',
-            height: 'var(--english-ai-hero-robot-scale-h)',
-            left: 'var(--english-ai-hero-robot-offset-x)',
-            top: 'var(--english-ai-hero-robot-offset-y)',
-          }}
-        />
-      </div>
-    </div>
+    />
   )
 }
 
@@ -134,7 +106,20 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
     ? 'A research-backed life-readiness program that builds communication, critical thinking, employability, citizenship, and personal development — and gives every student a downloadable leadership profile.'
     : isCodeMonkey
       ? 'Zene.ai is an AI-powered English program built for Indian classrooms. Every student speaks, listens, reads, and writes — every session. Every skill, measured.'
-      : 'Cambridge research: it takes 200 hours to move up one CEFR level and most of those hours are passive listening. Zene turns them into active speaking practice, individually graded for every student.'
+      : (
+          <>
+            <span className="block">
+              Cambridge research: it takes 200 hours to move up one
+            </span>
+            <span className="block">
+              CEFR level and most of those hours are passive listening.
+            </span>
+            <span className="block">
+              Zene turns them into active speaking practice, individually
+            </span>
+            <span className="block">graded for every student.</span>
+          </>
+        )
 
   const eyebrowContent = isTheEdge
     ? 'Life-readiness for Grades 6–12'
@@ -249,16 +234,11 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
               <div
                 className="program-hero-content-grid relative z-[1] grid min-h-0 min-w-0 flex-1 grid-cols-1 items-end gap-x-[var(--english-ai-hero-columns-gap)] gap-y-[var(--english-ai-hero-row-gap)] sm:grid-cols-[minmax(0,1fr)_auto] xl:grid-cols-[58%_42%]"
               >
-                <div className="min-w-0 self-center xl:self-auto">
+                <div className="english-ai-hero-copy min-w-0">
                   <p
-                    className={cn(
-                      'font-body text-black',
-                      !isCodeMonkey && 'uppercase',
-                    )}
+                    className="font-body uppercase text-black"
                     style={{
-                      fontSize: isCodeMonkey
-                        ? 'var(--code-monkey-hero-eyebrow-size)'
-                        : 'var(--section-text-eyebrow)',
+                      fontSize: 'var(--section-text-eyebrow)',
                       fontVariationSettings: "'opsz' 14",
                     }}
                     data-node-id="1060:2225"
@@ -271,10 +251,8 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
                     className="section-heading max-w-none font-heading font-medium uppercase text-black"
                     style={{
                       fontSize: 'var(--english-ai-hero-title-size)',
-                      maxWidth: isCodeMonkey ? undefined : 'var(--english-ai-hero-title-max-w)',
-                      marginTop: isCodeMonkey
-                        ? 'var(--code-monkey-hero-eyebrow-to-heading)'
-                        : 'var(--english-ai-hero-eyebrow-to-heading)',
+                      maxWidth: 'var(--english-ai-hero-title-max-w)',
+                      marginTop: 'var(--english-ai-hero-eyebrow-to-heading)',
                     }}
                     data-node-id="1060:2203"
                   >
@@ -282,12 +260,7 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
                   </h1>
 
                   <p
-                    className={cn(
-                      'font-body leading-normal text-black',
-                      isCodeMonkey
-                        ? 'normal-case font-medium'
-                        : 'capitalize font-medium',
-                    )}
+                    className="font-body font-medium capitalize leading-normal text-black"
                     style={{
                       fontSize: 'var(--english-ai-hero-body-size)',
                       fontVariationSettings: "'opsz' 14",
@@ -301,7 +274,7 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
                 </div>
 
                 <div className="flex w-full min-w-0 items-end justify-center sm:justify-end">
-                  <EnglishAiHeroIllustration />
+                  <EnglishAiHeroGif />
                 </div>
               </div>
             </div>

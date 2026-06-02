@@ -6,7 +6,7 @@ const AUTO_SLIDE_MS = 5000
 type HeroBadge = {
   image: string
   alt: string
-  text: string
+  lines: readonly string[]
   width: string
   height: string
 }
@@ -26,15 +26,20 @@ function HeroBadgeSlide({ badge }: { badge: HeroBadge }) {
         draggable={false}
       />
       <p
-        className="capitalize font-body font-normal leading-normal text-black"
+        className="normal-case font-body font-normal leading-normal text-black"
         style={{
-          fontSize: 'var(--hero-text-badge)',
+          fontSize: 'var(--section-text-body)',
           fontVariationSettings: "'opsz' 14",
-          maxWidth: 'calc(382px * var(--type-size))',
+          maxWidth: 'var(--hero-badge-text-max-w, calc(382px * var(--type-size)))',
           marginTop: 'var(--hero-gap)',
         }}
       >
-        {badge.text}
+        {badge.lines.map((line, index) => (
+          <span key={line}>
+            {line}
+            {index < badge.lines.length - 1 ? <br /> : null}
+          </span>
+        ))}
       </p>
     </div>
   )
@@ -111,7 +116,7 @@ export function HeroBadgesCarousel({ badges }: HeroBadgesCarouselProps) {
       >
         {badges.map((badge, index) => (
           <div
-            key={badge.text}
+            key={badge.lines.join(' ')}
             className="w-full shrink-0 sm:w-1/2"
             role="group"
             aria-roledescription="slide"
@@ -133,7 +138,7 @@ export function HeroBadgesCarousel({ badges }: HeroBadgesCarouselProps) {
       >
         {badges.map((badge, index) => (
           <button
-            key={badge.text}
+            key={badge.lines.join(' ')}
             type="button"
             role="tab"
             aria-label={`Show badge ${index + 1}`}

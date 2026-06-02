@@ -46,17 +46,49 @@ const TABS: {
   },
 ]
 
-const PRODUCT_PANEL_CONTENT = {
-  title: 'AI Speaking Lab',
-  subtitle: 'The speaking practice your classroom timetable cannot provide.',
-  bodyParagraphs: [
-    'One teacher cannot give 1-on-1 speaking practice to 30 students in 40 minutes. Zene does every day, for every student, across seven skill blocks: Speaking, Reading, Grammar, Phonics, Vocabulary, Comprehension, and Live Conversation.',
-    'Mapped to NCF and NEP 2020. Runs on the devices your school already owns. No language-lab room required.',
-  ],
-  video: '/assets/figma/00%20How%20to%20get%20started_.mp4',
+type ProductPanelContent = {
+  title: string
+  subtitle: string
+  bodyParagraphs: string[]
+  ctaLabel?: string
+  ctaLabelSize?: 'default' | 'long'
+  video: string
 }
 
-function ProductTabPanel() {
+const PRODUCT_PANELS: Record<ProductTab, ProductPanelContent> = {
+  'english-ai': {
+    title: 'AI Speaking Lab',
+    subtitle: 'The speaking practice your classroom timetable cannot provide.',
+    bodyParagraphs: [
+      'One teacher cannot give 1-on-1 speaking practice to 30 students in 40 minutes. Zene does every day, for every student, across seven skill blocks: Speaking, Reading, Grammar, Phonics, Vocabulary, Comprehension, and Live Conversation.',
+      'Mapped to NCF and NEP 2020. Runs on the devices your school already owns. No language-lab room required.',
+    ],
+    video: '/assets/figma/00%20How%20to%20get%20started_.mp4',
+  },
+  'code-monkey': {
+    title: 'CODE MONKEY',
+    subtitle: 'Code Is Being Learned, The Fun Way.',
+    bodyParagraphs: [
+      'Coding skills are built through a game-based AI and coding curriculum trusted by 45 million+ kids worldwide. Students progress from block coding to Python and web development through hands-on projects. Real-world programming, creative problem-solving, teacher dashboards, automatic grading, and lesson plans support every learning stage.',
+    ],
+    ctaLabel: 'EXPLORE CODING COURSES',
+    ctaLabelSize: 'long',
+    video: '/assets/figma/00%20How%20to%20get%20started_.mp4',
+  },
+  'the-edge': {
+    title: 'THE EDGE',
+    subtitle: "Life Skills Are Being Shaped For Tomorrow's Leaders.",
+    bodyParagraphs: [
+      'Leadership, resilience, financial literacy, and communication are developed through The Edge, an award-winning curriculum for Grades 6–12. Students build social-emotional and practical skills through structured learning. Designed using global frameworks, it includes internships, entrepreneurship challenges, and career readiness experiences that prepare learners for future success.',
+    ],
+    ctaLabel: 'DISCOVER THE EDGE',
+    video: '/assets/figma/00%20How%20to%20get%20started_.mp4',
+  },
+}
+
+function ProductTabPanel({ activeTab }: { activeTab: ProductTab }) {
+  const content = PRODUCT_PANELS[activeTab]
+
   return (
     <div
       className="product-tab-panel grid min-h-0 flex-1 items-stretch xl:grid-cols-[minmax(0,1fr)_var(--section-dashboard-w)]"
@@ -69,29 +101,29 @@ function ProductTabPanel() {
         >
           <h3
             className="font-heading font-medium uppercase leading-none text-black"
-            style={{ fontSize: 'var(--section-text-title)' }}
+            style={{ fontSize: 'var(--section-text-tab)' }}
             data-node-id="642:1150"
           >
-            {PRODUCT_PANEL_CONTENT.title}
+            {content.title}
           </h3>
           <p
-            className="capitalize font-body font-medium text-black"
+            className="normal-case font-body font-medium text-black"
             style={{
               fontSize: 'var(--section-text-body)',
               fontVariationSettings: "'opsz' 14",
             }}
             data-node-id="642:1151"
           >
-            {PRODUCT_PANEL_CONTENT.subtitle}
+            {content.subtitle}
           </p>
           <div
             className="product-tab-body flex flex-col"
             style={{ gap: 'var(--section-body-paragraph-gap)' }}
           >
-            {PRODUCT_PANEL_CONTENT.bodyParagraphs.map((paragraph, index) => (
+            {content.bodyParagraphs.map((paragraph, index) => (
               <p
                 key={index}
-                className="capitalize font-body font-normal leading-normal text-black"
+                className="normal-case font-body font-normal leading-normal text-black"
                 style={{
                   fontSize: 'var(--section-text-body)',
                   fontVariationSettings: "'opsz' 14",
@@ -109,7 +141,11 @@ function ProductTabPanel() {
           style={{ minHeight: 'var(--section-body-to-cta)' }}
           aria-hidden
         />
-        <TryFreeSessionButton className="shrink-0" />
+        <TryFreeSessionButton
+          className="shrink-0"
+          label={content.ctaLabel}
+          labelSize={content.ctaLabelSize}
+        />
       </div>
       <div
         className="product-tab-media w-full overflow-hidden shadow-[0_0_2px_rgba(0,0,0,0.25)] xl:w-[var(--section-dashboard-w)] xl:max-w-[var(--section-dashboard-w)] xl:shrink-0"
@@ -120,7 +156,8 @@ function ProductTabPanel() {
         data-node-id="642:1287"
       >
         <video
-          src={PRODUCT_PANEL_CONTENT.video}
+          key={content.video}
+          src={content.video}
           autoPlay
           muted
           loop
@@ -230,7 +267,7 @@ export function ProductIntroSection() {
             })}
           </div>
 
-          <ProductTabPanel />
+          <ProductTabPanel activeTab={activeTab} />
         </div>
       </div>
     </section>

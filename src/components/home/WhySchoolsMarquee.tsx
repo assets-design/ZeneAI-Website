@@ -26,7 +26,7 @@ export function WhySchoolsMarquee() {
               key={i}
               className="shrink-0 font-heading font-medium uppercase leading-none text-white"
               style={{
-                fontSize: 'var(--why-marquee-text)',
+                fontSize: 'var(--section-text-heading)',
                 paddingLeft: 'var(--why-marquee-text-gap)',
                 paddingRight: 'var(--why-marquee-text-gap)',
               }}

@@ -94,8 +94,9 @@
   --apply-btn-pill-top          : calc(28px * var(--header-font-scale));
   --apply-btn-pill-radius       : calc(50px * var(--header-font-scale));
   --apply-btn-pill-border       : calc(3px * var(--header-font-scale));
-  --apply-btn-text              : calc(42px * var(--type-size));
+  --apply-btn-text              : 36px;
   --apply-btn-text-left         : calc(35px * var(--type-size));
+  --apply-btn-text-zone-w       : var(--apply-btn-circle-left);
   --apply-btn-circle-size       : calc(140px * var(--header-font-scale));
   --apply-btn-circle-left       : calc(var(--apply-btn-w) - var(--apply-btn-circle-size));
   --apply-btn-student-size      : calc(79px * var(--media-size));
@@ -103,15 +104,17 @@
   --apply-btn-student-top       : calc(31px * var(--header-font-scale));
   --apply-btn-student-hover-size: calc(var(--apply-btn-circle-size) * 0.68);
 
-  /* Home hero — Figma Home frame 642:1122 (section card 642:1123) */
+  --the-edge-testimonials-name-size   : calc(52px * var(--type-size));
+
+  /* Home hero — align with program page (English AI / The Edge) typography */
   --hero-card-max-w             : 1910px;
   --hero-card-min-h             : 950px;
   --hero-card-radius            : 20px;
   --hero-padding-x              : 120px;
-  --hero-text-eyebrow           : calc(22px * var(--type-size));
-  --hero-text-headline          : calc(82px * var(--type-size));
-  --hero-text-body              : calc(34px * var(--type-size));
-  --hero-text-badge             : calc(22px * var(--type-size));
+  --hero-text-eyebrow           : var(--section-text-eyebrow);
+  --hero-text-headline          : var(--english-ai-hero-title-size);
+  --hero-text-body              : var(--english-ai-hero-body-size);
+  --hero-text-badge             : var(--section-text-body);
   --hero-decorative-w           : min(calc(480px * var(--media-size)), 42vw);
   --hero-decorative-h           : max(var(--apply-btn-h), calc(150px * var(--media-size)));
   --hero-robo-viewport-w        : calc(240px * var(--media-size));
@@ -121,8 +124,10 @@
   --hero-apply-top              : calc(29px * var(--header-font-scale));
   --hero-apply-right            : calc(120px * var(--header-font-scale));
   --hero-apply-offset-top       : 24px;
-  --hero-top-row-offset-top     : 12px;
-  --hero-robot-offset-top       : 8px;
+  --home-hero-apply-offset-top  : calc(56px * var(--header-font-scale));
+  --home-hero-eyebrow-to-heading: 0px;
+  --hero-top-row-offset-top     : calc(28px * var(--header-font-scale));
+  --hero-robot-offset-top       : calc(24px * var(--header-font-scale));
   --hero-top-row-min-h          : max(var(--apply-btn-h), var(--hero-decorative-h));
   --hero-inner-padding-top      : var(--hero-gap);
   --hero-gap                    : 15px;
@@ -139,6 +144,8 @@
   --hero-badge-carousel-to-dots : calc(20px * var(--header-font-scale));
   --hero-badge-dot-size         : calc(10px * var(--header-font-scale));
   --hero-badge-dot-gap          : calc(10px * var(--header-font-scale));
+  --hero-badges-gap             : calc(12px * var(--header-font-scale));
+  --hero-badge-text-max-w       : calc(382px * var(--type-size));
 
   /* Home section 2 — Built for every learner (642:1124) */
   --section-gap                 : 20px;
@@ -179,6 +186,7 @@
   --section-try-btn-w           : calc(476px * var(--header-font-scale));
   --section-try-btn-h           : calc(84px * var(--header-font-scale));
   --section-try-btn-border      : calc(3px * var(--header-font-scale));
+  --section-try-btn-label-long  : calc(30px * var(--type-size));
 
   /* Home section 3 — See it in action (642:1125) */
   --action-padding-top          : 60px;
@@ -215,7 +223,7 @@
   --why-marquee-h               : calc(132px * var(--header-font-scale));
   --why-marquee-radius          : 20px;
   --why-marquee-bg              : #177ec0;
-  --why-marquee-text            : calc(62px * var(--type-size));
+  --why-marquee-text            : var(--section-text-heading);
   --why-marquee-text-gap        : calc(48px * var(--type-size));
   --why-marquee-bottom          : calc(40px * var(--header-font-scale));
 
@@ -246,18 +254,20 @@
   --track-img-to-text           : calc(31px * var(--media-size));
   --track-text-max-w            : calc(434px * var(--type-size));
   --track-text-max-w-sm         : calc(384px * var(--type-size));
+  --track-text-max-w-body       : calc(480px * var(--type-size));
 
   /* Home section 7 — Become an AI-Ready School (765:1838 / 765:1839) */
   --ai-ready-padding-top        : 60px;
   --ai-ready-padding-bottom     : 80px;
   --ai-ready-heading-max-w      : calc(425px * var(--header-font-scale));
   --ai-ready-heading-to-diagram : calc(-8px * var(--media-size));
-  --ai-ready-diagram-h          : calc(854px * var(--media-size));
-  --ai-ready-headset-top        : 43%;
-  --ai-ready-headset-bottom     : 7%;
-  --ai-ready-headset-left       : 24%;
-  --ai-ready-headset-right      : 24%;
-  --ai-ready-headset-offset-y   : 50px;
+  --ai-ready-diagram-aspect     : 1910 / 854;
+  --ai-ready-diagram-max-h      : calc(854px * var(--media-size));
+  --ai-ready-student-body-pb    : calc(28px * var(--media-size));
+  --ai-ready-headset-top        : calc(45.78% + var(--ai-ready-student-body-pb));
+  --ai-ready-headset-bottom     : 16.51%;
+  --ai-ready-headset-left       : 36.93%;
+  --ai-ready-headset-right      : 36.93%;
 
   /* Home section 8 — Who Zene works with / onboarding (767:1875) */
   --onboard-padding-top         : 60px;
@@ -280,25 +290,29 @@
   --testimonial-heading-max-w       : calc(1342px * var(--header-font-scale));
   --testimonial-eyebrow-to-heading  : calc(44px * var(--header-font-scale));
   --testimonial-heading-to-carousel : calc(30px * var(--header-font-scale));
-  --testimonial-track-width         : 90%;
+  --testimonial-track-width         : 100%;
+  --testimonial-carousel-pl         : var(--section-padding-x);
   --testimonial-card-w              : calc(482px * var(--media-size));
   --testimonial-card-h              : calc(593px * var(--media-size));
   --testimonial-card-gap            : calc(45px * var(--header-font-scale));
   --testimonial-card-radius         : 20px;
   --testimonial-padding-x           : calc(45px * var(--header-font-scale));
-  --testimonial-quote-icon-w        : calc(82px * var(--media-size));
-  --testimonial-quote-icon-h        : calc(53px * var(--media-size));
-  --testimonial-quote-top           : calc(20px * var(--header-font-scale));
-  --testimonial-name-size           : calc(52px * var(--type-size));
+  --testimonial-quote-icon-w        : calc(140px * var(--media-size));
+  --testimonial-quote-icon-h        : calc(90px * var(--media-size));
+  --testimonial-quote-top           : calc(21px * var(--header-font-scale));
+  --testimonial-name-size           : var(--the-edge-testimonials-name-size);
   --testimonial-name-top            : calc(211px * var(--header-font-scale));
   --testimonial-name-max-w          : calc(251px * var(--header-font-scale));
-  --testimonial-body-top            : calc(333px * var(--header-font-scale));
+  --testimonial-name-to-body        : calc(16px * var(--header-font-scale));
+  --testimonial-body-top            : calc(279px * var(--header-font-scale));
   --testimonial-body-w              : calc(391px * var(--header-font-scale));
   --testimonial-logo-w              : calc(86px * var(--media-size));
   --testimonial-logo-h              : calc(112px * var(--media-size));
-  --testimonial-arrow-size          : calc(48px * var(--type-size));
+  --testimonial-logo-right          : 0px;
+  --testimonial-logo-bottom         : 0px;
+  --testimonial-arrow-size          : calc(83px * var(--media-size));
   --testimonial-arrow-gap           : calc(15px * var(--header-font-scale));
-  --testimonial-arrow-to-track      : calc(20px * var(--header-font-scale));
+  --testimonial-arrow-to-track      : calc(275px * var(--header-font-scale));
   --testimonial-fade-w              : calc(229px * var(--header-font-scale));
 
   /* Home section 10 — Our cohort / partner schools (1023:1891) */
@@ -316,12 +330,12 @@
   --cohort-carousel-to-dots         : calc(24px * var(--header-font-scale));
   --cohort-dot-size                 : calc(8px * var(--type-size));
   --cohort-dot-gap                  : calc(8px * var(--header-font-scale));
-  --cohort-logo-help-w              : calc(148px * var(--media-size));
-  --cohort-logo-help-h              : calc(144px * var(--media-size));
-  --cohort-logo-chist-w             : calc(216px * var(--media-size));
-  --cohort-logo-chist-h             : calc(151px * var(--media-size));
-  --cohort-logo-sancta-w            : calc(181px * var(--media-size));
-  --cohort-logo-sancta-h            : calc(105px * var(--media-size));
+  --cohort-logo-help-w              : calc(178px * var(--media-size));
+  --cohort-logo-help-h              : calc(172px * var(--media-size));
+  --cohort-logo-chist-w             : calc(268px * var(--media-size));
+  --cohort-logo-chist-h             : calc(188px * var(--media-size));
+  --cohort-logo-sancta-w            : calc(235px * var(--media-size));
+  --cohort-logo-sancta-h            : calc(132px * var(--media-size));
   --cohort-logo-book-w              : calc(189px * var(--media-size));
   --cohort-logo-book-h              : calc(89px * var(--media-size));
   --cohort-logo-ssvm-w              : calc(207px * var(--media-size));
@@ -330,8 +344,8 @@
   --cohort-logo-schechter-h         : calc(73px * var(--media-size));
   --cohort-logo-edgewater-w         : calc(141px * var(--media-size));
   --cohort-logo-edgewater-h         : calc(141px * var(--media-size));
-  --cohort-logo-patricks-w          : calc(165px * var(--media-size));
-  --cohort-logo-patricks-h          : calc(153px * var(--media-size));
+  --cohort-logo-patricks-w          : calc(220px * var(--media-size));
+  --cohort-logo-patricks-h          : calc(205px * var(--media-size));
   --cohort-logo-oak-w               : calc(135px * var(--media-size));
   --cohort-logo-oak-h               : calc(142px * var(--media-size));
   --cohort-logo-montfort-w          : calc(170px * var(--media-size));
@@ -349,18 +363,18 @@
   --faq-padding-bottom              : 80px;
   --faq-heading-to-list             : calc(42px * var(--header-font-scale));
   --faq-item-max-w                  : calc(1397px * var(--header-font-scale));
-  --faq-item-radius                 : calc(94.5px * var(--header-font-scale));
+  --faq-item-radius                 : 9999px;
   --faq-item-collapsed-h            : calc(124px * var(--header-font-scale));
   --faq-item-expanded-min-h         : calc(169px * var(--header-font-scale));
   --faq-item-gap                    : calc(15px * var(--header-font-scale));
   --faq-item-padding-x              : calc(60px * var(--header-font-scale));
   --faq-item-padding-y              : calc(30px * var(--header-font-scale));
   --faq-item-padding-y-expanded     : calc(30px * var(--header-font-scale));
-  --faq-icon-w                      : calc(82px * var(--media-size));
-  --faq-icon-h                      : calc(84px * var(--media-size));
-  --faq-icon-gap                    : calc(30px * var(--media-size));
-  --faq-question-size               : calc(32px * var(--type-size));
-  --faq-answer-size                 : calc(20px * var(--type-size));
+  --faq-icon-w                      : calc(100px * var(--media-size));
+  --faq-icon-h                      : calc(102px * var(--media-size));
+  --faq-icon-gap                    : calc(32px * var(--media-size));
+  --faq-question-size               : calc(28px * var(--type-size));
+  --faq-answer-size                 : var(--section-text-body);
   --faq-question-to-answer          : calc(25px * var(--header-font-scale));
   --faq-answer-max-w                : calc(812px * var(--header-font-scale));
 
@@ -387,6 +401,8 @@
   --apply-cta-btn-border            : calc(3px * var(--header-font-scale));
   --apply-cta-btn-text-size         : calc(42px * var(--type-size));
   --apply-cta-btn-padding-x         : calc(56px * var(--header-font-scale));
+  --apply-cta-btn-padding-x-left    : calc(40px * var(--header-font-scale));
+  --apply-cta-btn-text-to-arrow     : calc(24px * var(--header-font-scale));
   --apply-cta-btn-arrow-size        : calc(35px * var(--type-size));
   --about-skills-body-max-w         : calc(601px * var(--header-font-scale));
 
@@ -399,6 +415,8 @@
   --contact-hero-apply-top          : calc(40px * var(--header-font-scale));
   --contact-hero-apply-right        : 50px;
   --contact-hero-subtitle-max-w     : calc(874px * var(--type-size));
+  --contact-hero-subtitle-size      : calc(26px * var(--type-size));
+  --contact-hero-copy-pull-up       : calc(var(--hero-gap) + var(--apply-btn-h) + 10px);
   --contact-hero-title-to-subtitle  : calc(80px * var(--type-size));
   --contact-hero-illustration-w     : calc(585px * var(--media-size));
   --contact-hero-illustration-h     : calc(414px * var(--media-size));
@@ -503,12 +521,33 @@
   --blog-card-title-max-w           : calc(353px * var(--header-font-scale));
   --blog-card-body-max-w            : calc(481px * var(--header-font-scale));
 
+  /* Blog single post */
+  --blog-post-title-size            : calc(56px * var(--type-size));
+  --blog-post-title-max-w           : calc(1003px * var(--header-font-scale));
+  --blog-post-title-to-meta         : calc(20px * var(--type-size));
+  --blog-post-meta-size             : calc(20px * var(--type-size));
+  --blog-post-header-to-feature     : calc(40px * var(--type-size));
+  --blog-post-feature-h             : calc(420px * var(--media-size));
+  --blog-post-feature-to-content    : calc(48px * var(--type-size));
+  --blog-post-content-max-w         : calc(874px * var(--header-font-scale));
+  --blog-post-heading-size          : calc(32px * var(--type-size));
+  --blog-post-heading-to-body       : calc(20px * var(--type-size));
+  --blog-post-body-size             : calc(22px * var(--type-size));
+  --blog-post-paragraph-gap         : calc(16px * var(--type-size));
+  --blog-post-section-gap           : calc(32px * var(--type-size));
+  --blog-post-nav-gap               : calc(24px * var(--header-font-scale));
+  --blog-post-nav-padding-top       : calc(48px * var(--type-size));
+  --blog-post-nav-label-size        : calc(16px * var(--type-size));
+  --blog-post-nav-title-size        : calc(20px * var(--type-size));
+  --blog-post-nav-label-to-title    : calc(8px * var(--type-size));
+
   /* About page hero — Figma 1047:2176 / 1047:1943 */
-  --about-hero-padding-top          : 80px;
+  --about-hero-padding-top          : var(--hero-inner-padding-top, var(--hero-gap));
   --about-hero-padding-bottom       : 80px;
   --about-hero-columns-gap          : calc(40px * var(--header-font-scale));
   --about-hero-row-gap              : calc(32px * var(--header-font-scale));
-  --about-hero-text-offset-top      : 0px;
+  --about-hero-text-offset-top      : 40px;
+  --about-hero-eyebrow-to-heading   : var(--section-gap);
   --about-hero-text-max-w           : calc(1130px * var(--type-size));
   --about-hero-title-size           : calc(82px * var(--type-size));
   --about-hero-subtitle-size        : calc(38px * var(--type-size));
@@ -516,14 +555,11 @@
   --about-hero-subtitle-max-w       : calc(1074px * var(--type-size));
   --about-hero-title-to-subtitle    : calc(62px * var(--type-size));
   --about-hero-subtitle-indent      : 16.67%;
-  --about-hero-robot-margin-top     : 0px;
+  --about-hero-robot-padding-right  : 30px;
+  --about-hero-robot-inset-bottom   : var(--about-hero-padding-bottom);
   --about-hero-apply-margin-right   : 50px;
-  --about-hero-robot-wrap-w         : calc(287px * var(--media-size));
-  --about-hero-robot-wrap-h         : calc(377px * var(--media-size));
-  --about-hero-robot-scale-w        : 399.17%;
-  --about-hero-robot-scale-h        : 170.89%;
-  --about-hero-robot-offset-x       : -149.27%;
-  --about-hero-robot-offset-y       : -70.89%;
+  --about-hero-robot-w              : calc(360px * var(--media-size));
+  --about-hero-robot-h              : calc(440px * var(--media-size));
 
   /* About page — Why we exist — Figma 1054:2191 / 1047:1944 */
   --about-why-padding-top           : 80px;
@@ -532,31 +568,41 @@
   --about-why-row-gap               : calc(32px * var(--header-font-scale));
   --about-why-heading-size          : calc(62px * var(--type-size));
   --about-why-heading-word-gap      : calc(8px * var(--header-font-scale));
+  --about-why-eyebrow-to-heading    : var(--section-gap);
   --about-why-exist-highlight-h     : calc(74px * var(--header-font-scale));
   --about-why-exist-highlight-pad-x : calc(16px * var(--header-font-scale));
   --about-why-heading-to-body       : calc(30px * var(--header-font-scale));
-  --about-why-body-size             : calc(22px * var(--type-size));
+  --about-why-body-paragraph-gap    : calc(20px * var(--header-font-scale));
+  --about-why-body-size             : 18px;
+  --about-why-body-weight           : 500;
   --about-why-body-max-w            : calc(697px * var(--header-font-scale));
   --about-why-body-to-tagline       : calc(48px * var(--header-font-scale));
   --about-why-tagline-size          : calc(38px * var(--type-size));
   --about-why-tagline-max-w         : calc(539px * var(--header-font-scale));
-  --about-why-illustration-w        : min(100%, calc(720px * var(--media-size)));
-  --about-why-illustration-h        : calc(748px * var(--media-size));
+  --about-why-video-w               : min(100%, calc(720px * var(--media-size)));
+  --about-why-video-h               : calc(748px * var(--media-size));
+  --about-why-video-radius          : var(--section-dashboard-radius, 20px);
 
   /* About page — What Zene AI brings — Figma 1055:2192 / 1047:1946 */
   --about-brings-padding-top        : 80px;
   --about-brings-padding-bottom     : 80px;
   --about-brings-heading-size       : calc(62px * var(--type-size));
   --about-brings-heading-max-w      : calc(563px * var(--header-font-scale));
+  --about-brings-eyebrow-to-heading : var(--section-gap);
   --about-brings-highlight-h          : calc(74px * var(--header-font-scale));
   --about-brings-highlight-pad-x      : calc(16px * var(--header-font-scale));
+  --about-brings-heading-word-gap     : calc(8px * var(--header-font-scale));
   --about-brings-heading-to-grid    : calc(48px * var(--header-font-scale));
   --about-brings-grid-gap-x         : calc(24px * var(--header-font-scale));
   --about-brings-grid-gap-y         : calc(40px * var(--header-font-scale));
   --about-brings-stagger-offset     : calc(107px * var(--header-font-scale));
+  --about-brings-stagger-offset-three: calc(72px * var(--header-font-scale));
   --about-brings-feature-img-w      : min(100%, calc(520px * var(--media-size)));
   --about-brings-feature-img-h      : calc(347px * var(--media-size));
   --about-brings-feature-img-to-label: calc(30px * var(--media-size));
+  --about-brings-title-size         : calc(28px * var(--type-size));
+  --about-brings-title-to-description: calc(12px * var(--header-font-scale));
+  --about-brings-description-size   : calc(22px * var(--type-size));
   --about-brings-label-size         : calc(22px * var(--type-size));
   --about-brings-label-max-w        : calc(376px * var(--header-font-scale));
   --about-brings-carousel-to-dots   : calc(24px * var(--header-font-scale));
@@ -572,7 +618,7 @@
   --english-ai-hero-eyebrow-to-heading   : calc(20px * var(--header-font-scale));
   --english-ai-hero-title-size           : calc(82px * var(--type-size));
   --english-ai-hero-title-max-w          : calc(972px * var(--header-font-scale));
-  --english-ai-hero-body-size            : calc(28px * var(--type-size));
+  --english-ai-hero-body-size            : calc(32px * var(--type-size));
   --english-ai-hero-body-max-w           : calc(850px * var(--header-font-scale));
   --english-ai-hero-title-to-body        : calc(30px * var(--header-font-scale));
   --english-ai-hero-illustration-w       : calc(781px * var(--media-size));
@@ -610,8 +656,8 @@
   --english-ai-grid-heading-to-subtitle  : calc(30px * var(--type-size));
   --english-ai-grid-subtitle-max-w       : calc(1043px * var(--type-size));
   --english-ai-grid-subtitle-to-items    : calc(30px * var(--type-size));
-  --english-ai-grid-gap-x                : calc(24px * var(--header-font-scale));
-  --english-ai-grid-gap-y                : calc(40px * var(--header-font-scale));
+  --english-ai-grid-gap-x                : calc(32px * var(--header-font-scale));
+  --english-ai-grid-gap-y                : calc(48px * var(--header-font-scale));
   --english-ai-grid-img-w                : calc(213px * var(--media-size));
   --english-ai-grid-img-h                : calc(142px * var(--media-size));
   --english-ai-grid-img-to-title         : calc(30px * var(--media-size));
@@ -628,6 +674,7 @@
   --english-ai-comparison-heading-to-subtitle: calc(30px * var(--type-size));
   --english-ai-comparison-subtitle-max-w : calc(631px * var(--type-size));
   --english-ai-comparison-subtitle-to-table: calc(30px * var(--type-size));
+  --english-ai-comparison-table-to-footer  : calc(48px * var(--header-font-scale));
   --english-ai-comparison-table-min-w    : calc(680px * var(--header-font-scale));
   --english-ai-comparison-table-radius   : calc(12px * var(--header-font-scale));
   --english-ai-comparison-role-col       : calc(140px * var(--header-font-scale));
@@ -725,6 +772,7 @@
     --section-tab-code-w            : calc(340px * var(--header-font-scale));
     --section-tab-edge-w            : calc(300px * var(--header-font-scale));
     --section-try-btn-w             : min(100%, calc(400px * var(--header-font-scale)));
+    --section-try-btn-label-long    : calc(22px * var(--type-size));
     --section-dashboard-w           : 100%;
     --section-dashboard-h           : calc(280px * var(--media-scale) / var(--header-font-scale));
 
@@ -739,21 +787,24 @@
     --why-marquee-bottom            : calc(32px * var(--header-font-scale));
     --why-marquee-offset-top        : 15px;
 
-    --ai-ready-diagram-h            : calc(620px * var(--media-size));
+    --ai-ready-diagram-max-h        : calc(620px * var(--media-size));
 
-    --testimonial-track-width       : 100%;
     --testimonial-card-w            : calc(340px * var(--media-size));
-    --testimonial-card-h            : calc(420px * var(--media-size));
-    --testimonial-fade-w            : calc(80px * var(--header-font-scale));
-    --testimonial-name-top          : calc(150px * var(--header-font-scale));
-    --testimonial-body-top          : calc(240px * var(--header-font-scale));
+    --testimonial-card-h            : calc(520px * var(--media-size));
+    --testimonial-quote-icon-w      : calc(130px * var(--media-size));
+    --testimonial-quote-icon-h      : calc(84px * var(--media-size));
+    --testimonial-arrow-size        : calc(64px * var(--media-size));
+    --testimonial-arrow-to-track    : calc(48px * var(--header-font-scale));
+    --testimonial-name-top          : calc(185px * var(--header-font-scale));
+    --testimonial-body-top          : calc(248px * var(--header-font-scale));
     --testimonial-body-w            : calc(280px * var(--header-font-scale));
+    --testimonial-fade-w            : calc(80px * var(--header-font-scale));
 
     --faq-item-padding-x            : calc(32px * var(--header-font-scale));
-    --faq-item-radius               : calc(48px * var(--header-font-scale));
+    --faq-item-radius               : 9999px;
     --faq-item-collapsed-h          : auto;
-    --faq-icon-w                    : calc(56px * var(--media-size));
-    --faq-icon-h                    : calc(58px * var(--media-size));
+    --faq-icon-w                    : calc(68px * var(--media-size));
+    --faq-icon-h                    : calc(70px * var(--media-size));
     --faq-question-size             : calc(24px * var(--type-size));
 
     --apply-cta-yellow-size         : min(calc(100vw - 96px), calc(620px * var(--header-font-scale)));
@@ -771,6 +822,8 @@
     --apply-cta-btn-w               : min(100%, calc(360px * var(--header-font-scale)));
     --apply-cta-btn-text-size       : calc(28px * var(--type-size));
     --apply-cta-btn-padding-x       : calc(28px * var(--header-font-scale));
+    --apply-cta-btn-padding-x-left  : calc(18px * var(--header-font-scale));
+    --apply-cta-btn-text-to-arrow   : calc(16px * var(--header-font-scale));
     --apply-cta-btn-arrow-size      : calc(28px * var(--type-size));
 
     --apply-btn-w                   : min(100%, calc(260px * var(--header-font-scale)));
@@ -820,12 +873,16 @@
     --blog-avatar-student-size      : calc(68px * var(--media-size));
     --blog-avatar-student-left      : calc(26px * var(--media-size));
     --blog-avatar-student-top       : calc(26px * var(--media-size));
+    --blog-post-title-size          : calc(40px * var(--type-size));
+    --blog-post-feature-h           : calc(320px * var(--media-size));
+    --blog-post-heading-size        : calc(26px * var(--type-size));
+    --blog-post-body-size           : calc(20px * var(--type-size));
 
-    --about-hero-padding-top        : calc(48px * var(--header-font-scale));
+    --about-hero-padding-top        : var(--hero-inner-padding-top, var(--hero-gap));
     --about-hero-padding-bottom     : calc(48px * var(--header-font-scale));
     --about-hero-columns-gap        : calc(24px * var(--header-font-scale));
     --about-hero-row-gap            : calc(24px * var(--header-font-scale));
-    --about-hero-text-offset-top    : 0px;
+    --about-hero-text-offset-top    : 40px;
     --about-hero-text-max-w         : 100%;
     --about-hero-title-size         : calc(56px * var(--type-size));
     --about-hero-subtitle-size      : calc(28px * var(--type-size));
@@ -833,9 +890,9 @@
     --about-hero-subtitle-max-w     : 100%;
     --about-hero-title-to-subtitle  : calc(28px * var(--type-size));
     --about-hero-subtitle-indent    : 16.67%;
-    --about-hero-robot-margin-top   : 0px;
-    --about-hero-robot-wrap-w       : calc(200px * var(--media-size));
-    --about-hero-robot-wrap-h       : calc(260px * var(--media-size));
+    --about-hero-robot-inset-bottom   : var(--about-hero-padding-bottom);
+    --about-hero-robot-w            : calc(260px * var(--media-size));
+    --about-hero-robot-h            : calc(320px * var(--media-size));
 
     --about-why-padding-top         : calc(48px * var(--header-font-scale));
     --about-why-padding-bottom      : calc(48px * var(--header-font-scale));
@@ -845,13 +902,13 @@
     --about-why-exist-highlight-h   : calc(58px * var(--header-font-scale));
     --about-why-exist-highlight-pad-x: calc(12px * var(--header-font-scale));
     --about-why-heading-to-body     : calc(24px * var(--header-font-scale));
-    --about-why-body-size           : calc(20px * var(--type-size));
+    --about-why-body-size           : 18px;
     --about-why-body-max-w          : 100%;
     --about-why-body-to-tagline     : calc(28px * var(--header-font-scale));
     --about-why-tagline-size        : calc(28px * var(--type-size));
     --about-why-tagline-max-w       : 100%;
-    --about-why-illustration-w      : min(100%, calc(480px * var(--media-size)));
-    --about-why-illustration-h      : calc(500px * var(--media-size));
+    --about-why-video-w             : min(100%, calc(480px * var(--media-size)));
+    --about-why-video-h             : calc(500px * var(--media-size));
 
     --about-brings-padding-top      : calc(48px * var(--header-font-scale));
     --about-brings-padding-bottom   : calc(48px * var(--header-font-scale));
@@ -866,7 +923,8 @@
     --about-brings-feature-img-w    : min(100%, calc(400px * var(--media-size)));
     --about-brings-feature-img-h    : calc(267px * var(--media-size));
     --about-brings-feature-img-to-label: calc(24px * var(--media-size));
-    --about-brings-label-size       : calc(20px * var(--type-size));
+    --about-brings-title-size       : calc(24px * var(--type-size));
+    --about-brings-description-size : calc(20px * var(--type-size));
     --about-brings-label-max-w      : 100%;
 
     --english-ai-hero-padding-top        : calc(48px * var(--header-font-scale));
@@ -884,7 +942,7 @@
     --english-ai-hero-eyebrow-to-heading: calc(16px * var(--header-font-scale));
     --english-ai-hero-eyebrow-to-apply        : calc(12px * var(--header-font-scale));
     --english-ai-hero-title-to-body           : calc(20px * var(--header-font-scale));
-    --english-ai-hero-body-size               : calc(24px * var(--type-size));
+    --english-ai-hero-body-size               : calc(28px * var(--type-size));
     --english-ai-heading-max-w                : 100%;
     --english-ai-highlight-h                    : calc(58px * var(--header-font-scale));
     --english-ai-highlight-pad-x                : calc(12px * var(--header-font-scale));
@@ -940,6 +998,7 @@
     --contact-hero-padding-bottom   : 56px;
     --contact-hero-apply-to-image-gap: 80px;
     --contact-hero-title-to-subtitle: calc(32px * var(--type-size));
+    --contact-hero-subtitle-size    : calc(22px * var(--type-size));
     --contact-hero-illustration-w   : min(100%, calc(460px * var(--media-size)));
     --contact-hero-illustration-h   : calc(326px * var(--media-size));
 
@@ -1001,8 +1060,8 @@
     --cohort-grid-col-gap             : calc(16px * var(--header-font-scale));
     --cohort-carousel-to-dots         : calc(20px * var(--header-font-scale));
 
-    --hero-text-headline          : calc(42px * var(--type-size));
-    --hero-text-body              : calc(20px * var(--type-size));
+    --hero-text-headline          : var(--english-ai-hero-title-size);
+    --hero-text-body              : var(--english-ai-hero-body-size);
     --hero-robo-viewport-w        : calc(220px * var(--media-size));
     --hero-decorative-w           : min(var(--hero-robo-viewport-w), 54vw);
     --hero-decorative-h           : max(var(--apply-btn-h), calc(160px * var(--media-size)));
@@ -1023,6 +1082,7 @@
     --section-tab-gap               : 12px;
     --section-try-btn-w             : 100%;
     --section-try-btn-h             : calc(64px * var(--header-font-scale));
+    --section-try-btn-label-long    : calc(17px * var(--type-size));
     --section-dashboard-h           : calc(220px * var(--media-scale) / var(--header-font-scale));
 
     --action-padding-top            : 40px;
@@ -1032,7 +1092,7 @@
     --action-feature-img-w          : calc(120px * var(--media-scale) / var(--header-font-scale));
     --action-feature-img-h          : calc(80px * var(--media-scale) / var(--header-font-scale));
 
-    --why-marquee-text              : calc(36px * var(--type-size));
+    --why-marquee-text              : var(--section-text-heading);
     --why-marquee-bottom            : calc(24px * var(--header-font-scale));
     --why-marquee-offset-top        : 0px;
     --why-students-w                : min(100%, calc(640px * var(--media-size)));
@@ -1045,7 +1105,7 @@
     --track-padding-top             : 48px;
     --track-padding-bottom          : calc(80px * var(--header-font-scale));
 
-    --ai-ready-diagram-h            : calc(480px * var(--media-size));
+    --ai-ready-diagram-max-h        : calc(480px * var(--media-size));
     --ai-ready-padding-bottom       : 48px;
 
     --onboard-padding-bottom        : 64px;
@@ -1053,24 +1113,26 @@
     --onboard-image-h               : auto;
 
     --testimonial-card-w            : calc(280px * var(--media-size));
-    --testimonial-card-h            : calc(360px * var(--media-size));
+    --testimonial-card-h            : calc(420px * var(--media-size));
+    --testimonial-quote-icon-w      : calc(110px * var(--media-size));
+    --testimonial-quote-icon-h      : calc(71px * var(--media-size));
     --testimonial-padding-x         : calc(24px * var(--header-font-scale));
     --testimonial-name-top          : calc(120px * var(--header-font-scale));
-    --testimonial-body-top          : calc(200px * var(--header-font-scale));
+    --testimonial-body-top          : calc(168px * var(--header-font-scale));
     --testimonial-body-w            : calc(230px * var(--header-font-scale));
-    --testimonial-arrow-size        : calc(36px * var(--type-size));
-    --testimonial-fade-w            : calc(48px * var(--header-font-scale));
+    --testimonial-arrow-size        : calc(56px * var(--media-size));
+    --testimonial-arrow-to-track    : calc(24px * var(--header-font-scale));
 
     --faq-padding-top               : 48px;
     --faq-padding-bottom            : 48px;
     --faq-item-padding-x            : calc(20px * var(--header-font-scale));
     --faq-item-padding-y            : calc(20px * var(--header-font-scale));
-    --faq-item-radius               : calc(24px * var(--header-font-scale));
-    --faq-icon-w                    : calc(44px * var(--media-size));
-    --faq-icon-h                    : calc(46px * var(--media-size));
+    --faq-item-radius               : 9999px;
+    --faq-icon-w                    : calc(54px * var(--media-size));
+    --faq-icon-h                    : calc(56px * var(--media-size));
     --faq-icon-gap                  : calc(16px * var(--media-size));
-    --faq-question-size             : calc(18px * var(--type-size));
-    --faq-answer-size               : calc(16px * var(--type-size));
+    --faq-question-size             : calc(24px * var(--type-size));
+    --faq-answer-size               : var(--section-text-body);
 
     --apply-cta-padding-top         : calc(40px * var(--header-font-scale));
     --apply-cta-padding-bottom      : calc(56px * var(--header-font-scale));
@@ -1090,6 +1152,8 @@
     --apply-cta-btn-h               : calc(60px * var(--header-font-scale));
     --apply-cta-btn-text-size       : 18px;
     --apply-cta-btn-padding-x       : 20px;
+    --apply-cta-btn-padding-x-left  : 12px;
+    --apply-cta-btn-text-to-arrow   : 12px;
     --apply-cta-btn-arrow-size      : 22px;
 
     --apply-btn-w                   : min(100%, calc(200px * var(--header-font-scale)));
@@ -1151,22 +1215,27 @@
     --blog-avatar-student-size      : calc(56px * var(--media-size));
     --blog-avatar-student-left      : calc(22px * var(--media-size));
     --blog-avatar-student-top       : calc(22px * var(--media-size));
+    --blog-post-title-size          : calc(28px * var(--type-size));
+    --blog-post-feature-h           : calc(220px * var(--media-size));
+    --blog-post-heading-size        : calc(22px * var(--type-size));
+    --blog-post-body-size           : calc(18px * var(--type-size));
+    --blog-post-nav-title-size      : calc(18px * var(--type-size));
 
-    --about-hero-padding-top        : calc(32px * var(--header-font-scale));
+    --about-hero-padding-top        : var(--hero-inner-padding-top, var(--hero-gap));
     --about-hero-padding-bottom     : calc(40px * var(--header-font-scale));
     --about-hero-columns-gap        : calc(16px * var(--header-font-scale));
     --about-hero-row-gap            : calc(20px * var(--header-font-scale));
-    --about-hero-text-offset-top    : 0px;
+    --about-hero-text-offset-top    : 40px;
     --about-hero-text-max-w         : 100%;
     --about-hero-title-size         : calc(36px * var(--type-size));
     --about-hero-subtitle-size      : calc(20px * var(--type-size));
     --about-hero-title-max-w        : 100%;
     --about-hero-subtitle-max-w     : 100%;
     --about-hero-title-to-subtitle  : calc(16px * var(--type-size));
-    --about-hero-subtitle-indent    : 0%;
-    --about-hero-robot-margin-top   : calc(8px * var(--media-size));
-    --about-hero-robot-wrap-w       : calc(140px * var(--media-size));
-    --about-hero-robot-wrap-h       : calc(184px * var(--media-size));
+    --about-hero-subtitle-indent    : 8%;
+    --about-hero-robot-inset-bottom   : var(--about-hero-padding-bottom);
+    --about-hero-robot-w            : calc(192px * var(--media-size));
+    --about-hero-robot-h            : calc(236px * var(--media-size));
 
     --about-why-padding-top         : calc(32px * var(--header-font-scale));
     --about-why-padding-bottom      : calc(40px * var(--header-font-scale));
@@ -1176,13 +1245,13 @@
     --about-why-exist-highlight-h   : calc(44px * var(--header-font-scale));
     --about-why-exist-highlight-pad-x: calc(10px * var(--header-font-scale));
     --about-why-heading-to-body     : calc(16px * var(--header-font-scale));
-    --about-why-body-size           : calc(16px * var(--type-size));
+    --about-why-body-size           : 18px;
     --about-why-body-max-w          : 100%;
     --about-why-body-to-tagline     : calc(20px * var(--header-font-scale));
     --about-why-tagline-size        : calc(20px * var(--type-size));
     --about-why-tagline-max-w       : 100%;
-    --about-why-illustration-w      : min(100%, calc(320px * var(--media-size)));
-    --about-why-illustration-h      : calc(334px * var(--media-size));
+    --about-why-video-w             : min(100%, calc(320px * var(--media-size)));
+    --about-why-video-h             : calc(334px * var(--media-size));
 
     --about-brings-padding-top      : calc(32px * var(--header-font-scale));
     --about-brings-padding-bottom   : calc(40px * var(--header-font-scale));
@@ -1197,7 +1266,8 @@
     --about-brings-feature-img-w    : min(100%, calc(360px * var(--media-size)));
     --about-brings-feature-img-h    : calc(240px * var(--media-size));
     --about-brings-feature-img-to-label: calc(20px * var(--media-size));
-    --about-brings-label-size       : calc(16px * var(--type-size));
+    --about-brings-title-size       : calc(20px * var(--type-size));
+    --about-brings-description-size : calc(16px * var(--type-size));
     --about-brings-label-max-w      : 100%;
     --about-brings-carousel-to-dots : calc(20px * var(--header-font-scale));
     --about-brings-dot-size         : calc(8px * var(--type-size));
@@ -1209,7 +1279,7 @@
     --english-ai-hero-row-gap              : calc(20px * var(--header-font-scale));
     --english-ai-hero-title-size           : calc(36px * var(--type-size));
     --english-ai-hero-title-max-w          : 100%;
-    --english-ai-hero-body-size            : calc(18px * var(--type-size));
+    --english-ai-hero-body-size            : calc(22px * var(--type-size));
     --english-ai-hero-body-max-w           : 100%;
     --english-ai-hero-illustration-w       : 100%;
     --english-ai-hero-illustration-h       : calc(240px * var(--media-size));
@@ -1265,7 +1335,7 @@
     --about-skills-heading-max-w      : 100%;
     --about-skills-body-max-w         : 100%;
     --about-skills-yellow-py          : calc(28px * var(--header-font-scale));
-    --about-hero-text-offset-top      : 0px;
+    --about-hero-text-offset-top      : 40px;
     --ai-ready-heading-max-w          : 100%;
     --testimonial-padding-top         : calc(40px * var(--header-font-scale));
     --testimonial-heading-to-carousel : calc(24px * var(--header-font-scale));
@@ -1277,6 +1347,7 @@
     --contact-hero-padding-bottom   : 48px;
     --contact-hero-apply-to-image-gap: 48px;
     --contact-hero-title-to-subtitle: calc(20px * var(--type-size));
+    --contact-hero-subtitle-size    : calc(18px * var(--type-size));
     --contact-hero-illustration-w   : min(100%, calc(320px * var(--media-size)));
     --contact-hero-illustration-h   : calc(226px * var(--media-size));
 
@@ -1321,6 +1392,7 @@
     --section-text-title            : 40px;
     --section-text-body             : 17px;
     --section-text-tab              : 34px;
+    --section-try-btn-label-long    : 26px;
     --section-heading-to-tabs       : 36px;
     --section-tab-gap               : 32px;
     --section-tab-h                 : 72px;
@@ -1331,8 +1403,8 @@
     --section-dashboard-gap         : 24px;
 
     /* Hero */
-    --hero-text-headline            : 54px;
-    --hero-text-body                : 22px;
+    --hero-text-headline            : var(--english-ai-hero-title-size);
+    --hero-text-body                : var(--english-ai-hero-body-size);
     --hero-decorative-h             : max(var(--apply-btn-h), calc(150px * var(--media-size)));
     --hero-decorative-w             : min(420px, 38vw);
     --hero-body-pb                  : 0px;
@@ -1346,6 +1418,7 @@
     --hero-badge-3-h                : 95px;
     --hero-badge-4-w                : 178px;
     --hero-badge-4-h                : 98px;
+    --hero-badge-text-max-w         : 100%;
 
     /* See it in action */
     --action-padding-top            : 52px;
@@ -1365,7 +1438,7 @@
     --why-students-h                : clamp(400px, 44dvh, 560px);
     --why-gif-offset-left           : clamp(48px, 5vw, 96px);
     --why-marquee-h                 : 80px;
-    --why-marquee-text              : 34px;
+    --why-marquee-text              : var(--section-text-heading);
     --why-marquee-text-gap          : 32px;
     --why-marquee-bottom            : 24px;
 
@@ -1386,12 +1459,7 @@
     /* AI Ready */
     --ai-ready-padding-top          : 40px;
     --ai-ready-padding-bottom       : 32px;
-    --ai-ready-diagram-h            : min(420px, 50dvh);
-    --ai-ready-headset-top          : 42%;
-    --ai-ready-headset-bottom       : 6%;
-    --ai-ready-headset-left         : 18%;
-    --ai-ready-headset-right        : 18%;
-    --ai-ready-headset-offset-y     : 24px;
+    --ai-ready-diagram-max-h        : min(420px, 50dvh);
 
     /* Onboarding */
     --onboard-padding-top           : 52px;
@@ -1406,7 +1474,7 @@
     --testimonial-padding-bottom    : 32px;
     --testimonial-eyebrow-to-heading: 24px;
     --testimonial-heading-to-carousel: 20px;
-    --testimonial-card-h            : min(420px, 48dvh);
+    --testimonial-card-h            : min(calc(593px * var(--media-size)), 52dvh);
     --testimonial-name-size         : 36px;
 
     /* Cohort */
@@ -1425,8 +1493,8 @@
     --faq-item-collapsed-h          : 84px;
     --faq-item-expanded-min-h       : 140px;
     --faq-item-gap                  : 12px;
-    --faq-question-size             : 26px;
-    --faq-answer-size               : 16px;
+    --faq-question-size             : calc(24px * var(--type-size));
+    --faq-answer-size               : var(--section-text-body);
   }
 }
 

@@ -1,7 +1,6 @@
 import platformMockup from '@/assets/figma/english-ai/platform-mockup.png'
 import { cn } from '@/lib/utils'
 import type { ProgramVariant } from '@/types/program'
-import { isCustomProgramVariant } from '@/types/program'
 
 type EnglishAiPlatformSectionProps = {
   variant?: ProgramVariant
@@ -10,7 +9,6 @@ type EnglishAiPlatformSectionProps = {
 export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPlatformSectionProps) {
   const isCodeMonkey = variant === 'code-monkey'
   const isTheEdge = variant === 'the-edge'
-  const isCustomProgram = isCustomProgramVariant(variant)
   const headingId = isCodeMonkey
     ? 'code-monkey-platform-heading'
     : isTheEdge
@@ -20,8 +18,7 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
     <section
       className={cn(
         'w-full px-[5px] pt-[5px]',
-        isCodeMonkey && 'program-platform--code-monkey',
-        !isCustomProgram && 'program-platform--english-ai',
+        (variant === 'english-ai' || isCodeMonkey) && 'program-platform--english-ai',
       )}
       aria-labelledby={headingId}
       data-node-id="1060:2195"
@@ -39,7 +36,8 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
           }}
         >
           <p
-            className={cn('font-body text-black', !isCustomProgram && 'uppercase')}            style={{
+            className={cn('font-body text-black', !isTheEdge && 'uppercase')}
+            style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",
             }}
@@ -75,9 +73,11 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
                       measured.
                     </span>
                   </>
-                ) : isCodeMonkey ? (                  <>
+                ) : (
+                  <>
                     <span className="block whitespace-nowrap">One platform. Every</span>
                     <span className="block whitespace-nowrap">
+                      English{' '}
                       <span
                         className="inline-flex items-center bg-zene-cyan"
                         style={{
@@ -85,25 +85,10 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
                           paddingLeft: 'var(--english-ai-highlight-pad-x)',
                           paddingRight: 'var(--english-ai-highlight-pad-x)',
                         }}
+                        data-node-id="1060:2223"
                       >
-                        English skill
-                      </span>{' '}
-                      covered.
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    One platform. Every{' '}
-                    <span
-                      className="inline-block bg-[#78F3FA]"
-                      style={{
-                        minHeight: 'var(--english-ai-highlight-h)',
-                        paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                        paddingRight: 'var(--english-ai-highlight-pad-x)',
-                      }}
-                      data-node-id="1060:2223"
-                    >
-                      English skill covered.
+                        skill covered.
+                      </span>
                     </span>
                   </>
                 )}
@@ -112,7 +97,7 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
               <p
                 className={cn(
                   'font-body font-normal leading-normal text-black',
-                  isCustomProgram ? 'normal-case' : 'capitalize',
+                  isTheEdge ? 'normal-case' : 'capitalize',
                 )}
                 style={{
                   fontSize: 'var(--section-text-body)',
@@ -133,13 +118,11 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
             <p
               className={cn(
                 'font-heading font-normal leading-normal text-black lg:col-start-1 lg:row-start-2',
-                isCustomProgram ? 'normal-case' : 'capitalize',
+                isTheEdge ? 'normal-case' : 'capitalize',
               )}
               style={{
-                fontSize: isCustomProgram
-                  ? 'var(--code-monkey-platform-tagline-size)'
-                  : 'var(--english-ai-platform-tagline-size)',
-                maxWidth: isCustomProgram ? 'none' : 'var(--english-ai-platform-tagline-max-w)',
+                fontSize: 'var(--english-ai-platform-tagline-size)',
+                maxWidth: isTheEdge ? 'none' : 'var(--english-ai-platform-tagline-max-w)',
               }}
               data-node-id="1060:2213"
             >

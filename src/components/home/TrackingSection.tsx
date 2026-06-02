@@ -7,8 +7,8 @@ const TRACK_ITEMS = [
   {
     image: trackSpeaking,
     title: 'Individual speaking quality',
-    body: 'pronunciation, fluency, and confidence, scored automatically.',
-    textMaxW: 'var(--track-text-max-w)',
+    bodyLines: ['pronunciation, fluency, and confidence,', 'scored automatically.'],
+    textMaxW: 'var(--track-text-max-w-body)',
     imageOffset: false,
     nodeId: '762:1710',
     imageNodeId: '762:1693',
@@ -17,8 +17,9 @@ const TRACK_ITEMS = [
   {
     image: trackMastery,
     title: 'Skill-level mastery, per student',
-    body: 'reading, comprehension, vocabulary, grammar, all measured separately.',
-    textMaxW: 'var(--track-text-max-w-sm)',
+    titleOneLine: true,
+    bodyLines: ['reading, comprehension, vocabulary,', 'grammar, all measured separately.'],
+    textMaxW: 'var(--track-text-max-w-body)',
     imageOffset: true,
     nodeId: '762:1708',
     imageNodeId: '762:1696',
@@ -27,8 +28,12 @@ const TRACK_ITEMS = [
   {
     image: trackHeatmaps,
     title: 'Class-level skill heatmaps',
-    body: 'your academic head sees the weakest skill across every section in one screen.',
-    textMaxW: 'var(--track-text-max-w-sm)',
+    bodyLines: [
+      'your academic head sees the',
+      'weakest skill across every section in ',
+      'one screen.',
+    ],
+    textMaxW: 'var(--track-text-max-w-body)',
     imageOffset: false,
     nodeId: '762:1709',
     imageNodeId: '762:1706',
@@ -39,9 +44,10 @@ const TRACK_ITEMS = [
 function TrackItem({
   image,
   title,
-  body,
+  bodyLines,
   textMaxW,
   imageOffset,
+  titleOneLine = false,
   nodeId,
   imageNodeId,
   textNodeId,
@@ -68,7 +74,7 @@ function TrackItem({
         data-node-id={imageNodeId}
       />
       <p
-        className="capitalize font-body font-normal leading-normal text-black"
+        className="normal-case font-body font-normal leading-normal text-black"
         style={{
           fontSize: 'var(--section-text-body)',
           fontVariationSettings: "'opsz' 14",
@@ -77,10 +83,16 @@ function TrackItem({
         }}
         data-node-id={textNodeId}
       >
-        <span className="font-semibold">{title}</span>
+        <span className={cn('font-semibold', titleOneLine && 'xl:whitespace-nowrap')}>
+          {title}
+        </span>
         <br />
         <br />
-        {body}
+        {bodyLines.map((line) => (
+          <span key={line} className="block xl:whitespace-nowrap">
+            {line}
+          </span>
+        ))}
       </p>
     </article>
   )

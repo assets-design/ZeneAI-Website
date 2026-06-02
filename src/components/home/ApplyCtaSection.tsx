@@ -7,6 +7,29 @@ type ApplyCtaSectionProps = {
   variant?: 'home' | 'about' | 'code-monkey' | 'the-edge'
 }
 
+function ApplyCtaBodyCopy({ variant }: { variant: ApplyCtaSectionProps['variant'] }) {
+  if (variant === 'about') {
+    return (
+      <>
+        From AI English speaking to coding and leadership — a complete future-ready skill set,
+        trusted by schools across India
+      </>
+    )
+  }
+
+  if (variant === 'code-monkey') {
+    return <>Limited seats. Decisions rolling. Apply before the cohort closes.</>
+  }
+
+  return (
+    <>
+      5-minute application. Selection decisions after a call
+      <br />
+      with your school team.
+    </>
+  )
+}
+
 export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
   const [buttonHover, setButtonHover] = useState(false)
   const isAbout = variant === 'about'
@@ -102,19 +125,13 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
                 }}
                 data-node-id={isAbout ? '642:1358' : isTheEdge ? '1134:3550' : '975:1979'}
               >
-                {isAbout
-                  ? 'From AI English speaking to coding and leadership — a complete future-ready skill set, trusted by schools across India'
-                  : isTheEdge
-                    ? '5-minute application. Selection decisions after a call with your school team.'
-                    : isCodeMonkey
-                      ? 'Limited seats. Decisions rolling. Apply before the cohort closes.'
-                      : '5-minute application. Selection decisions after a call with your school team.'}
+                <ApplyCtaBodyCopy variant={variant} />
               </p>
 
               <div style={{ marginTop: 'var(--apply-cta-body-to-btn)' }}>
                 <StartApplicationButton
                   href={isAbout ? '/contact' : '#apply'}
-                  label={isAbout ? 'Book a free demo' : undefined}
+                  label={isAbout ? 'Apply to the AI 2026–27' : undefined}
                   onMouseEnter={() => setButtonHover(true)}
                   onMouseLeave={() => setButtonHover(false)}
                 />

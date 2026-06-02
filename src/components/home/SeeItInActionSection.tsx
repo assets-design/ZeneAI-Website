@@ -47,7 +47,7 @@ function ActionFeature({
         data-node-id={imageNodeId}
       />
       <p
-        className="capitalize font-body font-normal leading-normal text-black"
+        className="normal-case font-body font-normal leading-normal text-black"
         style={{
           fontSize: 'var(--section-text-body)',
           fontVariationSettings: "'opsz' 14",
@@ -119,25 +119,26 @@ export function SeeItInActionSection() {
               </h2>
 
               <div
-                className="action-demo-media min-h-0 w-full flex-1 overflow-hidden shadow-[0_0_6px_rgba(0,0,0,0.25)]"
+                className="action-demo-media min-h-0 w-full flex-1"
                 style={{
                   height: 'var(--action-demo-h)',
                   marginTop: 'var(--action-heading-to-demo)',
-                  borderRadius: 'var(--action-demo-radius)',
                 }}
                 data-node-id="642:1324"
               >
-                <img
-                  src="/assets/figma/home/section-3/main-comp.png"
-                  alt="Zene AI speaking lab demo with student and robot"
-                  className="size-full object-contain"
-                />
+                <div className="action-demo-media-inner size-full overflow-hidden">
+                  <img
+                    src="/assets/figma/home/section-3/main-comp.png"
+                    alt="Zene AI speaking lab demo with student and robot"
+                    className="size-full object-contain"
+                  />
+                </div>
               </div>
             </div>
 
             {/* Right — feature highlights */}
             <div
-              className="action-features-col flex min-h-0 min-w-0 flex-col"
+              className="action-features-col flex min-h-0 min-w-0 flex-col xl:justify-end"
               style={{ gap: 'var(--action-feature-gap)' }}
             >
               {FEATURES.map(feature => (

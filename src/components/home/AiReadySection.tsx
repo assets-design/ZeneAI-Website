@@ -38,12 +38,14 @@ function StakeholderBody({
   top,
   width,
   nodeId,
+  paddingBottom,
 }: {
   children: string
   left: string
   top: string
   width: string
   nodeId: string
+  paddingBottom?: string
 }) {
   return (
     <p
@@ -52,6 +54,7 @@ function StakeholderBody({
         left,
         top,
         width,
+        paddingBottom,
         fontSize: 'var(--section-text-body)',
         fontVariationSettings: "'opsz' 14",
       }}
@@ -115,9 +118,8 @@ export function AiReadySection() {
 
         {/* Full-bleed diagram — Figma 765:1839 */}
         <div
-          className="ai-ready-diagram relative w-full min-h-0"
+          className="ai-ready-diagram relative min-h-0"
           style={{
-            height: 'var(--ai-ready-diagram-h)',
             marginTop: 'var(--ai-ready-heading-to-diagram)',
             marginBottom: 'var(--ai-ready-padding-bottom)',
           }}
@@ -152,6 +154,7 @@ export function AiReadySection() {
             left="50%"
             top="37.82%"
             width="39.21%"
+            paddingBottom="var(--ai-ready-student-body-pb)"
             nodeId="765:1749"
           >
             Every student gets the 1-on-1 practice no classroom period can offer.
@@ -229,7 +232,6 @@ export function AiReadySection() {
               bottom: 'var(--ai-ready-headset-bottom)',
               left: 'var(--ai-ready-headset-left)',
               right: 'var(--ai-ready-headset-right)',
-              transform: 'translateY(var(--ai-ready-headset-offset-y))',
             }}
             data-node-id="765:1733"
           >

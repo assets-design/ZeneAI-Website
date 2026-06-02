@@ -1,49 +1,44 @@
 import { useCallback, useState } from 'react'
 
-const MAX_EYE_X = 7
-const MAX_EYE_Y = 5
-const BOTTOM_DEAD_ZONE = 0.65
-const EYE_TRACK_TRANSITION = 'transform 0.005s linear'
+// Headset eye midpoint in SVG viewBox (499.281 × 322) — 765:1733
+const EYE_CENTER_X_RATIO = 256 / 499.281
+const EYE_CENTER_Y_RATIO = 157 / 322
+const MAX_EYE_X = 12
+const MAX_EYE_Y = 12
+const TRACK_RADIUS_RATIO = 0.1
+const EYE_TRACK_TRANSITION = 'none'
 
 export type EyeOffset = { x: number; y: number }
-
-function clamp(value: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, value))
-}
 
 export function useHeadsetTracking() {
   const [eyeOffset, setEyeOffset] = useState<EyeOffset>({ x: 0, y: 0 })
 
-  const applyOffset = useCallback((next: EyeOffset) => {
-    setEyeOffset(next)
+  const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const centerX = rect.left + rect.width * EYE_CENTER_X_RATIO
+    const centerY = rect.top + rect.height * EYE_CENTER_Y_RATIO
+    const dx = event.clientX - centerX
+    const dy = event.clientY - centerY
+    const distance = Math.hypot(dx, dy)
+
+    if (distance === 0) {
+      setEyeOffset({ x: 0, y: 0 })
+      return
+    }
+
+    const maxDistance = Math.min(rect.width, rect.height) * TRACK_RADIUS_RATIO
+    const intensity = Math.min(distance / maxDistance, 1)
+    const angle = Math.atan2(dy, dx)
+
+    setEyeOffset({
+      x: Math.cos(angle) * MAX_EYE_X * intensity,
+      y: Math.sin(angle) * MAX_EYE_Y * intensity,
+    })
   }, [])
 
-  const handleMouseMove = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      const rect = event.currentTarget.getBoundingClientRect()
-      const relX = (event.clientX - rect.left) / rect.width
-      const relY = (event.clientY - rect.top) / rect.height
-
-      if (relY > BOTTOM_DEAD_ZONE) {
-        applyOffset({ x: 0, y: 0 })
-        return
-      }
-
-      const x = clamp((relX - 0.5) * 2 * MAX_EYE_X, -MAX_EYE_X, MAX_EYE_X)
-      let y = 0
-
-      if (relY < 0.5) {
-        y = clamp(-((0.5 - relY) / 0.5) * MAX_EYE_Y, -MAX_EYE_Y, 0)
-      }
-
-      applyOffset({ x, y })
-    },
-    [applyOffset],
-  )
-
   const handleMouseLeave = useCallback(() => {
-    applyOffset({ x: 0, y: 0 })
-  }, [applyOffset])
+    setEyeOffset({ x: 0, y: 0 })
+  }, [])
 
   return { eyeOffset, handleMouseMove, handleMouseLeave }
 }

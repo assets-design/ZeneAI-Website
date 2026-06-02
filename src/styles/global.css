@@ -307,21 +307,21 @@
 
   /* English AI platform section — larger device mockup on the right */
   .program-platform--english-ai {
-    --english-ai-platform-mockup-w: min(100%, calc(1050px * var(--header-font-scale)));
-    --english-ai-platform-mockup-h: calc(520px * var(--header-font-scale));
+    --english-ai-platform-mockup-w: min(100%, calc(1320px * var(--header-font-scale)));
+    --english-ai-platform-mockup-h: calc(640px * var(--header-font-scale));
   }
 
   @media (max-width: 1279px) {
     .program-platform--english-ai {
       --english-ai-platform-mockup-w: 100%;
-      --english-ai-platform-mockup-h: calc(380px * var(--header-font-scale));
+      --english-ai-platform-mockup-h: calc(480px * var(--header-font-scale));
     }
   }
 
   @media (max-width: 639px) {
     .program-platform--english-ai {
       --english-ai-platform-mockup-w: 100%;
-      --english-ai-platform-mockup-h: calc(260px * var(--header-font-scale));
+      --english-ai-platform-mockup-h: calc(340px * var(--header-font-scale));
     }
   }
 
@@ -561,29 +561,6 @@
     }
   }
 
-  /* Code Monkey platform section — larger device mockup + tagline sizing */
-  .program-platform--code-monkey {
-    --english-ai-platform-mockup-w: min(100%, calc(1050px * var(--header-font-scale)));
-    --english-ai-platform-mockup-h: calc(520px * var(--header-font-scale));
-    --code-monkey-platform-tagline-size: calc(30px * var(--type-size));
-  }
-
-  @media (max-width: 1279px) {
-    .program-platform--code-monkey {
-      --english-ai-platform-mockup-w: 100%;
-      --english-ai-platform-mockup-h: calc(380px * var(--header-font-scale));
-      --code-monkey-platform-tagline-size: calc(26px * var(--type-size));
-    }
-  }
-
-  @media (max-width: 639px) {
-    .program-platform--code-monkey {
-      --english-ai-platform-mockup-w: 100%;
-      --english-ai-platform-mockup-h: calc(260px * var(--header-font-scale));
-      --code-monkey-platform-tagline-size: calc(18px * var(--type-size));
-    }
-  }
-
   /* Full viewport white cards on desktop — standard pages only */
   @media (min-width: 1280px) {
     #main-content:not(.section-scroll-root) > section {
@@ -629,6 +606,25 @@
       overflow: hidden;
     }
 
+    #main-content:not(.section-scroll-root) .blog-post-page > :first-child,
+    #main-content:not(.section-scroll-root) .careers-page > :first-child,
+    #main-content:not(.section-scroll-root) .faq-page > :first-child,
+    #main-content:not(.section-scroll-root) .content-page > :first-child {
+      min-height: auto;
+      max-height: none;
+      overflow: visible;
+    }
+
+    #main-content:not(.section-scroll-root) .blog-post-page .blog-body,
+    #main-content:not(.section-scroll-root) .careers-page .blog-body,
+    #main-content:not(.section-scroll-root) .faq-page .blog-body,
+    #main-content:not(.section-scroll-root) .content-page .blog-body {
+      flex: none;
+      min-height: 0;
+      overflow: visible;
+      max-height: none;
+    }
+
     #main-content:not(.section-scroll-root) #faqs > :first-child {
       min-height: auto;
       max-height: none;
@@ -654,6 +650,112 @@
   }
 }
 
+.home-hero-robot .hero-robot-video {
+  margin-top: 0;
+}
+
+#home-hero {
+  --hero-top-row-offset-top: calc(28px * var(--header-font-scale));
+  --hero-robot-offset-top: calc(24px * var(--header-font-scale));
+  --home-hero-apply-offset-top: calc(56px * var(--header-font-scale));
+  --home-hero-eyebrow-to-heading: 0px;
+}
+
+#home-hero .hero-apply-slot {
+  --hero-apply-offset-top: var(--home-hero-apply-offset-top, 56px);
+}
+
+#about-hero {
+  --hero-top-row-offset-top: 0px;
+  --home-hero-apply-offset-top: 0px;
+  --hero-top-row-min-h: 0px;
+}
+
+#about-hero .about-hero-inner {
+  gap: 0;
+}
+
+#about-hero .hero-top-row {
+  min-height: 0;
+  margin-top: 0;
+  align-items: flex-start;
+}
+
+#about-hero .hero-top-row-spacer {
+  height: 0;
+}
+
+#about-hero .hero-apply-slot {
+  --hero-apply-offset-top: 0px;
+  margin-top: 90px;
+}
+
+#about-hero .about-hero-card {
+  position: relative;
+  overflow: hidden;
+}
+
+#about-hero .about-hero-inner,
+#about-hero .about-hero-body {
+  overflow: visible;
+}
+
+#about-hero .about-hero-robot {
+  overflow: visible;
+}
+
+#about-hero .about-hero-robot-wrap {
+  overflow: hidden;
+}
+
+#english-ai-hero,
+#code-monkey-hero {
+  --english-ai-hero-padding-top: 0;
+  --english-ai-hero-illustration-margin-top: 50px;
+}
+
+#english-ai-hero .program-hero-inner,
+#code-monkey-hero .program-hero-inner {
+  gap: 0;
+}
+
+/* Pull left copy up — transform keeps Apply Now + GIF layout unchanged */
+#english-ai-hero .english-ai-hero-copy,
+#code-monkey-hero .english-ai-hero-copy {
+  align-self: start;
+  transform: translateY(-50px);
+}
+
+.english-ai-feature-grid-inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+#english-ai-hero .program-hero-top-row .hero-apply-slot,
+#code-monkey-hero .program-hero-top-row .hero-apply-slot {
+  --hero-apply-offset-top: 0;
+  margin-top: 0;
+}
+
+#english-ai-hero .hero-apply-slot > .apply-now-btn,
+#code-monkey-hero .hero-apply-slot > .apply-now-btn {
+  margin-top: -25px;
+}
+
+#home-hero .hero-robot-video__media {
+  object-position: left bottom;
+}
+
+#home-hero .hero-badges {
+  width: 100%;
+  align-items: start;
+}
+
+#home-hero .hero-badges li {
+  min-width: 0;
+}
+
 .hero-card-inner {
   padding-top: var(--hero-inner-padding-top, var(--hero-gap));
 }
@@ -676,11 +778,22 @@
   margin-top: 0;
 }
 
+.contact-hero-top-row .hero-apply-slot > .apply-now-btn {
+  margin-top: 10px;
+}
+
+/* Pull left copy up — transform keeps Apply Now + illustration unchanged */
+@media (min-width: 1280px) {
+  .contact-hero-copy {
+    align-self: center;
+    transform: translateY(calc(-1 * var(--contact-hero-copy-pull-up)));
+  }
+}
+
 .hero-apply-slot {
   margin-top: var(--hero-apply-offset-top);
 }
 
-.about-hero-top-row .hero-apply-slot,
 .program-hero-top-row .hero-apply-slot {
   --hero-apply-offset-top: 0px;
   margin-top: 0;
@@ -717,13 +830,27 @@
     width: var(--apply-btn-w);
     max-width: none;
   }
+
+  .hero-apply-slot > .apply-now-btn {
+    display: block;
+    margin-top: 30px;
+    overflow: hidden;
+  }
+
+  #about-hero .hero-apply-slot > .apply-now-btn {
+    margin-top: 0;
+  }
+
+  #english-ai-hero .hero-apply-slot > .apply-now-btn,
+  #code-monkey-hero .hero-apply-slot > .apply-now-btn {
+    margin-top: 27px;
+  }
 }
 
 @media (max-width: 1279px) {
   .hero-top-row,
   .contact-hero-top-row,
-  .program-hero-top-row,
-  .about-hero-top-row {
+  .program-hero-top-row {
     width: 100%;
     max-width: 100%;
     min-width: 0;
@@ -785,6 +912,17 @@
 }
 
 /* Section white cards — flat top, rounded bottom corners only */
+.action-demo-media {
+  overflow: visible;
+  padding: 0 0 6px 6px;
+  box-sizing: border-box;
+}
+
+.action-demo-media-inner {
+  border-radius: var(--action-demo-radius);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
+}
+
 .section-card-shell {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -801,6 +939,64 @@
 .blog-card.section-card-shell {
   border-top-left-radius: var(--section-card-radius);
   border-top-right-radius: var(--section-card-radius);
+}
+
+.blog-post-card.section-card-shell {
+  border-top-left-radius: var(--section-card-radius);
+  border-top-right-radius: var(--section-card-radius);
+}
+
+/* Single blog post — card inset + content padding match header (5px + nav px) */
+.blog-post-page .blog-post-body,
+.blog-post-page .content-page-body,
+.careers-page .blog-post-body,
+.faq-page .blog-post-body,
+.content-page .blog-post-body,
+.content-page .content-page-body {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .blog-post-page .blog-post-body,
+  .blog-post-page .content-page-body,
+  .careers-page .blog-post-body,
+  .faq-page .blog-post-body,
+  .content-page .blog-post-body,
+  .content-page .content-page-body {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-post-page .blog-post-body,
+  .blog-post-page .content-page-body,
+  .careers-page .blog-post-body,
+  .faq-page .blog-post-body,
+  .content-page .blog-post-body,
+  .content-page .content-page-body {
+    padding-left: var(--header-padding-x);
+    padding-right: var(--header-padding-x);
+  }
+}
+
+.content-page-card.section-card-shell {
+  border-top-left-radius: var(--section-card-radius);
+  border-top-right-radius: var(--section-card-radius);
+}
+
+.blog-post-nav__link {
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.blog-post-header {
+  overflow: visible;
+}
+
+.blog-post-header .hero-apply-slot > .apply-now-btn {
+  transform: translateY(0px) translateX(15px);
 }
 
 /* Floating WhatsApp + back-to-top */

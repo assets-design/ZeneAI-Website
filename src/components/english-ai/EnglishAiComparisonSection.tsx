@@ -241,47 +241,51 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
             {isCodeMonkey ? (
               'Without Zene. With Zene.'
             ) : isTheEdge ? (
-              <>
+              <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
                 What your{' '}
                 <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
                   school looks like,
                 </span>{' '}
                 with and without The Edge.
-              </>
+              </span>
             ) : (
-              <>
+              <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
                 What your{' '}
                 <span
-                  className="inline-block bg-[#78F3FA]"
-                  style={{
-                    minHeight: 'var(--english-ai-highlight-h)',
-                    paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                    paddingRight: 'var(--english-ai-highlight-pad-x)',
-                  }}
+                  className="inline-flex items-center bg-zene-cyan"
+                  style={highlightStyle}
                   data-node-id="1060:2305"
                 >
                   school looks like,
                 </span>{' '}
                 with and without Zene.
-              </>
+              </span>
             )}
           </h2>
 
           {isCodeMonkey ? null : isTheEdge || !isCustomProgram ? (
             <p
               className={cn(
-                'font-body font-normal leading-normal text-black',
+                'english-ai-comparison-subtitle font-body font-normal leading-normal text-black max-lg:whitespace-normal lg:whitespace-nowrap',
                 isTheEdge || isCustomProgram ? 'normal-case' : 'capitalize',
               )}
               style={{
                 fontSize: 'var(--section-text-body)',
                 fontVariationSettings: "'opsz' 14",
-                maxWidth: 'var(--english-ai-comparison-subtitle-max-w)',
+                maxWidth: isTheEdge ? 'var(--english-ai-comparison-subtitle-max-w)' : undefined,
                 marginTop: 'var(--english-ai-comparison-heading-to-subtitle)',
               }}
               data-node-id="1060:2217"
             >
-              {isTheEdge ? 'Three perspectives. One clear shift.' : 'Three perspectives. Three everyday realities. One clear shift.'}
+              {isTheEdge ? (
+                <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
+                  Three perspectives. One clear shift.
+                </span>
+              ) : (
+                <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
+                  Three perspectives. Three everyday realities. One clear shift.
+                </span>
+              )}
             </p>
           ) : null}
 
@@ -411,14 +415,24 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
             </div>
           </div>
 
-          {isTheEdge ? (
+          {!isCodeMonkey && !isTheEdge ? (
+            <p
+              className="text-left font-heading font-medium uppercase leading-none text-black"
+              style={{
+                fontSize: 'var(--section-text-body)',
+                marginTop: 'var(--english-ai-comparison-table-to-footer)',
+              }}
+            >
+              Your English program does not change. Your school&apos;s ability to measure it does.
+            </p>
+          ) : isTheEdge ? (
             <p
               className="normal-case font-body font-normal leading-normal text-black"
               style={{
                 fontSize: 'var(--section-text-body)',
                 fontVariationSettings: "'opsz' 14",
                 maxWidth: 'var(--english-ai-comparison-subtitle-max-w)',
-                marginTop: 'var(--english-ai-comparison-subtitle-to-table)',
+                marginTop: 'var(--english-ai-comparison-table-to-footer)',
               }}
             >
               Life skills stop being a slogan. They become a transcript.

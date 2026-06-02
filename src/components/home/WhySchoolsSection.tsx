@@ -61,7 +61,7 @@ function ReasonItem({
         />
       </span>
       <p
-        className="min-w-0 capitalize font-body font-semibold leading-normal text-black"
+        className="min-w-0 normal-case font-body font-semibold leading-normal text-black"
         style={{
           fontSize: 'var(--section-text-body)',
           fontVariationSettings: "'opsz' 14",

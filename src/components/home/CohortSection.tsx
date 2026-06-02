@@ -17,6 +17,7 @@ type CohortLogo = {
   maxW: string
   maxH: string
   nodeId: string
+  scale?: number
 }
 
 const COHORT_LOGOS: CohortLogo[] = [
@@ -25,6 +26,7 @@ const COHORT_LOGOS: CohortLogo[] = [
     alt: 'Help International School',
     maxW: 'var(--cohort-logo-help-w)',
     maxH: 'var(--cohort-logo-help-h)',
+    scale: 1.12,
     nodeId: '975:1934',
   },
   {
@@ -32,6 +34,7 @@ const COHORT_LOGOS: CohortLogo[] = [
     alt: 'CHIST',
     maxW: 'var(--cohort-logo-chist-w)',
     maxH: 'var(--cohort-logo-chist-h)',
+    scale: 1.08,
     nodeId: '975:1935',
   },
   {
@@ -39,6 +42,7 @@ const COHORT_LOGOS: CohortLogo[] = [
     alt: 'Sancta Maria International School',
     maxW: 'var(--cohort-logo-sancta-w)',
     maxH: 'var(--cohort-logo-sancta-h)',
+    scale: 1.1,
     nodeId: '975:1937',
   },
   {
@@ -74,6 +78,7 @@ const COHORT_LOGOS: CohortLogo[] = [
     alt: "St. Patrick's High School",
     maxW: 'var(--cohort-logo-patricks-w)',
     maxH: 'var(--cohort-logo-patricks-h)',
+    scale: 1.35,
     nodeId: '975:1941',
   },
   {
@@ -295,7 +300,7 @@ type CohortSectionProps = {
   variant?: 'home' | 'about' | 'code-monkey' | 'the-edge'
 }
 
-function CohortLogoCell({ src, alt, maxW, maxH, nodeId }: CohortLogo) {
+function CohortLogoCell({ src, alt, maxW, maxH, nodeId, scale = 1 }: CohortLogo) {
   return (
     <div
       className="flex items-center justify-center"
@@ -306,7 +311,11 @@ function CohortLogoCell({ src, alt, maxW, maxH, nodeId }: CohortLogo) {
         src={src}
         alt={alt}
         className="max-w-full object-contain"
-        style={{ width: maxW, height: maxH }}
+        style={{
+          width: maxW,
+          height: maxH,
+          transform: scale !== 1 ? `scale(${scale})` : undefined,
+        }}
         loading="lazy"
       />
     </div>
@@ -401,7 +410,7 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
 
       {variant !== 'the-edge' ? (
         <p
-          className="capitalize font-body font-normal leading-normal text-black"
+          className="normal-case font-body font-normal leading-normal text-black"
           style={{
             fontSize: 'var(--section-text-body)',
             fontVariationSettings: "'opsz' 14",

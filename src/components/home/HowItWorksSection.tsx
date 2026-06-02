@@ -1,8 +1,42 @@
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import howToManageLessonsVideo from '@/data/2. How to Manage Lessons.mp4'
+import overallReportVideo from '@/data/3. Teachers - Overall Report.mp4'
+import courseCompletionReportVideo from '@/data/4. Teachers - Course Completion Report.mp4'
+import lessonCompletionReportVideo from '@/data/5. Teachers - Lesson Completion Report.mp4'
+import activityCompletionReportVideo from '@/data/6. Teachers - Activity Completion Report.mp4'
 
 const TEACHER_DASHBOARD_VIDEO =
   '/assets/figma/1.%20Teachers%20Dashboard%20Overview.mp4'
+
+const LESSON_MANAGEMENT_IMAGE =
+  '/assets/figma/home/section-5/lesson-management.png'
+
+function BlockVideo({
+  src,
+  ariaLabel,
+  className,
+  fillHeight = false,
+}: {
+  src: string
+  ariaLabel: string
+  className?: string
+  fillHeight?: boolean
+}) {
+  return (
+    <video
+      key={src}
+      src={src}
+      autoPlay
+      muted
+      loop
+      playsInline
+      aria-label={ariaLabel}
+      className={cn('block size-full object-cover object-top', className)}
+      style={fillHeight ? undefined : { height: '100%' }}
+    />
+  )
+}
 
 function FeatureBlock({
   title,
@@ -32,10 +66,7 @@ function FeatureBlock({
       </h3>
       {showDescription && description ? (
         <p
-          className={cn(
-            'font-body font-normal leading-normal text-black',
-            normalCaseBody ? 'normal-case' : 'capitalize',
-          )}
+          className="normal-case font-body font-normal leading-normal text-black"
           style={{
             fontSize: 'var(--section-text-body)',
             fontVariationSettings: "'opsz' 14",
@@ -51,40 +82,81 @@ function FeatureBlock({
 }
 
 type HowItWorksRightColumnProps = {
+  useHomeRightContent: boolean
   isCustomProgram: boolean
   isCodeMonkey: boolean
   isTheEdge: boolean
   fillLessonImage?: boolean
   duplicateSet?: boolean
+  loopDuplicate?: boolean
 }
 
 function HowItWorksRightColumn({
+  useHomeRightContent,
   isCustomProgram,
   isCodeMonkey,
   isTheEdge,
   fillLessonImage = false,
   duplicateSet = false,
+  loopDuplicate = false,
 }: HowItWorksRightColumnProps) {
-  const lessonDescription = isTheEdge
-    ? 'Easy-to-use tools to deploy curriculum and monitor student engagement.'
-    : isCodeMonkey
-      ? 'Weekly lesson plans aligned to your textbook. Adjust, assign, done.'
-      : 'Create, push, and track lessons without technical complexity. Full visibility from planning to delivery to review.'
+  const isHomeAlternateSet = duplicateSet && useHomeRightContent
 
-  const dashboardDescription = isTheEdge
-    ? 'A centralized hub to manage lessons, track progress, and provide feedback.'
-    : 'Track lesson progress, student activity, and analytics from one place. Manage Grades 1–12 with rankings, completion rates, and engagement data — all in real time.'
+  const lessonTitle = isHomeAlternateSet ? 'Track Activity Completion' : 'Lesson Management'
+
+  const lessonDescription =
+    isHomeAlternateSet
+      ? 'Measure student engagement through detailed activity and assignment reports.'
+      : isTheEdge
+        ? 'Easy-to-use tools to deploy curriculum and monitor student engagement.'
+        : isCodeMonkey
+          ? 'Weekly lesson plans aligned to your textbook. Adjust, assign, done.'
+          : 'Create, push, and track lessons without technical complexity. Full visibility from planning to delivery to review.'
+
+  const dashboardTitle = isHomeAlternateSet ? 'Review Lesson Completion' : 'Teacher Dashboard'
+
+  const dashboardDescription =
+    isHomeAlternateSet
+      ? 'See which lessons are completed, pending, or require attention.'
+      : isTheEdge
+        ? 'A centralized hub to manage lessons, track progress, and provide feedback.'
+        : 'Track lesson progress, student activity, and analytics from one place. Manage Grades 1–12 with rankings, completion rates, and engagement data — all in real time.'
+
+  const dashboardVideoSrc = isHomeAlternateSet
+    ? loopDuplicate
+      ? lessonCompletionReportVideo
+      : overallReportVideo
+    : TEACHER_DASHBOARD_VIDEO
+
+  const lessonVideoSrc = useHomeRightContent && !duplicateSet
+    ? howToManageLessonsVideo
+    : isHomeAlternateSet
+      ? loopDuplicate
+        ? activityCompletionReportVideo
+        : courseCompletionReportVideo
+      : null
+
+  const useLessonVideo = Boolean(lessonVideoSrc)
+
+  const hideDuplicateFromAssistiveTech = duplicateSet && (!useHomeRightContent || loopDuplicate)
+
+  const dashboardAriaLabel = isHomeAlternateSet
+    ? 'Zene review lesson completion dashboard'
+    : 'Zene teacher dashboard overview'
+
+  const lessonAriaLabel = isHomeAlternateSet
+    ? 'Zene track activity completion dashboard'
+    : 'Zene lesson management overview'
 
   return (
     <>
       <div className="how-dashboard-block min-h-0 shrink-0">
         <FeatureBlock
-          title="Teacher Dashboard"
-          description={isCodeMonkey ? '' : dashboardDescription}
+          title={dashboardTitle}
+          description={dashboardDescription}
           titleNodeId="642:1264"
           bodyNodeId="642:1265"
           normalCaseBody={isCustomProgram}
-          showDescription={!isCodeMonkey}
         >
           <div
             className="how-dashboard-media w-full overflow-hidden"
@@ -96,13 +168,14 @@ function HowItWorksRightColumn({
             data-node-id="642:1272"
           >
             <video
-              src={TEACHER_DASHBOARD_VIDEO}
+              key={dashboardVideoSrc}
+              src={dashboardVideoSrc}
               autoPlay
               muted
               loop
               playsInline
               className="size-full object-cover"
-              aria-label="Zene teacher dashboard overview"
+              aria-label={dashboardAriaLabel}
             />
           </div>
         </FeatureBlock>
@@ -114,25 +187,23 @@ function HowItWorksRightColumn({
           fillLessonImage && 'how-lesson-block--fill',
         )}
         style={{ gap: 'var(--how-block-gap)' }}
-        aria-hidden={duplicateSet ? true : undefined}
+        aria-hidden={hideDuplicateFromAssistiveTech ? true : undefined}
       >
         <h3
           className="font-heading font-medium uppercase leading-none text-black"
           style={{ fontSize: 'var(--section-text-tab)' }}
           data-node-id="642:1273"
         >
-          Lesson Management
+          {lessonTitle}
         </h3>
         <p
-          className={cn(
-            'font-body font-normal leading-normal text-black',
-            isCustomProgram ? 'normal-case' : 'capitalize',
-          )}
+          className="normal-case font-body font-normal leading-normal text-black"
           style={{
             fontSize: 'var(--section-text-body)',
             fontVariationSettings: "'opsz' 14",
           }}
           data-node-id="642:1274"
+          aria-hidden={hideDuplicateFromAssistiveTech ? true : undefined}
         >
           {lessonDescription}
         </p>
@@ -140,19 +211,34 @@ function HowItWorksRightColumn({
           className={cn(
             'how-lesson-img-wrap min-h-0 overflow-hidden',
             fillLessonImage && 'how-lesson-img-wrap--fill',
+            useLessonVideo && !fillLessonImage && 'how-lesson-video-wrap shrink-0',
+            useLessonVideo && fillLessonImage && 'how-lesson-video-wrap',
           )}
         >
-          <img
-            src="/assets/figma/home/section-5/lesson-management.png"
-            alt={duplicateSet ? '' : 'Zene lesson management interface'}
-            aria-hidden={duplicateSet ? true : undefined}
-            className="how-lesson-img block w-full object-cover object-top"
-            style={{
-              maxWidth: 'var(--how-lesson-img-w)',
-              height: fillLessonImage ? undefined : 'var(--how-lesson-img-h)',
-            }}
-            data-node-id="642:1275"
-          />
+          {useLessonVideo ? (
+            <BlockVideo
+              src={lessonVideoSrc!}
+              ariaLabel={lessonAriaLabel}
+              className="how-lesson-img"
+              fillHeight={fillLessonImage}
+            />
+          ) : (
+            <img
+              src={LESSON_MANAGEMENT_IMAGE}
+              alt={
+                hideDuplicateFromAssistiveTech
+                  ? ''
+                  : 'Zene lesson management interface'
+              }
+              aria-hidden={hideDuplicateFromAssistiveTech ? true : undefined}
+              className="how-lesson-img block w-full object-cover object-top"
+              style={{
+                maxWidth: 'var(--how-lesson-img-w)',
+                height: fillLessonImage ? undefined : 'var(--how-lesson-img-h)',
+              }}
+              data-node-id="642:1275"
+            />
+          )}
         </div>
       </article>
     </>
@@ -175,9 +261,12 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
       ? 'code-monkey-how-heading'
       : 'how-it-works-heading'
 
-  const useScrollableRightColumn = isEnglishAi || isCodeMonkey
+  const isHome = variant === 'home'
+  const useHomeRightContent = isHome || isProgramPage
+  const useScrollableRightColumn = useHomeRightContent
 
   const rightColumnProps = {
+    useHomeRightContent,
     isCustomProgram,
     isCodeMonkey,
     isTheEdge,
@@ -283,10 +372,7 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
             </h2>
 
             <p
-              className={cn(
-                'font-body font-normal leading-normal text-black',
-                isCustomProgram ? 'normal-case' : 'capitalize',
-              )}
+              className="normal-case font-body font-normal leading-normal text-black"
               style={{
                 fontSize: 'var(--section-text-body)',
                 fontVariationSettings: "'opsz' 14",
@@ -315,7 +401,10 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
                   <HowItWorksRightColumn {...rightColumnProps} fillLessonImage />
                 </div>
               </div>
-              <div className="how-it-works-right-set how-it-works-right-set--duplicate" aria-hidden="true">
+              <div
+                className="how-it-works-right-set how-it-works-right-set--duplicate"
+                aria-hidden={useHomeRightContent ? undefined : true}
+              >
                 <div
                   className="how-it-works-right flex min-h-0 min-w-0 flex-col"
                   style={{ gap: 'var(--how-section-gap)' }}
@@ -323,6 +412,19 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
                   <HowItWorksRightColumn {...rightColumnProps} duplicateSet />
                 </div>
               </div>
+              {useHomeRightContent ? (
+                <div
+                  className="how-it-works-right-set how-it-works-right-set--duplicate"
+                  aria-hidden="true"
+                >
+                  <div
+                    className="how-it-works-right flex min-h-0 min-w-0 flex-col"
+                    style={{ gap: 'var(--how-section-gap)' }}
+                  >
+                    <HowItWorksRightColumn {...rightColumnProps} duplicateSet loopDuplicate />
+                  </div>
+                </div>
+              ) : null}
             </div>
           ) : (
             <div

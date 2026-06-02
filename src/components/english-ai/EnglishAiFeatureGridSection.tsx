@@ -22,11 +22,20 @@ function FeatureCard({
   return (
     <article className="flex min-w-0 flex-col items-center text-center">
       <div
-        className="relative w-full max-w-[var(--english-ai-grid-img-w)] overflow-hidden"
-        style={{ height: 'var(--english-ai-grid-img-h)' }}
+        className="relative flex w-full max-w-[var(--english-ai-grid-img-w)] items-center justify-center"
+        style={{
+          height: 'var(--english-ai-grid-img-h)',
+          minHeight: 'var(--english-ai-grid-img-h)',
+        }}
         data-node-id={imageNodeId}
       >
-        <img src={image} alt="" aria-hidden className="size-full object-cover" draggable={false} />
+        <img
+          src={image}
+          alt=""
+          aria-hidden
+          className="max-h-full max-w-full object-contain object-bottom"
+          draggable={false}
+        />
       </div>
       <h3
         className="font-heading font-medium uppercase leading-none text-black"
@@ -178,6 +187,7 @@ type EnglishAiFeatureGridSectionProps = {
   items: FeatureItem[]
   footer?: string
   footerNodeId?: string
+  footerAlign?: 'left' | 'center'
   carouselAriaLabel: string
 }
 
@@ -194,6 +204,7 @@ export function EnglishAiFeatureGridSection({
   items,
   footer,
   footerNodeId,
+  footerAlign = 'left',
   carouselAriaLabel,
 }: EnglishAiFeatureGridSectionProps) {
   const isCustomProgram = isCustomProgramVariant(variant)
@@ -209,6 +220,7 @@ export function EnglishAiFeatureGridSection({
         style={{ maxWidth: 'var(--section-card-max-w)' }}
       >
         <div
+          className={cn(footer && 'english-ai-feature-grid-inner')}
           style={{
             paddingLeft: 'var(--section-padding-x)',
             paddingRight: 'var(--section-padding-x)',
@@ -216,48 +228,51 @@ export function EnglishAiFeatureGridSection({
             paddingBottom: 'var(--english-ai-grid-padding-bottom)',
           }}
         >
-          <p
-            className={cn('font-body text-black', !isCustomProgram && 'uppercase')}
-            style={{
-              fontSize: 'var(--section-text-eyebrow)',
-              fontVariationSettings: "'opsz' 14",
-            }}
-            data-node-id={eyebrowNodeId}
-          >
-            {eyebrow}
-          </p>
-
-          <h2
-            id={headingId}
-            className="section-heading max-w-[var(--english-ai-heading-max-w)] font-heading font-medium uppercase text-black"
-            style={{
-              fontSize: 'var(--section-text-heading)',
-              marginTop: 'var(--english-ai-grid-eyebrow-to-heading)',
-            }}
-            data-node-id={headingNodeId}
-          >
-            {heading}
-          </h2>
-
-          {subtitle ? (
+          <div className="shrink-0">
             <p
-              className={cn(
-                'font-body font-normal leading-normal text-black',
-                isCustomProgram ? 'normal-case' : 'capitalize',
-              )}
+              className={cn('font-body text-black', !isCustomProgram && 'uppercase')}
               style={{
-                fontSize: 'var(--section-text-body)',
+                fontSize: 'var(--section-text-eyebrow)',
                 fontVariationSettings: "'opsz' 14",
-                maxWidth: 'var(--english-ai-grid-subtitle-max-w)',
-                marginTop: 'var(--english-ai-grid-heading-to-subtitle)',
               }}
-              data-node-id={subtitleNodeId}
+              data-node-id={eyebrowNodeId}
             >
-              {subtitle}
+              {eyebrow}
             </p>
-          ) : null}
+
+            <h2
+              id={headingId}
+              className="section-heading max-w-[var(--english-ai-heading-max-w)] font-heading font-medium uppercase text-black"
+              style={{
+                fontSize: 'var(--section-text-heading)',
+                marginTop: 'var(--english-ai-grid-eyebrow-to-heading)',
+              }}
+              data-node-id={headingNodeId}
+            >
+              {heading}
+            </h2>
+
+            {subtitle ? (
+              <p
+                className={cn(
+                  'font-body font-normal leading-normal text-black',
+                  isCustomProgram ? 'normal-case' : 'capitalize',
+                )}
+                style={{
+                  fontSize: 'var(--section-text-body)',
+                  fontVariationSettings: "'opsz' 14",
+                  maxWidth: 'var(--english-ai-grid-subtitle-max-w)',
+                  marginTop: 'var(--english-ai-grid-heading-to-subtitle)',
+                }}
+                data-node-id={subtitleNodeId}
+              >
+                {subtitle}
+              </p>
+            ) : null}
+          </div>
 
           <div
+            className={cn('english-ai-feature-grid-items', footer && 'min-h-0 flex-1')}
             style={{
               marginTop: subtitle
                 ? 'var(--english-ai-grid-subtitle-to-items)'
@@ -270,7 +285,7 @@ export function EnglishAiFeatureGridSection({
               normalCaseBody={isCustomProgram}
             />
 
-            <div className="hidden min-w-0 grid-cols-1 gap-x-[var(--english-ai-grid-gap-x)] gap-y-[var(--english-ai-grid-gap-y)] sm:grid sm:grid-cols-2 xl:grid-cols-3">
+            <div className="english-ai-feature-grid-desktop hidden min-h-0 min-w-0 grid-cols-1 gap-x-[var(--english-ai-grid-gap-x)] gap-y-[var(--english-ai-grid-gap-y)] sm:grid sm:grid-cols-2 xl:grid-cols-3">
               {items.map(item => (
                 <FeatureCard key={item.titleNodeId} {...item} normalCaseBody={isCustomProgram} />
               ))}
@@ -279,10 +294,13 @@ export function EnglishAiFeatureGridSection({
 
           {footer ? (
             <p
-              className="text-center font-heading font-medium uppercase leading-none text-black"
+              className={cn(
+                'english-ai-feature-grid-footer mt-auto w-full shrink-0 font-heading font-medium uppercase leading-none text-black',
+                footerAlign === 'center' ? 'text-center' : 'text-left',
+              )}
               style={{
                 fontSize: 'var(--section-text-body)',
-                marginTop: 'var(--english-ai-grid-items-to-footer)',
+                paddingTop: 'var(--english-ai-grid-items-to-footer)',
               }}
               data-node-id={footerNodeId}
             >

@@ -47,12 +47,49 @@ function isFormFreeScrollZone(
   return scrollTop > formTop + EDGE_THRESHOLD && scrollTop < footerTop - EDGE_THRESHOLD
 }
 
+function getHowItWorksRightScroll(event: WheelEvent, root: HTMLElement): HTMLElement | null {
+  const target = event.target instanceof HTMLElement ? event.target : null
+  const howSection = target?.closest('#how-it-works')
+  if (howSection) {
+    return howSection.querySelector<HTMLElement>('.how-it-works-right-scroll')
+  }
+
+  const panels = getPanels(root)
+  if (panels.length === 0) return null
+
+  const step = getSectionStep(root)
+  const currentIndex = getPanelIndex(root.scrollTop, step, panels.length - 1)
+  const panel = panels[currentIndex]
+  return panel?.querySelector<HTMLElement>('#how-it-works .how-it-works-right-scroll') ?? null
+}
+
+function tryHowItWorksPanelScroll(event: WheelEvent, root: HTMLElement): boolean {
+  const scrollEl = getHowItWorksRightScroll(event, root)
+  if (!scrollEl) return false
+
+  const delta = event.deltaY
+  if (Math.abs(delta) < 1) return false
+
+  const { scrollTop, scrollHeight, clientHeight } = scrollEl
+  if (scrollHeight <= clientHeight + 1) return false
+
+  const atTop = scrollTop <= 0
+  const atBottom = scrollTop + clientHeight >= scrollHeight - 1
+
+  if ((delta > 0 && !atBottom) || (delta < 0 && !atTop)) {
+    scrollEl.scrollTop += delta
+    return true
+  }
+
+  return false
+}
+
 function shouldUseNestedScroll(event: WheelEvent, root: HTMLElement): boolean {
   const delta = event.deltaY
   let el = event.target instanceof HTMLElement ? event.target : null
 
   while (el && el !== root) {
-    if (el.classList.contains('section-faq-list')) {
+    if (el.classList.contains('section-faq-list') || el.classList.contains('how-it-works-right-scroll')) {
       const { scrollTop, scrollHeight, clientHeight } = el
       if (scrollHeight <= clientHeight + 1) break
       const atTop = scrollTop <= 0
@@ -116,6 +153,11 @@ export function useSectionSnapScroll() {
       if (!scrollLayout.contains(target)) return
 
       if (locked) {
+        event.preventDefault()
+        return
+      }
+
+      if (tryHowItWorksPanelScroll(event, scrollRoot)) {
         event.preventDefault()
         return
       }

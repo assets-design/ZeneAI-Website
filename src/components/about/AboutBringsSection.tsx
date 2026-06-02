@@ -7,47 +7,154 @@ import { cn } from '@/lib/utils'
 
 type AboutBringsFeature = {
   image: string
-  label: string
+  title?: string
+  titleLines?: readonly [string, string]
+  description?: string
   imageNodeId: string
-  labelNodeId: string
+  titleNodeId: string
+  descriptionNodeId?: string
   itemNodeId: string
-  stagger: boolean
+  stagger?: boolean
 }
 
-const FEATURES: AboutBringsFeature[] = [
+export const ABOUT_BRINGS_FEATURES: AboutBringsFeature[] = [
   {
     image: feature1,
-    label: 'AI-powered learning programs',
+    title: 'AI English Speaking Lab',
+    description: 'Daily speaking practice for every student. Graded by AI.',
     imageNodeId: '1047:2039',
-    labelNodeId: '1047:2040',
+    titleNodeId: '1047:2040',
+    descriptionNodeId: '1047:2040-desc',
     itemNodeId: '1047:2038',
     stagger: false,
   },
   {
     image: feature2,
-    label: 'Structured coding and language curriculum',
+    title: 'Code Monkey',
+    description:
+      "The world's most loved K–12 coding program. 18,000+ schools globally.",
     imageNodeId: '1047:2045',
-    labelNodeId: '1047:2046',
+    titleNodeId: '1047:2046',
+    descriptionNodeId: '1047:2046-desc',
     itemNodeId: '1047:2044',
     stagger: true,
   },
   {
     image: feature3,
-    label: 'Real-world skill development',
+    title: 'The Edge',
+    description:
+      'A Grade 6–12 life-readiness program. Every student leaves with a leadership profile.',
     imageNodeId: '1047:2048',
-    labelNodeId: '1047:2049',
+    titleNodeId: '1047:2049',
+    descriptionNodeId: '1047:2049-desc',
+    itemNodeId: '1047:2047',
+    stagger: false,
+  },
+]
+
+/** Four principles — about page section 4. */
+export const ABOUT_BRINGS_PRINCIPLES_FEATURES: AboutBringsFeature[] = [
+  {
+    image: feature1,
+    titleLines: ['Every student deserves', '1-on-1 attention.'],
+    description: 'Not just the top performers. Every student.',
+    imageNodeId: '1047:2039',
+    titleNodeId: '1047:2040',
+    descriptionNodeId: '1047:2040-desc',
+    itemNodeId: '1047:2038',
+    stagger: false,
+  },
+  {
+    image: feature2,
+    titleLines: ['Teachers need leverage,', 'not replacement.'],
+    description: 'Our job is to make every teacher more effective.',
+    imageNodeId: '1047:2045',
+    titleNodeId: '1047:2046',
+    descriptionNodeId: '1047:2046-desc',
+    itemNodeId: '1047:2044',
+    stagger: true,
+  },
+  {
+    image: feature3,
+    titleLines: ['Outcomes are measured,', "or they don't exist."],
+    description: 'Every Zene program ends in a downloadable report.',
+    imageNodeId: '1047:2048',
+    titleNodeId: '1047:2049',
+    descriptionNodeId: '1047:2049-desc',
     itemNodeId: '1047:2047',
     stagger: false,
   },
   {
     image: feature4,
-    label: 'Easy integration into school systems',
+    titleLines: ['Schools are partners,', 'not customers.'],
+    description: "We don't sell. We work with you.",
     imageNodeId: '1047:2042',
-    labelNodeId: '1047:2043',
+    titleNodeId: '1047:2043',
+    descriptionNodeId: '1047:2043-desc',
     itemNodeId: '1047:2041',
     stagger: true,
   },
 ]
+
+export type AboutBringsSectionContent = {
+  eyebrow: string
+  headingLine1: string
+  headingHighlight: string
+  headingOnOneLine?: boolean
+  carouselLabel: string
+}
+
+export const ABOUT_BRINGS_PROGRAMS_CONTENT: AboutBringsSectionContent = {
+  eyebrow: 'Three programs. One mission.',
+  headingLine1: 'What we bring to',
+  headingHighlight: 'your school.',
+  carouselLabel: 'What we bring to your school',
+}
+
+export const ABOUT_BRINGS_PRINCIPLES_CONTENT: AboutBringsSectionContent = {
+  eyebrow: 'Four principles',
+  headingLine1: 'What we ',
+  headingHighlight: 'believe.',
+  headingOnOneLine: true,
+  carouselLabel: 'What we believe',
+}
+
+type AboutBringsSectionProps = {
+  sectionId?: string
+  features?: AboutBringsFeature[]
+  content?: AboutBringsSectionContent
+}
+
+function AboutBringsFeatureTitle({ feature }: { feature: AboutBringsFeature }) {
+  if (feature.titleLines) {
+    return (
+      <div
+        className="mb-0 w-full max-w-[var(--about-brings-label-max-w)] text-center font-heading font-medium uppercase leading-normal text-black"
+        style={{
+          fontSize: 'var(--about-brings-title-size)',
+          marginTop: 'var(--about-brings-feature-img-to-label)',
+        }}
+        data-node-id={feature.titleNodeId}
+      >
+        <span className="block">{feature.titleLines[0]}</span>
+        <span className="block">{feature.titleLines[1]}</span>
+      </div>
+    )
+  }
+
+  return (
+    <p
+      className="mb-0 w-full max-w-[var(--about-brings-label-max-w)] text-center font-heading font-medium uppercase leading-normal text-black"
+      style={{
+        fontSize: 'var(--about-brings-title-size)',
+        marginTop: 'var(--about-brings-feature-img-to-label)',
+      }}
+      data-node-id={feature.titleNodeId}
+    >
+      {feature.title}
+    </p>
+  )
+}
 
 function AboutBringsFeatureItem({ feature }: { feature: AboutBringsFeature }) {
   return (
@@ -70,22 +177,31 @@ function AboutBringsFeatureItem({ feature }: { feature: AboutBringsFeature }) {
           draggable={false}
         />
       </div>
-      <p
-        className="mb-0 w-full max-w-[var(--about-brings-label-max-w)] text-center capitalize font-body font-normal leading-normal text-black"
-        style={{
-          fontSize: 'var(--about-brings-label-size)',
-          fontVariationSettings: "'opsz' 14",
-          marginTop: 'var(--about-brings-feature-img-to-label)',
-        }}
-        data-node-id={feature.labelNodeId}
-      >
-        {feature.label}
-      </p>
+      <AboutBringsFeatureTitle feature={feature} />
+      {feature.description ? (
+        <p
+          className="mb-0 w-full max-w-[var(--about-brings-label-max-w)] text-center font-body font-normal leading-normal text-black"
+          style={{
+            fontSize: 'var(--about-brings-description-size)',
+            fontVariationSettings: "'opsz' 14",
+            marginTop: 'var(--about-brings-title-to-description)',
+          }}
+          data-node-id={feature.descriptionNodeId}
+        >
+          {feature.description}
+        </p>
+      ) : null}
     </div>
   )
 }
 
-function AboutBringsMobileCarousel({ features }: { features: AboutBringsFeature[] }) {
+function AboutBringsMobileCarousel({
+  features,
+  carouselLabel,
+}: {
+  features: AboutBringsFeature[]
+  carouselLabel: string
+}) {
   const trackRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -144,7 +260,7 @@ function AboutBringsMobileCarousel({ features }: { features: AboutBringsFeature[
         ref={trackRef}
         className="flex snap-x snap-mandatory overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         aria-roledescription="carousel"
-        aria-label="What Zene AI brings to schools"
+        aria-label={carouselLabel}
       >
         {features.map((feature, index) => (
           <div
@@ -162,7 +278,7 @@ function AboutBringsMobileCarousel({ features }: { features: AboutBringsFeature[
       <div
         className="flex items-center justify-center"
         role="tablist"
-        aria-label="Choose feature slide"
+        aria-label="Choose program slide"
         style={{
           marginTop: 'var(--about-brings-carousel-to-dots)',
           gap: 'var(--about-brings-dot-gap)',
@@ -173,7 +289,7 @@ function AboutBringsMobileCarousel({ features }: { features: AboutBringsFeature[
             key={feature.itemNodeId}
             type="button"
             role="tab"
-            aria-label={`Show ${feature.label}`}
+            aria-label={`Show ${feature.titleLines?.join(' ') ?? feature.title ?? 'principle'}`}
             aria-selected={activeIndex === index}
             onClick={() => scrollToIndex(index)}
             className={cn(
@@ -191,11 +307,18 @@ function AboutBringsMobileCarousel({ features }: { features: AboutBringsFeature[
   )
 }
 
-export function AboutBringsSection() {
+export function AboutBringsSection({
+  sectionId = 'about-brings',
+  features = ABOUT_BRINGS_FEATURES,
+  content = ABOUT_BRINGS_PROGRAMS_CONTENT,
+}: AboutBringsSectionProps) {
+  const headingId = `${sectionId}-heading`
+  const isThreeColumn = features.length === 3
+
   return (
     <section
       className="w-full px-[5px] pt-[5px]"
-      aria-labelledby="about-brings-heading"
+      aria-labelledby={headingId}
       data-node-id="1055:2192"
     >
       <div
@@ -211,42 +334,81 @@ export function AboutBringsSection() {
             paddingBottom: 'var(--about-brings-padding-bottom)',
           }}
         >
+          <p
+            className="font-body uppercase text-black"
+            style={{
+              fontSize: 'var(--section-text-eyebrow)',
+              fontVariationSettings: "'opsz' 14",
+            }}
+          >
+            {content.eyebrow}
+          </p>
+
           <h2
-            id="about-brings-heading"
+            id={headingId}
             className="max-w-full font-heading font-medium uppercase leading-none text-black"
             style={{
               fontSize: 'var(--about-brings-heading-size)',
               maxWidth: 'var(--about-brings-heading-max-w)',
+              marginTop: 'var(--about-brings-eyebrow-to-heading)',
             }}
             data-node-id="1047:2037"
           >
-            <span className="block">What Zene AI</span>
-            <span className="block">
-              brings to{' '}
-              <span
-                className="inline-flex items-center bg-zene-cyan"
-                style={{
-                  minHeight: 'var(--about-brings-highlight-h)',
-                  paddingLeft: 'var(--about-brings-highlight-pad-x)',
-                  paddingRight: 'var(--about-brings-highlight-pad-x)',
-                }}
-              >
-                schools
+            {content.headingOnOneLine ? (
+              <span className="flex flex-wrap items-end gap-[var(--about-brings-heading-word-gap)]">
+                <span>{content.headingLine1}</span>
+                <span
+                  className="inline-flex items-center bg-zene-cyan"
+                  style={{
+                    minHeight: 'var(--about-brings-highlight-h)',
+                    paddingLeft: 'var(--about-brings-highlight-pad-x)',
+                    paddingRight: 'var(--about-brings-highlight-pad-x)',
+                  }}
+                >
+                  {content.headingHighlight}
+                </span>
               </span>
-            </span>
+            ) : (
+              <>
+                <span className="block max-sm:whitespace-normal sm:whitespace-nowrap">
+                  {content.headingLine1}
+                </span>
+                <span className="block max-sm:whitespace-normal sm:whitespace-nowrap">
+                  <span
+                    className="inline-flex items-center bg-zene-cyan"
+                    style={{
+                      minHeight: 'var(--about-brings-highlight-h)',
+                      paddingLeft: 'var(--about-brings-highlight-pad-x)',
+                      paddingRight: 'var(--about-brings-highlight-pad-x)',
+                    }}
+                  >
+                    {content.headingHighlight}
+                  </span>
+                </span>
+              </>
+            )}
           </h2>
 
-          <AboutBringsMobileCarousel features={FEATURES} />
+          <AboutBringsMobileCarousel
+            features={features}
+            carouselLabel={content.carouselLabel}
+          />
 
           <ul
-            className="hidden list-none grid-cols-2 gap-x-[var(--about-brings-grid-gap-x)] gap-y-[var(--about-brings-grid-gap-y)] p-0 sm:grid xl:grid-cols-4"
+            className={cn(
+              'hidden list-none gap-x-[var(--about-brings-grid-gap-x)] gap-y-[var(--about-brings-grid-gap-y)] p-0 sm:grid',
+              isThreeColumn ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-2 xl:grid-cols-4',
+            )}
             style={{ marginTop: 'var(--about-brings-heading-to-grid)' }}
           >
-            {FEATURES.map(feature => (
+            {features.map(feature => (
               <li
                 key={feature.itemNodeId}
                 className={cn(
-                  feature.stagger && 'xl:mt-[var(--about-brings-stagger-offset)]',
+                  feature.stagger &&
+                    (isThreeColumn
+                      ? 'sm:mt-[var(--about-brings-stagger-offset-three)]'
+                      : 'xl:mt-[var(--about-brings-stagger-offset)]'),
                 )}
               >
                 <AboutBringsFeatureItem feature={feature} />

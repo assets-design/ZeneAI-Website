@@ -1,47 +1,11 @@
-import blogCardImage from '@/assets/figma/blog/card-image.png'
 import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
+import { BLOG_POSTS } from '@/data/blogPosts'
 import { cn } from '@/lib/utils'
 import { Link } from 'react-router-dom'
 
 type BlogSectionProps = {
   panel?: boolean
 }
-
-const BLOG_POSTS = [
-  {
-    id: '1163:892',
-    title: 'Why Coding is the New Literacy for Students',
-    description:
-      'Coding helps students develop logical thinking, creativity, and problem-solving skills.',
-    image: blogCardImage,
-    imageNodeId: '1163:894',
-    titleNodeId: '1163:892',
-    bodyNodeId: '1163:893',
-    ctaNodeId: '1163:901',
-  },
-  {
-    id: '1163:895',
-    title: 'Building Confident Communicators with English AI',
-    description:
-      'Coding helps students develop logical thinking, creativity, and problem-solving skills.',
-    image: blogCardImage,
-    imageNodeId: '1163:897',
-    titleNodeId: '1163:895',
-    bodyNodeId: '1163:896',
-    ctaNodeId: '1163:902',
-  },
-  {
-    id: '1163:898',
-    title: 'Why Coding is the New Literacy for Students',
-    description:
-      'Coding helps students develop logical thinking, creativity, and problem-solving skills.',
-    image: blogCardImage,
-    imageNodeId: '1163:900',
-    titleNodeId: '1163:898',
-    bodyNodeId: '1163:899',
-    ctaNodeId: '1163:903',
-  },
-] as const
 
 const highlightStyle = {
   minHeight: 'var(--english-ai-highlight-h)',
@@ -56,8 +20,9 @@ function BlogPostCard({
 }) {
   return (
     <article className="blog-post-card flex min-w-0 flex-col items-center text-center">
-      <div
-        className="blog-post-card__image-wrap w-full overflow-hidden"
+      <Link
+        to={`/blog/${post.slug}`}
+        className="blog-post-card__image-wrap block w-full overflow-hidden"
         style={{
           maxWidth: 'var(--blog-card-image-w)',
           height: 'var(--blog-card-image-h)',
@@ -70,7 +35,7 @@ function BlogPostCard({
           alt=""
           className="h-full w-full object-cover"
         />
-      </div>
+      </Link>
 
       <h3
         className="blog-post-card__title capitalize font-body font-semibold leading-normal text-black"
@@ -81,7 +46,9 @@ function BlogPostCard({
         }}
         data-node-id={post.titleNodeId}
       >
-        {post.title}
+        <Link to={`/blog/${post.slug}`} className="text-black hover:text-black">
+          {post.title}
+        </Link>
       </h3>
 
       <p
@@ -98,7 +65,7 @@ function BlogPostCard({
       </p>
 
       <Link
-        to="/contact"
+        to={`/blog/${post.slug}`}
         className="blog-post-card__cta capitalize font-body font-normal leading-normal text-zene-blue underline decoration-solid underline-offset-2"
         style={{
           fontSize: 'var(--blog-card-cta-size)',
@@ -107,7 +74,7 @@ function BlogPostCard({
         }}
         data-node-id={post.ctaNodeId}
       >
-        Apply now →
+        Read more →
       </Link>
     </article>
   )
