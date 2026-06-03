@@ -87,7 +87,7 @@ export function AiReadySection() {
           }}
         >
           <p
-            className="font-body uppercase text-black"
+            className="section-eyebrow font-body uppercase text-black"
             style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",
@@ -103,7 +103,7 @@ export function AiReadySection() {
             style={{
               fontSize: 'var(--section-text-heading)',
               maxWidth: 'var(--ai-ready-heading-max-w)',
-              marginTop: 'var(--section-gap)',
+              marginTop: 'var(--section-eyebrow-to-heading)',
             }}
             data-node-id="765:1874"
           >

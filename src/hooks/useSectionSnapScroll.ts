@@ -47,20 +47,19 @@ function isFormFreeScrollZone(
   return scrollTop > formTop + EDGE_THRESHOLD && scrollTop < footerTop - EDGE_THRESHOLD
 }
 
-function getHowItWorksRightScroll(event: WheelEvent, root: HTMLElement): HTMLElement | null {
-  const target = event.target instanceof HTMLElement ? event.target : null
-  const howSection = target?.closest('#how-it-works')
-  if (howSection) {
-    return howSection.querySelector<HTMLElement>('.how-it-works-right-scroll')
-  }
-
+function getActiveHowItWorksPanel(root: HTMLElement): HTMLElement | null {
   const panels = getPanels(root)
   if (panels.length === 0) return null
 
   const step = getSectionStep(root)
   const currentIndex = getPanelIndex(root.scrollTop, step, panels.length - 1)
-  const panel = panels[currentIndex]
-  return panel?.querySelector<HTMLElement>('#how-it-works .how-it-works-right-scroll') ?? null
+  return panels[currentIndex]?.querySelector<HTMLElement>('#how-it-works') ?? null
+}
+
+function getHowItWorksRightScroll(event: WheelEvent, root: HTMLElement): HTMLElement | null {
+  const target = event.target instanceof HTMLElement ? event.target : null
+  const howSection = target?.closest('#how-it-works') ?? getActiveHowItWorksPanel(root)
+  return howSection?.querySelector<HTMLElement>('.how-it-works-right-scroll') ?? null
 }
 
 function tryHowItWorksPanelScroll(event: WheelEvent, root: HTMLElement): boolean {
@@ -82,6 +81,10 @@ function tryHowItWorksPanelScroll(event: WheelEvent, root: HTMLElement): boolean
   }
 
   return false
+}
+
+function isHowItWorksPanelActive(root: HTMLElement): boolean {
+  return getActiveHowItWorksPanel(root) != null
 }
 
 function shouldUseNestedScroll(event: WheelEvent, root: HTMLElement): boolean {
@@ -162,6 +165,8 @@ export function useSectionSnapScroll() {
         return
       }
 
+      const onHowItWorksPanel = isHowItWorksPanelActive(scrollRoot)
+
       if (shouldUseNestedScroll(event, scrollRoot)) return
 
       const panels = getPanels(scrollRoot)
@@ -193,7 +198,7 @@ export function useSectionSnapScroll() {
       const currentTop = getPanelTop(currentIndex, step)
 
       if (delta > 0) {
-        if (scrollTop > currentTop + EDGE_THRESHOLD) {
+        if (scrollTop > currentTop + EDGE_THRESHOLD && !onHowItWorksPanel) {
           if (currentIndex < lastIndex) {
             scrollToTop(getPanelTop(currentIndex + 1, step))
           } else if (footerTop != null) {
@@ -210,7 +215,7 @@ export function useSectionSnapScroll() {
         return
       }
 
-      if (scrollTop > currentTop + EDGE_THRESHOLD) {
+      if (scrollTop > currentTop + EDGE_THRESHOLD && !onHowItWorksPanel) {
         scrollToTop(currentTop)
         return
       }

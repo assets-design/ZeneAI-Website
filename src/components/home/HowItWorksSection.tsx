@@ -299,7 +299,7 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
           {/* Left — intro copy */}
           <div className="how-it-works-left min-w-0">
             <p
-              className={cn('font-body text-black', !isCustomProgram && 'uppercase')}
+              className="section-eyebrow font-body uppercase text-black"
               style={{
                 fontSize: 'var(--section-text-eyebrow)',
                 fontVariationSettings: "'opsz' 14",
@@ -318,7 +318,7 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
               className="font-heading font-medium uppercase leading-none text-black"
               style={{
                 fontSize: 'var(--section-text-heading)',
-                marginTop: 'var(--section-gap)',
+                marginTop: 'var(--section-eyebrow-to-heading)',
               }}
               data-node-id={isProgramPage ? '1060:2329' : '760:1682'}
             >

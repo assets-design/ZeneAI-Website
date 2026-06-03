@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { SectionEyebrow } from '@/components/SectionEyebrow'
 import { cn } from '@/lib/utils'
 
 import detailPersonalDev from '@/assets/figma/the-edge/framework/detail-personal-dev.png'
@@ -82,6 +83,11 @@ function polarPosition(angleDeg: number, radiusPercent: number) {
   }
 }
 
+/** Shortest signed delta so the dot travels along the ring, not in a straight line. */
+function shortestAngleDelta(fromDeg: number, toDeg: number) {
+  return ((((toDeg - fromDeg) % 360) + 540) % 360) - 180
+}
+
 const highlightStyle = {
   minHeight: 'var(--english-ai-highlight-h)',
   paddingLeft: 'var(--english-ai-highlight-pad-x)',
@@ -95,8 +101,12 @@ function FrameworkDiagram({
   activeIndex: number
   onSelect: (index: number) => void
 }) {
-  const activePillar = PILLARS[activeIndex]
-  const dotPosition = polarPosition(activePillar.angleDeg, RING_RADIUS_PERCENT)
+  const [dotAngleDeg, setDotAngleDeg] = useState(PILLARS[0].angleDeg)
+
+  useEffect(() => {
+    const target = PILLARS[activeIndex].angleDeg
+    setDotAngleDeg(prev => prev + shortestAngleDelta(prev, target))
+  }, [activeIndex])
 
   return (
     <div
@@ -137,14 +147,13 @@ function FrameworkDiagram({
         />
       </div>
 
-      <span
-        className="the-edge-framework-ring-dot"
+      <div
+        className="the-edge-framework-dot-orbit"
         aria-hidden
-        style={{
-          ...dotPosition,
-          transition: 'left 0.35s ease, top 0.35s ease',
-        }}
-      />
+        style={{ transform: `rotate(${dotAngleDeg}deg)` }}
+      >
+        <span className="the-edge-framework-ring-dot" />
+      </div>
 
       {PILLARS.map((pillar, index) => {
         const isActive = activeIndex === index
@@ -203,16 +212,12 @@ export function TheEdgeFrameworkSection() {
             paddingBottom: 'var(--the-edge-framework-padding-bottom)',
           }}
         >
-          <p
-            className="uppercase font-body text-black"
-            style={{
-              fontSize: 'var(--the-edge-framework-eyebrow-size)',
-              fontVariationSettings: "'opsz' 14",
-            }}
+          <SectionEyebrow
+            style={{ marginTop: 0 }}
             data-node-id="1100:2336"
           >
             The framework
-          </p>
+          </SectionEyebrow>
 
           <h2
             id="the-edge-framework-heading"

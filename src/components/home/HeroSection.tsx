@@ -83,7 +83,7 @@ export function HeroSection() {
           </div>
 
           <p
-            className="font-body uppercase text-black"
+            className="section-eyebrow font-body uppercase text-black"
             style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",

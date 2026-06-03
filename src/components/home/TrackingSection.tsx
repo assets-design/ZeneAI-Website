@@ -117,10 +117,22 @@ export function TrackingSection() {
             paddingBottom: 'var(--track-padding-bottom)',
           }}
         >
+          <p
+            className="section-eyebrow font-body uppercase text-black"
+            style={{
+              fontSize: 'var(--section-text-eyebrow)',
+              fontVariationSettings: "'opsz' 14",
+            }}
+          >
+            Measurable outcomes for your school
+          </p>
           <h2
             id="tracking-heading"
             className="font-heading font-medium uppercase leading-none text-black"
-            style={{ fontSize: 'var(--section-text-heading)' }}
+            style={{
+              fontSize: 'var(--section-text-heading)',
+              marginTop: 'var(--section-eyebrow-to-heading)',
+            }}
             data-node-id="762:1691"
           >
             What schools can now{' '}

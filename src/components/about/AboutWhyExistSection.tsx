@@ -23,7 +23,7 @@ export function AboutWhyExistSection() {
         >
           <div className="flex min-w-0 flex-col justify-center" data-node-id="1047:2029">
             <p
-              className="font-body uppercase text-black"
+              className="section-eyebrow font-body uppercase text-black"
               style={{
                 fontSize: 'var(--section-text-eyebrow)',
                 fontVariationSettings: "'opsz' 14",
@@ -36,7 +36,7 @@ export function AboutWhyExistSection() {
               id="about-why-heading"
               className="flex flex-wrap items-end font-heading font-medium uppercase leading-none text-black"
               style={{
-                fontSize: 'var(--about-why-heading-size)',
+                fontSize: 'var(--section-text-heading)',
                 gap: 'var(--about-why-heading-word-gap)',
                 marginTop: 'var(--about-why-eyebrow-to-heading)',
               }}

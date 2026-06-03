@@ -197,7 +197,7 @@ export function ProductIntroSection() {
           {/* Section header */}
           <div className="shrink-0" data-node-id="751:523">
             <p
-              className="font-body uppercase text-black"
+              className="section-eyebrow font-body uppercase text-black"
               style={{
                 fontSize: 'var(--section-text-eyebrow)',
                 fontVariationSettings: "'opsz' 14",
@@ -211,7 +211,7 @@ export function ProductIntroSection() {
               className="relative font-heading font-medium uppercase leading-none text-black"
               style={{
                 fontSize: 'var(--section-text-heading)',
-                marginTop: 'var(--section-gap)',
+                marginTop: 'var(--section-eyebrow-to-heading)',
               }}
               data-node-id="751:510"
             >

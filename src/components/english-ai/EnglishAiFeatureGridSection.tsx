@@ -230,7 +230,7 @@ export function EnglishAiFeatureGridSection({
         >
           <div className="shrink-0">
             <p
-              className={cn('font-body text-black', !isCustomProgram && 'uppercase')}
+              className="section-eyebrow font-body uppercase text-black"
               style={{
                 fontSize: 'var(--section-text-eyebrow)',
                 fontVariationSettings: "'opsz' 14",

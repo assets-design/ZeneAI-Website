@@ -84,8 +84,8 @@ export function BlogSection({ panel = false }: BlogSectionProps) {
   return (
     <section
       className={cn(
-        'w-full px-[var(--blog-section-card-gap,1px)]',
-        panel ? 'section-scroll-panel section-scroll-panel--form' : 'pt-[var(--blog-section-card-gap,1px)]',
+        'blog-page blog-post-page w-full px-[var(--section-card-gap)]',
+        panel ? 'section-scroll-panel section-scroll-panel--form' : 'pt-[var(--section-card-gap)]',
       )}
       aria-labelledby="blog-heading"
       data-node-id="1165:779"
@@ -99,10 +99,8 @@ export function BlogSection({ panel = false }: BlogSectionProps) {
         data-node-id="1147:3586"
       >
         <div
-          className={cn('blog-body', panel && 'blog-panel-body min-h-0 flex-1')}
+          className={cn('blog-body blog-post-body', panel && 'blog-panel-body min-h-0 flex-1')}
           style={{
-            paddingLeft: 'var(--section-padding-x)',
-            paddingRight: 'var(--section-padding-x)',
             paddingTop: panel
               ? 'var(--blog-panel-padding-top, var(--blog-padding-top))'
               : 'var(--blog-padding-top)',
@@ -114,7 +112,7 @@ export function BlogSection({ panel = false }: BlogSectionProps) {
           <div className="blog-header grid min-w-0 grid-cols-1 items-start gap-[var(--blog-header-gap)] xl:grid-cols-[minmax(0,1fr)_auto]">
             <div className="min-w-0">
               <p
-                className="font-body uppercase text-black"
+                className="section-eyebrow font-body uppercase text-black"
                 style={{
                   fontSize: 'var(--section-text-eyebrow)',
                   fontVariationSettings: "'opsz' 14",

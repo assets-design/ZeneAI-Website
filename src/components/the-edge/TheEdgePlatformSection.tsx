@@ -1,4 +1,5 @@
 import platformMockup from '@/assets/figma/the-edge/platform-mockup.png'
+import { SectionEyebrow } from '@/components/SectionEyebrow'
 
 const highlightStyle = {
   minHeight: 'var(--english-ai-highlight-h)',
@@ -30,17 +31,24 @@ export function TheEdgePlatformSection() {
         >
           <div className="grid min-w-0 items-start gap-y-[var(--english-ai-platform-row-gap)] lg:grid-cols-[minmax(0,688px)_1fr] lg:gap-x-[var(--english-ai-platform-columns-gap)]">
             <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+              <SectionEyebrow data-node-id="1100:2162">Platform intro</SectionEyebrow>
+
               <h2
                 id="the-edge-platform-heading"
-                className="section-heading max-w-[var(--english-ai-heading-max-w)] font-heading font-medium text-black"
-                style={{ fontSize: 'var(--section-text-heading)' }}
+                className="section-heading max-w-[var(--english-ai-heading-max-w)] font-heading font-medium uppercase text-black"
+                style={{
+                  fontSize: 'var(--section-text-heading)',
+                  marginTop: 'var(--english-ai-platform-eyebrow-to-content)',
+                }}
                 data-node-id="1100:2163"
               >
-                PLATFORM INTROHeadline: ONE PLATFORM.{' '}
-                <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
-                  EVERY LEADERSHIP
-                </span>{' '}
-                SKILL MEASURED.
+                <span className="block whitespace-nowrap">One platform. Every</span>
+                <span className="block whitespace-nowrap">
+                  <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                    leadership skill
+                  </span>{' '}
+                  measured.
+                </span>
               </h2>
 
               <p

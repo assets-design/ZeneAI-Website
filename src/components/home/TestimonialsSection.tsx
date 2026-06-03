@@ -29,15 +29,26 @@ type TestimonialsSectionProps = {
 function TestimonialsHeader({ variant }: { variant: 'home' | 'about' }) {
   if (variant === 'about') {
     return (
-      <h2
-        id="about-real-progress-heading"
-        className="max-w-full font-heading font-medium uppercase leading-none text-black"
-        style={{
-          fontSize: 'var(--section-text-heading)',
-          maxWidth: 'var(--about-real-progress-heading-max-w)',
-        }}
-        data-node-id="642:1344"
-      >
+      <>
+        <p
+          className="section-eyebrow font-body uppercase text-black"
+          style={{
+            fontSize: 'var(--section-text-eyebrow)',
+            fontVariationSettings: "'opsz' 14",
+          }}
+        >
+          What schools experience
+        </p>
+        <h2
+          id="about-real-progress-heading"
+          className="max-w-full font-heading font-medium uppercase leading-none text-black"
+          style={{
+            fontSize: 'var(--section-text-heading)',
+            maxWidth: 'var(--about-real-progress-heading-max-w)',
+            marginTop: 'var(--section-eyebrow-to-heading)',
+          }}
+          data-node-id="642:1344"
+        >
         <span className="block" data-node-id="642:1345">
           Real Students.
         </span>
@@ -53,13 +64,14 @@ function TestimonialsHeader({ variant }: { variant: 'home' | 'about' }) {
           Real Progress.
         </span>
       </h2>
+      </>
     )
   }
 
   return (
     <>
       <p
-        className="font-body uppercase text-black"
+        className="section-eyebrow font-body uppercase text-black"
         style={{
           fontSize: 'var(--section-text-eyebrow)',
           fontVariationSettings: "'opsz' 14",

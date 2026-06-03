@@ -1,4 +1,5 @@
 import platformMockup from '@/assets/figma/english-ai/platform-mockup.png'
+import codeMonkeyPlatformMockup from '@/data/codemonkey-devices-desktop 1.png'
 import { cn } from '@/lib/utils'
 import type { ProgramVariant } from '@/types/program'
 
@@ -36,7 +37,7 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
           }}
         >
           <p
-            className={cn('font-body text-black', !isTheEdge && 'uppercase')}
+            className="section-eyebrow font-body uppercase text-black"
             style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",
@@ -158,8 +159,12 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
               data-node-id="1060:2212"
             >
               <img
-                src={platformMockup}
-                alt="Zene English AI platform on desktop, tablet, and mobile"
+                src={isCodeMonkey ? codeMonkeyPlatformMockup : platformMockup}
+                alt={
+                  isCodeMonkey
+                    ? 'CodeMonkey on laptop, tablet, and mobile'
+                    : 'Zene English AI platform on desktop, tablet, and mobile'
+                }
                 className="size-full object-contain"
               />
             </div>

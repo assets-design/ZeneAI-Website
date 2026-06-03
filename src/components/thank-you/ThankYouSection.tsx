@@ -66,12 +66,22 @@ export function ThankYouSection({ panel = false }: ThankYouSectionProps) {
           }}
         >
           <div className="flex min-w-0 flex-col justify-center">
+            <p
+              className="section-eyebrow font-body uppercase text-black"
+              style={{
+                fontSize: 'var(--section-text-eyebrow)',
+                fontVariationSettings: "'opsz' 14",
+              }}
+            >
+              Demo request received
+            </p>
             <h1
               id="thank-you-heading"
               className="font-heading font-medium uppercase leading-none text-black"
               style={{
                 fontSize: 'var(--thank-you-title-size)',
                 maxWidth: 'var(--thank-you-title-max-w)',
+                marginTop: 'var(--section-eyebrow-to-heading)',
               }}
               data-node-id="735:1650"
             >

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { StudentFaceCircle } from '@/components/ApplyNowButton/StudentFaceCircle'
+import { SectionEyebrow } from '@/components/SectionEyebrow'
 import { StartApplicationButton } from '@/components/home/StartApplicationButton'
 import { cn } from '@/lib/utils'
 
@@ -22,11 +23,7 @@ function ApplyCtaBodyCopy({ variant }: { variant: ApplyCtaSectionProps['variant'
   }
 
   return (
-    <>
-      5-minute application. Selection decisions after a call
-      <br />
-      with your school team.
-    </>
+    <>5-minute application. Selection decisions after a call with your school team.</>
   )
 }
 
@@ -46,7 +43,11 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
   return (
     <section
       id={isAbout ? undefined : 'apply'}
-      className={cn('w-full px-[5px] pt-[5px]', isTheEdge && 'apply-cta-section--the-edge')}
+      className={cn(
+        'w-full px-[5px] pt-[5px]',
+        isAbout && 'apply-cta-section--about',
+        isTheEdge && 'apply-cta-section--the-edge',
+      )}
       aria-labelledby={headingId}
       data-node-id={isAbout ? '642:1331' : isTheEdge ? '1134:3546' : '1025:1892'}
     >
@@ -80,19 +81,33 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
               }}
               data-node-id={isAbout ? '642:1355' : isTheEdge ? '1134:3548' : '975:1977'}
             >
+              <SectionEyebrow
+                className="mx-auto"
+                style={{ marginTop: 0 }}
+              >
+                {isAbout
+                  ? 'Partner with us'
+                  : isTheEdge
+                    ? 'Apply now'
+                    : isCodeMonkey
+                      ? 'Join the cohort'
+                      : 'Apply now'}
+              </SectionEyebrow>
+
               <h2
                 id={headingId}
                 className="mx-auto font-heading font-medium uppercase leading-none text-black"
                 style={{
                   fontSize: 'var(--apply-cta-heading-size)',
                   maxWidth: 'var(--apply-cta-heading-max-w)',
+                  marginTop: 'var(--section-eyebrow-to-heading)',
                 }}
                 data-node-id={isAbout ? '642:1357' : isTheEdge ? '1134:3549' : '975:1978'}
               >
                 {isAbout ? (
                   <>
-                    <span className="block">Let&apos;s Build Skills</span>
-                    <span className="block">That Matter</span>
+                    <span className="block whitespace-nowrap">Let&apos;s Build</span>
+                    <span className="block whitespace-nowrap">Skills That Matter</span>
                   </>
                 ) : isTheEdge ? (
                   <>

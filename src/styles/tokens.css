@@ -149,6 +149,8 @@
 
   /* Home section 2 — Built for every learner (642:1124) */
   --section-gap                 : 20px;
+  --section-eyebrow-gap-scale   : 0.5;
+  --section-eyebrow-to-heading  : calc(var(--section-gap) * var(--section-eyebrow-gap-scale));
   --section-heading-line-height : 1.18;
   --section-heading-line-gap    : calc(10px * var(--header-font-scale));
   --section-card-max-w          : 1910px;
@@ -169,8 +171,13 @@
   --section-dashboard-radius    : 6px;
   --section-dashboard-gap       : calc(28px * var(--media-size));
   --section-text-max-w          : calc(946px * var(--type-size));
-  --section-text-eyebrow        : calc(22px * var(--type-size));
+  /* Matches The Edge framework eyebrow (THE FRAMEWORK) */
+  --section-text-eyebrow        : calc(28px * var(--type-size));
   --section-text-heading        : calc(62px * var(--type-size));
+  /* Section card titles — alias shared heading size (48px at desktop ≥1024px) */
+  --about-why-heading-size      : var(--section-text-heading);
+  --about-brings-heading-size   : var(--section-text-heading);
+  --apply-cta-heading-size      : var(--section-text-heading);
   --section-text-title          : calc(52px * var(--type-size));
   --section-text-tab            : calc(42px * var(--type-size));
   --section-text-body           : calc(22px * var(--type-size));
@@ -275,7 +282,7 @@
   --onboard-heading-max-w       : calc(1142px * var(--header-font-scale));
   --onboard-body-max-w          : calc(1076px * var(--header-font-scale));
   --onboard-copy-max-w          : calc(641px * var(--header-font-scale));
-  --onboard-eyebrow-to-heading  : calc(44px * var(--header-font-scale));
+  --onboard-eyebrow-to-heading  : calc(44px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   --onboard-heading-to-body     : calc(30px * var(--header-font-scale));
   --onboard-body-to-cards       : calc(30px * var(--header-font-scale));
   --onboard-columns-gap         : calc(80px * var(--header-font-scale));
@@ -288,7 +295,7 @@
   --testimonial-padding-top         : 60px;
   --testimonial-padding-bottom      : 80px;
   --testimonial-heading-max-w       : calc(1342px * var(--header-font-scale));
-  --testimonial-eyebrow-to-heading  : calc(44px * var(--header-font-scale));
+  --testimonial-eyebrow-to-heading  : calc(44px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   --testimonial-heading-to-carousel : calc(30px * var(--header-font-scale));
   --testimonial-track-width         : 100%;
   --testimonial-carousel-pl         : var(--section-padding-x);
@@ -320,7 +327,7 @@
   --cohort-padding-bottom           : 120px;
   --cohort-heading-max-w            : calc(1002px * var(--header-font-scale));
   --cohort-body-max-w               : calc(560px * var(--header-font-scale));
-  --cohort-eyebrow-to-heading       : calc(44px * var(--header-font-scale));
+  --cohort-eyebrow-to-heading       : calc(44px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   --cohort-heading-to-body          : calc(30px * var(--header-font-scale));
   --cohort-body-to-logos            : calc(67px * var(--header-font-scale));
   --cohort-logo-padding-x           : 100px;
@@ -390,7 +397,6 @@
   --apply-cta-content-padding-x     : calc(80px * var(--header-font-scale));
   --apply-cta-heading-max-w         : calc(455px * var(--type-size));
   --apply-cta-body-max-w            : calc(528px * var(--type-size));
-  --apply-cta-heading-size          : calc(62px * var(--type-size));
   --apply-cta-body-size             : calc(22px * var(--type-size));
   --apply-cta-yellow-py             : calc(56px * var(--header-font-scale));
   --apply-cta-heading-to-body       : calc(30px * var(--type-size));
@@ -403,6 +409,7 @@
   --apply-cta-btn-padding-x         : calc(56px * var(--header-font-scale));
   --apply-cta-btn-padding-x-left    : calc(40px * var(--header-font-scale));
   --apply-cta-btn-text-to-arrow     : calc(24px * var(--header-font-scale));
+  --apply-cta-btn-arrow-gap-right   : 0px;
   --apply-cta-btn-arrow-size        : calc(35px * var(--type-size));
   --about-skills-body-max-w         : calc(601px * var(--header-font-scale));
 
@@ -498,7 +505,7 @@
   --blog-section-card-gap           : 1px;
   --blog-padding-top                : 8px;
   --blog-padding-bottom             : calc(80px * var(--header-font-scale));
-  --blog-eyebrow-to-heading         : calc(44px * var(--type-size));
+  --blog-eyebrow-to-heading         : calc(44px * var(--type-size) * var(--section-eyebrow-gap-scale));
   --blog-heading-to-body            : calc(40px * var(--type-size));
   --blog-body-to-cards              : calc(54px * var(--type-size));
   --blog-header-gap                 : calc(32px * var(--header-font-scale));
@@ -547,7 +554,7 @@
   --about-hero-columns-gap          : calc(40px * var(--header-font-scale));
   --about-hero-row-gap              : calc(32px * var(--header-font-scale));
   --about-hero-text-offset-top      : 40px;
-  --about-hero-eyebrow-to-heading   : var(--section-gap);
+  --about-hero-eyebrow-to-heading   : var(--section-eyebrow-to-heading);
   --about-hero-text-max-w           : calc(1130px * var(--type-size));
   --about-hero-title-size           : calc(82px * var(--type-size));
   --about-hero-subtitle-size        : calc(38px * var(--type-size));
@@ -566,9 +573,8 @@
   --about-why-padding-bottom        : 80px;
   --about-why-columns-gap           : calc(48px * var(--header-font-scale));
   --about-why-row-gap               : calc(32px * var(--header-font-scale));
-  --about-why-heading-size          : calc(62px * var(--type-size));
   --about-why-heading-word-gap      : calc(8px * var(--header-font-scale));
-  --about-why-eyebrow-to-heading    : var(--section-gap);
+  --about-why-eyebrow-to-heading    : var(--section-eyebrow-to-heading);
   --about-why-exist-highlight-h     : calc(74px * var(--header-font-scale));
   --about-why-exist-highlight-pad-x : calc(16px * var(--header-font-scale));
   --about-why-heading-to-body       : calc(30px * var(--header-font-scale));
@@ -586,9 +592,8 @@
   /* About page — What Zene AI brings — Figma 1055:2192 / 1047:1946 */
   --about-brings-padding-top        : 80px;
   --about-brings-padding-bottom     : 80px;
-  --about-brings-heading-size       : calc(62px * var(--type-size));
   --about-brings-heading-max-w      : calc(563px * var(--header-font-scale));
-  --about-brings-eyebrow-to-heading : var(--section-gap);
+  --about-brings-eyebrow-to-heading : var(--section-eyebrow-to-heading);
   --about-brings-highlight-h          : calc(74px * var(--header-font-scale));
   --about-brings-highlight-pad-x      : calc(16px * var(--header-font-scale));
   --about-brings-heading-word-gap     : calc(8px * var(--header-font-scale));
@@ -614,8 +619,8 @@
   --english-ai-hero-padding-bottom       : 80px;
   --english-ai-hero-columns-gap          : calc(40px * var(--header-font-scale));
   --english-ai-hero-row-gap              : calc(32px * var(--header-font-scale));
-  --english-ai-hero-eyebrow-to-content   : calc(14px * var(--header-font-scale));
-  --english-ai-hero-eyebrow-to-heading   : calc(20px * var(--header-font-scale));
+  --english-ai-hero-eyebrow-to-content   : calc(14px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
+  --english-ai-hero-eyebrow-to-heading   : calc(20px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   --english-ai-hero-title-size           : calc(82px * var(--type-size));
   --english-ai-hero-title-max-w          : calc(972px * var(--header-font-scale));
   --english-ai-hero-body-size            : calc(32px * var(--type-size));
@@ -640,7 +645,7 @@
 
   --english-ai-platform-padding-top      : 80px;
   --english-ai-platform-padding-bottom   : 80px;
-  --english-ai-platform-eyebrow-to-content: calc(14px * var(--header-font-scale));
+  --english-ai-platform-eyebrow-to-content: calc(14px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   --english-ai-platform-columns-gap      : calc(90px * var(--header-font-scale));
   --english-ai-platform-row-gap          : calc(30px * var(--header-font-scale));
   --english-ai-platform-body-max-w       : calc(697px * var(--header-font-scale));
@@ -648,11 +653,11 @@
   --english-ai-platform-tagline-size     : calc(38px * var(--type-size));
   --english-ai-platform-tagline-max-w    : calc(505px * var(--header-font-scale));
   --english-ai-platform-mockup-w         : calc(902px * var(--header-font-scale));
-  --english-ai-platform-mockup-h         : calc(434px * var(--header-font-scale));
+  --english-ai-platform-mockup-h         : calc(520px * var(--header-font-scale));
 
   --english-ai-grid-padding-top          : 80px;
   --english-ai-grid-padding-bottom       : 80px;
-  --english-ai-grid-eyebrow-to-heading   : calc(14px * var(--header-font-scale));
+  --english-ai-grid-eyebrow-to-heading   : calc(14px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   --english-ai-grid-heading-to-subtitle  : calc(30px * var(--type-size));
   --english-ai-grid-subtitle-max-w       : calc(1043px * var(--type-size));
   --english-ai-grid-subtitle-to-items    : calc(30px * var(--type-size));
@@ -670,7 +675,7 @@
 
   --english-ai-comparison-padding-top    : 80px;
   --english-ai-comparison-padding-bottom : 80px;
-  --english-ai-comparison-eyebrow-to-heading: calc(14px * var(--header-font-scale));
+  --english-ai-comparison-eyebrow-to-heading: calc(14px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   --english-ai-comparison-heading-to-subtitle: calc(30px * var(--type-size));
   --english-ai-comparison-subtitle-max-w : calc(631px * var(--type-size));
   --english-ai-comparison-subtitle-to-table: calc(30px * var(--type-size));
@@ -691,11 +696,12 @@
 
   --english-ai-action-subtitle-max-w     : calc(875px * var(--type-size));
   --english-ai-action-heading-to-subtitle: calc(30px * var(--type-size));
+  --english-ai-action-feature-gap        : calc(96px * var(--header-font-scale));
   --english-ai-action-demo-h             : calc(522px * var(--media-scale) / var(--header-font-scale));
 
   --english-ai-curriculum-padding-top    : 80px;
   --english-ai-curriculum-padding-bottom : 80px;
-  --english-ai-curriculum-eyebrow-to-heading: calc(14px * var(--header-font-scale));
+  --english-ai-curriculum-eyebrow-to-heading: calc(14px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   --english-ai-curriculum-heading-to-subtitle: calc(30px * var(--type-size));
   --english-ai-curriculum-subtitle-max-w : calc(688px * var(--type-size));
   --english-ai-curriculum-subtitle-to-items: calc(30px * var(--type-size));
@@ -744,6 +750,7 @@
 /* --- Tablet (≤1023px) ------------------------------------- */
 @media (max-width: 1023px) {
   :root {
+    --section-text-eyebrow        : calc(24px * var(--type-size));
     --header-font-scale           : 0.72;
     --header-announcement-h       : 48px;
     --header-announcement-padding-y: calc(12px * var(--header-font-scale));
@@ -812,7 +819,6 @@
     --apply-cta-student-face-size   : calc(128px * var(--media-size));
     --apply-cta-student-overlap     : 0px;
     --apply-cta-content-padding-x   : calc(40px * var(--header-font-scale));
-    --apply-cta-heading-size        : calc(44px * var(--type-size));
     --apply-cta-body-size           : calc(20px * var(--type-size));
     --apply-cta-yellow-py           : calc(44px * var(--header-font-scale));
     --apply-cta-heading-max-w       : min(100%, calc(380px * var(--type-size)));
@@ -864,7 +870,7 @@
 
     --blog-padding-top              : 8px;
     --blog-padding-bottom           : calc(56px * var(--header-font-scale));
-    --blog-eyebrow-to-heading       : calc(28px * var(--type-size));
+    --blog-eyebrow-to-heading       : calc(28px * var(--type-size) * var(--section-eyebrow-gap-scale));
     --blog-heading-to-body          : calc(24px * var(--type-size));
     --blog-body-to-cards            : calc(40px * var(--type-size));
     --blog-card-image-w             : min(100%, calc(340px * var(--media-size)));
@@ -898,7 +904,6 @@
     --about-why-padding-bottom      : calc(48px * var(--header-font-scale));
     --about-why-columns-gap         : calc(32px * var(--header-font-scale));
     --about-why-row-gap             : calc(28px * var(--header-font-scale));
-    --about-why-heading-size        : calc(48px * var(--type-size));
     --about-why-exist-highlight-h   : calc(58px * var(--header-font-scale));
     --about-why-exist-highlight-pad-x: calc(12px * var(--header-font-scale));
     --about-why-heading-to-body     : calc(24px * var(--header-font-scale));
@@ -912,7 +917,6 @@
 
     --about-brings-padding-top      : calc(48px * var(--header-font-scale));
     --about-brings-padding-bottom   : calc(48px * var(--header-font-scale));
-    --about-brings-heading-size     : calc(48px * var(--type-size));
     --about-brings-heading-max-w    : 100%;
     --about-brings-highlight-h      : calc(58px * var(--header-font-scale));
     --about-brings-highlight-pad-x  : calc(12px * var(--header-font-scale));
@@ -939,7 +943,7 @@
     --english-ai-hero-robot-wrap-w         : calc(200px * var(--media-size));
     --english-ai-hero-robot-wrap-h         : calc(260px * var(--media-size));
     --english-ai-hero-illustration-margin-top: 0px;
-    --english-ai-hero-eyebrow-to-heading: calc(16px * var(--header-font-scale));
+    --english-ai-hero-eyebrow-to-heading: calc(16px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
     --english-ai-hero-eyebrow-to-apply        : calc(12px * var(--header-font-scale));
     --english-ai-hero-title-to-body           : calc(20px * var(--header-font-scale));
     --english-ai-hero-body-size               : calc(28px * var(--type-size));
@@ -950,7 +954,7 @@
     --english-ai-platform-padding-top      : calc(48px * var(--header-font-scale));
     --english-ai-platform-padding-bottom   : calc(48px * var(--header-font-scale));
     --english-ai-platform-mockup-w         : 100%;
-    --english-ai-platform-mockup-h         : calc(320px * var(--header-font-scale));
+    --english-ai-platform-mockup-h         : calc(380px * var(--header-font-scale));
     --english-ai-platform-tagline-size     : calc(28px * var(--type-size));
     --english-ai-platform-tagline-max-w    : 100%;
 
@@ -973,6 +977,7 @@
     --english-ai-comparison-row-py         : calc(20px * var(--header-font-scale));
 
     --english-ai-action-subtitle-max-w     : 100%;
+    --english-ai-action-feature-gap        : calc(64px * var(--header-font-scale));
     --english-ai-action-demo-h             : calc(380px * var(--media-scale) / var(--header-font-scale));
 
     --english-ai-curriculum-padding-top    : calc(48px * var(--header-font-scale));
@@ -1028,6 +1033,7 @@
 /* --- Mobile (≤639px) -------------------------------------- */
 @media (max-width: 639px) {
   :root {
+    --section-text-eyebrow        : calc(20px * var(--type-size));
     --header-font-scale           : 0.62;
     --header-announcement-h       : 44px;
     --header-announcement-padding-y: calc(14px * var(--header-font-scale));
@@ -1203,7 +1209,7 @@
 
     --blog-padding-top              : 8px;
     --blog-padding-bottom           : calc(48px * var(--header-font-scale));
-    --blog-eyebrow-to-heading       : calc(20px * var(--type-size));
+    --blog-eyebrow-to-heading       : calc(20px * var(--type-size) * var(--section-eyebrow-gap-scale));
     --blog-heading-to-body          : calc(16px * var(--type-size));
     --blog-body-to-cards            : calc(32px * var(--type-size));
     --blog-card-image-w             : 100%;
@@ -1241,7 +1247,6 @@
     --about-why-padding-bottom      : calc(40px * var(--header-font-scale));
     --about-why-columns-gap         : calc(24px * var(--header-font-scale));
     --about-why-row-gap             : calc(24px * var(--header-font-scale));
-    --about-why-heading-size        : calc(36px * var(--type-size));
     --about-why-exist-highlight-h   : calc(44px * var(--header-font-scale));
     --about-why-exist-highlight-pad-x: calc(10px * var(--header-font-scale));
     --about-why-heading-to-body     : calc(16px * var(--header-font-scale));
@@ -1255,7 +1260,6 @@
 
     --about-brings-padding-top      : calc(32px * var(--header-font-scale));
     --about-brings-padding-bottom   : calc(40px * var(--header-font-scale));
-    --about-brings-heading-size     : calc(36px * var(--type-size));
     --about-brings-heading-max-w    : 100%;
     --about-brings-highlight-h      : calc(44px * var(--header-font-scale));
     --about-brings-highlight-pad-x  : calc(10px * var(--header-font-scale));
@@ -1320,6 +1324,7 @@
     --english-ai-comparison-mobile-block-gap: calc(14px * var(--header-font-scale));
 
     --english-ai-action-subtitle-max-w     : 100%;
+    --english-ai-action-feature-gap        : calc(40px * var(--header-font-scale));
     --english-ai-action-demo-h             : calc(260px * var(--media-scale) / var(--header-font-scale));
 
     --english-ai-curriculum-padding-top    : calc(32px * var(--header-font-scale));
@@ -1376,6 +1381,13 @@
     --contact-info-email-icon-h     : calc(77px * var(--media-size));
     --contact-info-address-icon-w   : calc(75px * var(--media-size));
     --contact-info-address-icon-h   : calc(94px * var(--media-size));
+  }
+}
+
+/* --- Desktop section titles (≥1024px) --------------------- */
+@media (min-width: 1024px) {
+  :root {
+    --section-text-heading: 48px;
   }
 }
 
@@ -1464,7 +1476,7 @@
     /* Onboarding */
     --onboard-padding-top           : 52px;
     --onboard-padding-bottom        : 52px;
-    --onboard-eyebrow-to-heading    : 32px;
+    --onboard-eyebrow-to-heading    : calc(32px * var(--section-eyebrow-gap-scale));
     --onboard-heading-to-body       : 24px;
     --onboard-body-to-cards         : 24px;
     --onboard-image-h               : 190px;
@@ -1472,7 +1484,7 @@
     /* Testimonials */
     --testimonial-padding-top       : 40px;
     --testimonial-padding-bottom    : 32px;
-    --testimonial-eyebrow-to-heading: 24px;
+    --testimonial-eyebrow-to-heading: calc(24px * var(--section-eyebrow-gap-scale));
     --testimonial-heading-to-carousel: 20px;
     --testimonial-card-h            : min(calc(593px * var(--media-size)), 52dvh);
     --testimonial-name-size         : 36px;
@@ -1480,7 +1492,7 @@
     /* Cohort */
     --cohort-padding-top            : 40px;
     --cohort-padding-bottom         : 32px;
-    --cohort-eyebrow-to-heading     : 32px;
+    --cohort-eyebrow-to-heading     : calc(32px * var(--section-eyebrow-gap-scale));
     --cohort-heading-to-body        : 24px;
     --cohort-body-to-logos          : 40px;
     --cohort-logo-row-h             : 56px;

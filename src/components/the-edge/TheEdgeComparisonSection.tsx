@@ -125,7 +125,7 @@ export function TheEdgeComparisonSection() {
           }}
         >
           <p
-            className="uppercase font-body text-black"
+            className="section-eyebrow uppercase font-body text-black"
             style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",

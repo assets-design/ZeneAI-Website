@@ -48,10 +48,22 @@ export function ContactHeroSection({ panel = false }: ContactHeroSectionProps) {
             className="contact-hero-content grid w-full min-w-0 items-center gap-x-[var(--contact-hero-columns-gap)] gap-y-[var(--contact-hero-columns-gap)] max-xl:grid-cols-1 xl:grid-cols-2"
           >
             <div className="contact-hero-copy flex min-w-0 flex-col justify-start xl:col-start-1 xl:row-start-1">
+              <p
+                className="section-eyebrow reveal-left font-body uppercase text-black"
+                style={{
+                  fontSize: 'var(--section-text-eyebrow)',
+                  fontVariationSettings: "'opsz' 14",
+                }}
+              >
+                Get in touch
+              </p>
               <h1
                 id="contact-hero-heading"
                 className="reveal-left font-heading font-medium uppercase leading-none text-black"
-                style={{ fontSize: 'var(--hero-text-headline)' }}
+                style={{
+                  fontSize: 'var(--hero-text-headline)',
+                  marginTop: 'var(--section-eyebrow-to-heading)',
+                }}
                 data-node-id="642:2091"
               >
                 <span className="block">Bring AI-powered</span>

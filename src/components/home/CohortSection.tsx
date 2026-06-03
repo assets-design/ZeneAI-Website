@@ -325,14 +325,25 @@ function CohortLogoCell({ src, alt, maxW, maxH, nodeId, scale = 1 }: CohortLogo)
 function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' | 'the-edge' }) {
   if (variant === 'about') {
     return (
-      <h2
-        id="about-partners-heading"
-        className="max-w-full font-heading font-medium uppercase leading-none text-black"
-        style={{
-          fontSize: 'var(--section-text-heading)',
-        }}
-        data-node-id="642:1396"
-      >
+      <>
+        <p
+          className="section-eyebrow font-body uppercase text-black"
+          style={{
+            fontSize: 'var(--section-text-eyebrow)',
+            fontVariationSettings: "'opsz' 14",
+          }}
+        >
+          Our partners
+        </p>
+        <h2
+          id="about-partners-heading"
+          className="max-w-full font-heading font-medium uppercase leading-none text-black"
+          style={{
+            fontSize: 'var(--section-text-heading)',
+            marginTop: 'var(--section-eyebrow-to-heading)',
+          }}
+          data-node-id="642:1396"
+        >
         <span className="block" data-node-id="642:1397">
           trusted by
         </span>
@@ -356,6 +367,7 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
           </span>
         </span>
       </h2>
+      </>
     )
   }
 
@@ -368,18 +380,20 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
 
   return (
     <>
-      {variant !== 'the-edge' ? (
-        <p
-          className={cn('font-body text-black', !isCustomProgram && 'uppercase')}
-          style={{
-            fontSize: 'var(--section-text-eyebrow)',
-            fontVariationSettings: "'opsz' 14",
-          }}
-          data-node-id="975:1931"
-        >
-          {isCustomProgram ? 'Partners' : 'Our cohort'}
-        </p>
-      ) : null}
+      <p
+        className="section-eyebrow font-body uppercase text-black"
+        style={{
+          fontSize: 'var(--section-text-eyebrow)',
+          fontVariationSettings: "'opsz' 14",
+        }}
+        data-node-id="975:1931"
+      >
+        {variant === 'the-edge'
+          ? 'Success stories'
+          : isCustomProgram
+            ? 'Partners'
+            : 'Our cohort'}
+      </p>
 
       <h2
         id={variant === 'the-edge' ? 'the-edge-cohort-heading' : 'cohort-heading'}
@@ -387,7 +401,7 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
         style={{
           fontSize: 'var(--section-text-heading)',
           maxWidth: 'var(--cohort-heading-max-w)',
-          marginTop: variant === 'the-edge' ? undefined : 'var(--cohort-eyebrow-to-heading)',
+          marginTop: 'var(--cohort-eyebrow-to-heading)',
         }}
         data-node-id="975:1932"
       >
@@ -408,7 +422,7 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
         )}
       </h2>
 
-      {variant !== 'the-edge' ? (
+      {variant !== 'the-edge' && variant !== 'about' ? (
         <p
           className="normal-case font-body font-normal leading-normal text-black"
           style={{

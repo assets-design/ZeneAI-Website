@@ -48,7 +48,7 @@ export function ContentPageShell({
           <div className="blog-header grid min-w-0 grid-cols-1 items-start gap-[var(--blog-header-gap)] xl:grid-cols-[minmax(0,1fr)_auto]">
             <div className="min-w-0">
               <p
-                className="font-body uppercase text-black"
+                className="section-eyebrow font-body uppercase text-black"
                 style={{
                   fontSize: 'var(--section-text-eyebrow)',
                   fontVariationSettings: "'opsz' 14",

@@ -156,7 +156,7 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
           }}
         >
           <p
-            className={cn('font-body text-black', !isCustomProgram && 'uppercase')}
+            className="section-eyebrow font-body uppercase text-black"
             style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",

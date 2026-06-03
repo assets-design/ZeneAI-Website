@@ -10,6 +10,7 @@ const NAV_LINKS = [
   { label: 'english ai', href: '/english-ai', nodeId: '715:1691' },
   { label: 'code monkey', href: '/code-monkey', nodeId: '715:1692' },
   { label: 'the edge', href: '/the-edge', nodeId: '715:1693' },
+  { label: 'our Blogs', href: '/blog', nodeId: '715:1695' },
   { label: 'contact us', href: '/contact', nodeId: '715:1694' },
 ]
 

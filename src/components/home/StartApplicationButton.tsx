@@ -54,6 +54,7 @@ export function StartApplicationButton({
         style={{
           width: 'var(--apply-cta-btn-arrow-size)',
           height: 'auto',
+          marginRight: 'var(--apply-cta-btn-arrow-gap-right)',
         }}
         data-node-id="I975:1981;420:1144"
       />

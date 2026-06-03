@@ -335,7 +335,7 @@ export function AboutBringsSection({
           }}
         >
           <p
-            className="font-body uppercase text-black"
+            className="section-eyebrow font-body uppercase text-black"
             style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",
@@ -348,7 +348,7 @@ export function AboutBringsSection({
             id={headingId}
             className="max-w-full font-heading font-medium uppercase leading-none text-black"
             style={{
-              fontSize: 'var(--about-brings-heading-size)',
+              fontSize: 'var(--section-text-heading)',
               maxWidth: 'var(--about-brings-heading-max-w)',
               marginTop: 'var(--about-brings-eyebrow-to-heading)',
             }}

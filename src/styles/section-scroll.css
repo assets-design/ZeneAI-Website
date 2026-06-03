@@ -365,7 +365,7 @@ html.section-scroll-active body {
     --english-ai-curriculum-padding-bottom: var(--section-viewport-pad);
     --code-monkey-hero-illustration-margin-top: 0px;
     --english-ai-hero-illustration-h: clamp(220px, 36dvh, calc(520px * var(--media-size)));
-    --english-ai-platform-mockup-h: min(calc(434px * var(--header-font-scale)), 32dvh);
+    --english-ai-platform-mockup-h: min(calc(520px * var(--header-font-scale)), 38dvh);
     --the-edge-platform-mockup-h: min(calc(491px * var(--header-font-scale)), 36dvh);
     --the-edge-multi-rater-image-h: min(calc(216px * var(--media-size)), 18dvh);
     --the-edge-courses-card-image-h: min(calc(326px * var(--media-size)), 28dvh);
@@ -382,7 +382,7 @@ html.section-scroll-active body {
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-platform-heading),
   .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-platform-heading) {
     --english-ai-platform-mockup-w: min(100%, calc(1320px * var(--header-font-scale)));
-    --english-ai-platform-mockup-h: min(calc(640px * var(--header-font-scale)), 52dvh);
+    --english-ai-platform-mockup-h: min(calc(720px * var(--header-font-scale)), 58dvh);
   }
 
   /* English AI gains — fit one viewport: no top clip, footer visible, single-line title */
@@ -410,7 +410,7 @@ html.section-scroll-active body {
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-gains-heading) {
     --english-ai-grid-padding-top: clamp(20px, 3.5dvh, 32px);
     --english-ai-grid-padding-bottom: clamp(14px, 2dvh, 22px);
-    --english-ai-grid-eyebrow-to-heading: clamp(6px, 0.8dvh, 10px);
+    --english-ai-grid-eyebrow-to-heading: clamp(3px, 0.4dvh, 5px);
     --english-ai-grid-heading-to-subtitle: clamp(8px, 1dvh, 14px);
     --english-ai-grid-subtitle-to-items: clamp(8px, 1dvh, 14px);
     --english-ai-grid-gap-y: clamp(20px, 2.5dvh, 32px);
@@ -421,7 +421,6 @@ html.section-scroll-active body {
     --english-ai-grid-title-to-body: clamp(4px, 0.5dvh, 6px);
     --english-ai-grid-items-to-footer: clamp(12px, 1.5dvh, 20px);
     --section-text-body: clamp(17px, 1.9dvh, 21px);
-    --section-text-eyebrow: clamp(18px, 2dvh, 22px);
   }
 
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-gains-heading) #english-ai-gains-heading {
@@ -467,6 +466,20 @@ html.section-scroll-active body {
     justify-content: stretch;
   }
 
+  .program-page-scroll--home .section-scroll-panel--snap:has(#how-it-works) > section > :first-child,
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) > section > :first-child,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) > section > :first-child,
+  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#how-it-works) > section > :first-child {
+    overflow: visible;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#how-it-works) > section > .how-it-works-card,
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) > section > .how-it-works-card,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) > section > .how-it-works-card,
+  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#how-it-works) > section > .how-it-works-card {
+    overflow: visible;
+  }
+
   .program-page-scroll--home .section-scroll-panel--snap:has(#how-it-works) .how-it-works-grid,
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-grid,
   .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-grid,
@@ -474,8 +487,21 @@ html.section-scroll-active body {
     flex: 1 1 auto;
     min-height: 0;
     height: 100%;
-    align-items: stretch;
+    align-items: start;
     padding-bottom: 0 !important;
+  }
+
+  @media (min-width: 1280px) {
+    .program-page-scroll--home .section-scroll-panel--snap:has(#how-it-works) .how-it-works-left,
+    .program-page-scroll--english-ai .section-scroll-panel--snap:has(#how-it-works) .how-it-works-left,
+    .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#how-it-works) .how-it-works-left,
+    .program-page-scroll--the-edge .section-scroll-panel--snap:has(#how-it-works) .how-it-works-left {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      align-self: start;
+      background-color: #fff;
+    }
   }
 
   .program-page-scroll--home .section-scroll-panel--snap:has(#how-it-works) .how-it-works-right-scroll,
@@ -674,14 +700,7 @@ html.section-scroll-active body {
     --blog-panel-padding-bottom: var(--section-viewport-pad);
   }
 
-  .program-page-scroll--blog > .section-scroll-panel--form {
-    /* Nav overlaps announcement by 10px — reserve only visible nav height + card gap */
-    padding-top: calc(
-      var(--blog-section-card-gap, 1px) + var(--header-nav-h) - 10px
-    ) !important;
-    padding-bottom: var(--section-card-gap) !important;
-  }
-
+  .program-page-scroll--blog > .section-scroll-panel--form,
   .program-page-scroll--faq > .section-scroll-panel--form,
   .program-page-scroll--careers > .section-scroll-panel--form {
     padding-top: calc(
@@ -785,13 +804,7 @@ html.section-scroll-active body {
     overflow: visible;
   }
 
-  .program-page-scroll--blog .section-scroll-panel--form .blog-card {
-    min-height: calc(
-      var(--section-viewport-h, 100vh) - var(--blog-section-card-gap, 1px) -
-        (var(--header-nav-h) - 10px) - var(--section-card-gap)
-    );
-  }
-
+  .program-page-scroll--blog .section-scroll-panel--form .blog-card,
   .program-page-scroll--faq .section-scroll-panel--form .blog-card,
   .program-page-scroll--careers .section-scroll-panel--form .blog-card {
     min-height: calc(
@@ -964,6 +977,7 @@ html.section-scroll-active body {
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action),
   .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) {
     --english-ai-action-heading-to-subtitle: clamp(8px, 1.2dvh, 20px);
+    --action-feature-gap: var(--english-ai-action-feature-gap);
     --action-heading-to-demo: clamp(12px, 1.5dvh, 24px);
     --action-columns-row-gap: clamp(12px, 1.5dvh, 20px);
     --action-demo-h: clamp(
@@ -1017,7 +1031,7 @@ html.section-scroll-active body {
       var(--apply-cta-yellow-size) + var(--apply-cta-student-circle-size)
     );
     --apply-cta-content-padding-x: calc(64px * var(--header-font-scale));
-    --apply-cta-heading-size: calc(62px * var(--type-size));
+    --apply-cta-heading-size: var(--section-text-heading);
     --apply-cta-body-size: calc(22px * var(--type-size));
     --apply-cta-yellow-py: calc(56px * var(--header-font-scale));
     --apply-cta-heading-to-body: calc(30px * var(--type-size));
@@ -1029,6 +1043,11 @@ html.section-scroll-active body {
     --apply-cta-btn-arrow-size: calc(35px * var(--type-size));
     --apply-cta-heading-max-w: calc(455px * var(--type-size));
     --apply-cta-body-max-w: calc(528px * var(--type-size));
+  }
+
+  .program-page-scroll--about .section-scroll-panel--snap:has(#apply) .apply-cta-yellow .rotating-split-border {
+    --apply-cta-btn-padding-x: calc(72px * var(--header-font-scale));
+    --apply-cta-btn-arrow-gap-right: calc(28px * var(--header-font-scale));
   }
 
   .program-page-scroll--home .section-scroll-panel--snap:has(#faqs),

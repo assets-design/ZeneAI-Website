@@ -115,10 +115,22 @@ export function WhySchoolsSection() {
             style={{ gap: 'var(--why-columns-gap)' }}
           >
             <div className="min-w-0">
+              <p
+                className="section-eyebrow font-body uppercase text-black"
+                style={{
+                  fontSize: 'var(--section-text-eyebrow)',
+                  fontVariationSettings: "'opsz' 14",
+                }}
+              >
+                Why visionary schools partner with us
+              </p>
               <h2
                 id="why-schools-heading"
                 className="font-heading font-medium uppercase leading-none text-black"
-                style={{ fontSize: 'var(--section-text-heading)' }}
+                style={{
+                  fontSize: 'var(--section-text-heading)',
+                  marginTop: 'var(--section-eyebrow-to-heading)',
+                }}
                 data-node-id="642:1152"
               >
                 Why schools Choose{' '}

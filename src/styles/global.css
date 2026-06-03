@@ -123,6 +123,11 @@
       ) border-box;
   }
 
+  .apply-cta-section--about .apply-cta-yellow .rotating-split-border {
+    --apply-cta-btn-padding-x: calc(72px * var(--header-font-scale));
+    --apply-cta-btn-arrow-gap-right: calc(28px * var(--header-font-scale));
+  }
+
   .apply-cta-section--the-edge {
     --apply-cta-student-overlap: 0px;
     --apply-cta-stage-w: calc(
@@ -151,7 +156,7 @@
 
   /* English AI hero — 58/42 layout, eyebrow + headline + body left, illustration right */
   .program-hero--english-ai {
-    --english-ai-hero-eyebrow-to-heading: calc(20px * var(--header-font-scale));
+    --english-ai-hero-eyebrow-to-heading: calc(20px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
     --english-ai-hero-illustration-margin-top: 0px;
     --english-ai-hero-illustration-w: min(100%, calc(781px * var(--media-size)));
     --english-ai-hero-illustration-h: calc(487px * var(--media-size));
@@ -183,17 +188,17 @@
   .the-edge-framework-inner {
     --the-edge-framework-padding-top: var(--english-ai-grid-padding-top);
     --the-edge-framework-padding-bottom: var(--english-ai-grid-padding-bottom);
-    --the-edge-framework-eyebrow-size: calc(28px * var(--type-size));
-    --the-edge-framework-eyebrow-to-heading: var(--english-ai-grid-eyebrow-to-heading, var(--section-gap));
+    --the-edge-framework-eyebrow-to-heading: var(--english-ai-grid-eyebrow-to-heading, var(--section-eyebrow-to-heading));
     --the-edge-framework-heading-to-subtitle: var(--english-ai-grid-heading-to-subtitle, var(--section-gap));
     --the-edge-framework-subtitle-max-w: none;
     --the-edge-framework-subtitle-to-content: calc(48px * var(--media-size));
     --the-edge-framework-columns-gap: calc(60px * var(--media-size));
     --the-edge-framework-row-gap: calc(40px * var(--media-size));
-    --the-edge-framework-diagram-size: calc(520px * var(--media-size));
+    --the-edge-framework-diagram-size: calc(660px * var(--media-size));
     --the-edge-framework-ring-scale: 56.7%;
-    --the-edge-framework-pillar-size: calc(132px * var(--media-size));
-    --the-edge-framework-pillar-visual-scale: 0.82;
+    --the-edge-framework-ring-radius: 28.35cqw;
+    --the-edge-framework-pillar-size: calc(168px * var(--media-size));
+    --the-edge-framework-pillar-visual-scale: 0.95;
     --the-edge-framework-detail-image-h: calc(258px * var(--media-size));
     --the-edge-framework-detail-image-radius: calc(12px * var(--media-size));
     --the-edge-framework-image-to-title: calc(30px * var(--media-size));
@@ -202,9 +207,24 @@
     --the-edge-framework-indicator-size: calc(10px * var(--media-size));
   }
 
+  .the-edge-framework-diagram {
+    container-type: size;
+  }
+
   .the-edge-framework-ring {
     width: var(--the-edge-framework-ring-scale);
     height: var(--the-edge-framework-ring-scale);
+  }
+
+  .the-edge-framework-dot-orbit {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 4;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    transition: transform 0.55s ease-in-out;
   }
 
   .the-edge-framework-core {
@@ -237,24 +257,26 @@
 
   .the-edge-framework-ring-dot {
     position: absolute;
-    z-index: 4;
+    left: 0;
+    top: 0;
     width: var(--the-edge-framework-indicator-size);
     height: var(--the-edge-framework-indicator-size);
-    transform: translate(-50%, -50%);
+    transform: translateX(var(--the-edge-framework-ring-radius)) translate(-50%, -50%);
     border-radius: 9999px;
     background: #000;
-    pointer-events: none;
-    animation: the-edge-framework-dot-blink 1.4s ease-in-out infinite;
+    animation: the-edge-framework-dot-blink 1s ease-in-out infinite;
   }
 
   @keyframes the-edge-framework-dot-blink {
     0%,
     100% {
       opacity: 1;
+      transform: translateX(var(--the-edge-framework-ring-radius)) translate(-50%, -50%) scale(1);
     }
 
     50% {
-      opacity: 0.2;
+      opacity: 0.15;
+      transform: translateX(var(--the-edge-framework-ring-radius)) translate(-50%, -50%) scale(0.85);
     }
   }
 
@@ -268,10 +290,9 @@
 
   @media (max-width: 1279px) {
     .the-edge-framework-inner {
-      --the-edge-framework-diagram-size: min(100%, calc(420px * var(--media-size)));
-      --the-edge-framework-eyebrow-size: calc(24px * var(--type-size));
-      --the-edge-framework-pillar-size: calc(108px * var(--media-size));
-      --the-edge-framework-pillar-visual-scale: 0.8;
+      --the-edge-framework-diagram-size: min(100%, calc(520px * var(--media-size)));
+      --the-edge-framework-pillar-size: calc(140px * var(--media-size));
+      --the-edge-framework-pillar-visual-scale: 0.92;
       --the-edge-framework-subtitle-max-w: calc(660px * var(--media-size));
       --the-edge-framework-subtitle-to-content: calc(32px * var(--media-size));
     }
@@ -279,49 +300,34 @@
 
   @media (max-width: 639px) {
     .the-edge-framework-inner {
-      --the-edge-framework-diagram-size: min(100%, calc(320px * var(--media-size)));
-      --the-edge-framework-eyebrow-size: calc(20px * var(--type-size));
-      --the-edge-framework-pillar-size: calc(84px * var(--media-size));
-      --the-edge-framework-pillar-visual-scale: 0.78;
+      --the-edge-framework-diagram-size: min(100%, calc(380px * var(--media-size)));
+      --the-edge-framework-pillar-size: calc(108px * var(--media-size));
+      --the-edge-framework-pillar-visual-scale: 0.9;
       --the-edge-framework-detail-image-h: calc(200px * var(--media-size));
     }
   }
 
-  /* Code Monkey hero — shares English AI layout; eyebrow sizing only */
   .program-hero--code-monkey {
-    --code-monkey-hero-eyebrow-size: calc(24px * var(--type-size));
-    --code-monkey-hero-eyebrow-to-heading: calc(20px * var(--header-font-scale));
-  }
-
-  @media (max-width: 1279px) {
-    .program-hero--code-monkey {
-      --code-monkey-hero-eyebrow-size: calc(20px * var(--type-size));
-    }
-  }
-
-  @media (max-width: 639px) {
-    .program-hero--code-monkey {
-      --code-monkey-hero-eyebrow-size: calc(16px * var(--type-size));
-    }
+    --code-monkey-hero-eyebrow-to-heading: calc(20px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   }
 
   /* English AI platform section — larger device mockup on the right */
   .program-platform--english-ai {
     --english-ai-platform-mockup-w: min(100%, calc(1320px * var(--header-font-scale)));
-    --english-ai-platform-mockup-h: calc(640px * var(--header-font-scale));
+    --english-ai-platform-mockup-h: calc(720px * var(--header-font-scale));
   }
 
   @media (max-width: 1279px) {
     .program-platform--english-ai {
       --english-ai-platform-mockup-w: 100%;
-      --english-ai-platform-mockup-h: calc(480px * var(--header-font-scale));
+      --english-ai-platform-mockup-h: calc(540px * var(--header-font-scale));
     }
   }
 
   @media (max-width: 639px) {
     .program-platform--english-ai {
       --english-ai-platform-mockup-w: 100%;
-      --english-ai-platform-mockup-h: calc(340px * var(--header-font-scale));
+      --english-ai-platform-mockup-h: calc(380px * var(--header-font-scale));
     }
   }
 
@@ -426,6 +432,10 @@
     gap: var(--the-edge-courses-slide-gap);
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 0;
+  }
+
+  .the-edge-courses-track.the-edge-courses-track--autoplay {
+    scroll-snap-type: none;
   }
 
   .the-edge-courses-slide {
@@ -607,6 +617,7 @@
     }
 
     #main-content:not(.section-scroll-root) .blog-post-page > :first-child,
+    #main-content:not(.section-scroll-root) .blog-page > :first-child,
     #main-content:not(.section-scroll-root) .careers-page > :first-child,
     #main-content:not(.section-scroll-root) .faq-page > :first-child,
     #main-content:not(.section-scroll-root) .content-page > :first-child {
@@ -616,6 +627,7 @@
     }
 
     #main-content:not(.section-scroll-root) .blog-post-page .blog-body,
+    #main-content:not(.section-scroll-root) .blog-page .blog-body,
     #main-content:not(.section-scroll-root) .careers-page .blog-body,
     #main-content:not(.section-scroll-root) .faq-page .blog-body,
     #main-content:not(.section-scroll-root) .content-page .blog-body {
@@ -949,6 +961,7 @@
 /* Single blog post — card inset + content padding match header (5px + nav px) */
 .blog-post-page .blog-post-body,
 .blog-post-page .content-page-body,
+.blog-page .blog-post-body,
 .careers-page .blog-post-body,
 .faq-page .blog-post-body,
 .content-page .blog-post-body,
@@ -960,6 +973,7 @@
 @media (min-width: 640px) {
   .blog-post-page .blog-post-body,
   .blog-post-page .content-page-body,
+  .blog-page .blog-post-body,
   .careers-page .blog-post-body,
   .faq-page .blog-post-body,
   .content-page .blog-post-body,
@@ -972,6 +986,7 @@
 @media (min-width: 1024px) {
   .blog-post-page .blog-post-body,
   .blog-post-page .content-page-body,
+  .blog-page .blog-post-body,
   .careers-page .blog-post-body,
   .faq-page .blog-post-body,
   .content-page .blog-post-body,

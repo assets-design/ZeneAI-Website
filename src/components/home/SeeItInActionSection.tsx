@@ -82,11 +82,11 @@ export function SeeItInActionSection() {
             paddingRight: 'var(--section-padding-x)',
             paddingTop: 'var(--action-padding-top)',
             paddingBottom: 'var(--action-padding-bottom)',
-            gap: 'var(--section-gap)',
+            gap: 'var(--section-eyebrow-to-heading)',
           }}
         >
           <p
-            className="shrink-0 font-body uppercase text-black"
+            className="section-eyebrow shrink-0 font-body uppercase text-black"
             style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",

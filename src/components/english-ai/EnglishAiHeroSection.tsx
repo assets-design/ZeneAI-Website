@@ -1,4 +1,5 @@
 import theEdgeHeroIllustration from '@/assets/figma/the-edge/hero-illustration.png'
+import codeMonkeyHeroIllustration from '@/data/Group 555.png'
 import whySchoolsGif from '@/data/comp_04.gif'
 import theEdgeHeroLogoOverlay from '@/assets/figma/the-edge/hero-logo-overlay.png'
 import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
@@ -47,11 +48,17 @@ function TheEdgeHeroIllustration() {
   )
 }
 
-function EnglishAiHeroGif() {
+function ProgramHeroIllustration({
+  src,
+  alt,
+}: {
+  src: string
+  alt: string
+}) {
   return (
     <img
-      src={whySchoolsGif}
-      alt="Students learning with Zene AI"
+      src={src}
+      alt={alt}
       className="section-fit-media english-ai-hero-gif block h-auto object-contain object-left-bottom"
       style={{
         width: 'var(--english-ai-hero-illustration-w)',
@@ -167,7 +174,7 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
               >
                 <div className="min-w-0 self-center xl:self-auto">
                   <p
-                    className="font-body text-black"
+                    className="section-eyebrow font-body uppercase text-black"
                     style={{
                       fontSize: 'var(--section-text-eyebrow)',
                       fontVariationSettings: "'opsz' 14",
@@ -236,7 +243,7 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
               >
                 <div className="english-ai-hero-copy min-w-0">
                   <p
-                    className="font-body uppercase text-black"
+                    className="section-eyebrow font-body uppercase text-black"
                     style={{
                       fontSize: 'var(--section-text-eyebrow)',
                       fontVariationSettings: "'opsz' 14",
@@ -274,7 +281,14 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
                 </div>
 
                 <div className="flex w-full min-w-0 items-end justify-center sm:justify-end">
-                  <EnglishAiHeroGif />
+                  <ProgramHeroIllustration
+                    src={isCodeMonkey ? codeMonkeyHeroIllustration : whySchoolsGif}
+                    alt={
+                      isCodeMonkey
+                        ? 'CodeMonkey students with the monkey mascot'
+                        : 'Students learning with Zene AI'
+                    }
+                  />
                 </div>
               </div>
             </div>

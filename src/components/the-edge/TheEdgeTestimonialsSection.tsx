@@ -197,12 +197,25 @@ export function TheEdgeTestimonialsSection() {
           }}
         >
           <div className="the-edge-testimonials-layout grid min-w-0 items-start gap-x-[var(--the-edge-testimonials-columns-gap)] gap-y-[var(--the-edge-testimonials-row-gap)] lg:grid-cols-[minmax(0,var(--the-edge-testimonials-heading-col-w))_1fr]">
-            <h2
-              id="the-edge-testimonials-heading"
-              className="section-heading font-heading font-medium uppercase leading-none text-black lg:row-start-1"
-              style={{ fontSize: 'var(--section-text-heading)' }}
-              data-node-id="1126:2505"
-            >
+            <div className="lg:row-start-1">
+              <p
+                className="section-eyebrow font-body uppercase text-black"
+                style={{
+                  fontSize: 'var(--section-text-eyebrow)',
+                  fontVariationSettings: "'opsz' 14",
+                }}
+              >
+                From our partner schools
+              </p>
+              <h2
+                id="the-edge-testimonials-heading"
+                className="section-heading font-heading font-medium uppercase leading-none text-black"
+                style={{
+                  fontSize: 'var(--section-text-heading)',
+                  marginTop: 'var(--testimonial-eyebrow-to-heading)',
+                }}
+                data-node-id="1126:2505"
+              >
               <span className="block" data-node-id="1126:2506">
                 Real Students.
               </span>
@@ -213,7 +226,8 @@ export function TheEdgeTestimonialsSection() {
               >
                 Real Progress.
               </span>
-            </h2>
+              </h2>
+            </div>
 
             <div
               className="the-edge-testimonials-cards grid min-w-0 grid-cols-1 gap-[var(--the-edge-testimonials-card-gap)] md:grid-cols-2 lg:col-start-2 lg:row-start-1"

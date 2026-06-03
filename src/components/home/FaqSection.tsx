@@ -338,24 +338,22 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
             paddingBottom: 'var(--faq-padding-bottom)',
           }}
         >
-          {isCustomProgram ? (
-            <p
-              className="font-body text-black"
-              style={{
-                fontSize: 'var(--section-text-eyebrow)',
-                fontVariationSettings: "'opsz' 14",
-              }}
-            >
-              FAQ
-            </p>
-          ) : null}
+          <p
+            className="section-eyebrow font-body uppercase text-black"
+            style={{
+              fontSize: 'var(--section-text-eyebrow)',
+              fontVariationSettings: "'opsz' 14",
+            }}
+          >
+            FAQ
+          </p>
 
           <h2
             id={headingId}
             className="font-heading font-medium uppercase leading-none text-black"
             style={{
               fontSize: 'var(--section-text-heading)',
-              marginTop: isCustomProgram ? 'var(--section-gap)' : undefined,
+              marginTop: 'var(--section-eyebrow-to-heading)',
             }}
             data-node-id="975:1946"
           >

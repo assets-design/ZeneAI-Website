@@ -66,12 +66,22 @@ export function NotFoundSection({ panel = false }: NotFoundSectionProps) {
           }}
         >
           <div className="flex min-w-0 flex-col justify-center">
+            <p
+              className="section-eyebrow font-body uppercase text-black"
+              style={{
+                fontSize: 'var(--section-text-eyebrow)',
+                fontVariationSettings: "'opsz' 14",
+              }}
+            >
+              Page not found
+            </p>
             <h1
               id="not-found-heading"
               className="font-heading font-medium uppercase leading-none text-black"
               style={{
                 fontSize: 'var(--not-found-title-size)',
                 maxWidth: 'var(--not-found-title-max-w)',
+                marginTop: 'var(--section-eyebrow-to-heading)',
               }}
               data-node-id="735:1744"
             >

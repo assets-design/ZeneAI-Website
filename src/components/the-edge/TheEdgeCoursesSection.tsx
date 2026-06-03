@@ -35,6 +35,7 @@ const COURSES = [
 
 const COURSE_COUNT = COURSES.length
 const LOOP_SETS = 3
+const AUTO_SLIDE_MS = 4500
 
 const highlightStyle = {
   minHeight: 'var(--english-ai-highlight-h)',
@@ -127,6 +128,8 @@ export function TheEdgeCoursesSection() {
   const carouselRef = useRef<HTMLDivElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const isJumpingRef = useRef(false)
+  const isHoveredRef = useRef(false)
+  const isAutoAdvancingRef = useRef(false)
   const activeIndexRef = useRef(0)
   const [activeIndex, setActiveIndex] = useState(0)
   const [slideWidth, setSlideWidth] = useState<number | null>(null)
@@ -205,7 +208,7 @@ export function TheEdgeCoursesSection() {
 
   const normalizeScroll = useCallback(() => {
     const track = trackRef.current
-    if (!track || isJumpingRef.current) return
+    if (!track || isJumpingRef.current || isAutoAdvancingRef.current) return
 
     const closestIndex = getClosestSlideIndex(track)
     const logicalIndex = ((closestIndex % COURSE_COUNT) + COURSE_COUNT) % COURSE_COUNT
@@ -274,7 +277,7 @@ export function TheEdgeCoursesSection() {
 
     const handleScrollEnd = () => {
       if (scrollEndTimer) clearTimeout(scrollEndTimer)
-      normalizeScroll()
+      if (!isAutoAdvancingRef.current) normalizeScroll()
     }
 
     const handleScrollWithFallback = () => {
@@ -292,6 +295,82 @@ export function TheEdgeCoursesSection() {
       if (scrollEndTimer) clearTimeout(scrollEndTimer)
     }
   }, [getClosestSlideIndex, normalizeScroll, setLogicalIndex])
+
+  const advanceSlide = useCallback(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const slides = Array.from(track.children) as HTMLElement[]
+    if (slides.length === 0) return
+
+    const closestIndex = getClosestSlideIndex(track)
+    const nextIndex =
+      closestIndex + 1 < slides.length ? closestIndex + 1 : COURSE_COUNT
+    const nextSlide = slides[nextIndex]
+    if (!nextSlide) return
+
+    const nextLogical = loopSlides[nextIndex]?.logicalIndex ?? nextIndex % COURSE_COUNT
+
+    isAutoAdvancingRef.current = true
+    track.classList.add('the-edge-courses-track--autoplay')
+    track.scrollTo({ left: nextSlide.offsetLeft, behavior: 'smooth' })
+    setLogicalIndex(nextLogical)
+
+    window.setTimeout(() => {
+      track.classList.remove('the-edge-courses-track--autoplay')
+      isAutoAdvancingRef.current = false
+      normalizeScroll()
+    }, 650)
+  }, [getClosestSlideIndex, normalizeScroll, setLogicalIndex, loopSlides])
+
+  useEffect(() => {
+    const carousel = carouselRef.current
+    const section = carousel?.closest('section')
+    if (!carousel || !section) return
+
+    let timer: ReturnType<typeof setInterval> | undefined
+
+    const tick = () => {
+      if (isHoveredRef.current || isJumpingRef.current || isAutoAdvancingRef.current) return
+      if (carousel.clientWidth <= 0) return
+      advanceSlide()
+    }
+
+    const startAutoplay = () => {
+      if (timer != null) return
+      timer = window.setInterval(tick, AUTO_SLIDE_MS)
+      window.setTimeout(tick, 800)
+    }
+
+    const stopAutoplay = () => {
+      if (timer == null) return
+      window.clearInterval(timer)
+      timer = undefined
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.15)) {
+          startAutoplay()
+        } else {
+          stopAutoplay()
+        }
+      },
+      { threshold: [0, 0.15, 0.35] },
+    )
+
+    observer.observe(section)
+
+    const rect = carousel.getBoundingClientRect()
+    if (rect.width > 0 && rect.top < window.innerHeight && rect.bottom > 0) {
+      startAutoplay()
+    }
+
+    return () => {
+      stopAutoplay()
+      observer.disconnect()
+    }
+  }, [advanceSlide])
 
   return (
     <section
@@ -314,10 +393,22 @@ export function TheEdgeCoursesSection() {
             paddingBottom: 'var(--english-ai-curriculum-padding-bottom)',
           }}
         >
+          <p
+            className="section-eyebrow font-body uppercase text-black"
+            style={{
+              fontSize: 'var(--section-text-eyebrow)',
+              fontVariationSettings: "'opsz' 14",
+            }}
+          >
+            Leadership pathways
+          </p>
           <h2
             id="the-edge-courses-heading"
             className="section-heading max-w-[var(--english-ai-heading-max-w)] font-heading font-medium uppercase text-black"
-            style={{ fontSize: 'var(--section-text-heading)' }}
+            style={{
+              fontSize: 'var(--section-text-heading)',
+              marginTop: 'var(--section-eyebrow-to-heading)',
+            }}
             data-node-id="1100:2236"
           >
             The edge{' '}
@@ -326,7 +417,15 @@ export function TheEdgeCoursesSection() {
             </span>
           </h2>
 
-          <div style={{ marginTop: 'var(--the-edge-courses-heading-to-grid)' }}>
+          <div
+            style={{ marginTop: 'var(--the-edge-courses-heading-to-grid)' }}
+            onMouseEnter={() => {
+              isHoveredRef.current = true
+            }}
+            onMouseLeave={() => {
+              isHoveredRef.current = false
+            }}
+          >
             <div ref={carouselRef} className="the-edge-courses-carousel" data-node-id="1100:2061">
               <div
                 ref={trackRef}

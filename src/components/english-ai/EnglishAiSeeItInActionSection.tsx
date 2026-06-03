@@ -132,11 +132,11 @@ export function EnglishAiSeeItInActionSection({
             paddingRight: 'var(--section-padding-x)',
             paddingTop: 'var(--action-padding-top)',
             paddingBottom: 'var(--action-padding-bottom)',
-            gap: 'var(--section-gap)',
+            gap: 'var(--section-eyebrow-to-heading)',
           }}
         >
           <p
-            className={cn('shrink-0 font-body text-black', !isCustomProgram && 'uppercase')}
+            className="section-eyebrow shrink-0 font-body uppercase text-black"
             style={{
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",
@@ -235,7 +235,7 @@ export function EnglishAiSeeItInActionSection({
 
             <div
               className="action-features-col flex min-h-0 min-w-0 flex-col justify-start lg:col-start-2 lg:row-start-2"
-              style={{ gap: 'var(--action-feature-gap)' }}
+              style={{ gap: 'var(--english-ai-action-feature-gap, var(--action-feature-gap))' }}
             >
               {features.map(feature => (
                 <ActionFeature key={feature.titleNodeId} {...feature} normalCaseBody={isCustomProgram} />

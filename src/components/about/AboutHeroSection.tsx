@@ -43,7 +43,7 @@ export function AboutHeroSection() {
             style={{ marginTop: 'var(--about-hero-text-offset-top)' }}
           >
             <p
-              className="font-body uppercase text-black"
+              className="section-eyebrow font-body uppercase text-black"
               style={{
                 fontSize: 'var(--section-text-eyebrow)',
                 fontVariationSettings: "'opsz' 14",
