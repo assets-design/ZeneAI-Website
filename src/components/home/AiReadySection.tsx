@@ -1,5 +1,7 @@
+import { AiReadyStakeholdersCarousel } from '@/components/home/AiReadyStakeholdersCarousel'
 import { HeadsetTracker, useHeadsetTracking } from '@/components/home/HeadsetTracker'
 import { SpriteCharacter } from '@/components/home/SpriteCharacter'
+import { cn } from '@/lib/utils'
 
 /* Positions from Figma Frame 58 (765:1839) — 1910 × 854 canvas */
 
@@ -65,11 +67,13 @@ function StakeholderBody({
   )
 }
 
-export function AiReadySection() {
+export function AiReadySection({ variant = 'default' }: { variant?: 'home' | 'default' }) {
   const { eyeOffset, handleMouseMove, handleMouseLeave } = useHeadsetTracking()
+  const useMobileCarousel = variant === 'home'
 
   return (
     <section
+      id="ai-ready"
       className="w-full px-[5px] pt-[5px]"
       aria-labelledby="ai-ready-heading"
       data-node-id="765:1838"
@@ -116,9 +120,14 @@ export function AiReadySection() {
           </h2>
         </div>
 
-        {/* Full-bleed diagram — Figma 765:1839 */}
+        {useMobileCarousel ? <AiReadyStakeholdersCarousel /> : null}
+
+        {/* Full-bleed diagram — Figma 765:1839 (tablet & desktop; home mobile uses carousel) */}
         <div
-          className="ai-ready-diagram relative min-h-0"
+          className={cn(
+            'ai-ready-diagram relative min-h-0',
+            useMobileCarousel && 'hidden sm:block',
+          )}
           style={{
             marginTop: 'var(--ai-ready-heading-to-diagram)',
             marginBottom: 'var(--ai-ready-padding-bottom)',

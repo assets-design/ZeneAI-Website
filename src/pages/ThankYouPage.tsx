@@ -2,11 +2,7 @@ import { ScrollPageDesktop, useDesktopScrollPage } from '@/components/Layout/Scr
 import { ThankYouSection } from '@/components/thank-you/ThankYouSection'
 
 export function ThankYouPage() {
-  const isDesktop = useDesktopScrollPage()
-
-  if (!isDesktop) {
-    return <ThankYouSection />
-  }
+  useDesktopScrollPage()
 
   return (
     <ScrollPageDesktop pageClass="program-page-scroll--thank-you">

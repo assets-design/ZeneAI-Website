@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import {
   AboutBringsSection,
   ABOUT_BRINGS_PRINCIPLES_CONTENT,
@@ -25,24 +24,14 @@ const ABOUT_SECTIONS = [
     />
   ) },
   { key: 'product-intro', render: () => <ProductIntroSection /> },
-  { key: 'ai-ready', render: () => <AiReadySection /> },
+  { key: 'ai-ready', render: () => <AiReadySection variant="home" /> },
   { key: 'testimonials', render: () => <TestimonialsSection variant="about" /> },
   { key: 'cohort', render: () => <CohortSection variant="about" /> },
   { key: 'apply', render: () => <ApplyCtaSection variant="about" /> },
 ] as const
 
 export function AboutPage() {
-  const isDesktop = useDesktopScrollPage()
-
-  if (!isDesktop) {
-    return (
-      <>
-        {ABOUT_SECTIONS.map(({ key, render }) => (
-          <Fragment key={key}>{render()}</Fragment>
-        ))}
-      </>
-    )
-  }
+  useDesktopScrollPage()
 
   return <SnapSectionsDesktop pageClass="program-page-scroll--about" sections={ABOUT_SECTIONS} />
 }

@@ -832,12 +832,18 @@
     --apply-cta-btn-text-to-arrow   : calc(16px * var(--header-font-scale));
     --apply-cta-btn-arrow-size      : calc(28px * var(--type-size));
 
-    --apply-btn-w                   : min(100%, calc(260px * var(--header-font-scale)));
+    --apply-btn-w                   : calc(260px * var(--header-font-scale));
     --apply-btn-h                   : calc(96px * var(--header-font-scale));
-    --apply-btn-pill-w              : calc(246px * var(--header-font-scale));
-    --apply-btn-pill-h              : calc(58px * var(--header-font-scale));
+    /* Pill tucks under avatar — same overlap as desktop (94px) */
     --apply-btn-circle-size         : calc(96px * var(--header-font-scale));
+    --apply-btn-pill-w              : min(
+      var(--apply-btn-w),
+      calc((var(--apply-btn-w) - var(--apply-btn-circle-size)) + 94px * var(--header-font-scale))
+    );
+    --apply-btn-pill-h              : calc(58px * var(--header-font-scale));
+    --apply-btn-pill-top            : calc(19px * var(--header-font-scale));
     --apply-btn-circle-left         : calc(var(--apply-btn-w) - var(--apply-btn-circle-size));
+    --apply-btn-text-zone-w         : var(--apply-btn-circle-left);
     --hero-decorative-w             : min(calc(320px * var(--media-size)), 40vw);
     --hero-content-to-badges      : 12px;
     --apply-btn-student-size        : calc(58px * var(--media-size));
@@ -1031,6 +1037,14 @@
 }
 
 /* --- Mobile (≤639px) -------------------------------------- */
+/* --- Tablet description body (640–1279px) ------------------- */
+@media (min-width: 640px) and (max-width: 1279px) {
+  :root {
+    --section-text-body         : 16px;
+    --english-ai-hero-body-size : 16px;
+  }
+}
+
 @media (max-width: 639px) {
   :root {
     --section-text-eyebrow        : calc(20px * var(--type-size));
@@ -1081,6 +1095,7 @@
     --section-text-heading        : calc(36px * var(--type-size));
     --section-text-title          : calc(28px * var(--type-size));
     --section-text-tab            : calc(22px * var(--type-size));
+    --section-text-body           : 15px;
     --section-tab-h                 : calc(64px * var(--header-font-scale));
     --section-tab-english-w         : 100%;
     --section-tab-code-w            : 100%;
@@ -1283,7 +1298,7 @@
     --english-ai-hero-row-gap              : calc(20px * var(--header-font-scale));
     --english-ai-hero-title-size           : calc(36px * var(--type-size));
     --english-ai-hero-title-max-w          : 100%;
-    --english-ai-hero-body-size            : calc(22px * var(--type-size));
+    --english-ai-hero-body-size            : 15px;
     --english-ai-hero-body-max-w           : 100%;
     --english-ai-hero-illustration-w       : 100%;
     --english-ai-hero-illustration-h       : calc(240px * var(--media-size));

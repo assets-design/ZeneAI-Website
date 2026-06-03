@@ -307,6 +307,132 @@ function AboutBringsMobileCarousel({
   )
 }
 
+const ABOUT_BRINGS_TABLET_AUTO_SLIDE_MS = 5000
+const ABOUT_BRINGS_TABLET_VISIBLE_COUNT = 3
+
+function AboutBringsTabletCarousel({
+  features,
+  carouselLabel,
+}: {
+  features: AboutBringsFeature[]
+  carouselLabel: string
+}) {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const activeIndexRef = useRef(0)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const maxScrollIndex = Math.max(0, features.length - ABOUT_BRINGS_TABLET_VISIBLE_COUNT)
+
+  const scrollToIndex = useCallback((index: number, behavior: ScrollBehavior = 'smooth') => {
+    const track = trackRef.current
+    if (!track) return
+
+    const slide = track.children[index] as HTMLElement | undefined
+    if (!slide) return
+
+    track.scrollTo({ left: slide.offsetLeft, behavior })
+    activeIndexRef.current = index
+    setActiveIndex(index)
+  }, [])
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const handleScroll = () => {
+      const slides = Array.from(track.children) as HTMLElement[]
+      if (slides.length === 0) return
+
+      let closestIndex = 0
+      let closestDistance = Number.POSITIVE_INFINITY
+
+      slides.forEach((slide, index) => {
+        if (index > maxScrollIndex) return
+
+        const distance = Math.abs(track.scrollLeft - slide.offsetLeft)
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestIndex = index
+        }
+      })
+
+      activeIndexRef.current = closestIndex
+      setActiveIndex(closestIndex)
+    }
+
+    handleScroll()
+    track.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => track.removeEventListener('scroll', handleScroll)
+  }, [features.length, maxScrollIndex])
+
+  useEffect(() => {
+    if (maxScrollIndex === 0) return
+
+    const timer = window.setInterval(() => {
+      const nextIndex =
+        activeIndexRef.current >= maxScrollIndex ? 0 : activeIndexRef.current + 1
+      scrollToIndex(nextIndex)
+    }, ABOUT_BRINGS_TABLET_AUTO_SLIDE_MS)
+
+    return () => window.clearInterval(timer)
+  }, [maxScrollIndex, scrollToIndex])
+
+  return (
+    <div
+      className="about-brings-tablet-carousel hidden min-w-0 max-w-full overflow-hidden sm:block xl:hidden"
+      style={{ marginTop: 'var(--about-brings-heading-to-grid)' }}
+    >
+      <div
+        ref={trackRef}
+        className="about-brings-tablet-carousel-track flex w-full max-w-full min-w-0 snap-x snap-mandatory overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        aria-roledescription="carousel"
+        aria-label={carouselLabel}
+      >
+        {features.map((feature, index) => (
+          <div
+            key={feature.itemNodeId}
+            className="about-brings-tablet-carousel-slide-wrap box-border flex min-w-0 shrink-0 grow-0 snap-start snap-always"
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${index + 1} of ${features.length}`}
+          >
+            <AboutBringsFeatureItem feature={feature} />
+          </div>
+        ))}
+      </div>
+
+      <div
+        className="about-brings-tablet-carousel-dots flex items-center justify-center"
+        role="tablist"
+        aria-label="Choose principles slide"
+        style={{
+          marginTop: 'var(--about-brings-carousel-to-dots)',
+          gap: 'var(--about-brings-dot-gap)',
+        }}
+      >
+        {Array.from({ length: maxScrollIndex + 1 }, (_, index) => (
+          <button
+            key={`tablet-dot-${index}`}
+            type="button"
+            role="tab"
+            aria-label={`Show principles position ${index + 1}`}
+            aria-selected={activeIndex === index}
+            onClick={() => scrollToIndex(index)}
+            className={cn(
+              'rounded-full border-0 p-0 transition-colors',
+              activeIndex === index ? 'bg-black' : 'bg-black/20',
+            )}
+            style={{
+              width: 'var(--about-brings-dot-size)',
+              height: 'var(--about-brings-dot-size)',
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function AboutBringsSection({
   sectionId = 'about-brings',
   features = ABOUT_BRINGS_FEATURES,
@@ -314,6 +440,7 @@ export function AboutBringsSection({
 }: AboutBringsSectionProps) {
   const headingId = `${sectionId}-heading`
   const isThreeColumn = features.length === 3
+  const isFourColumn = features.length === 4
 
   return (
     <section
@@ -394,10 +521,18 @@ export function AboutBringsSection({
             carouselLabel={content.carouselLabel}
           />
 
+          {isFourColumn ? (
+            <AboutBringsTabletCarousel
+              features={features}
+              carouselLabel={content.carouselLabel}
+            />
+          ) : null}
+
           <ul
             className={cn(
-              'hidden list-none gap-x-[var(--about-brings-grid-gap-x)] gap-y-[var(--about-brings-grid-gap-y)] p-0 sm:grid',
-              isThreeColumn ? 'grid-cols-1 sm:grid-cols-3' : 'grid-cols-2 xl:grid-cols-4',
+              'hidden list-none gap-x-[var(--about-brings-grid-gap-x)] gap-y-[var(--about-brings-grid-gap-y)] p-0',
+              isThreeColumn && 'hidden sm:grid grid-cols-1 sm:grid-cols-3',
+              isFourColumn && 'hidden xl:grid xl:grid-cols-4',
             )}
             style={{ marginTop: 'var(--about-brings-heading-to-grid)' }}
           >

@@ -1,6 +1,7 @@
 import onboardingDevice from '@/assets/figma/english-ai/onboarding-device.png'
 import onboardingGrowth from '@/assets/figma/english-ai/onboarding-growth.png'
 import onboardingClassroom from '@/assets/figma/home/section-8/onboarding-classroom.png'
+import { OnboardingCriteriaCarousel } from '@/components/home/OnboardingCriteriaCarousel'
 import { cn } from '@/lib/utils'
 
 const CRITERIA = [
@@ -124,6 +125,7 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
   const isTheEdge = variant === 'the-edge'
   const isProgramPage = isEnglishAi || isCodeMonkey || isTheEdge
   const isCustomProgram = isCodeMonkey || isTheEdge
+  const isHome = variant === 'home'
   const criteria = isTheEdge ? THE_EDGE_CRITERIA : isCodeMonkey ? CODE_MONKEY_CRITERIA : CRITERIA
   const headingId = isTheEdge
     ? 'the-edge-onboarding-heading'
@@ -139,6 +141,7 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
 
   return (
     <section
+      id="onboarding"
       className="w-full px-[5px] pt-[5px]"
       aria-labelledby={headingId}
       data-node-id={isProgramPage ? '1060:2201' : '767:1875'}
@@ -206,9 +209,20 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
                 : 'Zene is built around partnership, not transaction. We review every application and select the visionary schools — the ones ready to create real impact in their students&apos; lives.'}
           </p>
 
+          {isHome ? (
+            <OnboardingCriteriaCarousel
+              className="sm:hidden"
+              criteria={criteria}
+              image={onboardingClassroom}
+            />
+          ) : null}
+
           <div
-            className="grid min-w-0 grid-cols-1 gap-[var(--onboard-columns-gap)] xl:grid-cols-2"
-            style={{ marginTop: 'var(--onboard-body-to-cards)' }}
+            className={cn(
+              'onboarding-criteria-grid grid min-w-0 grid-cols-1 gap-[var(--onboard-columns-gap)] xl:grid-cols-2',
+              isHome && 'hidden sm:grid',
+            )}
+            style={{ marginTop: isHome ? undefined : 'var(--onboard-body-to-cards)' }}
           >
             {criteria.map((item, index) => (
               <CriterionCard

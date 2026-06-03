@@ -22,16 +22,17 @@ export function AppLayout({
   const scrollRef = useRef<HTMLElement>(null)
   const isDesktop = useSectionScrollDesktop()
   const useSnapScroll = sectionScroll && isDesktop
+  const useScrollLayout = sectionScroll
 
   const header = (
     <Header
       showAnnouncement={showAnnouncement}
       pinNav={pinHeader}
-      sectionScroll={useSnapScroll}
+      sectionScroll={useScrollLayout}
     />
   )
 
-  if (useSnapScroll) {
+  if (useScrollLayout) {
     return (
       <SectionScrollProvider scrollRef={scrollRef}>
         <div className="layout-section-scroll">

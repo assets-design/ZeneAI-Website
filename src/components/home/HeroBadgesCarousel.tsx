@@ -26,18 +26,17 @@ function HeroBadgeSlide({ badge }: { badge: HeroBadge }) {
         draggable={false}
       />
       <p
-        className="normal-case font-body font-normal leading-normal text-black"
+        className="hero-badge-description normal-case font-body font-normal leading-normal text-black"
         style={{
-          fontSize: 'var(--section-text-body)',
+          fontSize: 'var(--hero-badge-description-size, var(--section-text-body))',
           fontVariationSettings: "'opsz' 14",
           maxWidth: 'var(--hero-badge-text-max-w, calc(382px * var(--type-size)))',
           marginTop: 'var(--hero-gap)',
         }}
       >
-        {badge.lines.map((line, index) => (
-          <span key={line}>
+        {badge.lines.map(line => (
+          <span key={line} className="hero-badge-description__line">
             {line}
-            {index < badge.lines.length - 1 ? <br /> : null}
           </span>
         ))}
       </p>
@@ -105,7 +104,7 @@ export function HeroBadgesCarousel({ badges }: HeroBadgesCarouselProps) {
 
   return (
     <div
-      className="xl:hidden"
+      className="hero-badges-carousel xl:hidden"
       style={{ marginTop: 'var(--hero-content-to-badges)' }}
     >
       <div

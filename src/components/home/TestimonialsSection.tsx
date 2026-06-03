@@ -130,7 +130,7 @@ export function TestimonialsSection({ variant = 'home' }: TestimonialsSectionPro
           className="testimonials-carousel-wrap flex justify-start"
           style={{ paddingBottom: 'var(--testimonial-padding-bottom)' }}
         >
-          <TestimonialCarousel items={TESTIMONIALS} />
+          <TestimonialCarousel items={TESTIMONIALS} variant={variant} />
         </div>
       </div>
     </section>

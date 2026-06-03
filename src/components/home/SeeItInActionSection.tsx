@@ -1,3 +1,5 @@
+import { ActionFeaturesCarousel } from '@/components/home/ActionFeaturesCarousel'
+
 const FEATURES = [
   {
     image: '/assets/figma/home/section-3/feature-speaking.png',
@@ -119,7 +121,7 @@ export function SeeItInActionSection() {
               </h2>
 
               <div
-                className="action-demo-media min-h-0 w-full flex-1"
+                className="action-demo-media min-h-0 w-full flex-1 xl:w-full"
                 style={{
                   height: 'var(--action-demo-h)',
                   marginTop: 'var(--action-heading-to-demo)',
@@ -130,15 +132,15 @@ export function SeeItInActionSection() {
                   <img
                     src="/assets/figma/home/section-3/main-comp.png"
                     alt="Zene AI speaking lab demo with student and robot"
-                    className="size-full object-contain"
+                    className="size-full object-cover xl:object-contain"
                   />
                 </div>
               </div>
             </div>
 
-            {/* Right — feature highlights */}
+            {/* Right — feature highlights (desktop only) */}
             <div
-              className="action-features-col flex min-h-0 min-w-0 flex-col xl:justify-end"
+              className="action-features-col hidden min-h-0 min-w-0 flex-col xl:flex xl:justify-end"
               style={{ gap: 'var(--action-feature-gap)' }}
             >
               {FEATURES.map(feature => (
@@ -146,6 +148,8 @@ export function SeeItInActionSection() {
               ))}
             </div>
           </div>
+
+          <ActionFeaturesCarousel features={FEATURES} />
         </div>
       </div>
     </section>

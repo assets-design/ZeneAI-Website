@@ -70,7 +70,8 @@ export function Header({
   const lastScrollY = useRef(0)
   const location = useLocation()
   const sectionScrollContext = useSectionScroll()
-  const usesSectionScroll = sectionScroll && sectionScrollContext?.enabled
+  const usesSectionScrollRoot =
+    sectionScroll && sectionScrollContext?.enabled && isSectionScrollDesktopViewport()
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -120,7 +121,7 @@ export function Header({
       lastScrollY.current = currentY
     }
 
-    if (usesSectionScroll) {
+    if (usesSectionScrollRoot) {
       const root = sectionScrollContext?.scrollRef.current
       if (!root) return undefined
 
@@ -140,7 +141,7 @@ export function Header({
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [pinNav, usesSectionScroll, sectionScrollContext?.scrollRef])
+  }, [pinNav, usesSectionScrollRoot, sectionScrollContext?.scrollRef])
 
   useEffect(() => {
     if (!menuOpen || pinNav) return
@@ -150,25 +151,25 @@ export function Header({
       setMenuOpen(false)
     }
 
-    const root = usesSectionScroll ? sectionScrollContext?.scrollRef.current : null
+    const root = usesSectionScrollRoot ? sectionScrollContext?.scrollRef.current : null
     const target: EventTarget = root ?? window
 
     target.addEventListener('scroll', handleScrollWhileMenuOpen, { passive: true })
     return () => target.removeEventListener('scroll', handleScrollWhileMenuOpen)
-  }, [menuOpen, pinNav, usesSectionScroll, sectionScrollContext?.scrollRef])
+  }, [menuOpen, pinNav, usesSectionScrollRoot, sectionScrollContext?.scrollRef])
 
   useEffect(() => {
-    if (!usesSectionScroll) return
+    if (!usesSectionScrollRoot) return
     setNavVisible(true)
     lastScrollY.current = 0
-  }, [location.pathname, usesSectionScroll])
+  }, [location.pathname, usesSectionScrollRoot])
 
   return (
     <header
       className={cn(
         'z-[100] w-full px-[5px] pt-[5px]',
         sectionScroll ? 'bg-black' : 'bg-white xl:bg-black',
-        sectionScroll ? 'shrink-0' : 'sticky top-0',
+        sectionScroll && isSectionScrollDesktopViewport() ? 'shrink-0' : 'sticky top-0',
       )}
     >
       {/* Figma Group 511 — 1910×149, node 967:1776 */}
@@ -210,26 +211,26 @@ export function Header({
         <div
           className={cn(
             'relative w-full',
-            usesSectionScroll && 'absolute left-0 right-0 top-full z-[101]',
+            usesSectionScrollRoot && 'absolute left-0 right-0 top-full z-[101]',
           )}
         >
         {/* Nav bar — fades out on scroll down, fades in on scroll up */}
         <div
           className={cn(
-            usesSectionScroll
+            usesSectionScrollRoot
               ? 'transition-opacity duration-300 ease-in-out'
               : 'grid transition-[grid-template-rows,opacity] duration-300 ease-in-out',
             pinNav || navVisible ? 'opacity-100' : 'opacity-0',
-            usesSectionScroll && !pinNav && !navVisible && 'pointer-events-none',
+            usesSectionScrollRoot && !pinNav && !navVisible && 'pointer-events-none',
           )}
           style={
-            usesSectionScroll
+            usesSectionScrollRoot
               ? undefined
               : { gridTemplateRows: pinNav || navVisible ? '1fr' : '0fr' }
           }
           aria-hidden={!pinNav && !navVisible}
         >
-          <div className={usesSectionScroll ? undefined : 'min-h-0 overflow-hidden'}>
+          <div className={usesSectionScrollRoot ? undefined : 'min-h-0 overflow-hidden'}>
             <div
               className={cn(
                 'flex h-header-nav items-center justify-between overflow-hidden bg-header-gradient px-6 sm:px-10 lg:px-[115px]',

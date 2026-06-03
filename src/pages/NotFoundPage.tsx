@@ -1,12 +1,8 @@
-import { NotFoundSection } from '@/components/not-found/NotFoundSection'
 import { ScrollPageDesktop, useDesktopScrollPage } from '@/components/Layout/ScrollPageDesktop'
+import { NotFoundSection } from '@/components/not-found/NotFoundSection'
 
 export function NotFoundPage() {
-  const isDesktop = useDesktopScrollPage()
-
-  if (!isDesktop) {
-    return <NotFoundSection />
-  }
+  useDesktopScrollPage()
 
   return (
     <ScrollPageDesktop pageClass="program-page-scroll--not-found">

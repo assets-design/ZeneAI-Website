@@ -111,10 +111,10 @@ export function WhySchoolsSection() {
           }}
         >
           <div
-            className="grid min-w-0 items-end xl:grid-cols-[13fr_7fr]"
+            className="why-schools-grid grid min-w-0 items-end xl:grid-cols-[13fr_7fr]"
             style={{ gap: 'var(--why-columns-gap)' }}
           >
-            <div className="min-w-0">
+            <div className="why-schools-copy min-w-0">
               <p
                 className="section-eyebrow font-body uppercase text-black"
                 style={{

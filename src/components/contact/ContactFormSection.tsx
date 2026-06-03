@@ -128,8 +128,8 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
   return (
     <section
       className={cn(
-        'w-full px-[5px] pt-[5px]',
-        panel && 'section-scroll-panel section-scroll-panel--form',
+        'w-full px-[5px]',
+        panel ? 'section-scroll-panel section-scroll-panel--form' : 'pt-[5px]',
       )}
       aria-labelledby="contact-form-heading"
       data-node-id="1041:1897"

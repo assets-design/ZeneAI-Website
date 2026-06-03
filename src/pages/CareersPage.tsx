@@ -2,11 +2,7 @@ import { CareersSection } from '@/components/careers/CareersSection'
 import { ScrollPageDesktop, useDesktopScrollPage } from '@/components/Layout/ScrollPageDesktop'
 
 export function CareersPage() {
-  const isDesktop = useDesktopScrollPage()
-
-  if (!isDesktop) {
-    return <CareersSection />
-  }
+  useDesktopScrollPage()
 
   return (
     <ScrollPageDesktop pageClass="program-page-scroll--careers">

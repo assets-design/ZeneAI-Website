@@ -132,13 +132,11 @@ html.section-scroll-active body {
 .section-scroll-panel--snap .action-inner {
   flex: 1 1 auto;
   min-height: 0;
-  overflow: hidden;
 }
 
 .section-scroll-panel--snap .action-columns {
   flex: 1 1 0;
   min-height: 0;
-  overflow: hidden;
 }
 
 .section-scroll-panel--snap .action-left-col {
@@ -153,8 +151,12 @@ html.section-scroll-active body {
 }
 
 @media (min-width: 1280px) {
+  .section-scroll-panel--snap .action-inner {
+    overflow: hidden;
+  }
+
   .section-scroll-panel--snap .action-columns {
-    grid-template-rows: minmax(0, 1fr);
+    overflow: hidden;
   }
 
   .section-scroll-panel--snap .action-features-col {
@@ -1299,13 +1301,9 @@ html.section-scroll-active body {
   transform: scale(1);
 }
 
-/* Tablet & mobile — white page chrome (no black gutters between sections) */
+/* Tablet & mobile — white page chrome for non-section-scroll pages only */
 @media (max-width: 1279px) {
   #main-content:not(.section-scroll-root) {
-    background-color: #fff;
-  }
-
-  header.z-\[100\] {
     background-color: #fff;
   }
 }
@@ -1499,7 +1497,9 @@ html.section-scroll-active body {
   }
 
   .section-scroll-panel--snap .product-tab-panel,
+  .section-scroll-panel--snap .action-columns,
   .section-scroll-panel--snap .action-left-col,
+  .section-scroll-panel--snap .action-features-col,
   .section-scroll-panel--snap .testimonials-carousel-wrap {
     flex: none !important;
     height: auto !important;
@@ -1517,11 +1517,908 @@ html.section-scroll-active body {
     flex: none !important;
   }
 
+  /* See it in action — prevent flex collapse hiding content on tablet/mobile */
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-inner,
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-columns,
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-left-col,
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-features-col {
+    flex: none !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media {
+    flex: none !important;
+    min-height: var(--action-demo-h) !important;
+    height: var(--action-demo-h) !important;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) {
+    --action-demo-h: min(
+      calc(200px * var(--media-scale) / var(--header-font-scale)),
+      28dvh
+    );
+    --action-features-carousel-mt: calc(24px * var(--header-font-scale));
+    --action-feature-carousel-gap: calc(16px * var(--header-font-scale));
+    --action-feature-carousel-to-dots: calc(16px * var(--header-font-scale));
+    --action-feature-carousel-img-w: calc(var(--action-feature-img-w) * 0.8);
+    --action-feature-carousel-img-h: calc(var(--action-feature-img-h) * 0.8);
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media-inner img {
+    object-fit: cover;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-feature-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-features-slide {
+    justify-content: center;
+  }
+
   .section-scroll-panel--snap .ai-ready-diagram {
     flex: none !important;
   }
 
   .section-scroll-panel--snap .apply-cta-inner {
     overflow: visible !important;
+  }
+
+  /* All scroll pages — stacked section cards on black (1px divider between cards) */
+  .program-page-scroll .section-scroll-panel--snap > section {
+    padding: 0 var(--section-card-gap) 0;
+  }
+
+  .program-page-scroll .section-scroll-panel--form,
+  .program-page-scroll .section-scroll-panel--hero {
+    padding-bottom: 0;
+  }
+
+  .program-page-scroll .section-card-shell,
+  .program-page-scroll .hero-card-shell {
+    border-top-left-radius: var(--section-card-radius);
+    border-top-right-radius: var(--section-card-radius);
+  }
+
+  .program-page-scroll .section-scroll-panel {
+    padding-top: var(--section-card-gap);
+  }
+
+  .program-page-scroll .section-scroll-panel:not(:first-child) {
+    padding-top: 1px;
+  }
+
+  .program-page-scroll .section-scroll-tail {
+    padding-top: 1px;
+  }
+}
+
+/* Homepage why schools — tablet only: list 60% + GIF 40% side by side */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .program-page-scroll--home #why-schools {
+    --why-students-w: 130%;
+    --why-students-h: clamp(
+      calc(380px * var(--media-scale) / var(--header-font-scale)),
+      50dvh,
+      calc(540px * var(--media-scale) / var(--header-font-scale))
+    );
+    --why-gif-offset-left: 0;
+    --why-gif-offset-top: 0;
+  }
+
+  .program-page-scroll--home #why-schools .why-schools-grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: end;
+  }
+
+  .program-page-scroll--home #why-schools .why-illustration-col {
+    overflow: visible;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  .program-page-scroll--home #why-schools .why-students-media {
+    width: var(--why-students-w) !important;
+    max-width: none;
+    max-height: var(--why-students-h) !important;
+    height: auto;
+    object-fit: contain;
+    object-position: right bottom;
+  }
+
+  /* See it in action — tablet: centered narrow demo box */
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media {
+    width: 40% !important;
+    max-width: 40% !important;
+    margin-inline: auto;
+  }
+}
+
+/* Homepage See it in action — mobile: full-width demo box, same height */
+@media (max-width: 639px) {
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-inline: 0;
+  }
+
+  /* Why schools — contain and center GIF inside white card */
+  .program-page-scroll--home .section-scroll-panel--snap:has(#why-schools) {
+    --why-students-w: 100%;
+    --why-students-h: clamp(
+      calc(200px * var(--media-scale) / var(--header-font-scale)),
+      32dvh,
+      calc(280px * var(--media-scale) / var(--header-font-scale))
+    );
+    --why-gif-offset-left: 0;
+    --why-gif-offset-top: 0;
+  }
+
+  .program-page-scroll--home #why-schools {
+    --why-students-w: 100%;
+  }
+
+  .program-page-scroll--home #why-schools .section-card-shell {
+    overflow: hidden !important;
+  }
+
+  .program-page-scroll--home #why-schools .why-illustration-col {
+    overflow: hidden !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .program-page-scroll--home #why-schools .why-students-media {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: var(--why-students-h) !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+    margin-inline: auto;
+  }
+}
+
+/* Homepage how-it-works — tablet & mobile: 80% video boxes, tighter spacing */
+@media (max-width: 1279px) {
+  .program-page-scroll--home #how-it-works {
+    --how-padding-top: calc(36px * var(--header-font-scale));
+    --how-padding-bottom: calc(12px * var(--header-font-scale));
+    --how-columns-gap: calc(28px * var(--header-font-scale));
+    --how-heading-to-body: calc(14px * var(--header-font-scale));
+    --how-block-gap: calc(14px * var(--header-font-scale));
+    --how-section-gap: calc(14px * var(--header-font-scale));
+    --section-eyebrow-to-heading: calc(10px * var(--header-font-scale));
+    --how-dashboard-video-w: min(
+      80%,
+      calc(679px * var(--media-scale) / var(--header-font-scale) * 0.8)
+    );
+    --how-dashboard-video-h: calc(
+      420px * var(--media-scale) / var(--header-font-scale) * 0.8
+    );
+    --how-lesson-img-w: min(
+      80%,
+      calc(679px * var(--media-scale) / var(--header-font-scale) * 0.8)
+    );
+    --how-lesson-img-h: calc(
+      145px * var(--media-scale) / var(--header-font-scale) * 0.8
+    );
+  }
+
+  .program-page-scroll--home #how-it-works .how-dashboard-media {
+    width: 80% !important;
+    max-width: 80% !important;
+    height: var(--how-dashboard-video-h) !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill {
+    width: 80% !important;
+    max-width: 80% !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-lesson-video-wrap {
+    height: var(--how-dashboard-video-h) !important;
+    min-height: var(--how-dashboard-video-h) !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill {
+    min-height: var(--how-lesson-img-h) !important;
+  }
+
+  /* How it works — tablet & mobile carousel (homepage only) */
+  .program-page-scroll--home #how-it-works {
+    --how-carousel-slide-title-size: calc(28px * var(--type-size));
+    --how-carousel-to-dots: calc(20px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide-wrap {
+    width: 100%;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media {
+    width: 80% !important;
+    max-width: 80% !important;
+    height: var(--how-dashboard-video-h) !important;
+  }
+}
+
+/* Homepage tracking — tablet & mobile carousel */
+@media (max-width: 1279px) {
+  .program-page-scroll--home .tracking-items-carousel {
+    --track-carousel-gap: calc(20px * var(--header-font-scale));
+    --track-carousel-to-dots: calc(20px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--home .tracking-items-slide {
+    justify-content: center;
+  }
+
+  .program-page-scroll--home .tracking-items-slide__item {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 639px) {
+  .program-page-scroll--home .tracking-items-carousel {
+    --track-carousel-gap: calc(12px * var(--header-font-scale));
+    --track-carousel-to-dots: calc(16px * var(--header-font-scale));
+    --track-caption-inner-gap: calc(8px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--home .tracking-items-carousel article img {
+    width: 80% !important;
+    max-width: 80%;
+    height: auto !important;
+    max-height: calc(var(--track-img-h) * 0.8);
+  }
+
+  .program-page-scroll--home .tracking-items-carousel .track-item-caption__body {
+    display: -webkit-box;
+    margin-top: var(--track-caption-inner-gap);
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+
+  .program-page-scroll--home .tracking-items-carousel .track-item-caption__body > span {
+    display: inline;
+  }
+
+  .program-page-scroll--home .tracking-items-carousel .track-item-caption__body > span:not(:last-child)::after {
+    content: ' ';
+  }
+
+  /* AI Ready — mobile stakeholder carousel (no center robo) */
+  .program-page-scroll--home #ai-ready,
+  .program-page-scroll--about #ai-ready {
+    --ai-ready-carousel-character-w: 80%;
+    --ai-ready-carousel-character-h: min(
+      calc(180px * var(--media-scale) / var(--header-font-scale)),
+      36vw
+    );
+    --ai-ready-carousel-title-mt: calc(16px * var(--header-font-scale));
+    --ai-ready-carousel-body-mt: calc(10px * var(--header-font-scale));
+    --ai-ready-carousel-body-max-w: min(100%, calc(300px * var(--header-font-scale)));
+    --ai-ready-carousel-to-dots: calc(20px * var(--header-font-scale));
+    --ai-ready-heading-to-diagram: calc(16px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--home .ai-ready-stakeholders-carousel,
+  .program-page-scroll--about .ai-ready-stakeholders-carousel {
+    padding-left: var(--section-padding-x);
+    padding-right: var(--section-padding-x);
+    padding-bottom: var(--ai-ready-padding-bottom);
+    margin-top: var(--ai-ready-heading-to-diagram);
+  }
+
+  .program-page-scroll--home .ai-ready-stakeholder-slide__character,
+  .program-page-scroll--about .ai-ready-stakeholder-slide__character {
+    position: relative;
+    width: var(--ai-ready-carousel-character-w);
+    height: var(--ai-ready-carousel-character-h);
+    max-width: 100%;
+    margin-inline: auto;
+  }
+
+  .program-page-scroll--home .ai-ready-stakeholder-slide__character img,
+  .program-page-scroll--about .ai-ready-stakeholder-slide__character img {
+    position: absolute !important;
+    inset: 0 !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover;
+  }
+
+  .program-page-scroll--home .ai-ready-stakeholder-slide__character--student img,
+  .program-page-scroll--about .ai-ready-stakeholder-slide__character--student img {
+    object-position: 50% 14%;
+  }
+
+  .program-page-scroll--home .ai-ready-stakeholder-slide__character--schools img,
+  .program-page-scroll--about .ai-ready-stakeholder-slide__character--schools img {
+    object-position: 18% 68%;
+  }
+
+  .program-page-scroll--home .ai-ready-stakeholder-slide__character--parent img,
+  .program-page-scroll--about .ai-ready-stakeholder-slide__character--parent img {
+    object-position: 82% 64%;
+  }
+
+  .program-page-scroll--home .ai-ready-stakeholder-slide__body,
+  .program-page-scroll--about .ai-ready-stakeholder-slide__body {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+}
+
+@media (min-width: 640px) {
+  .program-page-scroll--home .track-item-caption__body {
+    margin-top: calc(24px * var(--header-font-scale));
+  }
+}
+
+@media (min-width: 1280px) {
+  .program-page-scroll--home .track-item-caption__body {
+    margin-top: calc(32px * var(--media-size));
+  }
+}
+
+/* Homepage onboarding — tablet only: criteria cards side by side */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .program-page-scroll--home #onboarding {
+    --onboard-columns-gap: calc(24px * var(--header-font-scale));
+    --onboard-image-w: 100%;
+    --onboard-image-h: auto;
+    --onboard-copy-max-w: 100%;
+  }
+
+  .program-page-scroll--home #onboarding .onboarding-criteria-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .program-page-scroll--home #onboarding .onboarding-criteria-grid img {
+    width: 100%;
+    height: auto;
+    max-height: min(calc(260px * var(--media-size)), 30dvh);
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+/* Homepage FAQ — tablet & mobile: question larger than answer */
+@media (max-width: 1279px) {
+  .program-page-scroll--home #faqs {
+    --faq-question-size: 22px;
+  }
+}
+
+/* About page — mobile only: unified description size (matches home hero body, 15px) */
+@media (max-width: 639px) {
+  .program-page-scroll--about {
+    --section-text-body: var(--english-ai-hero-body-size);
+    --about-hero-subtitle-size: var(--english-ai-hero-body-size);
+    --about-why-body-size: var(--english-ai-hero-body-size);
+    --about-why-tagline-size: var(--english-ai-hero-body-size);
+    --about-brings-description-size: var(--english-ai-hero-body-size);
+    --apply-cta-body-size: var(--english-ai-hero-body-size);
+  }
+
+  /* About "The story" — video: inset 10px sides, no black letterbox bars */
+  .program-page-scroll--about .about-why-video {
+    width: auto !important;
+    max-width: none !important;
+    margin-inline: 3px;
+    height: auto !important;
+    background: transparent !important;
+  }
+
+  .program-page-scroll--about .about-why-video video {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none;
+    object-fit: unset;
+  }
+}
+
+/* About page — tablet only: "The story" video, no black letterbox bars */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .program-page-scroll--about .about-why-video {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    background: transparent !important;
+  }
+
+  .program-page-scroll--about .about-why-video video {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none;
+    object-fit: unset;
+  }
+
+  /* Apply CTA — tablet about: match home layout (side-by-side circle + student) */
+  .program-page-scroll--about .apply-cta-section--about {
+    --apply-cta-yellow-size: min(calc(100vw - 96px), calc(620px * var(--header-font-scale)));
+    --apply-cta-student-circle-size: calc(260px * var(--media-size));
+    --apply-cta-student-face-size: calc(128px * var(--media-size));
+    --apply-cta-student-overlap: 0px;
+    --apply-cta-content-padding-x: calc(40px * var(--header-font-scale));
+    --apply-cta-body-size: calc(20px * var(--type-size));
+    --apply-cta-yellow-py: calc(44px * var(--header-font-scale));
+    --apply-cta-heading-max-w: min(100%, calc(380px * var(--type-size)));
+    --apply-cta-body-max-w: min(100%, calc(420px * var(--type-size)));
+    --apply-cta-heading-to-body: calc(20px * var(--type-size));
+    --apply-cta-body-to-btn: calc(28px * var(--type-size));
+    --apply-cta-btn-w: min(100%, calc(360px * var(--header-font-scale)));
+    --apply-cta-btn-text-size: calc(28px * var(--type-size));
+    --apply-cta-btn-padding-x: calc(28px * var(--header-font-scale));
+    --apply-cta-btn-padding-x-left: calc(18px * var(--header-font-scale));
+    --apply-cta-btn-arrow-size: calc(28px * var(--type-size));
+    --apply-cta-btn-arrow-gap-right: 0px;
+  }
+
+  .program-page-scroll--about .apply-cta-section--about .apply-cta-stage {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: min(100%, var(--apply-cta-stage-w));
+  }
+
+  .program-page-scroll--about .apply-cta-section--about .apply-cta-yellow {
+    width: var(--apply-cta-yellow-size) !important;
+    height: var(--apply-cta-yellow-size) !important;
+    min-width: var(--apply-cta-yellow-size) !important;
+    min-height: var(--apply-cta-yellow-size) !important;
+    max-width: var(--apply-cta-yellow-size) !important;
+    max-height: var(--apply-cta-yellow-size) !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 50% !important;
+    margin-inline: 0;
+  }
+
+  .program-page-scroll--about .apply-cta-section--about .apply-cta-student {
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  .program-page-scroll--about .apply-cta-section--about .apply-cta-yellow .rotating-split-border {
+    --apply-cta-btn-padding-x: calc(28px * var(--header-font-scale));
+    --apply-cta-btn-arrow-gap-right: 0px;
+  }
+
+  /* Four principles — tablet: 3 cards visible, auto-slide carousel */
+  .program-page-scroll--about .about-brings-tablet-carousel-track {
+    gap: var(--about-brings-grid-gap-x);
+  }
+
+  .program-page-scroll--about .about-brings-tablet-carousel-slide-wrap {
+    flex: 0 0 calc((100% - (2 * var(--about-brings-grid-gap-x))) / 3);
+    max-width: calc((100% - (2 * var(--about-brings-grid-gap-x))) / 3);
+    min-width: 0;
+  }
+}
+
+/* About page hero — mobile only: Apply Now fix, taller card, robot bottom-right */
+@media (max-width: 639px) {
+  .program-page-scroll--about #about-hero {
+    --about-hero-text-offset-top: 0;
+    --about-hero-padding-top: calc(12px * var(--header-font-scale));
+    --about-hero-padding-bottom: calc(var(--about-hero-robot-h) + 24px);
+    --about-hero-robot-inset-bottom: calc(8px * var(--header-font-scale));
+    --about-hero-robot-padding-right: 0;
+    --about-hero-subtitle-max-w: calc(100% - var(--about-hero-robot-w) * 0.35);
+  }
+
+  .program-page-scroll--about #about-hero .about-hero-card {
+    min-height: max(
+      calc(100dvh - var(--header-nav-h) - calc(28px * var(--header-font-scale))),
+      calc(540px * var(--header-font-scale))
+    );
+  }
+
+  .program-page-scroll--about #about-hero .hero-top-row {
+    flex-shrink: 0;
+    align-items: flex-start;
+  }
+
+  .program-page-scroll--about #about-hero .hero-apply-slot {
+    margin-top: 0;
+    --apply-btn-w: calc(200px * var(--header-font-scale));
+    --apply-btn-h: calc(72px * var(--header-font-scale));
+    --apply-btn-circle-size: calc(72px * var(--header-font-scale));
+    --apply-btn-pill-h: calc(44px * var(--header-font-scale));
+    --apply-btn-pill-top: calc(14px * var(--header-font-scale));
+    --apply-btn-pill-radius: calc(50px * var(--header-font-scale));
+    --apply-btn-circle-left: calc(var(--apply-btn-w) - var(--apply-btn-circle-size));
+    --apply-btn-pill-w: calc(
+      var(--apply-btn-circle-left) + 60px * var(--header-font-scale)
+    );
+    --apply-btn-text-zone-w: var(--apply-btn-circle-left);
+    flex: none;
+    min-width: var(--apply-btn-w);
+    width: var(--apply-btn-w);
+    overflow: visible;
+  }
+
+  .program-page-scroll--about #about-hero .hero-apply-slot > .apply-now-btn {
+    overflow: hidden;
+    width: var(--apply-btn-w) !important;
+    max-width: none;
+  }
+
+  .program-page-scroll--about #about-hero .hero-apply-slot > .apply-now-btn > span:first-of-type {
+    width: var(--apply-btn-pill-w) !important;
+    max-width: var(--apply-btn-pill-w);
+    z-index: 1;
+  }
+
+  .program-page-scroll--about #about-hero .hero-apply-slot > .apply-now-btn > span:first-of-type .rotating-split-border {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: var(--apply-btn-pill-radius);
+    border-bottom-left-radius: var(--apply-btn-pill-radius);
+  }
+
+  .program-page-scroll--about #about-hero .hero-apply-slot > .apply-now-btn > span:first-of-type > span:last-of-type {
+    width: var(--apply-btn-text-zone-w);
+    max-width: var(--apply-btn-circle-left);
+  }
+
+  .program-page-scroll--about #about-hero .hero-apply-slot > .apply-now-btn > span.rounded-full {
+    z-index: 3;
+  }
+
+  .program-page-scroll--about #about-hero .about-hero-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 0;
+    min-height: 0;
+    padding-right: calc(var(--about-hero-robot-w) * 0.15);
+  }
+
+  .program-page-scroll--about #about-hero .about-hero-robot {
+    right: var(--section-padding-x);
+    bottom: var(--about-hero-robot-inset-bottom);
+  }
+}
+
+/* About page hero — tablet only: remove Apply Now top gap + inset from right */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .program-page-scroll--about #about-hero {
+    --about-hero-apply-margin-right: 40px;
+  }
+
+  .program-page-scroll--about #about-hero .hero-apply-slot {
+    margin-top: 0;
+    margin-right: var(--about-hero-apply-margin-right);
+  }
+}
+
+/* Testimonials — tablet only (home + about): keep text inside cards */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .program-page-scroll--home .testimonials-carousel-wrap article h3,
+  .program-page-scroll--home .testimonials-carousel-wrap article p,
+  .program-page-scroll--about .testimonials-carousel-wrap article h3,
+  .program-page-scroll--about .testimonials-carousel-wrap article p {
+    right: calc(var(--testimonial-padding-x) + 10px) !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+}
+
+/* Homepage cohort — tablet & mobile logo carousel */
+@media (max-width: 1279px) {
+  .program-page-scroll--home .cohort-logo-carousel {
+    --cohort-carousel-logo-max-w: min(100%, calc(160px * var(--media-size)));
+    --cohort-carousel-logo-max-h: min(var(--cohort-logo-row-h), calc(120px * var(--media-size)));
+  }
+
+  .program-page-scroll--home .cohort-logo-slide__cell img {
+    width: auto !important;
+    max-width: var(--cohort-carousel-logo-max-w) !important;
+    height: auto !important;
+    max-height: var(--cohort-carousel-logo-max-h) !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .program-page-scroll--home #how-it-works {
+    --how-padding-top: calc(28px * var(--header-font-scale));
+    --how-columns-gap: calc(20px * var(--header-font-scale));
+    --how-dashboard-video-w: 100%;
+    --how-lesson-img-w: 100%;
+    --how-dashboard-video-h: calc(
+      240px * var(--media-scale) / var(--header-font-scale) * 0.8
+    );
+    --how-lesson-img-h: calc(
+      100px * var(--media-scale) / var(--header-font-scale) * 0.8
+    );
+    --how-carousel-slide-title-size: calc(30px * var(--type-size));
+    --how-carousel-to-dots: calc(16px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--home #how-it-works .how-dashboard-media {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* How it works — mobile: contain carousel + copy inside white card */
+  .program-page-scroll--home #how-it-works .how-it-works-card {
+    overflow: hidden !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-grid {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-left,
+  .program-page-scroll--home #how-it-works .how-it-works-carousel {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-left h2,
+  .program-page-scroll--home #how-it-works .how-it-works-left p {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-track {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide-wrap {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide,
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__title,
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide p {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media video {
+    width: 100% !important;
+    max-width: 100% !important;
+    object-fit: cover;
+  }
+
+  /* Onboarding — mobile home: criteria image carousel */
+  .program-page-scroll--home #onboarding {
+    --onboard-carousel-title-size: calc(26px * var(--type-size));
+    --onboard-carousel-to-dots: calc(16px * var(--header-font-scale));
+    --onboard-image-h: min(calc(220px * var(--media-scale) / var(--header-font-scale)), 32dvh);
+    --onboard-copy-max-w: 100%;
+  }
+
+  .program-page-scroll--home #onboarding .onboarding-criteria-carousel-track {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .program-page-scroll--home #onboarding .onboarding-criteria-carousel-slide-wrap {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .program-page-scroll--home #onboarding .onboarding-criteria-slide,
+  .program-page-scroll--home #onboarding .onboarding-criteria-slide__media {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .program-page-scroll--home #onboarding .onboarding-criteria-slide__img {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: var(--onboard-image-h) !important;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  /* Testimonials — mobile (home + about): one full card per slide */
+  .program-page-scroll--home .testimonials-carousel-wrap,
+  .program-page-scroll--about .testimonials-carousel-wrap {
+    --testimonial-carousel-pl: var(--section-padding-x);
+    --testimonial-card-gap: 0;
+    --testimonial-mobile-card-padding: 20px;
+    --testimonial-arrow-to-track: calc(12px * var(--header-font-scale));
+    --testimonial-name-size: calc(36px * var(--type-size));
+    --testimonial-quote-icon-w: calc(96px * var(--media-size));
+    --testimonial-quote-icon-h: calc(62px * var(--media-size));
+  }
+
+  .program-page-scroll--home .testimonial-carousel--mobile-home,
+  .program-page-scroll--about .testimonial-carousel--mobile-home {
+    padding-left: var(--testimonial-carousel-pl);
+    padding-right: var(--testimonial-carousel-pl);
+  }
+
+  .program-page-scroll--home .testimonial-carousel--mobile-home .testimonial-carousel-viewport,
+  .program-page-scroll--about .testimonial-carousel--mobile-home .testimonial-carousel-viewport {
+    margin-top: calc(12px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--home .testimonial-mobile-slide,
+  .program-page-scroll--about .testimonial-mobile-slide {
+    flex: none;
+  }
+
+  .program-page-scroll--home .testimonial-card--mobile-home,
+  .program-page-scroll--about .testimonial-card--mobile-home {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100% !important;
+    min-height: min(calc(260px * var(--media-scale) / var(--header-font-scale)), 40dvh);
+    padding: var(--testimonial-mobile-card-padding);
+    padding-bottom: calc(var(--testimonial-logo-h) + var(--testimonial-mobile-card-padding));
+  }
+
+  .program-page-scroll--home .testimonial-card--mobile-home .testimonial-card__name,
+  .program-page-scroll--about .testimonial-card--mobile-home .testimonial-card__name {
+    margin-top: calc(12px * var(--header-font-scale));
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  .program-page-scroll--home .testimonial-card--mobile-home .testimonial-card__quote-body,
+  .program-page-scroll--about .testimonial-card--mobile-home .testimonial-card__quote-body {
+    display: -webkit-box;
+    width: 100%;
+    margin-top: calc(10px * var(--header-font-scale));
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    padding-right: calc(var(--testimonial-logo-w) * 0.5);
+  }
+
+  /* Apply CTA — mobile home + about: true circle, no eyebrow spacing, stacked layout */
+  .program-page-scroll--home #apply,
+  .program-page-scroll--about .apply-cta-section--about {
+    --apply-cta-mobile-circle-size: min(calc(100vw - calc(48px * var(--header-font-scale))), 340px);
+    --apply-cta-yellow-size: var(--apply-cta-mobile-circle-size);
+    --apply-cta-stage-w: 100%;
+    --apply-cta-yellow-py: calc(24px * var(--header-font-scale));
+    --apply-cta-content-padding-x: calc(20px * var(--header-font-scale));
+    --apply-cta-heading-to-body: calc(12px * var(--header-font-scale));
+    --apply-cta-body-to-btn: calc(32px * var(--header-font-scale));
+    --apply-cta-student-circle-size: calc(200px * var(--media-size));
+    --apply-cta-student-face-size: calc(100px * var(--media-size));
+    --apply-cta-student-face-hover-size: calc(136px * var(--media-size));
+  }
+
+  .program-page-scroll--about .apply-cta-section--about {
+    --apply-cta-body-size: 16px;
+    --apply-cta-heading-size: 24px;
+    --apply-cta-heading-max-w: min(100%, 300px);
+    --apply-cta-body-max-w: min(100%, 320px);
+    --apply-cta-btn-w: min(100%, 300px);
+    --apply-cta-btn-h: calc(60px * var(--header-font-scale));
+    --apply-cta-btn-text-size: 18px;
+    --apply-cta-btn-padding-x: 20px;
+    --apply-cta-btn-padding-x-left: 12px;
+    --apply-cta-btn-arrow-gap-right: 0px;
+  }
+
+  .program-page-scroll--about .apply-cta-section--about .apply-cta-yellow .rotating-split-border {
+    --apply-cta-btn-padding-x: 20px;
+    --apply-cta-btn-arrow-gap-right: 0px;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap .apply-cta-stage,
+  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-stage {
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap .apply-cta-yellow,
+  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-yellow {
+    width: var(--apply-cta-mobile-circle-size) !important;
+    height: var(--apply-cta-mobile-circle-size) !important;
+    min-width: var(--apply-cta-mobile-circle-size) !important;
+    min-height: var(--apply-cta-mobile-circle-size) !important;
+    max-width: var(--apply-cta-mobile-circle-size) !important;
+    max-height: var(--apply-cta-mobile-circle-size) !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .program-page-scroll--home .section-scroll-panel--snap .apply-cta-student,
+  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-student {
+    margin-top: 0 !important;
+  }
+
+  /* Product intro — mobile home + about: tab CTA button 60% width, larger label */
+  .program-page-scroll--home #product-intro,
+  .program-page-scroll--about #product-intro {
+    --section-try-btn-w: 60%;
+    --section-try-btn-label-long: calc(22px * var(--type-size));
+    --product-tab-panel-title-size: calc(30px * var(--type-size));
+  }
+
+  .program-page-scroll--home #product-intro .product-tab-panel-title,
+  .program-page-scroll--about #product-intro .product-tab-panel-title {
+    font-size: var(--product-tab-panel-title-size) !important;
+  }
+
+  .program-page-scroll--home #product-intro .product-tab-copy > a,
+  .program-page-scroll--about #product-intro .product-tab-copy > a {
+    width: 60% !important;
+    max-width: 60% !important;
+  }
+
+  .program-page-scroll--home #product-intro .product-tab-copy > a > span:first-of-type,
+  .program-page-scroll--about #product-intro .product-tab-copy > a > span:first-of-type {
+    font-size: calc(26px * var(--type-size)) !important;
+  }
+
+  /* Code Monkey tab — wider CTA for long label (mobile only) */
+  .program-page-scroll--home #product-intro .product-tab-panel[data-active-tab='code-monkey'] .product-tab-copy > a,
+  .program-page-scroll--about #product-intro .product-tab-panel[data-active-tab='code-monkey'] .product-tab-copy > a {
+    width: 65% !important;
+    max-width: 100% !important;
+  }
+
+  .program-page-scroll--home #product-intro .product-tab-panel[data-active-tab='code-monkey'],
+  .program-page-scroll--about #product-intro .product-tab-panel[data-active-tab='code-monkey'] {
+    --section-try-btn-w: 100%;
+  }
+
+  /* FAQ — mobile: larger question + open item radius */
+  .program-page-scroll--home #faqs {
+    --faq-question-size: 18px;
+  }
+
+  #faqs .faq-item-button[aria-expanded='true'],
+  .faq-page .faq-item-button[aria-expanded='true'] {
+    border-radius: 25px !important;
   }
 }

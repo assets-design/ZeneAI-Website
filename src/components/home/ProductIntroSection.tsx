@@ -93,6 +93,7 @@ function ProductTabPanel({ activeTab }: { activeTab: ProductTab }) {
     <div
       className="product-tab-panel grid min-h-0 flex-1 items-stretch xl:grid-cols-[minmax(0,1fr)_var(--section-dashboard-w)]"
       style={{ gap: 'var(--section-dashboard-gap)' }}
+      data-active-tab={activeTab}
     >
       <div className="product-tab-copy flex h-full min-h-0 min-w-0 flex-col">
         <div
@@ -100,8 +101,8 @@ function ProductTabPanel({ activeTab }: { activeTab: ProductTab }) {
           style={{ gap: 'var(--section-content-gap)' }}
         >
           <h3
-            className="font-heading font-medium uppercase leading-none text-black"
-            style={{ fontSize: 'var(--section-text-tab)' }}
+            className="product-tab-panel-title font-heading font-medium uppercase leading-none text-black"
+            style={{ fontSize: 'var(--product-tab-panel-title-size, var(--section-text-tab))' }}
             data-node-id="642:1150"
           >
             {content.title}
@@ -137,7 +138,7 @@ function ProductTabPanel({ activeTab }: { activeTab: ProductTab }) {
           </div>
         </div>
         <div
-          className="min-h-0 flex-1"
+          className="product-tab-panel-spacer min-h-0 flex-1"
           style={{ minHeight: 'var(--section-body-to-cta)' }}
           aria-hidden
         />
@@ -225,7 +226,7 @@ export function ProductIntroSection() {
 
           {/* Product tabs */}
           <div
-            className="flex shrink-0 flex-col items-stretch sm:flex-row sm:flex-wrap sm:items-center"
+            className="product-intro-tabs flex shrink-0 flex-col items-stretch sm:flex-row sm:flex-wrap sm:items-center"
             style={{
               gap: 'var(--section-tab-gap)',
               marginTop: 'calc(var(--section-heading-to-tabs) - var(--section-gap))',
@@ -259,7 +260,7 @@ export function ProductIntroSection() {
                       style={{ width: tab.iconW, height: tab.iconH }}
                     />
                   )}
-                  <span className="font-heading font-medium uppercase leading-none text-black">
+                  <span className="product-intro-tab-label font-heading font-medium uppercase leading-none text-black">
                     {tab.label}
                   </span>
                 </button>

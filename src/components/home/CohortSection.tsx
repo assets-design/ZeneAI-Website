@@ -98,8 +98,276 @@ const COHORT_LOGOS: CohortLogo[] = [
 ]
 
 const COHORT_LOOP_SETS = 3
+const COHORT_AUTO_SLIDE_MS = 4500
+const COHORT_TABLET_MQ = '(min-width: 640px) and (max-width: 1279px)'
+const COHORT_FIRST_LOGO_NODE_ID = COHORT_LOGOS[0].nodeId
 
-function CohortLogoCarousel({ marginTop }: { marginTop: string }) {
+function buildHomeCohortSlides(visibleCount: number, step: number) {
+  const count = COHORT_LOGOS.length
+  const slides: (typeof COHORT_LOGOS)[number][][] = []
+
+  if (step >= visibleCount) {
+    for (let index = 0; index < count; index += step) {
+      slides.push(
+        Array.from({ length: visibleCount }, (_, offset) => COHORT_LOGOS[(index + offset) % count]),
+      )
+    }
+    return slides
+  }
+
+  return Array.from({ length: count }, (_, index) =>
+    Array.from({ length: visibleCount }, (_, offset) => COHORT_LOGOS[(index + offset) % count]),
+  )
+}
+
+function useHomeCohortCarouselLayout() {
+  const [isTablet, setIsTablet] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia(COHORT_TABLET_MQ).matches : false,
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia(COHORT_TABLET_MQ)
+    const handleChange = () => setIsTablet(mq.matches)
+    handleChange()
+    mq.addEventListener('change', handleChange)
+    return () => mq.removeEventListener('change', handleChange)
+  }, [])
+
+  return isTablet
+    ? { visibleCount: 3, step: 1, isTablet: true as const }
+    : { visibleCount: 2, step: 2, isTablet: false as const }
+}
+
+function HomeCohortLogoCarousel({ marginTop }: { marginTop: string }) {
+  const { visibleCount, step, isTablet } = useHomeCohortCarouselLayout()
+  const slides = useMemo(
+    () => buildHomeCohortSlides(visibleCount, step),
+    [visibleCount, step],
+  )
+  const loopSlides = useMemo(
+    () =>
+      Array.from({ length: COHORT_LOOP_SETS }, (_, setIndex) =>
+        slides.map((group, slideIndex) => ({
+          key: `home-cohort-${setIndex}-${slideIndex}`,
+          logos: group,
+          logicalIndex: slideIndex,
+        })),
+      ).flat(),
+    [slides],
+  )
+
+  const trackRef = useRef<HTMLDivElement>(null)
+  const isJumpingRef = useRef(false)
+  const activeIndexRef = useRef(0)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const setLogicalIndex = useCallback((logicalIndex: number) => {
+    activeIndexRef.current = logicalIndex
+    setActiveIndex(logicalIndex)
+  }, [])
+
+  const getClosestSlideIndex = useCallback((track: HTMLDivElement) => {
+    const slideEls = Array.from(track.children) as HTMLElement[]
+    if (slideEls.length === 0) return 0
+
+    let closestIndex = 0
+    let closestDistance = Number.POSITIVE_INFINITY
+
+    slideEls.forEach((slide, index) => {
+      const distance = Math.abs(track.scrollLeft - slide.offsetLeft)
+      if (distance < closestDistance) {
+        closestDistance = distance
+        closestIndex = index
+      }
+    })
+
+    return closestIndex
+  }, [])
+
+  const scrollToLogicalIndex = useCallback(
+    (logicalIndex: number, behavior: ScrollBehavior = 'smooth') => {
+      const track = trackRef.current
+      if (!track || slides.length === 0) return
+
+      const slide = track.children[slides.length + logicalIndex] as HTMLElement | undefined
+      if (!slide) return
+
+      if (behavior === 'auto') isJumpingRef.current = true
+      track.scrollTo({ left: slide.offsetLeft, behavior })
+      setLogicalIndex(logicalIndex)
+
+      if (behavior === 'auto') {
+        requestAnimationFrame(() => {
+          isJumpingRef.current = false
+        })
+      }
+    },
+    [setLogicalIndex, slides.length],
+  )
+
+  const normalizeScroll = useCallback(() => {
+    const track = trackRef.current
+    if (!track || isJumpingRef.current || slides.length === 0) return
+
+    const closestIndex = getClosestSlideIndex(track)
+    const count = slides.length
+    const logicalIndex = ((closestIndex % count) + count) % count
+
+    setLogicalIndex(logicalIndex)
+
+    if (closestIndex < count) {
+      const target = track.children[closestIndex + count] as HTMLElement | undefined
+      if (!target) return
+
+      isJumpingRef.current = true
+      track.scrollTo({ left: target.offsetLeft, behavior: 'auto' })
+      requestAnimationFrame(() => {
+        isJumpingRef.current = false
+      })
+      return
+    }
+
+    if (closestIndex >= count * 2) {
+      const target = track.children[closestIndex - count] as HTMLElement | undefined
+      if (!target) return
+
+      isJumpingRef.current = true
+      track.scrollTo({ left: target.offsetLeft, behavior: 'auto' })
+      requestAnimationFrame(() => {
+        isJumpingRef.current = false
+      })
+    }
+  }, [getClosestSlideIndex, setLogicalIndex, slides.length])
+
+  useEffect(() => {
+    activeIndexRef.current = 0
+    setActiveIndex(0)
+    requestAnimationFrame(() => {
+      scrollToLogicalIndex(0, 'auto')
+    })
+  }, [isTablet, scrollToLogicalIndex, slides.length])
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const handleScroll = () => {
+      if (isJumpingRef.current || slides.length === 0) return
+
+      const closestIndex = getClosestSlideIndex(track)
+      const count = slides.length
+      setLogicalIndex(((closestIndex % count) + count) % count)
+    }
+
+    let scrollEndTimer: ReturnType<typeof setTimeout> | undefined
+
+    const handleScrollEnd = () => {
+      if (scrollEndTimer) clearTimeout(scrollEndTimer)
+      normalizeScroll()
+    }
+
+    const handleScrollWithFallback = () => {
+      handleScroll()
+      if (scrollEndTimer) clearTimeout(scrollEndTimer)
+      scrollEndTimer = setTimeout(handleScrollEnd, 150)
+    }
+
+    track.addEventListener('scroll', handleScrollWithFallback, { passive: true })
+    track.addEventListener('scrollend', handleScrollEnd)
+
+    const resizeObserver = new ResizeObserver(() => {
+      scrollToLogicalIndex(activeIndexRef.current, 'auto')
+    })
+    resizeObserver.observe(track)
+
+    return () => {
+      track.removeEventListener('scroll', handleScrollWithFallback)
+      track.removeEventListener('scrollend', handleScrollEnd)
+      if (scrollEndTimer) clearTimeout(scrollEndTimer)
+      resizeObserver.disconnect()
+    }
+  }, [getClosestSlideIndex, normalizeScroll, scrollToLogicalIndex, setLogicalIndex, slides.length])
+
+  useEffect(() => {
+    if (slides.length <= 1) return
+
+    const timer = window.setInterval(() => {
+      const nextIndex = (activeIndexRef.current + 1) % slides.length
+      scrollToLogicalIndex(nextIndex)
+    }, COHORT_AUTO_SLIDE_MS)
+
+    return () => window.clearInterval(timer)
+  }, [scrollToLogicalIndex, slides.length])
+
+  if (slides.length === 0) return null
+
+  return (
+    <div className="cohort-logo-carousel xl:hidden" style={{ marginTop }}>
+      <div
+        ref={trackRef}
+        className="cohort-logo-track flex snap-x snap-mandatory overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        aria-roledescription="carousel"
+        aria-label="School partner logos"
+      >
+        {loopSlides.map((slide) => (
+          <div
+            key={slide.key}
+            className="cohort-logo-slide flex w-full shrink-0 snap-center snap-always"
+            style={{ minHeight: 'var(--cohort-logo-row-h)' }}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${slide.logicalIndex + 1} of ${slides.length}`}
+          >
+            {slide.logos.map((logo) => (
+              <div
+                key={`${slide.key}-${logo.nodeId}`}
+                className="cohort-logo-slide__cell flex min-w-0 flex-1 items-center justify-center"
+              >
+                <CohortLogoCell
+                  {...logo}
+                  sizeMultiplier={
+                    isTablet && logo.nodeId === COHORT_FIRST_LOGO_NODE_ID ? 0.9 : 1
+                  }
+                />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <div
+        className="flex items-center justify-center"
+        role="tablist"
+        aria-label="Choose partner logo slide"
+        style={{
+          marginTop: 'var(--cohort-carousel-to-dots)',
+          gap: 'var(--cohort-dot-gap)',
+        }}
+      >
+        {slides.map((group, index) => (
+          <button
+            key={`cohort-dot-${index}-${group[0]?.nodeId ?? index}`}
+            type="button"
+            role="tab"
+            aria-label={`Show partner logos slide ${index + 1}`}
+            aria-selected={activeIndex === index}
+            onClick={() => scrollToLogicalIndex(index)}
+            className={cn(
+              'rounded-full border-0 p-0 transition-colors',
+              activeIndex === index ? 'bg-black' : 'bg-black/20',
+            )}
+            style={{
+              width: 'var(--cohort-dot-size)',
+              height: 'var(--cohort-dot-size)',
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function LegacyCohortLogoCarousel({ marginTop }: { marginTop: string }) {
   const trackRef = useRef<HTMLDivElement>(null)
   const isJumpingRef = useRef(false)
   const activeIndexRef = useRef(0)
@@ -296,11 +564,35 @@ function CohortLogoCarousel({ marginTop }: { marginTop: string }) {
   )
 }
 
+function CohortLogoCarousel({
+  marginTop,
+  variant,
+}: {
+  marginTop: string
+  variant: 'home' | 'about' | 'code-monkey' | 'the-edge'
+}) {
+  if (variant === 'home') {
+    return <HomeCohortLogoCarousel marginTop={marginTop} />
+  }
+
+  return <LegacyCohortLogoCarousel marginTop={marginTop} />
+}
+
 type CohortSectionProps = {
   variant?: 'home' | 'about' | 'code-monkey' | 'the-edge'
 }
 
-function CohortLogoCell({ src, alt, maxW, maxH, nodeId, scale = 1 }: CohortLogo) {
+function CohortLogoCell({
+  src,
+  alt,
+  maxW,
+  maxH,
+  nodeId,
+  scale = 1,
+  sizeMultiplier = 1,
+}: CohortLogo & { sizeMultiplier?: number }) {
+  const totalScale = scale * sizeMultiplier
+
   return (
     <div
       className="flex items-center justify-center"
@@ -314,7 +606,7 @@ function CohortLogoCell({ src, alt, maxW, maxH, nodeId, scale = 1 }: CohortLogo)
         style={{
           width: maxW,
           height: maxH,
-          transform: scale !== 1 ? `scale(${scale})` : undefined,
+          transform: totalScale !== 1 ? `scale(${totalScale})` : undefined,
         }}
         loading="lazy"
       />
@@ -474,7 +766,7 @@ export function CohortSection({ variant = 'home' }: CohortSectionProps) {
         >
           <CohortHeader variant={variant} />
 
-          <CohortLogoCarousel marginTop={logosMarginTop} />
+          <CohortLogoCarousel marginTop={logosMarginTop} variant={variant} />
 
           <div
             className="hidden grid-cols-2 items-center justify-items-center md:grid-cols-3 xl:grid xl:grid-cols-5"

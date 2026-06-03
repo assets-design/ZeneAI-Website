@@ -36,18 +36,17 @@ const TRUST_BADGES = [
 function HeroBadgeText({ lines }: { lines: readonly string[] }) {
   return (
     <p
-      className="normal-case font-body font-normal leading-normal text-black"
+      className="hero-badge-description normal-case font-body font-normal leading-normal text-black"
       style={{
-        fontSize: 'var(--section-text-body)',
+        fontSize: 'var(--hero-badge-description-size, var(--section-text-body))',
         fontVariationSettings: "'opsz' 14",
         maxWidth: 'var(--hero-badge-text-max-w)',
         marginTop: 'var(--hero-gap)',
       }}
     >
-      {lines.map((line, index) => (
-        <span key={line}>
+      {lines.map(line => (
+        <span key={line} className="hero-badge-description__line">
           {line}
-          {index < lines.length - 1 ? <br /> : null}
         </span>
       ))}
     </p>

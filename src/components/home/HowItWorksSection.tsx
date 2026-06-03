@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import { HowItWorksCarousel } from '@/components/home/HowItWorksCarousel'
 import howToManageLessonsVideo from '@/data/2. How to Manage Lessons.mp4'
 import overallReportVideo from '@/data/3. Teachers - Overall Report.mp4'
 import courseCompletionReportVideo from '@/data/4. Teachers - Course Completion Report.mp4'
@@ -392,7 +393,14 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
 
           {/* Right — Teacher Dashboard + Lesson Management */}
           {useScrollableRightColumn ? (
-            <div className="how-it-works-right-scroll min-h-0 min-w-0">
+            <>
+              {isHome ? <HowItWorksCarousel /> : null}
+              <div
+                className={cn(
+                  'how-it-works-right-scroll min-h-0 min-w-0',
+                  isHome && 'hidden xl:block',
+                )}
+              >
               <div className="how-it-works-right-set how-it-works-right-set--primary">
                 <div
                   className="how-it-works-right flex min-h-0 min-w-0 flex-col"
@@ -425,7 +433,8 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
                   </div>
                 </div>
               ) : null}
-            </div>
+              </div>
+            </>
           ) : (
             <div
               className="how-it-works-right flex min-h-0 min-w-0 flex-col"

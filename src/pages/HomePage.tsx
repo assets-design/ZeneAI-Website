@@ -1,4 +1,3 @@
-import { Fragment } from 'react'
 import { SnapSectionsDesktop, useDesktopScrollPage } from '@/components/Layout/ScrollPageDesktop'
 import { AiReadySection } from '@/components/home/AiReadySection'
 import { ApplyCtaSection } from '@/components/home/ApplyCtaSection'
@@ -20,7 +19,7 @@ const HOME_SECTIONS = [
   { key: 'why-schools', render: () => <WhySchoolsSection /> },
   { key: 'how-it-works', render: () => <HowItWorksSection /> },
   { key: 'tracking', render: () => <TrackingSection /> },
-  { key: 'ai-ready', render: () => <AiReadySection /> },
+  { key: 'ai-ready', render: () => <AiReadySection variant="home" /> },
   { key: 'onboarding', render: () => <OnboardingSection /> },
   { key: 'testimonials', render: () => <TestimonialsSection /> },
   { key: 'cohort', render: () => <CohortSection /> },
@@ -29,17 +28,7 @@ const HOME_SECTIONS = [
 ] as const
 
 export function HomePage() {
-  const isDesktop = useDesktopScrollPage()
-
-  if (!isDesktop) {
-    return (
-      <>
-        {HOME_SECTIONS.map(({ key, render }) => (
-          <Fragment key={key}>{render()}</Fragment>
-        ))}
-      </>
-    )
-  }
+  useDesktopScrollPage()
 
   return <SnapSectionsDesktop pageClass="program-page-scroll--home" sections={HOME_SECTIONS} />
 }

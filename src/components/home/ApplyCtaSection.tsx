@@ -82,7 +82,10 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
               data-node-id={isAbout ? '642:1355' : isTheEdge ? '1134:3548' : '975:1977'}
             >
               <SectionEyebrow
-                className="mx-auto"
+                className={cn(
+                  'mx-auto',
+                  (variant === 'home' || variant === 'about') && 'max-sm:hidden',
+                )}
                 style={{ marginTop: 0 }}
               >
                 {isAbout
@@ -96,12 +99,17 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
 
               <h2
                 id={headingId}
-                className="mx-auto font-heading font-medium uppercase leading-none text-black"
                 style={{
                   fontSize: 'var(--apply-cta-heading-size)',
                   maxWidth: 'var(--apply-cta-heading-max-w)',
-                  marginTop: 'var(--section-eyebrow-to-heading)',
+                  ...(variant !== 'home' &&
+                    variant !== 'about' && { marginTop: 'var(--section-eyebrow-to-heading)' }),
                 }}
+                className={cn(
+                  'mx-auto font-heading font-medium uppercase leading-none text-black',
+                  (variant === 'home' || variant === 'about') &&
+                    'mt-0 sm:mt-[var(--section-eyebrow-to-heading)]',
+                )}
                 data-node-id={isAbout ? '642:1357' : isTheEdge ? '1134:3549' : '975:1978'}
               >
                 {isAbout ? (

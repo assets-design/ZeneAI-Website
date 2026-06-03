@@ -2,11 +2,7 @@ import { BlogSection } from '@/components/blog/BlogSection'
 import { ScrollPageDesktop, useDesktopScrollPage } from '@/components/Layout/ScrollPageDesktop'
 
 export function BlogPage() {
-  const isDesktop = useDesktopScrollPage()
-
-  if (!isDesktop) {
-    return <BlogSection />
-  }
+  useDesktopScrollPage()
 
   return (
     <ScrollPageDesktop pageClass="program-page-scroll--blog">
