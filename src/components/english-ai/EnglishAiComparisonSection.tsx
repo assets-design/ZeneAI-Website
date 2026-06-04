@@ -134,11 +134,11 @@ function ComparisonMobileCard({
         </p>
         <p
           className={cn(
-            'mb-0 font-body font-normal leading-normal text-black',
+            'english-ai-comparison-mobile-body mb-0 font-body font-normal leading-normal text-black',
             normalCaseBody ? 'normal-case' : 'capitalize',
           )}
           style={{
-            fontSize: 'var(--section-text-body)',
+            fontSize: 'var(--english-ai-comparison-mobile-body-size, var(--section-text-body))',
             fontVariationSettings: "'opsz' 14",
             marginTop: 'var(--english-ai-comparison-mobile-text-gap)',
           }}
@@ -157,11 +157,11 @@ function ComparisonMobileCard({
         </p>
         <p
           className={cn(
-            'mb-0 font-body font-normal leading-normal text-black',
+            'english-ai-comparison-mobile-body mb-0 font-body font-normal leading-normal text-black',
             normalCaseBody ? 'normal-case' : 'capitalize',
           )}
           style={{
-            fontSize: 'var(--section-text-body)',
+            fontSize: 'var(--english-ai-comparison-mobile-body-size, var(--section-text-body))',
             fontVariationSettings: "'opsz' 14",
             marginTop: 'var(--english-ai-comparison-mobile-text-gap)',
           }}

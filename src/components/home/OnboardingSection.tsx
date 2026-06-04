@@ -215,12 +215,19 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
               criteria={criteria}
               image={onboardingClassroom}
             />
+          ) : isEnglishAi || isCodeMonkey ? (
+            <OnboardingCriteriaCarousel
+              className="sm:hidden"
+              criteria={criteria}
+              images={ENGLISH_AI_IMAGES}
+              image={ENGLISH_AI_IMAGES[0]}
+            />
           ) : null}
 
           <div
             className={cn(
               'onboarding-criteria-grid grid min-w-0 grid-cols-1 gap-[var(--onboard-columns-gap)] xl:grid-cols-2',
-              isHome && 'hidden sm:grid',
+              (isHome || isEnglishAi || isCodeMonkey) && 'hidden sm:grid',
             )}
             style={{ marginTop: isHome ? undefined : 'var(--onboard-body-to-cards)' }}
           >

@@ -4,12 +4,6 @@ import { getAdjacentBlogPosts } from '@/data/blogPosts'
 import { cn } from '@/lib/utils'
 import { Link } from 'react-router-dom'
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 type BlogPostSectionProps = {
   post: BlogPost
 }
@@ -108,8 +102,18 @@ export function BlogPostSection({ post }: BlogPostSectionProps) {
             paddingBottom: 'var(--blog-padding-bottom)',
           }}
         >
-          <div className="blog-post-header blog-header grid min-w-0 grid-cols-1 items-start gap-[var(--blog-header-gap)] xl:grid-cols-[minmax(0,1fr)_auto]">
-            <div className="min-w-0">
+          <div
+            id="blog-post-header"
+            className="blog-post-header program-hero-inner flex min-w-0 flex-col"
+            style={{ gap: 'var(--blog-header-gap)' }}
+          >
+            <div className="program-hero-top-row flex min-w-0 items-end justify-end">
+              <div className="hero-apply-slot shrink-0">
+                <ApplyNowButton href="/contact" />
+              </div>
+            </div>
+
+            <div className="blog-post-header-copy min-w-0">
               <p
                 className="section-eyebrow font-body uppercase text-black"
                 style={{
@@ -124,10 +128,9 @@ export function BlogPostSection({ post }: BlogPostSectionProps) {
 
               <h1
                 id="blog-post-heading"
-                className="font-heading font-medium uppercase leading-none text-black"
+                className="max-w-none font-heading font-medium uppercase leading-none text-black"
                 style={{
                   fontSize: 'var(--blog-post-title-size)',
-                  maxWidth: 'var(--blog-post-title-max-w)',
                   marginTop: 'var(--blog-eyebrow-to-heading)',
                 }}
               >
@@ -144,10 +147,6 @@ export function BlogPostSection({ post }: BlogPostSectionProps) {
               >
                 {post.published} · {post.readTime}
               </p>
-            </div>
-
-            <div className="hero-apply-slot mx-auto shrink-0 self-start xl:mx-0">
-              <ApplyNowButton href="/contact" className="max-w-full shrink-0" />
             </div>
           </div>
 
@@ -168,11 +167,8 @@ export function BlogPostSection({ post }: BlogPostSectionProps) {
           </div>
 
           <div
-            className="blog-post-content mx-auto w-full min-w-0"
-            style={{
-              maxWidth: 'var(--blog-post-content-max-w)',
-              marginTop: 'var(--blog-post-feature-to-content)',
-            }}
+            className="blog-post-content w-full min-w-0 max-w-none"
+            style={{ marginTop: 'var(--blog-post-feature-to-content)' }}
           >
             {post.sections.map((section, index) => (
               <section
@@ -214,27 +210,6 @@ export function BlogPostSection({ post }: BlogPostSectionProps) {
                 ))}
               </section>
             ))}
-
-            <p
-              className="capitalize font-body font-normal leading-normal text-black"
-              style={{
-                fontSize: 'var(--blog-post-body-size)',
-                fontVariationSettings: "'opsz' 14",
-                marginTop: 'var(--blog-post-section-gap)',
-              }}
-            >
-              Ready to bring{' '}
-              <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
-                future-ready programs
-              </span>{' '}
-              to your school?{' '}
-              <Link
-                to="/contact"
-                className="text-zene-blue underline decoration-solid underline-offset-2"
-              >
-                Apply now →
-              </Link>
-            </p>
 
             <BlogPostNav prev={prev} next={next} />
           </div>

@@ -1,5 +1,22 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import type { ProgramVariant } from '@/types/program'
+import { isCustomProgramVariant } from '@/types/program'
 import { cn } from '@/lib/utils'
+
+const TABLET_VISIBLE_COUNT = 3
+const TABLET_SCROLL_STEP = 2
+const TABLET_AUTO_SLIDE_MS = 5000
+
+function buildTabletScrollPositions(itemCount: number): number[] {
+  if (itemCount <= TABLET_VISIBLE_COUNT) return [0]
+
+  const positions: number[] = []
+  for (let i = 0; i < itemCount; i += TABLET_SCROLL_STEP) {
+    positions.push(i)
+    if (i + TABLET_VISIBLE_COUNT >= itemCount) break
+  }
+  return positions
+}
 
 type FeatureItem = {
   image: string
@@ -171,8 +188,133 @@ function EnglishAiFeatureMobileCarousel({
   )
 }
 
-import type { ProgramVariant } from '@/types/program'
-import { isCustomProgramVariant } from '@/types/program'
+function EnglishAiFeatureTabletCarousel({
+  items,
+  ariaLabel,
+  normalCaseBody = false,
+}: {
+  items: FeatureItem[]
+  ariaLabel: string
+  normalCaseBody?: boolean
+}) {
+  const trackRef = useRef<HTMLDivElement>(null)
+  const activePositionRef = useRef(0)
+  const [activePositionIndex, setActivePositionIndex] = useState(0)
+  const scrollPositions = useMemo(() => buildTabletScrollPositions(items.length), [items.length])
+
+  const scrollToPositionIndex = useCallback(
+    (positionIndex: number, behavior: ScrollBehavior = 'smooth') => {
+      const track = trackRef.current
+      if (!track) return
+
+      const itemIndex = scrollPositions[positionIndex]
+      if (itemIndex === undefined) return
+
+      const slide = track.children[itemIndex] as HTMLElement | undefined
+      if (!slide) return
+
+      track.scrollTo({ left: slide.offsetLeft, behavior })
+      activePositionRef.current = positionIndex
+      setActivePositionIndex(positionIndex)
+    },
+    [scrollPositions],
+  )
+
+  useEffect(() => {
+    const track = trackRef.current
+    if (!track) return
+
+    const handleScroll = () => {
+      const slides = Array.from(track.children) as HTMLElement[]
+      if (slides.length === 0) return
+
+      let closestPositionIndex = 0
+      let closestDistance = Number.POSITIVE_INFINITY
+
+      scrollPositions.forEach((itemIndex, positionIndex) => {
+        const slide = slides[itemIndex]
+        if (!slide) return
+
+        const distance = Math.abs(track.scrollLeft - slide.offsetLeft)
+        if (distance < closestDistance) {
+          closestDistance = distance
+          closestPositionIndex = positionIndex
+        }
+      })
+
+      activePositionRef.current = closestPositionIndex
+      setActivePositionIndex(closestPositionIndex)
+    }
+
+    handleScroll()
+    track.addEventListener('scroll', handleScroll, { passive: true })
+    return () => track.removeEventListener('scroll', handleScroll)
+  }, [items.length, scrollPositions])
+
+  useEffect(() => {
+    if (scrollPositions.length <= 1) return
+
+    const timer = window.setInterval(() => {
+      const nextPositionIndex =
+        activePositionRef.current >= scrollPositions.length - 1 ? 0 : activePositionRef.current + 1
+      scrollToPositionIndex(nextPositionIndex)
+    }, TABLET_AUTO_SLIDE_MS)
+
+    return () => window.clearInterval(timer)
+  }, [scrollPositions, scrollToPositionIndex])
+
+  return (
+    <div className="english-ai-feature-tablet-carousel hidden min-w-0 max-w-full overflow-hidden sm:block xl:hidden">
+      <div
+        ref={trackRef}
+        className="english-ai-feature-tablet-carousel-track flex w-full max-w-full min-w-0 snap-x snap-mandatory overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        aria-roledescription="carousel"
+        aria-label={ariaLabel}
+      >
+        {items.map((item, index) => (
+          <div
+            key={item.titleNodeId}
+            className="english-ai-feature-tablet-carousel-slide-wrap box-border flex min-w-0 shrink-0 grow-0 snap-start snap-always"
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${index + 1} of ${items.length}`}
+          >
+            <FeatureCard {...item} normalCaseBody={normalCaseBody} />
+          </div>
+        ))}
+      </div>
+
+      <div
+        className="english-ai-feature-tablet-carousel-dots flex items-center justify-center"
+        role="tablist"
+        aria-label="Choose feature slide"
+        style={{
+          marginTop: 'var(--english-ai-grid-carousel-to-dots)',
+          gap: 'var(--english-ai-grid-dot-gap)',
+        }}
+      >
+        {scrollPositions.map((itemIndex, positionIndex) => (
+          <button
+            key={`tablet-dot-${itemIndex}`}
+            type="button"
+            role="tab"
+            aria-label={`Show features position ${positionIndex + 1}`}
+            aria-selected={activePositionIndex === positionIndex}
+            onClick={() => scrollToPositionIndex(positionIndex)}
+            className={cn(
+              'rounded-full border-0 p-0 transition-colors',
+              activePositionIndex === positionIndex ? 'bg-black' : 'bg-black/20',
+            )}
+            style={{
+              width: 'var(--english-ai-grid-dot-size)',
+              height: 'var(--english-ai-grid-dot-size)',
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 type EnglishAiFeatureGridSectionProps = {
   variant?: ProgramVariant
@@ -208,6 +350,7 @@ export function EnglishAiFeatureGridSection({
   carouselAriaLabel,
 }: EnglishAiFeatureGridSectionProps) {
   const isCustomProgram = isCustomProgramVariant(variant)
+  const showTabletCarousel = variant === 'english-ai' || variant === 'code-monkey'
 
   return (
     <section
@@ -285,7 +428,22 @@ export function EnglishAiFeatureGridSection({
               normalCaseBody={isCustomProgram}
             />
 
-            <div className="english-ai-feature-grid-desktop hidden min-h-0 min-w-0 grid-cols-1 gap-x-[var(--english-ai-grid-gap-x)] gap-y-[var(--english-ai-grid-gap-y)] sm:grid sm:grid-cols-2 xl:grid-cols-3">
+            {showTabletCarousel ? (
+              <EnglishAiFeatureTabletCarousel
+                items={items}
+                ariaLabel={carouselAriaLabel}
+                normalCaseBody={isCustomProgram}
+              />
+            ) : null}
+
+            <div
+              className={cn(
+                'english-ai-feature-grid-desktop hidden min-h-0 min-w-0 grid-cols-1 gap-x-[var(--english-ai-grid-gap-x)] gap-y-[var(--english-ai-grid-gap-y)]',
+                showTabletCarousel
+                  ? 'xl:grid xl:grid-cols-3'
+                  : 'sm:grid sm:grid-cols-2 xl:grid-cols-3',
+              )}
+            >
               {items.map(item => (
                 <FeatureCard key={item.titleNodeId} {...item} normalCaseBody={isCustomProgram} />
               ))}

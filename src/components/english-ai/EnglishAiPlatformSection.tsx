@@ -47,10 +47,10 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
             {isTheEdge ? 'Platform Intro' : isCodeMonkey ? 'The Platform' : 'The AI English Speaking Lab'}          </p>
 
           <div
-            className="grid min-w-0 items-start gap-y-[var(--english-ai-platform-row-gap)] lg:grid-cols-[minmax(0,688px)_1fr] lg:gap-x-[var(--english-ai-platform-columns-gap)]"
+            className="english-ai-platform-grid grid min-w-0 items-start gap-y-[var(--english-ai-platform-row-gap)] lg:grid-cols-[minmax(0,688px)_1fr] lg:gap-x-[var(--english-ai-platform-columns-gap)]"
             style={{ marginTop: 'var(--english-ai-platform-eyebrow-to-content)' }}
           >
-            <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+            <div className="english-ai-platform-copy min-w-0 lg:col-start-1 lg:row-start-1">
               <h2
                 id={headingId}
                 className="section-heading max-w-[var(--english-ai-heading-max-w)] font-heading font-medium uppercase text-black"
@@ -118,7 +118,7 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
 
             <p
               className={cn(
-                'font-heading font-normal leading-normal text-black lg:col-start-1 lg:row-start-2',
+                'english-ai-platform-tagline font-heading font-normal leading-normal text-black lg:col-start-1 lg:row-start-2',
                 isTheEdge ? 'normal-case' : 'capitalize',
               )}
               style={{
@@ -150,7 +150,7 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
             </p>
 
             <div
-              className="relative mx-auto min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:justify-self-end"
+              className="english-ai-platform-mockup relative mx-auto min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:justify-self-end"
               style={{
                 width: 'var(--english-ai-platform-mockup-w)',
                 maxWidth: '100%',

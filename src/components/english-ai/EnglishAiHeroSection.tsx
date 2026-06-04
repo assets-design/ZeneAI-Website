@@ -115,16 +115,16 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
       ? 'Zene.ai is an AI-powered English program built for Indian classrooms. Every student speaks, listens, reads, and writes — every session. Every skill, measured.'
       : (
           <>
-            <span className="block">
-              Cambridge research: it takes 200 hours to move up one
+            <span className="block max-sm:inline">
+              Cambridge research: it takes 200 hours to move up one{' '}
             </span>
-            <span className="block">
-              CEFR level and most of those hours are passive listening.
+            <span className="block max-sm:inline">
+              CEFR level and most of those hours are passive listening.{' '}
             </span>
-            <span className="block">
-              Zene turns them into active speaking practice, individually
+            <span className="block max-sm:inline">
+              Zene turns them into active speaking practice, individually{' '}
             </span>
-            <span className="block">graded for every student.</span>
+            <span className="block max-sm:inline">graded for every student.</span>
           </>
         )
 
@@ -170,7 +170,7 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
               </div>
 
               <div
-                className="relative z-[1] grid min-h-0 min-w-0 flex-1 grid-cols-1 items-end gap-x-[var(--english-ai-hero-columns-gap)] gap-y-[var(--english-ai-hero-row-gap)] sm:grid-cols-[minmax(0,1fr)_auto] xl:grid-cols-[60%_40%]"
+                className="program-hero-content-grid relative z-[1] grid min-h-0 min-w-0 flex-1 grid-cols-1 items-end gap-x-[var(--english-ai-hero-columns-gap)] gap-y-[var(--english-ai-hero-row-gap)] sm:grid-cols-[minmax(0,1fr)_auto] xl:grid-cols-[60%_40%]"
               >
                 <div className="min-w-0 self-center xl:self-auto">
                   <p

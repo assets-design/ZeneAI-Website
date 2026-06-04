@@ -394,11 +394,11 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
           {/* Right — Teacher Dashboard + Lesson Management */}
           {useScrollableRightColumn ? (
             <>
-              {isHome ? <HowItWorksCarousel /> : null}
+              {isHome || isEnglishAi || isCodeMonkey || isTheEdge ? <HowItWorksCarousel /> : null}
               <div
                 className={cn(
                   'how-it-works-right-scroll min-h-0 min-w-0',
-                  isHome && 'hidden xl:block',
+                  (isHome || isEnglishAi || isCodeMonkey || isTheEdge) && 'hidden xl:block',
                 )}
               >
               <div className="how-it-works-right-set how-it-works-right-set--primary">

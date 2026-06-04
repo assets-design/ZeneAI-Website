@@ -29,8 +29,8 @@ export function TheEdgePlatformSection() {
             paddingBottom: 'var(--english-ai-platform-padding-bottom)',
           }}
         >
-          <div className="grid min-w-0 items-start gap-y-[var(--english-ai-platform-row-gap)] lg:grid-cols-[minmax(0,688px)_1fr] lg:gap-x-[var(--english-ai-platform-columns-gap)]">
-            <div className="min-w-0 lg:col-start-1 lg:row-start-1">
+          <div className="the-edge-platform-grid grid min-w-0 items-start gap-y-[var(--english-ai-platform-row-gap)] lg:grid-cols-[minmax(0,688px)_1fr] lg:gap-x-[var(--english-ai-platform-columns-gap)]">
+            <div className="the-edge-platform-copy min-w-0 lg:col-start-1 lg:row-start-1">
               <SectionEyebrow data-node-id="1100:2162">Platform intro</SectionEyebrow>
 
               <h2
@@ -69,7 +69,7 @@ export function TheEdgePlatformSection() {
             </div>
 
             <p
-              className="font-heading font-normal normal-case leading-normal text-black lg:col-start-1 lg:row-start-2"
+              className="the-edge-platform-tagline font-heading font-normal normal-case leading-normal text-black lg:col-start-1 lg:row-start-2"
               style={{
                 fontSize: 'var(--code-monkey-platform-tagline-size, var(--english-ai-platform-tagline-size))',
               }}
@@ -84,7 +84,7 @@ export function TheEdgePlatformSection() {
             </p>
 
             <div
-              className="relative mx-auto min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:justify-self-end"
+              className="the-edge-platform-mockup relative mx-auto min-w-0 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:justify-self-end"
               style={{
                 width: 'var(--the-edge-platform-mockup-w)',
                 maxWidth: '100%',

@@ -15,6 +15,7 @@ type CriterionItem = {
 type OnboardingCriteriaCarouselProps = {
   criteria: readonly CriterionItem[]
   image: string
+  images?: readonly string[]
   className?: string
 }
 
@@ -72,6 +73,7 @@ function CriterionSlide({
 export function OnboardingCriteriaCarousel({
   criteria,
   image,
+  images,
   className,
 }: OnboardingCriteriaCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null)
@@ -147,14 +149,14 @@ export function OnboardingCriteriaCarousel({
         aria-roledescription="carousel"
         aria-label="Who Zene works with criteria"
       >
-        {criteria.map((item) => (
+        {criteria.map((item, index) => (
           <div
             key={item.nodeId}
             className="onboarding-criteria-carousel-slide-wrap box-border flex min-w-0 max-w-full shrink-0 grow-0 basis-full snap-center snap-always"
             role="group"
             aria-roledescription="slide"
           >
-            <CriterionSlide item={item} image={image} />
+            <CriterionSlide item={item} image={images?.[index] ?? image} />
           </div>
         ))}
       </div>

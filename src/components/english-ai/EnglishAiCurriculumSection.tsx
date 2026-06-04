@@ -253,6 +253,7 @@ type EnglishAiCurriculumSectionProps = {
 }
 
 export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAiCurriculumSectionProps) {
+  const isEnglishAi = variant === 'english-ai'
   const isCodeMonkey = variant === 'code-monkey'
   const isTheEdge = variant === 'the-edge'
   const isCustomProgram = isCodeMonkey || isTheEdge
@@ -377,8 +378,10 @@ export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAi
 
             <div
               className={cn(
-                'hidden min-w-0 grid-cols-1 gap-x-[var(--english-ai-curriculum-gap-x)] gap-y-[var(--english-ai-curriculum-gap-y)] sm:grid sm:grid-cols-2',
-                isTheEdge ? 'lg:grid-cols-4' : 'lg:grid-cols-3',
+                'english-ai-curriculum-grid hidden min-w-0 grid-cols-1 gap-x-[var(--english-ai-curriculum-gap-x)] gap-y-[var(--english-ai-curriculum-gap-y)] sm:grid',
+                isEnglishAi || isCodeMonkey
+                  ? 'sm:grid-cols-3'
+                  : cn('sm:grid-cols-2', isTheEdge ? 'lg:grid-cols-4' : 'lg:grid-cols-3'),
               )}
             >
               {items.map(item => (

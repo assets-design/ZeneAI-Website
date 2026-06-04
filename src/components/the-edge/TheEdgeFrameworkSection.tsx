@@ -267,7 +267,7 @@ export function TheEdgeFrameworkSection() {
                   src={activePillar.detailImage}
                   alt=""
                   aria-hidden
-                  className="size-full object-cover"
+                  className="block size-full object-cover max-sm:h-auto max-sm:w-full max-sm:object-contain"
                 />
               </div>
 

@@ -60,10 +60,7 @@ function ComparisonMobileCard({
           paddingBottom: 'var(--english-ai-comparison-mobile-body-py)',
         }}
       >
-        <p
-          className="mb-0 font-heading font-medium uppercase leading-none text-black"
-          style={{ fontSize: 'var(--english-ai-comparison-mobile-label-size)' }}
-        >
+        <p className="the-edge-comparison-mobile-col-label mb-0 font-heading font-medium uppercase leading-none text-black">
           Without The Edge
         </p>
         <p
@@ -78,11 +75,8 @@ function ComparisonMobileCard({
           {without}
         </p>
         <p
-          className="mb-0 font-heading font-medium uppercase leading-none text-black"
-          style={{
-            fontSize: 'var(--english-ai-comparison-mobile-label-size)',
-            marginTop: 'var(--english-ai-comparison-mobile-block-gap)',
-          }}
+          className="the-edge-comparison-mobile-col-label mb-0 font-heading font-medium uppercase leading-none text-black"
+          style={{ marginTop: 'var(--english-ai-comparison-mobile-block-gap)' }}
         >
           With The Edge
         </p>

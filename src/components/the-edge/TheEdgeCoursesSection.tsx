@@ -64,7 +64,13 @@ function CourseCard({
   return (
     <article className="the-edge-courses-card flex min-w-0 flex-col items-center text-center">
       <div className="the-edge-courses-card-image overflow-hidden" data-node-id={imageNodeId}>
-        <img src={image} alt="" aria-hidden className="size-full object-cover" draggable={false} />
+        <img
+          src={image}
+          alt=""
+          aria-hidden
+          className="block w-full h-auto object-contain max-xl:object-contain xl:size-full xl:object-cover"
+          draggable={false}
+        />
       </div>
       <p
         className="mb-0 capitalize font-body font-normal leading-normal text-black"

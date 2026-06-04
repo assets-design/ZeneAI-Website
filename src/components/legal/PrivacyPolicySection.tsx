@@ -26,9 +26,8 @@ export function PrivacyPolicySection() {
       />
 
       <p
-        className="blog-post-content mx-auto w-full min-w-0 capitalize font-body font-normal leading-normal text-black"
+        className="blog-post-content mx-auto w-full min-w-0 max-w-none capitalize font-body font-normal leading-normal text-black"
         style={{
-          maxWidth: 'var(--blog-post-content-max-w)',
           fontSize: 'var(--blog-post-body-size)',
           fontVariationSettings: "'opsz' 14",
           marginTop: 'var(--blog-post-section-gap)',

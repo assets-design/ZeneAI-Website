@@ -40,8 +40,18 @@ export function FaqPageSection({ panel = false }: FaqPageSectionProps) {
               : 'var(--blog-padding-bottom)',
           }}
         >
-          <div className="blog-header grid min-w-0 grid-cols-1 items-start gap-[var(--blog-header-gap)] xl:grid-cols-[minmax(0,1fr)_auto]">
-            <div className="min-w-0">
+          <div
+            id="faq-page-header"
+            className="blog-post-header program-hero-inner flex min-w-0 flex-col"
+            style={{ gap: 'var(--blog-header-gap)' }}
+          >
+            <div className="program-hero-top-row flex min-w-0 items-end justify-end">
+              <div className="hero-apply-slot shrink-0">
+                <ApplyNowButton href="/contact" className="max-w-full shrink-0" />
+              </div>
+            </div>
+
+            <div className="blog-post-header-copy min-w-0">
               <p
                 className="section-eyebrow font-body uppercase text-black"
                 style={{
@@ -54,10 +64,9 @@ export function FaqPageSection({ panel = false }: FaqPageSectionProps) {
 
               <h1
                 id="faq-page-heading"
-                className="font-heading font-medium uppercase leading-none text-black"
+                className="max-w-none font-heading font-medium uppercase leading-none text-black"
                 style={{
                   fontSize: 'var(--section-text-heading)',
-                  maxWidth: 'var(--blog-heading-max-w)',
                   marginTop: 'var(--blog-eyebrow-to-heading)',
                 }}
               >
@@ -72,17 +81,12 @@ export function FaqPageSection({ panel = false }: FaqPageSectionProps) {
                 style={{
                   fontSize: 'var(--section-text-body)',
                   fontVariationSettings: "'opsz' 14",
-                  maxWidth: 'var(--blog-body-max-w)',
                   marginTop: 'var(--blog-heading-to-body)',
                 }}
               >
                 Find clear answers about programs, trials, personalization, data privacy, and how
                 Zene AI fits into your school.
               </p>
-            </div>
-
-            <div className="hero-apply-slot mx-auto shrink-0 self-start xl:mx-0">
-              <ApplyNowButton href="/contact" className="max-w-full shrink-0" />
             </div>
           </div>
 

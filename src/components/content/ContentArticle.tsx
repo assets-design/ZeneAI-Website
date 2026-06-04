@@ -18,11 +18,8 @@ export function ContentArticle({
 }: ContentArticleProps) {
   return (
     <div
-      className={cn('blog-post-content mx-auto w-full min-w-0', className)}
-      style={{
-        maxWidth: 'var(--blog-post-content-max-w)',
-        marginTop,
-      }}
+      className={cn('blog-post-content mx-auto w-full min-w-0 max-w-none', className)}
+      style={{ marginTop }}
     >
       {sections.map((section, index) => (
         <section

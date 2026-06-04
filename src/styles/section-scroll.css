@@ -1366,6 +1366,20 @@ html.section-scroll-active body {
     min-height: 0;
   }
 
+  /* English AI + Code Monkey + The Edge scroll hero — tablet/mobile: top-right Apply Now, no extra slot offset */
+  .homepage-flow .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-hero) .program-hero-body,
+  .homepage-flow .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-hero) .program-hero-body,
+  .homepage-flow .program-page-scroll--the-edge .section-scroll-panel--snap:has(#the-edge-hero) .program-hero-body {
+    --english-ai-hero-padding-top: 0;
+  }
+
+  .homepage-flow .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-hero) .program-hero-top-row .hero-apply-slot,
+  .homepage-flow .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-hero) .program-hero-top-row .hero-apply-slot,
+  .homepage-flow .program-page-scroll--the-edge .section-scroll-panel--snap:has(#the-edge-hero) .program-hero-top-row .hero-apply-slot {
+    margin-top: 0;
+    --hero-apply-offset-top: 0;
+  }
+
   .homepage-flow .product-tab-panel,
   .homepage-flow .action-columns,
   .homepage-flow .action-left-col,
@@ -1636,6 +1650,56 @@ html.section-scroll-active body {
     max-width: 40% !important;
     margin-inline: auto;
   }
+
+  /* English AI + Code Monkey see it in action — tablet: demo left, feature copy right */
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action),
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) {
+    --action-columns-gap: clamp(24px, 3vw, 48px);
+    --action-demo-h: clamp(
+      calc(560px * var(--media-size)),
+      48dvh,
+      calc(480px * var(--media-scale) / var(--header-font-scale))
+    );
+    --english-ai-action-feature-gap: clamp(16px, 2.2dvh, 28px);
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-columns,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-columns {
+    grid-template-columns: minmax(0, 13fr) minmax(0, 7fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    align-items: stretch;
+    column-gap: var(--action-columns-gap);
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-columns > p,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-columns > p {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media {
+    grid-column: 1;
+    grid-row: 2;
+    width: 100% !important;
+    max-width: none !important;
+    margin-inline: 0;
+    align-self: stretch;
+    min-height: var(--action-demo-h, var(--english-ai-action-demo-h)) !important;
+    height: var(--action-demo-h, var(--english-ai-action-demo-h)) !important;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-features-col,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-features-col {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+    height: auto;
+    min-height: 0;
+  }
 }
 
 /* Homepage See it in action — mobile: full-width demo box, same height */
@@ -1644,6 +1708,25 @@ html.section-scroll-active body {
     width: 100% !important;
     max-width: 100% !important;
     margin-inline: 0;
+  }
+
+  /* English AI + Code Monkey see it in action — mobile: shorter demo video box */
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action),
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) {
+    --action-demo-h: min(
+      calc(200px * var(--media-scale) / var(--header-font-scale)),
+      26dvh
+    );
+    --english-ai-action-demo-h: min(
+      calc(200px * var(--media-scale) / var(--header-font-scale)),
+      26dvh
+    );
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media {
+    min-height: var(--action-demo-h, var(--english-ai-action-demo-h)) !important;
+    height: var(--action-demo-h, var(--english-ai-action-demo-h)) !important;
   }
 
   /* Why schools — contain and center GIF inside white card */
@@ -1683,9 +1766,12 @@ html.section-scroll-active body {
   }
 }
 
-/* Homepage how-it-works — tablet & mobile: 80% video boxes, tighter spacing */
+/* Homepage + English AI + Code Monkey + The Edge how-it-works — tablet & mobile: 80% video boxes, tighter spacing */
 @media (max-width: 1279px) {
-  .program-page-scroll--home #how-it-works {
+  .program-page-scroll--home #how-it-works,
+  .program-page-scroll--english-ai #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works {
     --how-padding-top: calc(36px * var(--header-font-scale));
     --how-padding-bottom: calc(12px * var(--header-font-scale));
     --how-columns-gap: calc(28px * var(--header-font-scale));
@@ -1709,38 +1795,62 @@ html.section-scroll-active body {
     );
   }
 
-  .program-page-scroll--home #how-it-works .how-dashboard-media {
+  .program-page-scroll--home #how-it-works .how-dashboard-media,
+  .program-page-scroll--english-ai #how-it-works .how-dashboard-media,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-dashboard-media {
     width: 80% !important;
     max-width: 80% !important;
     height: var(--how-dashboard-video-h) !important;
   }
 
   .program-page-scroll--home #how-it-works .how-lesson-video-wrap,
-  .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill {
+  .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill,
+  .program-page-scroll--english-ai #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--english-ai #how-it-works .how-lesson-img-wrap--fill,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-lesson-img-wrap--fill {
     width: 80% !important;
     max-width: 80% !important;
   }
 
-  .program-page-scroll--home #how-it-works .how-lesson-video-wrap {
+  .program-page-scroll--home #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--english-ai #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-lesson-video-wrap {
     height: var(--how-dashboard-video-h) !important;
     min-height: var(--how-dashboard-video-h) !important;
   }
 
-  .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill {
+  .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill,
+  .program-page-scroll--english-ai #how-it-works .how-lesson-img-wrap--fill,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-lesson-img-wrap--fill {
     min-height: var(--how-lesson-img-h) !important;
   }
 
-  /* How it works — tablet & mobile carousel (homepage only) */
-  .program-page-scroll--home #how-it-works {
+  /* How it works — tablet & mobile carousel (homepage + English AI + Code Monkey + The Edge) */
+  .program-page-scroll--home #how-it-works,
+  .program-page-scroll--english-ai #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works {
     --how-carousel-slide-title-size: calc(28px * var(--type-size));
     --how-carousel-to-dots: calc(20px * var(--header-font-scale));
   }
 
-  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide-wrap {
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide-wrap,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide-wrap,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide-wrap {
     width: 100%;
   }
 
-  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media {
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__media,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__media {
     width: 80% !important;
     max-width: 80% !important;
     height: var(--how-dashboard-video-h) !important;
@@ -1876,20 +1986,26 @@ html.section-scroll-active body {
   }
 }
 
-/* Homepage onboarding — tablet only: criteria cards side by side */
+/* Homepage + English AI + Code Monkey onboarding — tablet only: criteria cards side by side */
 @media (min-width: 640px) and (max-width: 1279px) {
-  .program-page-scroll--home #onboarding {
+  .program-page-scroll--home #onboarding,
+  .program-page-scroll--english-ai #onboarding,
+  .program-page-scroll--code-monkey #onboarding {
     --onboard-columns-gap: calc(24px * var(--header-font-scale));
     --onboard-image-w: 100%;
     --onboard-image-h: auto;
     --onboard-copy-max-w: 100%;
   }
 
-  .program-page-scroll--home #onboarding .onboarding-criteria-grid {
+  .program-page-scroll--home #onboarding .onboarding-criteria-grid,
+  .program-page-scroll--english-ai #onboarding .onboarding-criteria-grid,
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .program-page-scroll--home #onboarding .onboarding-criteria-grid img {
+  .program-page-scroll--home #onboarding .onboarding-criteria-grid img,
+  .program-page-scroll--english-ai #onboarding .onboarding-criteria-grid img,
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-grid img {
     width: 100%;
     height: auto;
     max-height: min(calc(260px * var(--media-size)), 30dvh);
@@ -1951,8 +2067,11 @@ html.section-scroll-active body {
     object-fit: unset;
   }
 
-  /* Apply CTA — tablet about: match home layout (side-by-side circle + student) */
-  .program-page-scroll--about .apply-cta-section--about {
+  /* Apply CTA — tablet about + English AI + Code Monkey + The Edge: match home layout (side-by-side circle + student) */
+  .program-page-scroll--about .apply-cta-section--about,
+  .program-page-scroll--english-ai #apply,
+  .program-page-scroll--code-monkey #apply,
+  .program-page-scroll--the-edge #apply {
     --apply-cta-yellow-size: min(calc(100vw - 96px), calc(620px * var(--header-font-scale)));
     --apply-cta-student-circle-size: calc(260px * var(--media-size));
     --apply-cta-student-face-size: calc(128px * var(--media-size));
@@ -1972,14 +2091,20 @@ html.section-scroll-active body {
     --apply-cta-btn-arrow-gap-right: 0px;
   }
 
-  .program-page-scroll--about .apply-cta-section--about .apply-cta-stage {
+  .program-page-scroll--about .apply-cta-section--about .apply-cta-stage,
+  .program-page-scroll--english-ai #apply .apply-cta-stage,
+  .program-page-scroll--code-monkey #apply .apply-cta-stage,
+  .program-page-scroll--the-edge #apply .apply-cta-stage {
     flex-direction: row;
     justify-content: center;
     align-items: center;
     width: min(100%, var(--apply-cta-stage-w));
   }
 
-  .program-page-scroll--about .apply-cta-section--about .apply-cta-yellow {
+  .program-page-scroll--about .apply-cta-section--about .apply-cta-yellow,
+  .program-page-scroll--english-ai #apply .apply-cta-yellow,
+  .program-page-scroll--code-monkey #apply .apply-cta-yellow,
+  .program-page-scroll--the-edge #apply .apply-cta-yellow {
     width: var(--apply-cta-yellow-size) !important;
     height: var(--apply-cta-yellow-size) !important;
     min-width: var(--apply-cta-yellow-size) !important;
@@ -1991,12 +2116,18 @@ html.section-scroll-active body {
     margin-inline: 0;
   }
 
-  .program-page-scroll--about .apply-cta-section--about .apply-cta-student {
+  .program-page-scroll--about .apply-cta-section--about .apply-cta-student,
+  .program-page-scroll--english-ai #apply .apply-cta-student,
+  .program-page-scroll--code-monkey #apply .apply-cta-student,
+  .program-page-scroll--the-edge #apply .apply-cta-student {
     margin-top: 0 !important;
     margin-left: 0 !important;
   }
 
-  .program-page-scroll--about .apply-cta-section--about .apply-cta-yellow .rotating-split-border {
+  .program-page-scroll--about .apply-cta-section--about .apply-cta-yellow .rotating-split-border,
+  .program-page-scroll--english-ai #apply .apply-cta-yellow .rotating-split-border,
+  .program-page-scroll--code-monkey #apply .apply-cta-yellow .rotating-split-border,
+  .program-page-scroll--the-edge #apply .apply-cta-yellow .rotating-split-border {
     --apply-cta-btn-padding-x: calc(28px * var(--header-font-scale));
     --apply-cta-btn-arrow-gap-right: 0px;
   }
@@ -2010,6 +2141,62 @@ html.section-scroll-active body {
     flex: 0 0 calc((100% - (2 * var(--about-brings-grid-gap-x))) / 3);
     max-width: calc((100% - (2 * var(--about-brings-grid-gap-x))) / 3);
     min-width: 0;
+  }
+
+  /* English AI + Code Monkey feature grid — tablet: 3 cards visible, slide 2 at a time */
+  .program-page-scroll--english-ai .english-ai-feature-tablet-carousel-track,
+  .program-page-scroll--code-monkey .english-ai-feature-tablet-carousel-track {
+    gap: var(--english-ai-grid-gap-x);
+  }
+
+  .program-page-scroll--english-ai .english-ai-feature-tablet-carousel-slide-wrap,
+  .program-page-scroll--code-monkey .english-ai-feature-tablet-carousel-slide-wrap {
+    flex: 0 0 calc((100% - (2 * var(--english-ai-grid-gap-x))) / 3);
+    max-width: calc((100% - (2 * var(--english-ai-grid-gap-x))) / 3);
+    min-width: 0;
+  }
+
+  /* English AI + Code Monkey curriculum — tablet: 3 image boxes in one row */
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-curriculum-heading),
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-curriculum-heading) {
+    --english-ai-curriculum-gap-x: clamp(12px, 2vw, 20px);
+    --english-ai-curriculum-gap-y: clamp(16px, 2dvh, 24px);
+    --english-ai-grid-img-w: 100%;
+    --english-ai-grid-img-h: min(calc(142px * var(--media-size)), 16dvh);
+    --english-ai-grid-img-to-title: clamp(8px, 1dvh, 12px);
+    --english-ai-grid-title-to-body: clamp(4px, 0.5dvh, 6px);
+    --english-ai-curriculum-copy-max-w: 100%;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-curriculum-heading) .english-ai-curriculum-grid,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-curriculum-heading) .english-ai-curriculum-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-curriculum-heading) .english-ai-curriculum-grid article > div,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-curriculum-heading) .english-ai-curriculum-grid article > div {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-curriculum-heading) .english-ai-curriculum-grid article > div img,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-curriculum-heading) .english-ai-curriculum-grid article > div img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+}
+
+/* English AI + Code Monkey + The Edge comparison — mobile only: larger Without/With card text */
+@media (max-width: 639px) {
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-comparison-heading),
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-comparison-heading),
+  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#the-edge-comparison-heading) {
+    --english-ai-comparison-mobile-label-size: calc(18px * var(--type-size));
+    --english-ai-comparison-mobile-body-size: 18px;
+    --section-text-body: 18px;
   }
 }
 
@@ -2139,7 +2326,10 @@ html.section-scroll-active body {
 }
 
 @media (max-width: 639px) {
-  .program-page-scroll--home #how-it-works {
+  .program-page-scroll--home #how-it-works,
+  .program-page-scroll--english-ai #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works {
     --how-padding-top: calc(28px * var(--header-font-scale));
     --how-columns-gap: calc(20px * var(--header-font-scale));
     --how-dashboard-video-w: 100%;
@@ -2154,51 +2344,87 @@ html.section-scroll-active body {
     --how-carousel-to-dots: calc(16px * var(--header-font-scale));
   }
 
-  .program-page-scroll--home #how-it-works .how-dashboard-media {
+  .program-page-scroll--home #how-it-works .how-dashboard-media,
+  .program-page-scroll--english-ai #how-it-works .how-dashboard-media,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-dashboard-media {
     width: 100% !important;
     max-width: 100% !important;
   }
 
   .program-page-scroll--home #how-it-works .how-lesson-video-wrap,
-  .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill {
+  .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill,
+  .program-page-scroll--english-ai #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--english-ai #how-it-works .how-lesson-img-wrap--fill,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-lesson-img-wrap--fill {
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media {
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__media,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__media {
     width: 100% !important;
     max-width: 100% !important;
   }
 
   /* How it works — mobile: contain carousel + copy inside white card */
-  .program-page-scroll--home #how-it-works .how-it-works-card {
+  .program-page-scroll--home #how-it-works .how-it-works-card,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-card,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-card {
     overflow: hidden !important;
   }
 
-  .program-page-scroll--home #how-it-works .how-it-works-grid {
+  .program-page-scroll--home #how-it-works .how-it-works-grid,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-grid,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-grid {
     min-width: 0 !important;
     max-width: 100% !important;
     overflow: hidden !important;
   }
 
   .program-page-scroll--home #how-it-works .how-it-works-left,
-  .program-page-scroll--home #how-it-works .how-it-works-carousel {
+  .program-page-scroll--home #how-it-works .how-it-works-carousel,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-left,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-left,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel {
     min-width: 0 !important;
     max-width: 100% !important;
   }
 
   .program-page-scroll--home #how-it-works .how-it-works-left h2,
-  .program-page-scroll--home #how-it-works .how-it-works-left p {
+  .program-page-scroll--home #how-it-works .how-it-works-left p,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-left h2,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-left p,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-left h2,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-left p {
     max-width: 100%;
     overflow-wrap: anywhere;
   }
 
-  .program-page-scroll--home #how-it-works .how-it-works-carousel-track {
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-track,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-track,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-track {
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide-wrap {
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide-wrap,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide-wrap,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide-wrap {
     flex: 0 0 100% !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -2208,31 +2434,49 @@ html.section-scroll-active body {
 
   .program-page-scroll--home #how-it-works .how-it-works-carousel-slide,
   .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__title,
-  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide p {
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide p,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__title,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide p,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__title,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide p {
     max-width: 100% !important;
     min-width: 0 !important;
   }
 
-  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media video {
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media video,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__media video,
+  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__media video {
     width: 100% !important;
     max-width: 100% !important;
     object-fit: cover;
   }
 
-  /* Onboarding — mobile home: criteria image carousel */
-  .program-page-scroll--home #onboarding {
+  /* Onboarding — mobile home + English AI + Code Monkey: criteria image carousel */
+  .program-page-scroll--home #onboarding,
+  .program-page-scroll--english-ai #onboarding,
+  .program-page-scroll--code-monkey #onboarding {
     --onboard-carousel-title-size: calc(26px * var(--type-size));
     --onboard-carousel-to-dots: calc(16px * var(--header-font-scale));
     --onboard-image-h: min(calc(220px * var(--media-scale) / var(--header-font-scale)), 32dvh);
     --onboard-copy-max-w: 100%;
   }
 
-  .program-page-scroll--home #onboarding .onboarding-criteria-carousel-track {
+  .program-page-scroll--home #onboarding .onboarding-criteria-carousel-track,
+  .program-page-scroll--english-ai #onboarding .onboarding-criteria-carousel-track,
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-carousel-track {
     width: 100% !important;
     max-width: 100% !important;
   }
 
-  .program-page-scroll--home #onboarding .onboarding-criteria-carousel-slide-wrap {
+  .program-page-scroll--home #onboarding .onboarding-criteria-carousel-slide-wrap,
+  .program-page-scroll--english-ai #onboarding .onboarding-criteria-carousel-slide-wrap,
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-carousel-slide-wrap {
     flex: 0 0 100% !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -2241,18 +2485,32 @@ html.section-scroll-active body {
   }
 
   .program-page-scroll--home #onboarding .onboarding-criteria-slide,
-  .program-page-scroll--home #onboarding .onboarding-criteria-slide__media {
+  .program-page-scroll--home #onboarding .onboarding-criteria-slide__media,
+  .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide,
+  .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide__media,
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide,
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide__media {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
   }
 
-  .program-page-scroll--home #onboarding .onboarding-criteria-slide__img {
+  .program-page-scroll--home #onboarding .onboarding-criteria-slide__img,
+  .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide__img,
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide__img {
     width: 100% !important;
     max-width: 100% !important;
     height: var(--onboard-image-h) !important;
-    object-fit: cover;
     object-position: center;
+  }
+
+  .program-page-scroll--home #onboarding .onboarding-criteria-slide__img {
+    object-fit: cover;
+  }
+
+  .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide__img,
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide__img {
+    object-fit: contain;
   }
 
   /* Testimonials — mobile (home + about): one full card per slide */
@@ -2314,9 +2572,12 @@ html.section-scroll-active body {
     padding-right: calc(var(--testimonial-logo-w) * 0.5);
   }
 
-  /* Apply CTA — mobile home + about: true circle, no eyebrow spacing, stacked layout */
+  /* Apply CTA — mobile home + about + English AI + Code Monkey + The Edge: true circle, no eyebrow spacing, stacked layout */
   .program-page-scroll--home #apply,
-  .program-page-scroll--about .apply-cta-section--about {
+  .program-page-scroll--about .apply-cta-section--about,
+  .program-page-scroll--english-ai #apply,
+  .program-page-scroll--code-monkey #apply,
+  .program-page-scroll--the-edge #apply {
     --apply-cta-mobile-circle-size: min(calc(100vw - calc(48px * var(--header-font-scale))), 340px);
     --apply-cta-yellow-size: var(--apply-cta-mobile-circle-size);
     --apply-cta-stage-w: 100%;
@@ -2348,7 +2609,10 @@ html.section-scroll-active body {
   }
 
   .program-page-scroll--home .section-scroll-panel--snap .apply-cta-stage,
-  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-stage {
+  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-stage,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .apply-cta-stage,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .apply-cta-stage,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .apply-cta-stage {
     width: 100% !important;
     max-width: 100% !important;
     max-height: none !important;
@@ -2358,7 +2622,10 @@ html.section-scroll-active body {
   }
 
   .program-page-scroll--home .section-scroll-panel--snap .apply-cta-yellow,
-  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-yellow {
+  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-yellow,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .apply-cta-yellow,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .apply-cta-yellow,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .apply-cta-yellow {
     width: var(--apply-cta-mobile-circle-size) !important;
     height: var(--apply-cta-mobile-circle-size) !important;
     min-width: var(--apply-cta-mobile-circle-size) !important;
@@ -2372,7 +2639,10 @@ html.section-scroll-active body {
   }
 
   .program-page-scroll--home .section-scroll-panel--snap .apply-cta-student,
-  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-student {
+  .program-page-scroll--about .section-scroll-panel--snap .apply-cta-student,
+  .program-page-scroll--english-ai .section-scroll-panel--snap .apply-cta-student,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .apply-cta-student,
+  .program-page-scroll--the-edge .section-scroll-panel--snap .apply-cta-student {
     margin-top: 0 !important;
   }
 

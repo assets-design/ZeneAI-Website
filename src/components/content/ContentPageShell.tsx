@@ -90,11 +90,10 @@ export function ContentPageShell({
 
               {intro ? (
                 <p
-                  className="capitalize font-body font-normal leading-normal text-black"
+                  className="w-full max-w-none capitalize font-body font-normal leading-normal text-black"
                   style={{
                     fontSize: 'var(--section-text-body)',
                     fontVariationSettings: "'opsz' 14",
-                    maxWidth: 'var(--blog-body-max-w)',
                     marginTop: 'var(--blog-heading-to-body)',
                   }}
                 >
