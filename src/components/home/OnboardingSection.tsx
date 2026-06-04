@@ -1,6 +1,7 @@
 import onboardingDevice from '@/assets/figma/english-ai/onboarding-device.png'
 import onboardingGrowth from '@/assets/figma/english-ai/onboarding-growth.png'
 import onboardingClassroom from '@/assets/figma/home/section-8/onboarding-classroom.png'
+import onboardingWhoZene1 from '@/assets/figma/home/section-8/onboarding-who-zene-1.png'
 import { OnboardingCriteriaCarousel } from '@/components/home/OnboardingCriteriaCarousel'
 import { cn } from '@/lib/utils'
 
@@ -73,17 +74,22 @@ function CriterionCard({
 }: (typeof CRITERIA)[number] & { image: string; normalCaseBody?: boolean }) {
   return (
     <article className="flex min-w-0 flex-col items-center text-center" data-node-id={nodeId}>
-      <img
-        src={image}
-        alt=""
-        aria-hidden
-        className="max-w-full object-cover"
+      <div
+        className="onboarding-criteria-card__media flex items-center justify-center overflow-hidden"
         style={{
           width: 'var(--onboard-image-w)',
           height: 'var(--onboard-image-h)',
         }}
         data-node-id={imageNodeId}
-      />
+      >
+        <img
+          src={image}
+          alt=""
+          aria-hidden
+          className="size-full object-contain object-center"
+          draggable={false}
+        />
+      </div>
       <h3
         className="font-heading font-medium uppercase leading-none text-black"
         style={{
@@ -118,6 +124,7 @@ type OnboardingSectionProps = {
 }
 
 const ENGLISH_AI_IMAGES = [onboardingGrowth, onboardingDevice] as const
+const HOME_ONBOARDING_IMAGES = [onboardingWhoZene1, onboardingClassroom] as const
 
 export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) {
   const isEnglishAi = variant === 'english-ai'
@@ -213,7 +220,8 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
             <OnboardingCriteriaCarousel
               className="sm:hidden"
               criteria={criteria}
-              image={onboardingClassroom}
+              images={HOME_ONBOARDING_IMAGES}
+              image={HOME_ONBOARDING_IMAGES[0]}
             />
           ) : isEnglishAi || isCodeMonkey ? (
             <OnboardingCriteriaCarousel
@@ -235,7 +243,13 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
               <CriterionCard
                 key={item.nodeId}
                 {...item}
-                image={isProgramPage ? ENGLISH_AI_IMAGES[index] : onboardingClassroom}
+                image={
+                  isHome
+                    ? HOME_ONBOARDING_IMAGES[index]
+                    : isProgramPage
+                      ? ENGLISH_AI_IMAGES[index]
+                      : onboardingClassroom
+                }
                 normalCaseBody
               />
             ))}

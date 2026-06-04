@@ -211,7 +211,8 @@ export function Header({
         <div
           className={cn(
             'relative w-full',
-            usesSectionScrollRoot && 'absolute left-0 right-0 top-full z-[101]',
+            usesSectionScrollRoot &&
+              'pointer-events-none absolute left-0 right-0 top-full z-[101]',
           )}
         >
         {/* Nav bar — fades out on scroll down, fades in on scroll up */}
@@ -221,6 +222,7 @@ export function Header({
               ? 'transition-opacity duration-300 ease-in-out'
               : 'grid transition-[grid-template-rows,opacity] duration-300 ease-in-out',
             pinNav || navVisible ? 'opacity-100' : 'opacity-0',
+            usesSectionScrollRoot && 'pointer-events-auto',
             usesSectionScrollRoot && !pinNav && !navVisible && 'pointer-events-none',
           )}
           style={

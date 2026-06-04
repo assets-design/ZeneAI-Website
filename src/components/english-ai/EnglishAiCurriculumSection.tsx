@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
+import codeMonkeyAdaptedToSchool from '@/assets/figma/code-monkey/adapted-to-school-1.png'
 import curriculumCefr from '@/assets/figma/english-ai/curriculum-cefr.png'
 import curriculumNcf from '@/assets/figma/english-ai/curriculum-ncf.png'
 import curriculumTextbook from '@/assets/figma/english-ai/curriculum-textbook.png'
@@ -33,7 +34,7 @@ const ITEMS = [
 
 const CODE_MONKEY_ITEMS = [
   {
-    image: curriculumNcf,
+    image: codeMonkeyAdaptedToSchool,
     title: 'Your textbook stays.',
     body: 'We align vocabulary, themes, and reading levels to the book you already use.',
     imageNodeId: '1060:2340',

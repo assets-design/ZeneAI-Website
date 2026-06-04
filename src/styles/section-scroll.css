@@ -670,7 +670,8 @@ html.section-scroll-active body {
   .program-page-scroll--contact .section-scroll-panel--form {
     --contact-hero-padding-top: calc(var(--header-nav-h) + var(--hero-gap));
     --contact-hero-padding-bottom: var(--section-viewport-pad);
-    --contact-form-padding-top: var(--section-viewport-pad);
+    /* Clear the absolutely positioned nav bar so the first form row is clickable */
+    --contact-form-padding-top: calc(var(--header-nav-h) + var(--section-viewport-pad));
     --contact-form-padding-bottom: var(--section-viewport-pad);
     --contact-hero-illustration-h: clamp(220px, 34dvh, calc(414px * var(--media-size)));
   }
@@ -943,6 +944,13 @@ html.section-scroll-active body {
   .program-page-scroll--contact .section-scroll-panel--hero .contact-hero-card,
   .program-page-scroll--contact .section-scroll-panel--form .section-card-shell {
     justify-content: center;
+    overflow: visible;
+  }
+
+  .program-page-scroll--contact .contact-form,
+  .program-page-scroll--contact .contact-searchable-select {
+    position: relative;
+    z-index: 2;
   }
 
   .program-page-scroll--home .section-scroll-panel--snap:has(#product-intro),
@@ -2505,7 +2513,7 @@ html.section-scroll-active body {
   }
 
   .program-page-scroll--home #onboarding .onboarding-criteria-slide__img {
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide__img,

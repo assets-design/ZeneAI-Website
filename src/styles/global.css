@@ -145,6 +145,8 @@
     -webkit-appearance: none;
     appearance        : none;
     overflow          : visible;
+    position          : relative;
+    z-index           : 1;
   }
 
   .contact-form-field::placeholder {
@@ -154,6 +156,22 @@
 
   select.contact-form-field {
     background-color: #fff;
+  }
+
+  .contact-form {
+    pointer-events: auto;
+  }
+
+  .contact-searchable-select__menu {
+    border-radius: 20px;
+  }
+
+  .contact-searchable-select__search {
+    border-radius: 20px;
+  }
+
+  .program-page-scroll--contact .section-scroll-panel--form .section-card-shell {
+    overflow: visible;
   }
 
   /* English AI hero — 58/42 layout, eyebrow + headline + body left, illustration right */
@@ -1694,6 +1712,13 @@
   border-top-right-radius: var(--section-card-radius);
 }
 
+/* Home onboarding — show full illustration in criteria image boxes (no crop) */
+#onboarding .onboarding-criteria-card__media img,
+#onboarding .onboarding-criteria-slide__media img {
+  object-fit: contain;
+  object-position: center;
+}
+
 .blog-post-nav__link {
   text-decoration: none;
   transition: color 0.15s ease;
@@ -1705,6 +1730,9 @@
 
 .blog-post-page .blog-post-header-copy,
 .blog-post-page .blog-post-content,
+.blog-post-page .blog-post-feature-caption,
+.blog-post-page .blog-post-feature-caption h1,
+.blog-post-page .blog-post-feature-caption p,
 .content-page .blog-header-copy,
 .content-page .blog-header > div > p {
   width: 100%;

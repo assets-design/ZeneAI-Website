@@ -31,17 +31,20 @@ function CriterionSlide({
       className="onboarding-criteria-slide flex min-w-0 max-w-full flex-col items-center text-center"
       data-node-id={item.nodeId}
     >
-      <div className="onboarding-criteria-slide__media overflow-hidden">
+      <div
+        className="onboarding-criteria-slide__media flex items-center justify-center overflow-hidden"
+        style={{
+          width: 'var(--onboard-image-w)',
+          height: 'var(--onboard-image-h)',
+        }}
+        data-node-id={item.imageNodeId}
+      >
         <img
           src={image}
           alt=""
           aria-hidden
-          className="onboarding-criteria-slide__img max-w-full object-cover"
-          style={{
-            width: 'var(--onboard-image-w)',
-            height: 'var(--onboard-image-h)',
-          }}
-          data-node-id={item.imageNodeId}
+          className="onboarding-criteria-slide__img size-full max-h-full max-w-full object-contain object-center"
+          draggable={false}
         />
       </div>
       <h3

@@ -126,23 +126,12 @@ export function BlogPostSection({ post }: BlogPostSectionProps) {
                 </Link>
               </p>
 
-              <h1
-                id="blog-post-heading"
-                className="max-w-none font-heading font-medium uppercase leading-none text-black"
-                style={{
-                  fontSize: 'var(--blog-post-title-size)',
-                  marginTop: 'var(--blog-eyebrow-to-heading)',
-                }}
-              >
-                {post.title}
-              </h1>
-
               <p
                 className="capitalize font-body font-normal leading-normal text-black/70"
                 style={{
                   fontSize: 'var(--blog-post-meta-size)',
                   fontVariationSettings: "'opsz' 14",
-                  marginTop: 'var(--blog-post-title-to-meta)',
+                  marginTop: 'var(--blog-eyebrow-to-heading)',
                 }}
               >
                 {post.published} · {post.readTime}
@@ -164,6 +153,30 @@ export function BlogPostSection({ post }: BlogPostSectionProps) {
               className="h-full w-full object-cover"
               style={{ minHeight: 'var(--blog-post-feature-h)' }}
             />
+          </div>
+
+          <div className="blog-post-feature-caption w-full min-w-0 max-w-none">
+            <h1
+              id="blog-post-heading"
+              className="blog-post-card__title w-full max-w-none capitalize font-body font-semibold leading-normal text-black"
+              style={{
+                fontSize: 'var(--blog-card-title-size)',
+                marginTop: 'var(--blog-card-image-to-title)',
+              }}
+            >
+              {post.title}
+            </h1>
+
+            <p
+              className="blog-post-card__description w-full max-w-none capitalize font-body font-normal leading-normal text-black"
+              style={{
+                fontSize: 'var(--blog-card-body-size)',
+                fontVariationSettings: "'opsz' 14",
+                marginTop: 'var(--blog-card-title-to-body)',
+              }}
+            >
+              {post.description}
+            </p>
           </div>
 
           <div

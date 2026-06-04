@@ -1,25 +1,34 @@
-import type { InputHTMLAttributes, SelectHTMLAttributes } from 'react'
+import { useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
-import chevronDown from '@/assets/figma/contact/section-2/chevron-down.svg'
+
+import { ContactSearchableSelect } from '@/components/contact/ContactSearchableSelect'
 import { ContactSpriteIcon } from '@/components/contact/ContactSpriteIcon'
+import {
+  getIndianCityOptions,
+  getIndianStateLabel,
+  INDIAN_STATE_OPTIONS,
+} from '@/data/indiaLocations'
+import { submitContactForm } from '@/lib/submitContactForm'
 import { cn } from '@/lib/utils'
+
+import type { InputHTMLAttributes } from 'react'
 
 type ContactFormSectionProps = {
   panel?: boolean
 }
 
 const FIELD_CLASS =
-  'contact-form-field w-full box-border border border-black/60 bg-white capitalize font-body font-medium text-black outline-none transition-colors focus:border-zene-blue'
+  'contact-form-field w-full box-border border border-black/60 bg-white normal-case font-body font-medium text-black outline-none transition-colors focus:border-zene-blue'
 
 const FIELD_STYLE = {
   minHeight: 'var(--contact-form-field-h)',
   height: 'var(--contact-form-field-h)',
-  lineHeight: 'var(--contact-form-field-line-height)',
+  lineHeight: '1.25',
   borderRadius: 'var(--contact-form-field-radius)',
   paddingLeft: 'var(--contact-form-field-padding-x)',
   paddingRight: 'var(--contact-form-field-padding-x)',
-  paddingTop: 'var(--contact-form-field-padding-y)',
-  paddingBottom: 'var(--contact-form-field-padding-y)',
+  paddingTop: '0.35em',
+  paddingBottom: '0.35em',
   fontSize: 'var(--contact-form-field-text)',
   fontVariationSettings: "'opsz' 14",
 } as const
@@ -31,47 +40,10 @@ function ContactTextField({
 }: InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
-      className={`${FIELD_CLASS} placeholder:text-black/50 ${className ?? ''}`}
+      className={cn(`${FIELD_CLASS} placeholder:text-black/50`, className)}
       style={{ ...FIELD_STYLE, ...style }}
       {...props}
     />
-  )
-}
-
-function ContactSelectField({
-  className,
-  children,
-  style,
-  ...props
-}: SelectHTMLAttributes<HTMLSelectElement>) {
-  return (
-    <div
-      className="relative w-full"
-      style={{ height: 'var(--contact-form-field-h)' }}
-    >
-      <select
-        className={`${FIELD_CLASS} appearance-none pr-[calc(var(--contact-form-field-padding-x)+28px)] ${className ?? ''}`}
-        style={{ ...FIELD_STYLE, ...style }}
-        {...props}
-      >
-        {children}
-      </select>
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 flex items-center"
-        style={{ right: 'var(--contact-form-field-padding-x)' }}
-      >
-        <img
-          src={chevronDown}
-          alt=""
-          className="rotate-90 object-contain opacity-50"
-          style={{
-            width: 'var(--contact-form-chevron-w)',
-            height: 'var(--contact-form-chevron-h)',
-          }}
-        />
-      </span>
-    </div>
   )
 }
 
@@ -124,6 +96,48 @@ const CONTACT_INFO = [
 
 export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
   const navigate = useNavigate()
+  const [schoolName, setSchoolName] = useState('')
+  const [stateIso, setStateIso] = useState('')
+  const [city, setCity] = useState('')
+  const [name, setName] = useState('')
+  const [designation, setDesignation] = useState('')
+  const [phone, setPhone] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const cityOptions = getIndianCityOptions(stateIso)
+
+  const handleStateChange = (nextState: string) => {
+    setStateIso(nextState)
+    setCity('')
+  }
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setError(null)
+    setSubmitting(true)
+
+    try {
+      await submitContactForm({
+        schoolName: schoolName.trim(),
+        state: stateIso,
+        stateLabel: getIndianStateLabel(stateIso),
+        city: city.trim(),
+        name: name.trim(),
+        designation: designation.trim(),
+        phone: phone.trim(),
+      })
+      navigate('/thank-you')
+    } catch (submitError) {
+      setError(
+        submitError instanceof Error
+          ? submitError.message
+          : 'Unable to send your request. Please try again.',
+      )
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   return (
     <section
@@ -135,7 +149,7 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
       data-node-id="1041:1897"
     >
       <div
-        className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
+        className="relative mx-auto w-full overflow-visible section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
         data-node-id="642:2090"
       >
@@ -152,11 +166,9 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
           </h2>
 
           <form
-            className="reveal mx-auto w-full max-w-[var(--contact-form-max-w)]"
-            onSubmit={event => {
-              event.preventDefault()
-              navigate('/thank-you')
-            }}
+            className="contact-form relative z-[2] mx-auto w-full max-w-[var(--contact-form-max-w)]"
+            onSubmit={handleSubmit}
+            noValidate
           >
             <div
               className="grid grid-cols-1 gap-x-[var(--contact-form-col-gap)] gap-y-[var(--contact-form-row-gap)] sm:grid-cols-2 xl:grid-cols-3"
@@ -165,36 +177,46 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
                 name="schoolName"
                 placeholder="School Name"
                 autoComplete="organization"
+                value={schoolName}
+                onChange={event => setSchoolName(event.target.value)}
+                required
                 data-node-id="642:2101"
               />
-              <ContactSelectField name="city" defaultValue="" data-node-id="642:2113">
-                <option value="" disabled>
-                  City
-                </option>
-                <option value="hyderabad">Hyderabad</option>
-                <option value="bengaluru">Bengaluru</option>
-                <option value="mumbai">Mumbai</option>
-                <option value="delhi">Delhi</option>
-              </ContactSelectField>
-              <ContactSelectField name="state" defaultValue="" data-node-id="642:2117">
-                <option value="" disabled>
-                  State
-                </option>
-                <option value="telangana">Telangana</option>
-                <option value="karnataka">Karnataka</option>
-                <option value="maharashtra">Maharashtra</option>
-                <option value="delhi">Delhi</option>
-              </ContactSelectField>
+              <ContactSearchableSelect
+                name="state"
+                placeholder="State"
+                options={INDIAN_STATE_OPTIONS}
+                value={stateIso}
+                onChange={handleStateChange}
+                required
+                data-node-id="642:2117"
+              />
+              <ContactSearchableSelect
+                name="city"
+                placeholder="City"
+                options={cityOptions}
+                value={city}
+                onChange={setCity}
+                disabled={!stateIso}
+                required
+                data-node-id="642:2113"
+              />
               <ContactTextField
                 name="name"
                 placeholder="Name"
                 autoComplete="name"
+                value={name}
+                onChange={event => setName(event.target.value)}
+                required
                 data-node-id="642:2104"
               />
               <ContactTextField
                 name="designation"
                 placeholder="Designation"
                 autoComplete="organization-title"
+                value={designation}
+                onChange={event => setDesignation(event.target.value)}
+                required
                 data-node-id="642:2107"
               />
               <ContactTextField
@@ -202,9 +224,25 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
                 type="tel"
                 placeholder="Phone Number"
                 autoComplete="tel"
+                value={phone}
+                onChange={event => setPhone(event.target.value)}
+                required
                 data-node-id="642:2110"
               />
             </div>
+
+            {error ? (
+              <p
+                className="mt-6 text-center font-body font-medium normal-case text-red-600"
+                style={{
+                  fontSize: 'var(--section-text-body)',
+                  fontVariationSettings: "'opsz' 14",
+                }}
+                role="alert"
+              >
+                {error}
+              </p>
+            ) : null}
 
             <div
               className="flex justify-center"
@@ -212,7 +250,8 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
             >
               <button
                 type="submit"
-                className="w-full max-w-[var(--contact-form-button-w)] bg-gradient-to-b from-zene-cyan to-zene-blue font-heading uppercase leading-none text-black transition-opacity hover:opacity-90"
+                disabled={submitting}
+                className="w-full max-w-[var(--contact-form-button-w)] bg-gradient-to-b from-zene-cyan to-zene-blue font-heading uppercase leading-none text-black transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-70"
                 style={{
                   height: 'var(--contact-form-button-h)',
                   borderRadius: 'var(--contact-form-button-radius)',
@@ -220,7 +259,9 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
                 }}
                 data-node-id="642:2120"
               >
-                <span data-node-id="642:2121">Request a Demo</span>
+                <span data-node-id="642:2121">
+                  {submitting ? 'Sending…' : 'Request a Demo'}
+                </span>
               </button>
             </div>
           </form>
@@ -256,7 +297,7 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
                   {item.lines.map((line, index) => (
                     <p
                       key={item.lineNodeIds[index]}
-                      className={index > 0 ? 'mb-0' : 'mb-0'}
+                      className="mb-0"
                       style={
                         index > 0
                           ? { marginTop: 'var(--contact-info-line-gap)' }
