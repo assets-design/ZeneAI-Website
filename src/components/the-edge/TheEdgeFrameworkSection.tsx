@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { SectionEyebrow } from '@/components/SectionEyebrow'
 import { cn } from '@/lib/utils'
 
+import detailActiveCitizenship from '@/assets/figma/the-edge/framework/detail-active-citizenship.png'
+import detailCommunication from '@/assets/figma/the-edge/framework/detail-communication.png'
+import detailEmployability from '@/assets/figma/the-edge/framework/detail-employability.png'
+import detailLearning from '@/assets/figma/the-edge/framework/detail-learning.png'
 import detailPersonalDev from '@/assets/figma/the-edge/framework/detail-personal-dev.png'
 import ellipseInner from '@/assets/figma/the-edge/framework/ellipse-inner.svg'
 import ellipseOuter from '@/assets/figma/the-edge/framework/ellipse-outer.svg'
@@ -12,10 +16,6 @@ import pillarCriticalThinking from '@/assets/figma/the-edge/framework/pillar-cri
 import pillarFinancialLiteracy from '@/assets/figma/the-edge/framework/pillar-financial-literacy.png'
 import pillarPersonalDev from '@/assets/figma/the-edge/framework/pillar-personal-dev.png'
 import theEdgeHeroLogoOverlay from '@/assets/figma/the-edge/hero-logo-overlay.png'
-import gainCommunication from '@/assets/figma/english-ai/gain-pronunciation.png'
-import gainCriticalThinking from '@/assets/figma/english-ai/gain-reading.png'
-import gainFinancialLiteracy from '@/assets/figma/english-ai/gain-grammar.png'
-import gainCitizenship from '@/assets/figma/english-ai/gain-data.png'
 
 const PILLARS = [
   {
@@ -29,45 +29,51 @@ const PILLARS = [
   },
   {
     id: 'active-citizenship',
-    title: 'Active Citizenship',
-    body: 'Community engagement and civic responsibility measured with documented proof.',
+    title: 'Communication',
+    body: 'Verbal and non-verbal skills, professional writing, conflict resolution.',
     icon: pillarCitizenship,
-    detailImage: gainCitizenship,
+    detailImage: detailCommunication,
     angleDeg: 198,
     nodeId: '1106:2362',
   },
   {
     id: 'communication',
-    title: 'Communication',
-    body: 'Writing, speaking, and active listening developed through structured practice and feedback.',
+    title: 'Active Citizenship',
+    body: 'Respect, civic engagement, ethical decision-making.',
     icon: pillarCommunication,
-    detailImage: gainCommunication,
+    detailImage: detailActiveCitizenship,
     angleDeg: -18,
     nodeId: '1106:2359',
   },
   {
     id: 'critical-thinking',
-    title: 'Critical Thinking',
-    body: 'Problem-solving, analysis, and decision-making assessed through scaffolded growth.',
+    title: 'Learning',
+    body: 'Critical thinking, research, problem-solving, adaptability.',
     icon: pillarCriticalThinking,
-    detailImage: gainCriticalThinking,
+    detailImage: detailLearning,
     angleDeg: 126,
     nodeId: '1108:2365',
   },
   {
     id: 'financial-literacy',
-    title: 'Financial Literacy',
-    body: 'Practical money skills and entrepreneurial thinking built into every module.',
+    title: 'Employability',
+    body: 'Networking, personal brand, interview readiness, career planning.',
     icon: pillarFinancialLiteracy,
-    detailImage: gainFinancialLiteracy,
+    detailImage: detailEmployability,
     angleDeg: 54,
     nodeId: '1108:2368',
   },
 ] as const
 
+/** Clockwise order around the diagram for swipe navigation. */
+const PILLAR_SWIPE_ORDER = [...PILLARS.keys()].sort(
+  (a, b) => PILLARS[a].angleDeg - PILLARS[b].angleDeg,
+)
+
+const SWIPE_THRESHOLD_PX = 48
+
 /** Middle (second) ring radius — dot sits on this stroke (diameter = 56.7%). */
 const RING_RADIUS_PERCENT = 28.35
-/** Outer fill radius (light-blue background, full diagram). */
 const OUTER_FILL_RADIUS_PERCENT = 50
 /** Inset from outer edge so character art does not touch the fill boundary. */
 const OUTER_BAND_INSET_PERCENT = 3.5
@@ -94,25 +100,81 @@ const highlightStyle = {
   paddingRight: 'var(--english-ai-highlight-pad-x)',
 } as const
 
+function stepOrbitIndex(current: number, direction: 1 | -1) {
+  const orderIndex = PILLAR_SWIPE_ORDER.indexOf(current)
+  const nextOrderIndex =
+    (orderIndex + direction + PILLAR_SWIPE_ORDER.length) % PILLAR_SWIPE_ORDER.length
+  return PILLAR_SWIPE_ORDER[nextOrderIndex]
+}
+
 function FrameworkDiagram({
-  activeIndex,
+  selectedIndex,
   onSelect,
 }: {
-  activeIndex: number
+  selectedIndex: number
   onSelect: (index: number) => void
 }) {
-  const [dotAngleDeg, setDotAngleDeg] = useState(PILLARS[0].angleDeg)
+  const [orbitIndex, setOrbitIndex] = useState(selectedIndex)
+  const [dotAngleDeg, setDotAngleDeg] = useState(PILLARS[selectedIndex].angleDeg)
+  const pointerStartXRef = useRef<number | null>(null)
+  const didSwipeRef = useRef(false)
 
   useEffect(() => {
-    const target = PILLARS[activeIndex].angleDeg
+    const target = PILLARS[orbitIndex].angleDeg
     setDotAngleDeg(prev => prev + shortestAngleDelta(prev, target))
-  }, [activeIndex])
+  }, [orbitIndex])
+
+  const handlePointerDown = (clientX: number) => {
+    pointerStartXRef.current = clientX
+    didSwipeRef.current = false
+  }
+
+  const handlePointerEnd = (clientX: number) => {
+    const startX = pointerStartXRef.current
+    pointerStartXRef.current = null
+    if (startX === null) return
+
+    const deltaX = clientX - startX
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD_PX) return
+
+    didSwipeRef.current = true
+    setOrbitIndex(prev => stepOrbitIndex(prev, deltaX < 0 ? 1 : -1))
+  }
+
+  const handlePillarClick = (index: number) => {
+    if (didSwipeRef.current) {
+      didSwipeRef.current = false
+      return
+    }
+
+    setOrbitIndex(index)
+    onSelect(index)
+  }
 
   return (
     <div
       className="the-edge-framework-diagram relative mx-auto aspect-square w-full max-w-[var(--the-edge-framework-diagram-size)]"
       role="tablist"
       aria-label="Five pillars framework"
+      onTouchStart={event => {
+        if (event.touches.length !== 1) return
+        handlePointerDown(event.touches[0].clientX)
+      }}
+      onTouchEnd={event => {
+        if (event.changedTouches.length !== 1) return
+        handlePointerEnd(event.changedTouches[0].clientX)
+      }}
+      onPointerDown={event => {
+        if (event.pointerType === 'touch') return
+        handlePointerDown(event.clientX)
+      }}
+      onPointerUp={event => {
+        if (event.pointerType === 'touch') return
+        handlePointerEnd(event.clientX)
+      }}
+      onPointerCancel={() => {
+        pointerStartXRef.current = null
+      }}
     >
       <img
         src={ellipseOuter}
@@ -156,7 +218,7 @@ function FrameworkDiagram({
       </div>
 
       {PILLARS.map((pillar, index) => {
-        const isActive = activeIndex === index
+        const isOrbitActive = orbitIndex === index
         const position = polarPosition(pillar.angleDeg, ICON_RADIUS_PERCENT)
 
         return (
@@ -164,12 +226,12 @@ function FrameworkDiagram({
             key={pillar.id}
             type="button"
             role="tab"
-            aria-selected={isActive}
+            aria-selected={selectedIndex === index}
             aria-label={pillar.title}
-            onClick={() => onSelect(index)}
+            onClick={() => handlePillarClick(index)}
             className={cn(
               'the-edge-framework-pillar absolute border-0 bg-transparent p-0',
-              isActive && 'the-edge-framework-pillar--active',
+              isOrbitActive && 'the-edge-framework-pillar--active',
             )}
             style={position}
             data-node-id={pillar.nodeId}
@@ -249,10 +311,10 @@ export function TheEdgeFrameworkSection() {
           </p>
 
           <div
-            className="the-edge-framework-content grid min-w-0 items-center gap-x-[var(--the-edge-framework-columns-gap)] gap-y-[var(--the-edge-framework-row-gap)] lg:grid-cols-2"
+            className="the-edge-framework-content grid min-w-0 items-start gap-x-[var(--the-edge-framework-columns-gap)] gap-y-[var(--the-edge-framework-row-gap)] lg:grid-cols-2"
             style={{ marginTop: 'var(--the-edge-framework-subtitle-to-content)' }}
           >
-            <FrameworkDiagram activeIndex={activeIndex} onSelect={setActiveIndex} />
+            <FrameworkDiagram selectedIndex={activeIndex} onSelect={setActiveIndex} />
 
             <article
               className="the-edge-framework-detail min-w-0"
@@ -267,35 +329,36 @@ export function TheEdgeFrameworkSection() {
                   src={activePillar.detailImage}
                   alt=""
                   aria-hidden
-                  className="block size-full object-cover max-sm:h-auto max-sm:w-full max-sm:object-contain"
                 />
               </div>
 
-              <h3
-                id={`the-edge-framework-pillar-${activePillar.id}`}
-                className="font-body font-semibold normal-case leading-normal text-black"
-                style={{
-                  fontSize: 'var(--section-text-body)',
-                  fontVariationSettings: "'opsz' 14",
-                  marginTop: 'var(--the-edge-framework-image-to-title)',
-                }}
-                data-node-id="1110:2371"
-              >
-                {activePillar.title}
-              </h3>
+              <div className="the-edge-framework-detail-copy">
+                <h3
+                  id={`the-edge-framework-pillar-${activePillar.id}`}
+                  className="font-body font-semibold normal-case leading-normal text-black"
+                  style={{
+                    fontSize: 'var(--section-text-body)',
+                    fontVariationSettings: "'opsz' 14",
+                    marginTop: 'var(--the-edge-framework-image-to-title)',
+                  }}
+                  data-node-id="1110:2371"
+                >
+                  {activePillar.title}
+                </h3>
 
-              <p
-                className="normal-case font-body font-normal leading-normal text-black"
-                style={{
-                  fontSize: 'var(--section-text-body)',
-                  fontVariationSettings: "'opsz' 14",
-                  maxWidth: 'var(--the-edge-framework-detail-body-max-w)',
-                  marginTop: 'var(--the-edge-framework-title-to-body)',
-                }}
-                data-node-id="1110:2372"
-              >
-                {activePillar.body}
-              </p>
+                <p
+                  className="normal-case font-body font-normal leading-normal text-black"
+                  style={{
+                    fontSize: 'var(--section-text-body)',
+                    fontVariationSettings: "'opsz' 14",
+                    maxWidth: 'var(--the-edge-framework-detail-body-max-w)',
+                    marginTop: 'var(--the-edge-framework-title-to-body)',
+                  }}
+                  data-node-id="1110:2372"
+                >
+                  {activePillar.body}
+                </p>
+              </div>
             </article>
           </div>
         </div>

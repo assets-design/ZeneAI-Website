@@ -383,8 +383,7 @@ html.section-scroll-active body {
 
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-platform-heading),
   .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-platform-heading) {
-    --english-ai-platform-mockup-w: min(100%, calc(1320px * var(--header-font-scale)));
-    --english-ai-platform-mockup-h: min(calc(720px * var(--header-font-scale)), 58dvh);
+    --english-ai-platform-mockup-w: min(100%, calc(902px * var(--header-font-scale)));
   }
 
   /* English AI gains — fit one viewport: no top clip, footer visible, single-line title */
@@ -1010,15 +1009,31 @@ html.section-scroll-active body {
   .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-features-col {
     height: auto;
     min-height: 0;
-    align-self: start;
+    align-self: stretch;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-inner,
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-columns,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-columns {
+    overflow: visible;
   }
 
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media,
   .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media {
     flex: none;
     min-height: var(--action-demo-h, var(--english-ai-action-demo-h));
-    height: auto;
+    height: 100%;
     align-self: stretch;
+    overflow: visible;
+    padding: 0 6px 6px 6px;
+    box-sizing: border-box;
+  }
+
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media-inner {
+    border-radius: var(--action-demo-radius);
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
   }
 
   .program-page-scroll--home .section-scroll-panel--snap .ai-ready-diagram,
@@ -1074,7 +1089,7 @@ html.section-scroll-active body {
     --faq-icon-h: clamp(58px, 7.2dvh, 82px);
     --faq-icon-gap: clamp(18px, 2.2dvh, 28px);
     --faq-question-size: clamp(22px, 2.8dvh, 32px);
-    --faq-answer-size: clamp(14px, 1.6dvh, 18px);
+    --faq-answer-size: 18px;
   }
 
   .program-page-scroll--home .section-scroll-panel--snap:has(#faqs) .section-faq-list,
@@ -1184,12 +1199,17 @@ html.section-scroll-active body {
   align-items: flex-end;
   justify-content: flex-end;
   margin-bottom: 30px;
+  overflow: visible;
 }
 
-.section-scroll-panel--hero .contact-hero-panel-image img {
-  max-height: var(--contact-hero-illustration-h);
+.section-scroll-panel--hero .contact-hero-panel-image img,
+#contact-hero .contact-hero-gif {
   width: var(--contact-hero-illustration-w);
+  max-width: 100%;
+  height: auto;
+  max-height: var(--contact-hero-illustration-h);
   object-fit: contain;
+  object-position: center bottom;
 }
 
 /* Thank you / 404 — min viewport section, scroll to footer */
@@ -1433,6 +1453,20 @@ html.section-scroll-active body {
   }
 }
 
+/*
+ * iOS Safari — IntersectionObserver often never fires for reveal nodes inside
+ * overflow-hidden section cards, leaving white panels blank after deploy.
+ * Visual layout (sizes/padding/margins) is unchanged; only opacity/transform reset.
+ */
+@supports (-webkit-touch-callout: none) {
+  .section-scroll-root :is(.reveal, .reveal-left, .reveal-right, .reveal-scale),
+  .layout-section-scroll :is(.reveal, .reveal-left, .reveal-right, .reveal-scale) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* Tablet & mobile — normal document scroll (no 100vh panels or snap) */
 @media (max-width: 1279px) {
   html.section-scroll-active,
@@ -1660,6 +1694,13 @@ html.section-scroll-active body {
   }
 
   /* English AI + Code Monkey see it in action — tablet: demo left, feature copy right */
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-inner,
+  .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-columns,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-columns {
+    overflow: visible;
+  }
+
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action),
   .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) {
     --action-columns-gap: clamp(24px, 3vw, 48px);
@@ -1694,7 +1735,10 @@ html.section-scroll-active body {
     margin-inline: 0;
     align-self: stretch;
     min-height: var(--action-demo-h, var(--english-ai-action-demo-h)) !important;
-    height: var(--action-demo-h, var(--english-ai-action-demo-h)) !important;
+    height: 100% !important;
+    overflow: visible;
+    padding: 0 6px 6px 6px !important;
+    box-sizing: border-box;
   }
 
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#see-it-in-action) .action-features-col,
@@ -1735,6 +1779,9 @@ html.section-scroll-active body {
   .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media {
     min-height: var(--action-demo-h, var(--english-ai-action-demo-h)) !important;
     height: var(--action-demo-h, var(--english-ai-action-demo-h)) !important;
+    overflow: visible;
+    padding: 0 6px 6px 6px !important;
+    box-sizing: border-box;
   }
 
   /* Why schools — contain and center GIF inside white card */
@@ -2029,6 +2076,11 @@ html.section-scroll-active body {
   }
 }
 
+/* FAQ page — question size */
+.program-page-scroll--faq {
+  --faq-question-size: 20px;
+}
+
 /* About page — mobile only: unified description size (matches home hero body, 15px) */
 @media (max-width: 639px) {
   .program-page-scroll--about {
@@ -2040,39 +2092,28 @@ html.section-scroll-active body {
     --apply-cta-body-size: var(--english-ai-hero-body-size);
   }
 
-  /* About "The story" — video: inset 10px sides, no black letterbox bars */
-  .program-page-scroll--about .about-why-video {
+  /* About "The story" — animated GIF, natural sizing on white background */
+  .program-page-scroll--about .about-why-gif {
     width: auto !important;
-    max-width: none !important;
+    max-width: min(100%, calc(720px * var(--media-size))) !important;
     margin-inline: 3px;
     height: auto !important;
+    max-height: min(calc(748px * var(--media-size)), 50dvh) !important;
+    object-fit: contain;
+    object-position: center;
     background: transparent !important;
-  }
-
-  .program-page-scroll--about .about-why-video video {
-    display: block;
-    width: 100% !important;
-    height: auto !important;
-    max-height: none;
-    object-fit: unset;
   }
 }
 
-/* About page — tablet only: "The story" video, no black letterbox bars */
+/* About page — tablet only: "The story" GIF */
 @media (min-width: 640px) and (max-width: 1279px) {
-  .program-page-scroll--about .about-why-video {
+  .program-page-scroll--about .about-why-gif {
     width: 100% !important;
     max-width: 100% !important;
+    max-height: calc(500px * var(--media-size)) !important;
     height: auto !important;
+    object-fit: contain;
     background: transparent !important;
-  }
-
-  .program-page-scroll--about .about-why-video video {
-    display: block;
-    width: 100% !important;
-    height: auto !important;
-    max-height: none;
-    object-fit: unset;
   }
 
   /* Apply CTA — tablet about + English AI + Code Monkey + The Edge: match home layout (side-by-side circle + student) */

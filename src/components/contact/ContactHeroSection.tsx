@@ -1,4 +1,4 @@
-import contactHeroIllustration from '@/assets/figma/contact/hero-illustration.png'
+import contactHeroIllustration from '@/assets/figma/contact/hero-illustration.gif'
 import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
 import { cn } from '@/lib/utils'
 
@@ -9,6 +9,7 @@ type ContactHeroSectionProps = {
 export function ContactHeroSection({ panel = false }: ContactHeroSectionProps) {
   return (
     <section
+      id="contact-hero"
       className={cn(
         'w-full px-[5px]',
         panel && 'section-scroll-panel section-scroll-panel--hero',
@@ -96,15 +97,11 @@ export function ContactHeroSection({ panel = false }: ContactHeroSectionProps) {
               <img
                 src={contactHeroIllustration}
                 alt="Student working on a laptop beside a school program form"
-                className="reveal-right h-auto w-full max-w-full object-contain"
-                style={
-                  panel
-                    ? undefined
-                    : {
-                        width: 'var(--contact-hero-illustration-w)',
-                        maxHeight: 'var(--contact-hero-illustration-h)',
-                      }
-                }
+                className="reveal-right section-fit-media contact-hero-gif block h-auto max-w-full object-contain object-bottom"
+                style={{
+                  width: 'var(--contact-hero-illustration-w)',
+                  maxHeight: 'var(--contact-hero-illustration-h)',
+                }}
               />
             </div>
           </div>

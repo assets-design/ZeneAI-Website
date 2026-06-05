@@ -2,6 +2,7 @@ import onboardingDevice from '@/assets/figma/english-ai/onboarding-device.png'
 import onboardingGrowth from '@/assets/figma/english-ai/onboarding-growth.png'
 import onboardingClassroom from '@/assets/figma/home/section-8/onboarding-classroom.png'
 import onboardingWhoZene1 from '@/assets/figma/home/section-8/onboarding-who-zene-1.png'
+import onboardingWhoZene2 from '@/assets/figma/home/section-8/onboarding-who-zene-2.png'
 import { OnboardingCriteriaCarousel } from '@/components/home/OnboardingCriteriaCarousel'
 import { cn } from '@/lib/utils'
 
@@ -124,7 +125,7 @@ type OnboardingSectionProps = {
 }
 
 const ENGLISH_AI_IMAGES = [onboardingGrowth, onboardingDevice] as const
-const HOME_ONBOARDING_IMAGES = [onboardingWhoZene1, onboardingClassroom] as const
+const HOME_ONBOARDING_IMAGES = [onboardingWhoZene1, onboardingWhoZene2] as const
 
 export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) {
   const isEnglishAi = variant === 'english-ai'

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import tabTheEdgeIcon from '@/assets/figma/home/section-2/tab-the-edge.png'
 import { cn } from '@/lib/utils'
 import { TryFreeSessionButton } from '@/components/home/TryFreeSessionButton'
 
@@ -37,8 +38,8 @@ const TABS: {
   {
     id: 'the-edge',
     label: 'The Edges',
-    icon: '/assets/figma/home/section-2/tab-the-edge.png',
-    iconW: 'calc(80px * var(--header-font-scale))',
+    icon: tabTheEdgeIcon,
+    iconW: 'calc(69px * var(--header-font-scale))',
     iconH: 'calc(69px * var(--header-font-scale))',
     width: 'var(--section-tab-edge-w)',
     activeClass: 'bg-zene-pink',

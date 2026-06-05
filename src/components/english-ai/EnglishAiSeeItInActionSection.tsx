@@ -215,22 +215,23 @@ export function EnglishAiSeeItInActionSection({
             </p>
 
             <div
-              className="action-demo-media min-h-0 w-full self-stretch overflow-hidden bg-[#d9d9d9] shadow-[0_0_6px_rgba(0,0,0,0.25)] lg:col-start-1 lg:row-start-2"
+              className="action-demo-media min-h-0 w-full self-stretch lg:col-start-1 lg:row-start-2"
               style={{
                 minHeight: 'var(--action-demo-h, var(--english-ai-action-demo-h))',
-                borderRadius: 'var(--action-demo-radius)',
               }}
               data-node-id="1060:2326"
             >
-              <video
-                src={DEMO_VIDEO}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="size-full object-contain"
-                aria-label="Zene English AI session demo"
-              />
+              <div className="action-demo-media-inner size-full overflow-hidden bg-white">
+                <video
+                  src={DEMO_VIDEO}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="size-full object-cover object-center"
+                  aria-label="Zene English AI session demo"
+                />
+              </div>
             </div>
 
             <div

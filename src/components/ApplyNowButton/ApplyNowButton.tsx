@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { CONTACT_PAGE_PATH } from '@/lib/contact'
 import { StudentFaceCircle } from '@/components/ApplyNowButton/StudentFaceCircle'
 
 type ApplyNowButtonProps = {
@@ -9,7 +10,7 @@ type ApplyNowButtonProps = {
 }
 
 export function ApplyNowButton({
-  href = '#apply',
+  href = CONTACT_PAGE_PATH,
   className,
   onClick,
 }: ApplyNowButtonProps) {

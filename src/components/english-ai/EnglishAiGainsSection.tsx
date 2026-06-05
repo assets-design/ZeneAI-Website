@@ -1,14 +1,25 @@
+import codeMonkeyOutcomes3 from '@/assets/figma/code-monkey/outcomes-3.png'
+import codeMonkeyOutcomesRow1Col1 from '@/assets/figma/code-monkey/outcomes-row1-col1.png'
+import codeMonkeyOutcomesRow1Col2 from '@/assets/figma/code-monkey/outcomes-row1-col2.png'
+import codeMonkeyOutcomesRow2Col1 from '@/assets/figma/code-monkey/outcomes-row2-col1.png'
+import codeMonkeyOutcomesRow2Col2 from '@/assets/figma/code-monkey/outcomes-row2-col2.png'
+import codeMonkeyOutcomesRow2Col3 from '@/assets/figma/code-monkey/outcomes-row2-col3.png'
 import gainData from '@/assets/figma/english-ai/gain-data.png'
+import gainsRow1Col1 from '@/assets/figma/english-ai/gains-row1-col1.png'
+import gainsRow1Col2 from '@/assets/figma/english-ai/gains-row1-col2.png'
+import gainsRow1Col3 from '@/assets/figma/english-ai/gains-row1-col3.png'
+import gainsRow2Col1 from '@/assets/figma/english-ai/gains-row2-col1.png'
+import gainsRow2Col2 from '@/assets/figma/english-ai/gains-row2-col2.png'
+import gainsRow2Col3 from '@/assets/figma/english-ai/gains-row2-col3.png'
 import gainEveryStudent from '@/assets/figma/english-ai/gain-every-student.png'
 import gainGrammar from '@/assets/figma/english-ai/gain-grammar.png'
-import gainHardware from '@/assets/figma/english-ai/gain-hardware.png'
 import gainPronunciation from '@/assets/figma/english-ai/gain-pronunciation.png'
 import gainReading from '@/assets/figma/english-ai/gain-reading.png'
 import { EnglishAiFeatureGridSection } from '@/components/english-ai/EnglishAiFeatureGridSection'
 
 const GAINS = [
   {
-    image: gainEveryStudent,
+    image: gainsRow1Col1,
     title: 'Every student speaks.',
     body: 'The 1-on-1 speaking practice your timetable could never fit.',
     imageNodeId: '1060:2247',
@@ -16,7 +27,7 @@ const GAINS = [
     bodyNodeId: '1060:2262',
   },
   {
-    image: gainPronunciation,
+    image: gainsRow1Col2,
     title: 'Pronunciation, automatically corrected.',
     body: 'What no teacher can mark for 30 students Zene marks for everyone.',
     imageNodeId: '1060:2251',
@@ -24,7 +35,7 @@ const GAINS = [
     bodyNodeId: '1060:2269',
   },
   {
-    image: gainReading,
+    image: gainsRow1Col3,
     title: 'Reading and comprehension, finally measurable.',
     body: 'Fluency, accuracy, and inference scored for every student — not just the ones called on.',
     imageNodeId: '1060:2255',
@@ -32,7 +43,7 @@ const GAINS = [
     bodyNodeId: '1060:2280',
   },
   {
-    image: gainGrammar,
+    image: gainsRow2Col1,
     title: 'Grammar and vocabulary, practiced through play.',
     body: 'Games replace drills. Students return on their own.',
     imageNodeId: '1060:2249',
@@ -40,7 +51,7 @@ const GAINS = [
     bodyNodeId: '1060:2281',
   },
   {
-    image: gainData,
+    image: gainsRow2Col2,
     title: 'Data your principal team can act on.',
     body: 'Class heatmaps, term reports, board-ready PDFs generated automatically.',
     imageNodeId: '1060:2253',
@@ -48,7 +59,7 @@ const GAINS = [
     bodyNodeId: '1060:2297',
   },
   {
-    image: gainHardware,
+    image: gainsRow2Col3,
     title: 'No new hardware. No new room. No disruption.',
     body: 'Runs on the devices your school already owns.',
     imageNodeId: '1060:2257',
@@ -59,7 +70,7 @@ const GAINS = [
 
 const CODE_MONKEY_GAINS = [
   {
-    image: gainEveryStudent,
+    image: codeMonkeyOutcomesRow1Col1,
     title: 'Measurable speaking fluency',
     body: 'Every student speaks for 10+ minutes per session — and you have the recordings.',
     imageNodeId: '1060:2247',
@@ -67,7 +78,7 @@ const CODE_MONKEY_GAINS = [
     bodyNodeId: '1060:2262',
   },
   {
-    image: gainPronunciation,
+    image: codeMonkeyOutcomesRow1Col2,
     title: 'Closed comprehension gaps',
     body: 'Adaptive reading meets each student at their level, then moves them up.',
     imageNodeId: '1060:2251',
@@ -75,7 +86,7 @@ const CODE_MONKEY_GAINS = [
     bodyNodeId: '1060:2269',
   },
   {
-    image: gainReading,
+    image: codeMonkeyOutcomes3,
     title: 'Better written expression',
     body: 'Structured writing practice with AI feedback. Drafts that improve over a term.',
     imageNodeId: '1060:2255',
@@ -83,7 +94,7 @@ const CODE_MONKEY_GAINS = [
     bodyNodeId: '1060:2280',
   },
   {
-    image: gainGrammar,
+    image: codeMonkeyOutcomesRow2Col1,
     title: 'Confidence in English',
     body: 'Low-stakes daily practice means even quiet students start speaking.',
     imageNodeId: '1060:2249',
@@ -91,7 +102,7 @@ const CODE_MONKEY_GAINS = [
     bodyNodeId: '1060:2281',
   },
   {
-    image: gainData,
+    image: codeMonkeyOutcomesRow2Col2,
     title: 'Teacher visibility',
     body: "A live dashboard shows who's struggling, on what, this week.",
     imageNodeId: '1060:2253',
@@ -99,7 +110,7 @@ const CODE_MONKEY_GAINS = [
     bodyNodeId: '1060:2297',
   },
   {
-    image: gainHardware,
+    image: codeMonkeyOutcomesRow2Col3,
     title: 'Board-aligned outcomes',
     body: 'Mapped to CBSE, ICSE, IB, and Cambridge frameworks.',
     imageNodeId: '1060:2257',

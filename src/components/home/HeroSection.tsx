@@ -107,7 +107,7 @@ export function HeroSection() {
           </h1>
 
           <p
-            className="ml-0 normal-case font-body font-medium leading-normal text-black xl:ml-[var(--hero-body-offset-x)]"
+            className="home-hero-description ml-0 normal-case font-body font-medium leading-normal text-black xl:ml-[var(--hero-body-offset-x)]"
             style={{
               fontSize: 'var(--english-ai-hero-body-size)',
               fontVariationSettings: "'opsz' 14",
@@ -118,13 +118,9 @@ export function HeroSection() {
             data-node-id="642:1131"
           >
             Research shows 1-on-1 attention helps students outperform 98% of classroom
-            learners. Zene gives
-            <br />
-            every student that 1-on-1 experience in speaking, reading, grammar, phonics,
-            vocabulary,
-            <br />
-            comprehension, live conversation, and more graded by AI, supervised by your
-            teachers.
+            learners. Zene gives every student that 1-on-1 experience in speaking, reading,
+            grammar, phonics, vocabulary, comprehension, live conversation, and more graded
+            by AI, supervised by your teachers.
           </p>
 
           <HeroBadgesCarousel badges={TRUST_BADGES} />

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { StudentFaceCircle } from '@/components/ApplyNowButton/StudentFaceCircle'
-import { SectionEyebrow } from '@/components/SectionEyebrow'
 import { StartApplicationButton } from '@/components/home/StartApplicationButton'
 import { cn } from '@/lib/utils'
 
@@ -81,35 +80,13 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
               }}
               data-node-id={isAbout ? '642:1355' : isTheEdge ? '1134:3548' : '975:1977'}
             >
-              <SectionEyebrow
-                className={cn(
-                  'mx-auto',
-                  (variant === 'home' || variant === 'about') && 'max-sm:hidden',
-                )}
-                style={{ marginTop: 0 }}
-              >
-                {isAbout
-                  ? 'Partner with us'
-                  : isTheEdge
-                    ? 'Apply now'
-                    : isCodeMonkey
-                      ? 'Join the cohort'
-                      : 'Apply now'}
-              </SectionEyebrow>
-
               <h2
                 id={headingId}
                 style={{
                   fontSize: 'var(--apply-cta-heading-size)',
                   maxWidth: 'var(--apply-cta-heading-max-w)',
-                  ...(variant !== 'home' &&
-                    variant !== 'about' && { marginTop: 'var(--section-eyebrow-to-heading)' }),
                 }}
-                className={cn(
-                  'mx-auto font-heading font-medium uppercase leading-none text-black',
-                  (variant === 'home' || variant === 'about') &&
-                    'mt-0 sm:mt-[var(--section-eyebrow-to-heading)]',
-                )}
+                className="mx-auto mt-0 font-heading font-medium uppercase leading-none text-black"
                 data-node-id={isAbout ? '642:1357' : isTheEdge ? '1134:3549' : '975:1978'}
               >
                 {isAbout ? (
@@ -153,7 +130,6 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
 
               <div style={{ marginTop: 'var(--apply-cta-body-to-btn)' }}>
                 <StartApplicationButton
-                  href={isAbout ? '/contact' : '#apply'}
                   label={isAbout ? 'Apply to the AI 2026–27' : undefined}
                   onMouseEnter={() => setButtonHover(true)}
                   onMouseLeave={() => setButtonHover(false)}

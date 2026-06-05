@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import imgBaseline from '@/assets/figma/the-edge/multi-rater/baseline-assessments.png'
-import imgCapstone from '@/assets/figma/the-edge/multi-rater/capstone-projects.png'
-import imgMultiRater from '@/assets/figma/the-edge/multi-rater/multi-rater-verification.png'
-import imgScaffolded from '@/assets/figma/the-edge/multi-rater/scaffolded-growth.png'
+import imgBaseline from '@/assets/figma/the-edge/multi-rater/beyond-personality-1.png'
+import imgCapstone from '@/assets/figma/the-edge/multi-rater/beyond-personality-4.png'
+import imgMultiRater from '@/assets/figma/the-edge/multi-rater/beyond-personality-3.png'
+import imgScaffolded from '@/assets/figma/the-edge/multi-rater/beyond-personality-2.png'
 import { cn } from '@/lib/utils'
 
 const FEATURES = [

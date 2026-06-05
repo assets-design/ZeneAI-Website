@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { CONTACT_PAGE_PATH } from '@/lib/contact'
 import arrowRight from '@/assets/figma/home/section-12/arrow-right.svg'
 
 type StartApplicationButtonProps = {
@@ -10,7 +11,7 @@ type StartApplicationButtonProps = {
 }
 
 export function StartApplicationButton({
-  href = '#apply',
+  href = CONTACT_PAGE_PATH,
   className,
   label = 'Start application',
   onMouseEnter,

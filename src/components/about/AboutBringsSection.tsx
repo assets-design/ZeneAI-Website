@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import feature1 from '@/assets/figma/about/section-3/feature-1.png'
-import feature2 from '@/assets/figma/about/section-3/feature-2.png'
-import feature3 from '@/assets/figma/about/section-3/feature-3.png'
-import feature4 from '@/assets/figma/about/section-3/feature-4.png'
+import threePrograms1 from '@/assets/figma/about/section-3/three-programs-1.png'
+import principles1 from '@/assets/figma/about/section-3/principles-1.png'
+import principles2 from '@/assets/figma/about/section-3/principles-2.png'
+import principles3 from '@/assets/figma/about/section-3/principles-3.png'
+import principles4 from '@/assets/figma/about/section-3/principles-4.png'
+import threePrograms2 from '@/assets/figma/about/section-3/three-programs-2.png'
+import threePrograms3 from '@/assets/figma/about/section-3/three-programs-3.png'
 import { cn } from '@/lib/utils'
 
 type AboutBringsFeature = {
@@ -19,7 +22,7 @@ type AboutBringsFeature = {
 
 export const ABOUT_BRINGS_FEATURES: AboutBringsFeature[] = [
   {
-    image: feature1,
+    image: threePrograms1,
     title: 'AI English Speaking Lab',
     description: 'Daily speaking practice for every student. Graded by AI.',
     imageNodeId: '1047:2039',
@@ -29,7 +32,7 @@ export const ABOUT_BRINGS_FEATURES: AboutBringsFeature[] = [
     stagger: false,
   },
   {
-    image: feature2,
+    image: threePrograms2,
     title: 'Code Monkey',
     description:
       "The world's most loved K–12 coding program. 18,000+ schools globally.",
@@ -40,7 +43,7 @@ export const ABOUT_BRINGS_FEATURES: AboutBringsFeature[] = [
     stagger: true,
   },
   {
-    image: feature3,
+    image: threePrograms3,
     title: 'The Edge',
     description:
       'A Grade 6–12 life-readiness program. Every student leaves with a leadership profile.',
@@ -55,7 +58,7 @@ export const ABOUT_BRINGS_FEATURES: AboutBringsFeature[] = [
 /** Four principles — about page section 4. */
 export const ABOUT_BRINGS_PRINCIPLES_FEATURES: AboutBringsFeature[] = [
   {
-    image: feature1,
+    image: principles1,
     titleLines: ['Every student deserves', '1-on-1 attention.'],
     description: 'Not just the top performers. Every student.',
     imageNodeId: '1047:2039',
@@ -65,7 +68,7 @@ export const ABOUT_BRINGS_PRINCIPLES_FEATURES: AboutBringsFeature[] = [
     stagger: false,
   },
   {
-    image: feature2,
+    image: principles2,
     titleLines: ['Teachers need leverage,', 'not replacement.'],
     description: 'Our job is to make every teacher more effective.',
     imageNodeId: '1047:2045',
@@ -75,7 +78,7 @@ export const ABOUT_BRINGS_PRINCIPLES_FEATURES: AboutBringsFeature[] = [
     stagger: true,
   },
   {
-    image: feature3,
+    image: principles3,
     titleLines: ['Outcomes are measured,', "or they don't exist."],
     description: 'Every Zene program ends in a downloadable report.',
     imageNodeId: '1047:2048',
@@ -85,7 +88,7 @@ export const ABOUT_BRINGS_PRINCIPLES_FEATURES: AboutBringsFeature[] = [
     stagger: false,
   },
   {
-    image: feature4,
+    image: principles4,
     titleLines: ['Schools are partners,', 'not customers.'],
     description: "We don't sell. We work with you.",
     imageNodeId: '1047:2042',

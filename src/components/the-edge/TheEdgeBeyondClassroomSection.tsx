@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import classroomIllustration from '@/assets/figma/the-edge/beyond-classroom/classroom-illustration.png'
+import beyondClassroom1 from '@/assets/figma/the-edge/beyond-classroom/beyond-classroom-1.png'
+import beyondClassroom2 from '@/assets/figma/the-edge/beyond-classroom/beyond-classroom-2.png'
 import { cn } from '@/lib/utils'
 
 const TRACKS = [
   {
+    image: beyondClassroom1,
     title: 'Entrepreneurship track',
     body: 'Students design and pitch a real venture. Market research, business model, prototype, presentation.',
     imageNodeId: '1126:2476',
@@ -12,6 +14,7 @@ const TRACKS = [
     bodyNodeId: '1126:2475',
   },
   {
+    image: beyondClassroom2,
     title: 'Internship track',
     body: 'Students complete a structured internship challenge. Real problem. Real deliverable.',
     imageNodeId: '1126:2479',
@@ -27,6 +30,7 @@ const highlightStyle = {
 } as const
 
 function TrackCard({
+  image,
   title,
   body,
   imageNodeId,
@@ -37,10 +41,10 @@ function TrackCard({
     <article className="the-edge-beyond-track flex min-w-0 flex-col items-center text-center">
       <div className="the-edge-beyond-track-image overflow-hidden" data-node-id={imageNodeId}>
         <img
-          src={classroomIllustration}
+          src={image}
           alt=""
           aria-hidden
-          className="size-full object-cover"
+          className="size-full object-contain"
           draggable={false}
         />
       </div>

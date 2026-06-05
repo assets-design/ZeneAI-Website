@@ -450,7 +450,8 @@
   --contact-form-info-gap           : calc(160px * var(--header-font-scale));
   --contact-info-gap                : calc(48px * var(--header-font-scale));
   --contact-info-icon-gap           : calc(24px * var(--header-font-scale));
-  --contact-info-text-size          : calc(28px * var(--type-size));
+  --contact-info-text-size          : 18px;
+  --contact-info-text-weight        : 500;
   --contact-info-text-offset-y      : calc(28px * var(--type-size));
   --contact-info-line-gap           : calc(21px * var(--header-font-scale));
   --contact-info-phone-icon-w       : calc(138px * var(--media-size));
@@ -1005,7 +1006,7 @@
     --cohort-padding-bottom           : calc(80px * var(--header-font-scale));
 
     --contact-hero-min-h            : auto;
-    --contact-hero-padding-top      : calc(var(--header-nav-h) + var(--hero-gap));
+    --contact-hero-padding-top      : 20px;
     --contact-hero-padding-bottom   : 56px;
     --contact-hero-apply-to-image-gap: 80px;
     --contact-hero-title-to-subtitle: calc(32px * var(--type-size));
@@ -1025,7 +1026,8 @@
     --contact-form-button-h         : calc(72px * var(--header-font-scale));
     --contact-form-button-text      : calc(32px * var(--type-size));
     --contact-form-info-gap         : calc(80px * var(--header-font-scale));
-    --contact-info-text-size        : calc(22px * var(--type-size));
+    --contact-info-text-size        : 16px;
+    --contact-info-text-weight      : 500;
     --contact-info-text-offset-y    : calc(16px * var(--type-size));
     --contact-info-phone-icon-w     : calc(110px * var(--media-size));
     --contact-info-phone-icon-h     : calc(114px * var(--media-size));
@@ -1042,6 +1044,7 @@
   :root {
     --section-text-body         : 16px;
     --english-ai-hero-body-size : 16px;
+    --contact-info-text-size    : 16px;
   }
 }
 
@@ -1058,7 +1061,7 @@
     --header-logo-h               : calc(29px * var(--media-size));
     --header-pdf-h                : calc(44px * var(--header-font-scale));
     --header-pdf-min-w            : calc(120px * var(--header-font-scale));
-    --header-text-announcement    : calc(14px * var(--type-size));
+    --header-text-announcement    : calc(18px * var(--type-size));
     --header-text-pdf             : calc(20px * var(--type-size));
     --header-text-menu            : calc(24px * var(--type-size));
     --header-menu-text            : calc(32px * var(--type-size));
@@ -1363,7 +1366,7 @@
     --cohort-padding-bottom           : calc(64px * var(--header-font-scale));
 
     --contact-hero-min-h            : auto;
-    --contact-hero-padding-top      : calc(var(--header-nav-h) + var(--hero-gap));
+    --contact-hero-padding-top      : 23px;
     --contact-hero-padding-bottom   : 48px;
     --contact-hero-apply-to-image-gap: 48px;
     --contact-hero-title-to-subtitle: calc(20px * var(--type-size));
@@ -1387,7 +1390,8 @@
     --contact-form-info-gap         : calc(48px * var(--header-font-scale));
     --contact-info-gap                : calc(32px * var(--header-font-scale));
     --contact-info-icon-gap           : calc(16px * var(--header-font-scale));
-    --contact-info-text-size        : calc(16px * var(--type-size));
+    --contact-info-text-size        : 15px;
+    --contact-info-text-weight      : 500;
     --contact-info-text-offset-y    : calc(8px * var(--type-size));
     --contact-info-line-gap           : calc(12px * var(--header-font-scale));
     --contact-info-phone-icon-w     : calc(80px * var(--media-size));

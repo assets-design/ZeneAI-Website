@@ -174,6 +174,29 @@
     overflow: visible;
   }
 
+  /* Contact footer info — DM Sans opsz 14 was shrinking text; use explicit sizes */
+  .program-page-scroll--contact .contact-info-text,
+  .program-page-scroll--contact .contact-info-link {
+    font-size: var(--contact-info-text-size) !important;
+    font-weight: var(--contact-info-text-weight) !important;
+    font-variation-settings: 'opsz' 20;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 1023px) {
+    .program-page-scroll--contact .contact-info-text,
+    .program-page-scroll--contact .contact-info-link {
+      font-variation-settings: 'opsz' 24;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .program-page-scroll--contact .contact-info-text,
+    .program-page-scroll--contact .contact-info-link {
+      font-variation-settings: 'opsz' 20;
+    }
+  }
+
   /* English AI hero — 58/42 layout, eyebrow + headline + body left, illustration right */
   .program-hero--english-ai {
     --english-ai-hero-eyebrow-to-heading: calc(20px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
@@ -219,16 +242,19 @@
     --the-edge-framework-ring-radius: 28.35cqw;
     --the-edge-framework-pillar-size: calc(168px * var(--media-size));
     --the-edge-framework-pillar-visual-scale: 0.95;
+    --the-edge-framework-detail-image-w: calc(387px * var(--media-size));
     --the-edge-framework-detail-image-h: calc(258px * var(--media-size));
     --the-edge-framework-detail-image-radius: calc(12px * var(--media-size));
     --the-edge-framework-image-to-title: calc(30px * var(--media-size));
     --the-edge-framework-title-to-body: calc(14px * var(--media-size));
     --the-edge-framework-detail-body-max-w: calc(625px * var(--media-size));
+    --the-edge-framework-detail-copy-min-h: calc(118px * var(--media-size));
     --the-edge-framework-indicator-size: calc(10px * var(--media-size));
   }
 
   .the-edge-framework-diagram {
     container-type: size;
+    touch-action: pan-y;
   }
 
   .the-edge-framework-ring {
@@ -301,11 +327,24 @@
   }
 
   .the-edge-framework-detail-image {
-    width: 100%;
-    max-width: calc(387px * var(--media-size));
+    flex-shrink: 0;
+    width: var(--the-edge-framework-detail-image-w);
+    max-width: 100%;
     height: var(--the-edge-framework-detail-image-h);
     border-radius: var(--the-edge-framework-detail-image-radius);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+  }
+
+  .the-edge-framework-detail-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .the-edge-framework-detail-copy {
+    min-height: var(--the-edge-framework-detail-copy-min-h);
   }
 
   @media (max-width: 1279px) {
@@ -323,7 +362,9 @@
       --the-edge-framework-diagram-size: min(100%, calc(380px * var(--media-size)));
       --the-edge-framework-pillar-size: calc(108px * var(--media-size));
       --the-edge-framework-pillar-visual-scale: 0.9;
+      --the-edge-framework-detail-image-w: min(100%, calc(387px * var(--media-size)));
       --the-edge-framework-detail-image-h: calc(200px * var(--media-size));
+      --the-edge-framework-detail-copy-min-h: calc(104px * var(--media-size));
     }
 
     .the-edge-framework-detail {
@@ -332,13 +373,6 @@
 
     .the-edge-framework-detail-image {
       margin-inline: auto;
-      height: auto;
-    }
-
-    .the-edge-framework-detail-image img {
-      height: auto;
-      object-fit: contain;
-      object-position: center;
     }
 
     .the-edge-framework-detail h3,
@@ -374,26 +408,6 @@
 
   .program-hero--code-monkey {
     --code-monkey-hero-eyebrow-to-heading: calc(20px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
-  }
-
-  /* English AI platform section — larger device mockup on the right */
-  .program-platform--english-ai {
-    --english-ai-platform-mockup-w: min(100%, calc(1320px * var(--header-font-scale)));
-    --english-ai-platform-mockup-h: calc(720px * var(--header-font-scale));
-  }
-
-  @media (max-width: 1279px) {
-    .program-platform--english-ai {
-      --english-ai-platform-mockup-w: 100%;
-      --english-ai-platform-mockup-h: calc(540px * var(--header-font-scale));
-    }
-  }
-
-  @media (max-width: 639px) {
-    .program-platform--english-ai {
-      --english-ai-platform-mockup-w: 100%;
-      --english-ai-platform-mockup-h: calc(380px * var(--header-font-scale));
-    }
   }
 
   /* The Edge platform section — device mockup from Figma Group 539 */
@@ -934,6 +948,18 @@
   display: block;
 }
 
+#home-hero .home-hero-description {
+  text-wrap: pretty;
+}
+
+/* MacBook / small laptop — avoid orphan line breaks in hero description */
+@media (min-width: 1280px) and (max-width: 1536px) {
+  #home-hero .home-hero-description {
+    --hero-body-offset-x: calc(240px * var(--header-font-scale));
+    max-width: min(var(--hero-body-max-w), calc(100% - var(--hero-body-offset-x)));
+  }
+}
+
 .hero-card-inner {
   padding-top: var(--hero-inner-padding-top, var(--hero-gap));
 }
@@ -958,6 +984,38 @@
 
 .contact-hero-top-row .hero-apply-slot > .apply-now-btn {
   margin-top: 10px;
+}
+
+/* Contact page hero — tablet & mobile: 20px top padding, no extra Apply Now offset (desktop unchanged) */
+@media (max-width: 1279px) {
+  .program-page-scroll--contact .section-scroll-panel--hero {
+    --contact-hero-padding-top: 20px;
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-inner {
+    --contact-hero-padding-top: 20px;
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row,
+  .homepage-flow .program-page-scroll--contact #contact-hero .contact-hero-top-row {
+    margin-top: 0;
+    min-height: 0;
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row .hero-apply-slot {
+    margin-top: 0;
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row .hero-apply-slot > .apply-now-btn {
+    margin-top: 0;
+  }
+}
+
+/* Contact page hero — tablet only: inset Apply Now 40px from the right */
+@media (min-width: 640px) and (max-width: 1279px) {
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row .hero-apply-slot {
+    margin-right: 40px;
+  }
 }
 
 /* Pull left copy up — transform keeps Apply Now + illustration unchanged */
@@ -1282,6 +1340,67 @@
   }
 }
 
+/* Contact page hero — mobile only: full Apply Now pill, text inside border */
+@media (max-width: 639px) {
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row,
+  .homepage-flow .program-page-scroll--contact #contact-hero .contact-hero-top-row {
+    margin-top: 0;
+    min-height: 0;
+    align-items: flex-start;
+    justify-content: flex-end;
+    overflow: visible;
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row .hero-apply-slot {
+    --apply-btn-w: calc(200px * var(--header-font-scale));
+    --apply-btn-h: calc(72px * var(--header-font-scale));
+    --apply-btn-circle-size: calc(72px * var(--header-font-scale));
+    --apply-btn-pill-h: calc(44px * var(--header-font-scale));
+    --apply-btn-pill-top: calc(14px * var(--header-font-scale));
+    --apply-btn-pill-radius: calc(50px * var(--header-font-scale));
+    --apply-btn-circle-left: calc(var(--apply-btn-w) - var(--apply-btn-circle-size));
+    --apply-btn-pill-w: calc(
+      var(--apply-btn-circle-left) + 60px * var(--header-font-scale)
+    );
+    --apply-btn-text-zone-w: var(--apply-btn-circle-left);
+    flex: none;
+    min-width: var(--apply-btn-w);
+    width: var(--apply-btn-w);
+    max-width: none;
+    overflow: visible;
+    margin-top: 0;
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row .hero-apply-slot > .apply-now-btn {
+    overflow: hidden;
+    width: var(--apply-btn-w) !important;
+    max-width: none;
+    margin-top: 0;
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row .hero-apply-slot > .apply-now-btn > span:first-of-type {
+    width: var(--apply-btn-pill-w) !important;
+    max-width: var(--apply-btn-pill-w);
+    z-index: 1;
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row .hero-apply-slot > .apply-now-btn > span:first-of-type .rotating-split-border {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: var(--apply-btn-pill-radius);
+    border-bottom-left-radius: var(--apply-btn-pill-radius);
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row .hero-apply-slot > .apply-now-btn > span:first-of-type > span:last-of-type {
+    width: var(--apply-btn-text-zone-w);
+    max-width: var(--apply-btn-circle-left);
+  }
+
+  .program-page-scroll--contact #contact-hero .contact-hero-top-row .hero-apply-slot > .apply-now-btn > span.rounded-full {
+    z-index: 3;
+  }
+}
+
 /* English AI + Code Monkey + The Edge hero — mobile only: full Apply Now pill + tighter illustration spacing */
 @media (max-width: 639px) {
   #english-ai-hero,
@@ -1420,14 +1539,25 @@
   }
 
   #english-ai-hero .english-ai-hero-gif,
-  #code-monkey-hero .english-ai-hero-gif {
+  #code-monkey-hero .english-ai-hero-gif,
+  #contact-hero .contact-hero-gif {
     width: 100% !important;
     max-width: 100% !important;
-    max-height: var(--english-ai-hero-illustration-h) !important;
+    max-height: var(--contact-hero-illustration-h, var(--english-ai-hero-illustration-h)) !important;
     height: auto !important;
-    margin-top: var(--english-ai-hero-illustration-margin-top) !important;
     object-fit: contain;
     object-position: center bottom;
+  }
+
+  #english-ai-hero .english-ai-hero-gif,
+  #code-monkey-hero .english-ai-hero-gif {
+    max-height: var(--english-ai-hero-illustration-h) !important;
+    margin-top: var(--english-ai-hero-illustration-margin-top) !important;
+  }
+
+  #contact-hero .contact-hero-gif {
+    max-height: var(--contact-hero-illustration-h) !important;
+    margin-top: 0 !important;
   }
 
   #the-edge-hero .the-edge-hero-illustration {
@@ -1444,42 +1574,44 @@
   }
 }
 
-/* English AI platform — tablet only: copy left, mockup right + larger tagline */
+/* English AI + Code Monkey platform — tablet only: copy left, mockup right + larger tagline */
 @media (min-width: 640px) and (max-width: 1279px) {
-  .program-page-scroll--english-ai .program-platform--english-ai {
+  .program-page-scroll--english-ai .program-platform--english-ai,
+  .program-page-scroll--code-monkey .program-platform--english-ai {
     --english-ai-platform-columns-gap: calc(24px * var(--header-font-scale));
-    --english-ai-platform-mockup-w: min(100%, calc(360px * var(--header-font-scale)));
-    --english-ai-platform-mockup-h: calc(320px * var(--header-font-scale));
   }
 
-  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-grid {
+  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-grid,
+  .program-page-scroll--code-monkey .program-platform--english-ai .english-ai-platform-grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 42%);
     column-gap: var(--english-ai-platform-columns-gap);
   }
 
-  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-copy {
+  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-copy,
+  .program-page-scroll--code-monkey .program-platform--english-ai .english-ai-platform-copy {
     grid-column: 1;
     grid-row: 1;
   }
 
-  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-tagline {
-    grid-column: 1;
-    grid-row: 2;
+  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-tagline,
+  .program-page-scroll--code-monkey .program-platform--english-ai .english-ai-platform-tagline {
     font-size: calc(var(--english-ai-platform-tagline-size) + 2px) !important;
   }
 
-  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-mockup {
+  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-mockup,
+  .program-page-scroll--code-monkey .program-platform--english-ai .english-ai-platform-mockup {
     grid-column: 2;
-    grid-row: 1 / span 2;
+    grid-row: 1;
     justify-self: end;
     align-self: center;
     margin-inline: 0;
   }
 }
 
-/* English AI platform — mobile only: larger tagline */
+/* English AI + Code Monkey platform — mobile only: larger tagline */
 @media (max-width: 639px) {
-  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-tagline {
+  .program-page-scroll--english-ai .program-platform--english-ai .english-ai-platform-tagline,
+  .program-page-scroll--code-monkey .program-platform--english-ai .english-ai-platform-tagline {
     font-size: calc(var(--english-ai-platform-tagline-size) + 2px) !important;
   }
 }

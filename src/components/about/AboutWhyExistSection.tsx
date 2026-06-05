@@ -1,4 +1,4 @@
-const ABOUT_WHY_VIDEO = '/assets/figma/home/section-5/monitor-learning-progress.mp4'
+import aboutStoryIllustration from '@/assets/figma/about/story-illustration.gif'
 
 export function AboutWhyExistSection() {
   return (
@@ -96,24 +96,15 @@ export function AboutWhyExistSection() {
             className="flex w-full min-w-0 items-center justify-center"
             data-node-id="1047:2071"
           >
-            <div
-              className="about-why-video flex w-full items-center justify-center overflow-hidden bg-black shadow-[0_0_6px_rgba(0,0,0,0.25)]"
+            <img
+              src={aboutStoryIllustration}
+              alt="Students collaborating with the Zene AI robot at a learning table"
+              className="about-why-gif block h-auto max-w-full object-contain"
               style={{
-                maxWidth: 'var(--about-why-video-w)',
-                height: 'var(--about-why-video-h)',
-                borderRadius: 'var(--about-why-video-radius)',
+                width: 'var(--about-why-video-w)',
+                maxHeight: 'var(--about-why-video-h)',
               }}
-            >
-              <video
-                src={ABOUT_WHY_VIDEO}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="size-full object-contain object-center"
-                aria-label="Zene AI classroom learning in action"
-              />
-            </div>
+            />
           </div>
         </div>
       </div>

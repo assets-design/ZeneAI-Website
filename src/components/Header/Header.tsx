@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useSectionScroll } from '@/contexts/SectionScrollContext'
 import { isSectionScrollDesktopViewport } from '@/hooks/useSectionScrollDesktop'
+import { CONTACT_PAGE_PATH } from '@/lib/contact'
 import { cn } from '@/lib/utils'
 
 const NAV_LINKS = [
@@ -198,7 +199,7 @@ export function Header({
           >
             Applications open for the AY 2026–27 Cohort. Limited spots remaining{' '}
             <a
-              href="#apply"
+              href={CONTACT_PAGE_PATH}
               className="text-zene-blue underline decoration-solid underline-offset-2 hover:opacity-80"
             >
               Apply now →

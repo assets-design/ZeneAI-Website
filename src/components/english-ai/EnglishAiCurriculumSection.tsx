@@ -1,13 +1,18 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { cn } from '@/lib/utils'
 import codeMonkeyAdaptedToSchool from '@/assets/figma/code-monkey/adapted-to-school-1.png'
+import codeMonkeyAdaptedToSchool2 from '@/assets/figma/code-monkey/adapted-to-school-2.png'
+import codeMonkeyAdaptedToSchool3 from '@/assets/figma/code-monkey/adapted-to-school-3.png'
 import curriculumCefr from '@/assets/figma/english-ai/curriculum-cefr.png'
 import curriculumNcf from '@/assets/figma/english-ai/curriculum-ncf.png'
 import curriculumTextbook from '@/assets/figma/english-ai/curriculum-textbook.png'
+import mappedToSchool1 from '@/assets/figma/english-ai/mapped-to-school-1.png'
+import mappedToSchool2 from '@/assets/figma/english-ai/mapped-to-school-2.png'
+import mappedToSchool3 from '@/assets/figma/english-ai/mapped-to-school-3.png'
 
 const ITEMS = [
   {
-    image: curriculumNcf,
+    image: mappedToSchool1,
     title: 'NCF and NEP 2020 aligned.',
     body: 'Every activity mapped to a curriculum outcome. Your board reports stay defensible.',
     imageNodeId: '1060:2340',
@@ -15,7 +20,7 @@ const ITEMS = [
     bodyNodeId: '1060:2286',
   },
   {
-    image: curriculumCefr,
+    image: mappedToSchool2,
     title: 'CEFR-graded from Pre-A1 to B2.',
     body: 'The international standard, applied from day one.',
     imageNodeId: '1060:2341',
@@ -23,7 +28,7 @@ const ITEMS = [
     bodyNodeId: '1060:2288',
   },
   {
-    image: curriculumTextbook,
+    image: mappedToSchool3,
     title: 'Mapped to your textbook.',
     body: 'Tell us your English textbook. Our curriculum team maps every Zene lesson to your chapters.',
     imageNodeId: '1060:2342',
@@ -42,7 +47,7 @@ const CODE_MONKEY_ITEMS = [
     bodyNodeId: '1060:2286',
   },
   {
-    image: curriculumCefr,
+    image: codeMonkeyAdaptedToSchool2,
     title: 'Your scope stays.',
     body: "Zene practices what you're teaching this week — not its own curriculum.",
     imageNodeId: '1060:2341',
@@ -50,7 +55,7 @@ const CODE_MONKEY_ITEMS = [
     bodyNodeId: '1060:2288',
   },
   {
-    image: curriculumTextbook,
+    image: codeMonkeyAdaptedToSchool3,
     title: 'Your sequence stays.',
     body: 'Teachers reorder, skip, or extend any module. Zene follows.',
     imageNodeId: '1060:2342',

@@ -1,9 +1,16 @@
 import { useEffect } from 'react'
 import { useSectionScroll } from '@/contexts/SectionScrollContext'
-import { useSectionScrollDesktop } from '@/hooks/useSectionScrollDesktop'
+import {
+  isAppleTouchDevice,
+  useSectionScrollDesktop,
+} from '@/hooks/useSectionScrollDesktop'
 import { useSectionSnapScroll } from '@/hooks/useSectionSnapScroll'
 
 const REVEAL_SELECTOR = '.reveal, .reveal-left, .reveal-right, .reveal-scale'
+
+function showReveals(elements: NodeListOf<HTMLElement>) {
+  elements.forEach(el => el.classList.add('is-visible'))
+}
 
 /** Keeps panel min-height in sync as the scroll container resizes (desktop only). */
 export function useSectionScrollLayout() {
@@ -61,9 +68,10 @@ export function useSectionReveal() {
 
     const reveals = main.querySelectorAll<HTMLElement>(REVEAL_SELECTOR)
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const skipRevealAnimation = !useSnapScroll || isAppleTouchDevice()
 
-    if (reducedMotion) {
-      reveals.forEach(el => el.classList.add('is-visible'))
+    if (reducedMotion || skipRevealAnimation) {
+      showReveals(reveals)
       return () => {
         document.documentElement.classList.remove('section-scroll-active')
       }
@@ -80,13 +88,19 @@ export function useSectionReveal() {
       },
       {
         root: useSnapScroll ? scrollRoot : null,
-        threshold: 0.2,
+        threshold: 0.05,
+        rootMargin: '0px 0px 10% 0px',
       },
     )
 
     reveals.forEach(el => observer.observe(el))
 
+    const revealFallbackTimer = window.setTimeout(() => {
+      showReveals(main.querySelectorAll<HTMLElement>(REVEAL_SELECTOR))
+    }, 1200)
+
     return () => {
+      window.clearTimeout(revealFallbackTimer)
       observer.disconnect()
       document.documentElement.classList.remove('section-scroll-active')
     }

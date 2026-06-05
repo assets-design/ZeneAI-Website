@@ -8,7 +8,7 @@ import {
   getIndianStateLabel,
   INDIAN_STATE_OPTIONS,
 } from '@/data/indiaLocations'
-import { submitContactForm } from '@/lib/submitContactForm'
+import { submitContactForm } from '@/lib/leadForm'
 import { cn } from '@/lib/utils'
 
 import type { InputHTMLAttributes } from 'react'
@@ -59,8 +59,10 @@ const CONTACT_INFO = [
     imageLeft: '-10.68%',
     imageTop: '-56.63%',
     textNodeId: '642:2124',
-    lines: ['+91 9912983515', '+91 9177650701'],
-    lineNodeIds: ['642:2125', '642:2126'],
+    lines: [
+      { text: '+91 9912983515', href: 'tel:+919912983515', nodeId: '642:2125' },
+      { text: '+91 9177650701', href: 'tel:+919177650701', nodeId: '642:2126' },
+    ],
   },
   {
     nodeId: '642:2127',
@@ -73,8 +75,10 @@ const CONTACT_INFO = [
     imageLeft: '-104.53%',
     imageTop: '-65.24%',
     textNodeId: '642:2129',
-    lines: ['info@zeneai.com', 'zeneai@gmail.com'],
-    lineNodeIds: ['642:2130', '642:2131'],
+    lines: [
+      { text: 'info@zeneai.com', href: 'mailto:info@zeneai.com', nodeId: '642:2130' },
+      { text: 'zeneai@gmail.com', href: 'mailto:zeneai@gmail.com', nodeId: '642:2131' },
+    ],
   },
   {
     nodeId: '642:2132',
@@ -88,9 +92,12 @@ const CONTACT_INFO = [
     imageTop: '-44.28%',
     textNodeId: '642:2134',
     lines: [
-      'Plot No, 73P, Beverly Hills, Guttala Begumpet, Kavuri Hills, Jubilee Hills, Hyderabad, Telangana 500081',
+      {
+        text: 'Plot No, 73P, Beverly Hills, Guttala Begumpet, Kavuri Hills, Jubilee Hills, Hyderabad, Telangana 500081',
+        href: 'https://www.google.com/maps/search/?api=1&query=Plot+No+73P+Beverly+Hills+Guttala+Begumpet+Kavuri+Hills+Jubilee+Hills+Hyderabad+Telangana+500081',
+        nodeId: '642:2134',
+      },
     ],
-    lineNodeIds: ['642:2134'],
   },
 ] as const
 
@@ -287,25 +294,33 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
                   nodeId={item.iconNodeId}
                 />
                 <div
-                  className="min-w-0 capitalize font-body font-normal leading-normal text-black"
+                  className="contact-info-text min-w-0 font-body font-medium leading-snug text-black"
                   style={{
                     fontSize: 'var(--contact-info-text-size)',
-                    fontVariationSettings: "'opsz' 14",
+                    fontWeight: 'var(--contact-info-text-weight)',
                   }}
                   data-node-id={item.textNodeId}
                 >
                   {item.lines.map((line, index) => (
                     <p
-                      key={item.lineNodeIds[index]}
+                      key={line.nodeId}
                       className="mb-0"
                       style={
                         index > 0
                           ? { marginTop: 'var(--contact-info-line-gap)' }
                           : undefined
                       }
-                      data-node-id={item.lineNodeIds[index]}
+                      data-node-id={line.nodeId}
                     >
-                      {line}
+                      <a
+                        href={line.href}
+                        className="contact-info-link normal-case text-inherit no-underline transition-colors hover:text-zene-blue hover:underline"
+                        {...(line.href.startsWith('http')
+                          ? { target: '_blank', rel: 'noopener noreferrer' }
+                          : {})}
+                      >
+                        {line.text}
+                      </a>
                     </p>
                   ))}
                 </div>
