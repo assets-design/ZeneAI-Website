@@ -8,6 +8,17 @@
     <meta name="description" content="Zene AI — Smart Language Learning" />
     <title>Zene AI</title>
 
+    <script>
+      (function () {
+        var ua = navigator.userAgent || '';
+        var isIOS = /iPad|iPhone|iPod/.test(ua);
+        var isIpadOS = navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+        if (isIOS || isIpadOS) {
+          document.documentElement.classList.add('ios-touch');
+        }
+      })();
+    </script>
+
     <!-- Google Fonts preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

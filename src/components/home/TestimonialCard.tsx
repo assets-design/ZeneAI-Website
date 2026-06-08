@@ -29,8 +29,8 @@ export function TestimonialCard({
           : 'relative shrink-0 overflow-hidden rounded-[var(--testimonial-card-radius)]'
       }
       style={{
-        width: 'var(--testimonial-card-w)',
-        height: isMobileHome ? undefined : 'var(--testimonial-card-h)',
+        width: isMobileHome ? '100%' : 'var(--testimonial-card-w)',
+        height: isMobileHome ? '100%' : 'var(--testimonial-card-h)',
         backgroundColor: bg,
       }}
       data-node-id={nodeId}

@@ -1052,16 +1052,16 @@
   :root {
     --section-text-eyebrow        : calc(20px * var(--type-size));
     --header-font-scale           : 0.62;
-    --header-announcement-h       : 44px;
-    --header-announcement-padding-y: calc(14px * var(--header-font-scale));
+    --header-announcement-h       : auto;
+    --header-announcement-padding-y: calc(12px * var(--header-font-scale));
     --header-announcement-padding-x: 16px;
-    --header-announcement-line-height: 1.4;
+    --header-announcement-line-height: 1.45;
     --header-nav-h                : 64px;
     --header-logo-w               : calc(140px * var(--media-size));
     --header-logo-h               : calc(29px * var(--media-size));
     --header-pdf-h                : calc(44px * var(--header-font-scale));
     --header-pdf-min-w            : calc(120px * var(--header-font-scale));
-    --header-text-announcement    : calc(18px * var(--type-size));
+    --header-text-announcement    : calc(22px * var(--type-size));
     --header-text-pdf             : calc(20px * var(--type-size));
     --header-text-menu            : calc(24px * var(--type-size));
     --header-menu-text            : calc(32px * var(--type-size));

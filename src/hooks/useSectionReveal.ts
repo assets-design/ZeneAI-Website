@@ -1,15 +1,14 @@
 import { useEffect } from 'react'
 import { useSectionScroll } from '@/contexts/SectionScrollContext'
-import {
-  isAppleTouchDevice,
-  useSectionScrollDesktop,
-} from '@/hooks/useSectionScrollDesktop'
+import { isAppleTouchDevice, useSectionScrollDesktop } from '@/hooks/useSectionScrollDesktop'
 import { useSectionSnapScroll } from '@/hooks/useSectionSnapScroll'
 
 const REVEAL_SELECTOR = '.reveal, .reveal-left, .reveal-right, .reveal-scale'
 
-function showReveals(elements: NodeListOf<HTMLElement>) {
-  elements.forEach(el => el.classList.add('is-visible'))
+function showReveals(root: ParentNode) {
+  root.querySelectorAll<HTMLElement>(REVEAL_SELECTOR).forEach(el => {
+    el.classList.add('is-visible')
+  })
 }
 
 /** Keeps panel min-height in sync as the scroll container resizes (desktop only). */
@@ -51,6 +50,7 @@ export function useSectionReveal() {
   const sectionScroll = useSectionScroll()
   const isDesktop = useSectionScrollDesktop()
   const useSnapScroll = Boolean(sectionScroll?.enabled && isDesktop)
+  const isIosTouch = isAppleTouchDevice()
 
   useSectionScrollLayout()
   useSectionSnapScroll()
@@ -60,22 +60,39 @@ export function useSectionReveal() {
     const main = scrollRoot ?? document.getElementById('main-content')
     if (!main) return undefined
 
-    if (useSnapScroll) {
+    if (useSnapScroll && !isIosTouch) {
       document.documentElement.classList.add('section-scroll-active')
     } else {
       document.documentElement.classList.remove('section-scroll-active')
     }
 
-    const reveals = main.querySelectorAll<HTMLElement>(REVEAL_SELECTOR)
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const skipRevealAnimation = !useSnapScroll || isAppleTouchDevice()
+    const skipRevealAnimation = !useSnapScroll || isIosTouch
+
+    const syncReveals = () => showReveals(main)
 
     if (reducedMotion || skipRevealAnimation) {
-      showReveals(reveals)
+      syncReveals()
+      const rafId = window.requestAnimationFrame(syncReveals)
+
+      if (!isIosTouch) {
+        return () => {
+          window.cancelAnimationFrame(rafId)
+          document.documentElement.classList.remove('section-scroll-active')
+        }
+      }
+
+      const observer = new MutationObserver(syncReveals)
+      observer.observe(main, { childList: true, subtree: true })
+
       return () => {
+        window.cancelAnimationFrame(rafId)
+        observer.disconnect()
         document.documentElement.classList.remove('section-scroll-active')
       }
     }
+
+    const reveals = main.querySelectorAll<HTMLElement>(REVEAL_SELECTOR)
 
     const observer = new IntersectionObserver(
       entries => {
@@ -95,14 +112,12 @@ export function useSectionReveal() {
 
     reveals.forEach(el => observer.observe(el))
 
-    const revealFallbackTimer = window.setTimeout(() => {
-      showReveals(main.querySelectorAll<HTMLElement>(REVEAL_SELECTOR))
-    }, 1200)
+    const revealFallbackTimer = window.setTimeout(syncReveals, 1200)
 
     return () => {
       window.clearTimeout(revealFallbackTimer)
       observer.disconnect()
       document.documentElement.classList.remove('section-scroll-active')
     }
-  }, [sectionScroll, isDesktop, useSnapScroll])
+  }, [isIosTouch, isDesktop, sectionScroll, useSnapScroll])
 }

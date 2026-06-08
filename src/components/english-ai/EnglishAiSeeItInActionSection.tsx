@@ -1,3 +1,6 @@
+import codeMonkeyDemoVideo from '@/data/01.mp4'
+import { isCustomProgramVariant } from '@/types/program'
+import type { ProgramVariant } from '@/types/program'
 import { cn } from '@/lib/utils'
 
 const FEATURES = [
@@ -64,6 +67,7 @@ const THE_EDGE_FEATURES = [
 ] as const
 
 const DEMO_VIDEO = '/assets/figma/00%20How%20to%20get%20started_.mp4'
+const CODE_MONKEY_DEMO_VIDEO = codeMonkeyDemoVideo
 
 function ActionFeature({
   title,
@@ -93,9 +97,6 @@ function ActionFeature({
     </article>
   )
 }
-
-import { isCustomProgramVariant } from '@/types/program'
-import type { ProgramVariant } from '@/types/program'
 
 type EnglishAiSeeItInActionSectionProps = {
   variant?: ProgramVariant
@@ -223,13 +224,18 @@ export function EnglishAiSeeItInActionSection({
             >
               <div className="action-demo-media-inner size-full overflow-hidden bg-white">
                 <video
-                  src={DEMO_VIDEO}
+                  key={isCodeMonkey ? 'code-monkey-demo' : 'english-ai-demo'}
+                  src={isCodeMonkey ? CODE_MONKEY_DEMO_VIDEO : DEMO_VIDEO}
                   autoPlay
                   muted
                   loop
                   playsInline
                   className="size-full object-cover object-center"
-                  aria-label="Zene English AI session demo"
+                  aria-label={
+                    isCodeMonkey
+                      ? 'Zene Code Monkey live session demo'
+                      : 'Zene English AI session demo'
+                  }
                 />
               </div>
             </div>

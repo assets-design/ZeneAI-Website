@@ -1456,6 +1456,7 @@ html.section-scroll-active body {
 /*
  * iOS Safari — IntersectionObserver often never fires for reveal nodes inside
  * overflow-hidden section cards, leaving white panels blank after deploy.
+ * Also disable viewport-locked scroll layout on all Apple touch breakpoints.
  * Visual layout (sizes/padding/margins) is unchanged; only opacity/transform reset.
  */
 @supports (-webkit-touch-callout: none) {
@@ -1465,6 +1466,54 @@ html.section-scroll-active body {
     transform: none;
     transition: none;
   }
+}
+
+html.ios-touch :is(.reveal, .reveal-left, .reveal-right, .reveal-scale) {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+html.ios-touch.section-scroll-active,
+html.ios-touch.section-scroll-active body {
+  overflow: auto !important;
+  height: auto !important;
+}
+
+html.ios-touch .layout-section-scroll {
+  display: block !important;
+  height: auto !important;
+  min-height: 100vh !important;
+  min-height: -webkit-fill-available !important;
+  overflow: visible !important;
+}
+
+html.ios-touch .section-scroll-root {
+  flex: none !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+  overscroll-behavior: auto !important;
+}
+
+html.ios-touch .section-scroll-panel,
+html.ios-touch .section-scroll-panel--snap,
+html.ios-touch .section-scroll-panel--hero,
+html.ios-touch .section-scroll-panel--form {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+html.ios-touch .section-scroll-panel--snap > section,
+html.ios-touch .section-scroll-panel--snap > section > :first-child {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  flex: none !important;
+  justify-content: flex-start !important;
 }
 
 /* Tablet & mobile — normal document scroll (no 100vh panels or snap) */
@@ -1852,7 +1901,7 @@ html.section-scroll-active body {
 
   .program-page-scroll--home #how-it-works .how-dashboard-media,
   .program-page-scroll--english-ai #how-it-works .how-dashboard-media,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-dashboard-media,
   .program-page-scroll--the-edge #how-it-works .how-dashboard-media {
     width: 80% !important;
     max-width: 80% !important;
@@ -1863,9 +1912,9 @@ html.section-scroll-active body {
   .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill,
   .program-page-scroll--english-ai #how-it-works .how-lesson-video-wrap,
   .program-page-scroll--english-ai #how-it-works .how-lesson-img-wrap--fill,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--code-monkey #how-it-works .how-lesson-img-wrap--fill,
   .program-page-scroll--the-edge #how-it-works .how-lesson-video-wrap,
-  .program-page-scroll--code-monkey #how-it-works,
   .program-page-scroll--the-edge #how-it-works .how-lesson-img-wrap--fill {
     width: 80% !important;
     max-width: 80% !important;
@@ -1873,7 +1922,7 @@ html.section-scroll-active body {
 
   .program-page-scroll--home #how-it-works .how-lesson-video-wrap,
   .program-page-scroll--english-ai #how-it-works .how-lesson-video-wrap,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-lesson-video-wrap,
   .program-page-scroll--the-edge #how-it-works .how-lesson-video-wrap {
     height: var(--how-dashboard-video-h) !important;
     min-height: var(--how-dashboard-video-h) !important;
@@ -1881,7 +1930,7 @@ html.section-scroll-active body {
 
   .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill,
   .program-page-scroll--english-ai #how-it-works .how-lesson-img-wrap--fill,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-lesson-img-wrap--fill,
   .program-page-scroll--the-edge #how-it-works .how-lesson-img-wrap--fill {
     min-height: var(--how-lesson-img-h) !important;
   }
@@ -1897,18 +1946,45 @@ html.section-scroll-active body {
 
   .program-page-scroll--home #how-it-works .how-it-works-carousel-slide-wrap,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide-wrap,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide-wrap,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide-wrap {
     width: 100%;
   }
 
   .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__media,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide__media,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__media {
     width: 80% !important;
     max-width: 80% !important;
     height: var(--how-dashboard-video-h) !important;
+  }
+
+  /* Homepage — tablet carousel video boxes: centered, rounded, shadowed, full video visible */
+  .program-page-scroll--home #how-it-works {
+    --how-dashboard-video-radius: 10px;
+    --how-dashboard-video-w: min(
+      92%,
+      calc(679px * var(--media-scale) / var(--header-font-scale))
+    );
+    --how-dashboard-video-h: calc(380px * var(--media-scale) / var(--header-font-scale));
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(92%, var(--how-dashboard-video-w)) !important;
+    max-width: min(92%, var(--how-dashboard-video-w)) !important;
+    margin-inline: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media video {
+    object-fit: contain !important;
+    object-position: center;
   }
 }
 
@@ -1960,13 +2036,22 @@ html.section-scroll-active body {
     content: ' ';
   }
 
+  /* Mobile section carousels — white media wells (no tinted/cropped sprite backgrounds) */
+  .program-page-scroll .ai-ready-stakeholder-slide__character,
+  .program-page-scroll .onboarding-criteria-slide__media,
+  .program-page-scroll .how-it-works-carousel-slide__media,
+  .program-page-scroll .action-features-slide .action-feature-tile,
+  .program-page-scroll .tracking-items-slide__item {
+    background-color: #fff;
+  }
+
   /* AI Ready — mobile stakeholder carousel (no center robo) */
   .program-page-scroll--home #ai-ready,
   .program-page-scroll--about #ai-ready {
-    --ai-ready-carousel-character-w: 80%;
+    --ai-ready-carousel-character-w: min(100%, calc(320px * var(--header-font-scale)));
     --ai-ready-carousel-character-h: min(
-      calc(180px * var(--media-scale) / var(--header-font-scale)),
-      36vw
+      calc(240px * var(--media-scale) / var(--header-font-scale)),
+      48vw
     );
     --ai-ready-carousel-title-mt: calc(16px * var(--header-font-scale));
     --ai-ready-carousel-body-mt: calc(10px * var(--header-font-scale));
@@ -1986,37 +2071,23 @@ html.section-scroll-active body {
   .program-page-scroll--home .ai-ready-stakeholder-slide__character,
   .program-page-scroll--about .ai-ready-stakeholder-slide__character {
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: var(--ai-ready-carousel-character-w);
     height: var(--ai-ready-carousel-character-h);
     max-width: 100%;
     margin-inline: auto;
   }
 
-  .program-page-scroll--home .ai-ready-stakeholder-slide__character img,
-  .program-page-scroll--about .ai-ready-stakeholder-slide__character img {
-    position: absolute !important;
-    inset: 0 !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    max-width: none !important;
-    object-fit: cover;
-  }
-
-  .program-page-scroll--home .ai-ready-stakeholder-slide__character--student img,
-  .program-page-scroll--about .ai-ready-stakeholder-slide__character--student img {
-    object-position: 50% 14%;
-  }
-
-  .program-page-scroll--home .ai-ready-stakeholder-slide__character--schools img,
-  .program-page-scroll--about .ai-ready-stakeholder-slide__character--schools img {
-    object-position: 18% 68%;
-  }
-
-  .program-page-scroll--home .ai-ready-stakeholder-slide__character--parent img,
-  .program-page-scroll--about .ai-ready-stakeholder-slide__character--parent img {
-    object-position: 82% 64%;
+  .program-page-scroll--home .ai-ready-stakeholder-slide__img,
+  .program-page-scroll--about .ai-ready-stakeholder-slide__img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
   }
 
   .program-page-scroll--home .ai-ready-stakeholder-slide__body,
@@ -2383,19 +2454,21 @@ html.section-scroll-active body {
     --how-columns-gap: calc(20px * var(--header-font-scale));
     --how-dashboard-video-w: 100%;
     --how-lesson-img-w: 100%;
-    --how-dashboard-video-h: calc(
-      240px * var(--media-scale) / var(--header-font-scale) * 0.8
-    );
     --how-lesson-img-h: calc(
       100px * var(--media-scale) / var(--header-font-scale) * 0.8
     );
     --how-carousel-slide-title-size: calc(30px * var(--type-size));
     --how-carousel-to-dots: calc(16px * var(--header-font-scale));
+    --how-dashboard-video-radius: 10px;
+    --how-dashboard-video-h: min(
+      calc(300px * var(--media-scale) / var(--header-font-scale)),
+      45dvh
+    );
   }
 
   .program-page-scroll--home #how-it-works .how-dashboard-media,
   .program-page-scroll--english-ai #how-it-works .how-dashboard-media,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-dashboard-media,
   .program-page-scroll--the-edge #how-it-works .how-dashboard-media {
     width: 100% !important;
     max-width: 100% !important;
@@ -2405,9 +2478,9 @@ html.section-scroll-active body {
   .program-page-scroll--home #how-it-works .how-lesson-img-wrap--fill,
   .program-page-scroll--english-ai #how-it-works .how-lesson-video-wrap,
   .program-page-scroll--english-ai #how-it-works .how-lesson-img-wrap--fill,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-lesson-video-wrap,
+  .program-page-scroll--code-monkey #how-it-works .how-lesson-img-wrap--fill,
   .program-page-scroll--the-edge #how-it-works .how-lesson-video-wrap,
-  .program-page-scroll--code-monkey #how-it-works,
   .program-page-scroll--the-edge #how-it-works .how-lesson-img-wrap--fill {
     width: 100% !important;
     max-width: 100% !important;
@@ -2415,7 +2488,7 @@ html.section-scroll-active body {
 
   .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__media,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide__media,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__media {
     width: 100% !important;
     max-width: 100% !important;
@@ -2424,14 +2497,14 @@ html.section-scroll-active body {
   /* How it works — mobile: contain carousel + copy inside white card */
   .program-page-scroll--home #how-it-works .how-it-works-card,
   .program-page-scroll--english-ai #how-it-works .how-it-works-card,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-card,
   .program-page-scroll--the-edge #how-it-works .how-it-works-card {
     overflow: hidden !important;
   }
 
   .program-page-scroll--home #how-it-works .how-it-works-grid,
   .program-page-scroll--english-ai #how-it-works .how-it-works-grid,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-grid,
   .program-page-scroll--the-edge #how-it-works .how-it-works-grid {
     min-width: 0 !important;
     max-width: 100% !important;
@@ -2442,9 +2515,9 @@ html.section-scroll-active body {
   .program-page-scroll--home #how-it-works .how-it-works-carousel,
   .program-page-scroll--english-ai #how-it-works .how-it-works-left,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-left,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel,
   .program-page-scroll--the-edge #how-it-works .how-it-works-left,
-  .program-page-scroll--code-monkey #how-it-works,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel {
     min-width: 0 !important;
     max-width: 100% !important;
@@ -2454,9 +2527,9 @@ html.section-scroll-active body {
   .program-page-scroll--home #how-it-works .how-it-works-left p,
   .program-page-scroll--english-ai #how-it-works .how-it-works-left h2,
   .program-page-scroll--english-ai #how-it-works .how-it-works-left p,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-left h2,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-left p,
   .program-page-scroll--the-edge #how-it-works .how-it-works-left h2,
-  .program-page-scroll--code-monkey #how-it-works,
   .program-page-scroll--the-edge #how-it-works .how-it-works-left p {
     max-width: 100%;
     overflow-wrap: anywhere;
@@ -2464,7 +2537,7 @@ html.section-scroll-active body {
 
   .program-page-scroll--home #how-it-works .how-it-works-carousel-track,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-track,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-track,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-track {
     width: 100% !important;
     max-width: 100% !important;
@@ -2472,7 +2545,7 @@ html.section-scroll-active body {
 
   .program-page-scroll--home #how-it-works .how-it-works-carousel-slide-wrap,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide-wrap,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide-wrap,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide-wrap {
     flex: 0 0 100% !important;
     width: 100% !important;
@@ -2487,23 +2560,41 @@ html.section-scroll-active body {
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__title,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide p,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide__title,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide p,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide,
-  .program-page-scroll--code-monkey #how-it-works,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__title,
-  .program-page-scroll--code-monkey #how-it-works,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide p {
     max-width: 100% !important;
     min-width: 0 !important;
   }
 
+  /* How it works — mobile carousel video boxes: centered, rounded, shadowed, full video visible */
+  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media,
+  .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__media,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide__media,
+  .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: var(--how-dashboard-video-h) !important;
+    margin-inline: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
   .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media video,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__media video,
-  .program-page-scroll--code-monkey #how-it-works,
+  .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide__media video,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__media video {
     width: 100% !important;
     max-width: 100% !important;
-    object-fit: cover;
+    object-fit: contain !important;
+    object-position: center;
   }
 
   /* Onboarding — mobile home + English AI + Code Monkey: criteria image carousel */
@@ -2562,16 +2653,21 @@ html.section-scroll-active body {
     object-fit: contain;
   }
 
-  /* Testimonials — mobile (home + about): one full card per slide */
+  /* Testimonials — mobile (home + about): one full card per slide, fixed size while scrolling */
   .program-page-scroll--home .testimonials-carousel-wrap,
   .program-page-scroll--about .testimonials-carousel-wrap {
     --testimonial-carousel-pl: var(--section-padding-x);
     --testimonial-card-gap: 0;
     --testimonial-mobile-card-padding: 20px;
+    --testimonial-mobile-card-h: calc(260px * var(--media-scale) / var(--header-font-scale));
     --testimonial-arrow-to-track: calc(12px * var(--header-font-scale));
     --testimonial-name-size: calc(36px * var(--type-size));
     --testimonial-quote-icon-w: calc(96px * var(--media-size));
     --testimonial-quote-icon-h: calc(62px * var(--media-size));
+    flex: none !important;
+    align-items: flex-start !important;
+    height: auto !important;
+    min-height: 0 !important;
   }
 
   .program-page-scroll--home .testimonial-carousel--mobile-home,
@@ -2583,11 +2679,23 @@ html.section-scroll-active body {
   .program-page-scroll--home .testimonial-carousel--mobile-home .testimonial-carousel-viewport,
   .program-page-scroll--about .testimonial-carousel--mobile-home .testimonial-carousel-viewport {
     margin-top: calc(12px * var(--header-font-scale));
+    height: var(--testimonial-mobile-card-h) !important;
+    min-height: var(--testimonial-mobile-card-h) !important;
+    max-height: var(--testimonial-mobile-card-h) !important;
+  }
+
+  .program-page-scroll--home .testimonial-mobile-track,
+  .program-page-scroll--about .testimonial-mobile-track {
+    height: 100%;
   }
 
   .program-page-scroll--home .testimonial-mobile-slide,
   .program-page-scroll--about .testimonial-mobile-slide {
-    flex: none;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
   }
 
   .program-page-scroll--home .testimonial-card--mobile-home,
@@ -2597,7 +2705,9 @@ html.section-scroll-active body {
     align-items: flex-start;
     box-sizing: border-box;
     width: 100% !important;
-    min-height: min(calc(260px * var(--media-scale) / var(--header-font-scale)), 40dvh);
+    height: var(--testimonial-mobile-card-h) !important;
+    min-height: var(--testimonial-mobile-card-h) !important;
+    max-height: var(--testimonial-mobile-card-h) !important;
     padding: var(--testimonial-mobile-card-padding);
     padding-bottom: calc(var(--testimonial-logo-h) + var(--testimonial-mobile-card-padding));
   }

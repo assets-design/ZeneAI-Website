@@ -44,13 +44,19 @@ export function FloatingActions() {
   const [showBackToTop, setShowBackToTop] = useState(false)
 
   const scrollToTop = useCallback(() => {
+    const api = sectionScroll?.apiRef.current
+    if (api) {
+      api.scrollToY(0)
+      return
+    }
+
     const target = getScrollTarget()
     if (target === window) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
       return
     }
     target.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
+  }, [sectionScroll?.apiRef])
 
   useEffect(() => {
     const target = getScrollTarget()

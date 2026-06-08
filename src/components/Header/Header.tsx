@@ -16,9 +16,14 @@ const NAV_LINKS = [
 ]
 
 const TABLET_MIN_WIDTH = 640
+const MOBILE_MAX_WIDTH = 639
 
 function isTabletOrDesktop() {
   return window.matchMedia(`(min-width: ${TABLET_MIN_WIDTH}px)`).matches
+}
+
+function isMobileViewport() {
+  return window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`).matches
 }
 
 /** Figma Component 1 — hamburger lines; transforms to cross when open */
@@ -66,13 +71,20 @@ export function Header({
 }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [navVisible, setNavVisible] = useState(true)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? isMobileViewport() : false,
+  )
   const menuRef = useRef<HTMLDivElement>(null)
   const btnRef = useRef<HTMLButtonElement>(null)
   const lastScrollY = useRef(0)
+  const navVisibleRef = useRef(true)
+  const scrollRafId = useRef<number | null>(null)
   const location = useLocation()
   const sectionScrollContext = useSectionScroll()
   const usesSectionScrollRoot =
     sectionScroll && sectionScrollContext?.enabled && isSectionScrollDesktopViewport()
+  const useMobileNavOverlay = isMobile && !usesSectionScrollRoot
+  const navOverlayMode = usesSectionScrollRoot || useMobileNavOverlay
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -103,23 +115,60 @@ export function Header({
   }, [pinNav])
 
   useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`)
+    const update = () => setIsMobile(mq.matches)
+    update()
+    mq.addEventListener('change', update)
+    return () => mq.removeEventListener('change', update)
+  }, [])
+
+  useEffect(() => {
+    navVisibleRef.current = navVisible
+  }, [navVisible])
+
+  useEffect(() => {
     if (pinNav) return
 
-    const scrollThreshold = 8
-
     function updateNavVisibility(currentY: number) {
+      const mobile = isMobileViewport()
+      const scrollThreshold = mobile ? 32 : 8
+      const minScrollToHide = mobile ? 72 : 0
+      let nextVisible = navVisibleRef.current
+
       if (currentY <= 0) {
-        setNavVisible(true)
-      } else if (currentY > lastScrollY.current + scrollThreshold) {
-        setNavVisible(false)
+        nextVisible = true
+      } else if (
+        currentY > minScrollToHide &&
+        currentY > lastScrollY.current + scrollThreshold
+      ) {
+        nextVisible = false
         if (isTabletOrDesktop()) {
           setMenuOpen(false)
         }
       } else if (currentY < lastScrollY.current - scrollThreshold) {
-        setNavVisible(true)
+        nextVisible = true
       }
 
       lastScrollY.current = currentY
+
+      if (nextVisible !== navVisibleRef.current) {
+        navVisibleRef.current = nextVisible
+        setNavVisible(nextVisible)
+      }
+    }
+
+    function scheduleNavUpdate(getScrollY: () => number) {
+      if (!isMobileViewport()) {
+        updateNavVisibility(getScrollY())
+        return
+      }
+
+      if (scrollRafId.current !== null) return
+
+      scrollRafId.current = window.requestAnimationFrame(() => {
+        scrollRafId.current = null
+        updateNavVisibility(getScrollY())
+      })
     }
 
     if (usesSectionScrollRoot) {
@@ -129,19 +178,33 @@ export function Header({
       lastScrollY.current = root.scrollTop
 
       function handleSectionScroll() {
-        updateNavVisibility(root!.scrollTop)
+        scheduleNavUpdate(() => root!.scrollTop)
       }
 
       root.addEventListener('scroll', handleSectionScroll, { passive: true })
-      return () => root.removeEventListener('scroll', handleSectionScroll)
+      return () => {
+        root.removeEventListener('scroll', handleSectionScroll)
+        if (scrollRafId.current !== null) {
+          window.cancelAnimationFrame(scrollRafId.current)
+          scrollRafId.current = null
+        }
+      }
     }
 
+    lastScrollY.current = window.scrollY
+
     function handleScroll() {
-      updateNavVisibility(window.scrollY)
+      scheduleNavUpdate(() => window.scrollY)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (scrollRafId.current !== null) {
+        window.cancelAnimationFrame(scrollRafId.current)
+        scrollRafId.current = null
+      }
+    }
   }, [pinNav, usesSectionScrollRoot, sectionScrollContext?.scrollRef])
 
   useEffect(() => {
@@ -160,10 +223,11 @@ export function Header({
   }, [menuOpen, pinNav, usesSectionScrollRoot, sectionScrollContext?.scrollRef])
 
   useEffect(() => {
-    if (!usesSectionScrollRoot) return
+    if (!usesSectionScrollRoot && !isMobile) return
     setNavVisible(true)
+    navVisibleRef.current = true
     lastScrollY.current = 0
-  }, [location.pathname, usesSectionScrollRoot])
+  }, [location.pathname, usesSectionScrollRoot, isMobile])
 
   return (
     <header
@@ -212,28 +276,29 @@ export function Header({
         <div
           className={cn(
             'relative w-full',
-            usesSectionScrollRoot &&
+            navOverlayMode &&
               'pointer-events-none absolute left-0 right-0 top-full z-[101]',
           )}
         >
         {/* Nav bar — fades out on scroll down, fades in on scroll up */}
         <div
           className={cn(
-            usesSectionScrollRoot
-              ? 'transition-opacity duration-300 ease-in-out'
+            navOverlayMode
+              ? 'transition-[transform,opacity] duration-300 ease-in-out'
               : 'grid transition-[grid-template-rows,opacity] duration-300 ease-in-out',
             pinNav || navVisible ? 'opacity-100' : 'opacity-0',
-            usesSectionScrollRoot && 'pointer-events-auto',
-            usesSectionScrollRoot && !pinNav && !navVisible && 'pointer-events-none',
+            navOverlayMode && (pinNav || navVisible ? 'translate-y-0' : '-translate-y-full'),
+            navOverlayMode && 'pointer-events-auto',
+            navOverlayMode && !pinNav && !navVisible && 'pointer-events-none',
           )}
           style={
-            usesSectionScrollRoot
+            navOverlayMode
               ? undefined
               : { gridTemplateRows: pinNav || navVisible ? '1fr' : '0fr' }
           }
           aria-hidden={!pinNav && !navVisible}
         >
-          <div className={usesSectionScrollRoot ? undefined : 'min-h-0 overflow-hidden'}>
+          <div className={navOverlayMode ? undefined : 'min-h-0 overflow-hidden'}>
             <div
               className={cn(
                 'flex h-header-nav items-center justify-between overflow-hidden bg-header-gradient px-6 sm:px-10 lg:px-[115px]',
@@ -313,12 +378,13 @@ export function Header({
                 onClick={() => {
                   setMenuOpen(false)
                   if (link.href === '/' && location.pathname === '/') {
-                    const root = sectionScrollContext?.scrollRef.current
+                    const api = sectionScrollContext?.apiRef.current
                     if (
-                      root?.classList.contains('section-scroll-root') &&
+                      api &&
+                      sectionScrollContext?.scrollRef.current?.classList.contains('section-scroll-root') &&
                       isSectionScrollDesktopViewport()
                     ) {
-                      root.scrollTo({ top: 0, behavior: 'smooth' })
+                      api.scrollToY(0)
                     } else {
                       window.scrollTo({ top: 0, behavior: 'smooth' })
                     }

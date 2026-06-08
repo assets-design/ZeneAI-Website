@@ -1,52 +1,33 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { SpriteCharacter } from '@/components/home/SpriteCharacter'
+import mobileParent from '@/assets/figma/home/section-7/mobile-parent.png'
+import mobileSchools from '@/assets/figma/home/section-7/mobile-schools.png'
+import mobileStudent from '@/assets/figma/home/section-7/mobile-student.png'
 import { cn } from '@/lib/utils'
 
 const AUTO_SLIDE_MS = 5000
 
 const STAKEHOLDERS = [
   {
-    key: 'student',
+    stakeholderKey: 'student',
     title: 'Student',
     body: 'Every student gets the 1-on-1 practice no classroom period can offer.',
-    sprite: {
-      imageWidth: '273.8%',
-      imageHeight: '162.8%',
-      imageLeft: '0',
-      imageTop: '-23.37%',
-      nodeId: '765:1742',
-      imageNodeId: '765:1742',
-    },
+    image: mobileStudent,
     titleNodeId: '765:1741',
     bodyNodeId: '765:1749',
   },
   {
-    key: 'schools',
+    stakeholderKey: 'schools',
     title: 'schools',
     body: 'Your teachers see skill-level data classroom observation can never capture.',
-    sprite: {
-      imageWidth: '342.86%',
-      imageHeight: '174.45%',
-      imageLeft: '-125.22%',
-      imageTop: '-30.66%',
-      nodeId: '765:1745',
-      imageNodeId: '765:1745',
-    },
+    image: mobileSchools,
     titleNodeId: '765:1744',
     bodyNodeId: '765:1751',
   },
   {
-    key: 'parent',
+    stakeholderKey: 'parent',
     title: 'Parent.',
     body: "Parents see exactly which skills their child is building — and what's next.",
-    sprite: {
-      imageWidth: '302.96%',
-      imageHeight: '206.43%',
-      imageLeft: '-199.01%',
-      imageTop: '-53.02%',
-      nodeId: '765:1748',
-      imageNodeId: '765:1748',
-    },
+    image: mobileParent,
     titleNodeId: '765:1754',
     bodyNodeId: '765:1755',
   },
@@ -56,7 +37,7 @@ function StakeholderSlide({
   stakeholderKey,
   title,
   body,
-  sprite,
+  image,
   titleNodeId,
   bodyNodeId,
 }: (typeof STAKEHOLDERS)[number]) {
@@ -64,11 +45,17 @@ function StakeholderSlide({
     <article className="ai-ready-stakeholder-slide flex w-full min-w-0 flex-col items-center text-center">
       <div
         className={cn(
-          'ai-ready-stakeholder-slide__character shrink-0 overflow-hidden',
+          'ai-ready-stakeholder-slide__character shrink-0 overflow-hidden bg-white',
           `ai-ready-stakeholder-slide__character--${stakeholderKey}`,
         )}
       >
-        <SpriteCharacter {...sprite} />
+        <img
+          src={image}
+          alt=""
+          aria-hidden
+          className="ai-ready-stakeholder-slide__img size-full object-contain object-center"
+          draggable={false}
+        />
       </div>
       <h3
         className="font-heading font-medium uppercase leading-none text-black"
@@ -162,7 +149,7 @@ export function AiReadyStakeholdersCarousel() {
       >
         {STAKEHOLDERS.map((item, index) => (
           <div
-            key={item.sprite.nodeId}
+            key={item.stakeholderKey}
             className="ai-ready-stakeholders-slide flex w-full shrink-0 snap-center snap-always"
             role="group"
             aria-roledescription="slide"
@@ -184,7 +171,7 @@ export function AiReadyStakeholdersCarousel() {
       >
         {STAKEHOLDERS.map((item, index) => (
           <button
-            key={`dot-${item.sprite.nodeId}`}
+            key={`dot-${item.stakeholderKey}`}
             type="button"
             role="tab"
             aria-label={`Show slide ${index + 1}`}

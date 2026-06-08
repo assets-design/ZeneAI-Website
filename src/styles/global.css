@@ -1574,6 +1574,17 @@
   }
 }
 
+/* All hero sections — mobile only: push Apply Now below sticky nav overlay */
+@media (max-width: 639px) {
+  .hero-apply-slot {
+    margin-top: 0 !important;
+  }
+
+  .hero-apply-slot > .apply-now-btn {
+    margin-top: 60px !important;
+  }
+}
+
 /* English AI + Code Monkey platform — tablet only: copy left, mockup right + larger tagline */
 @media (min-width: 640px) and (max-width: 1279px) {
   .program-page-scroll--english-ai .program-platform--english-ai,

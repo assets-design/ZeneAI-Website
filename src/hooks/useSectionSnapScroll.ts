@@ -1,11 +1,44 @@
 import { useEffect } from 'react'
 import { useSectionScroll } from '@/contexts/SectionScrollContext'
 import { useSectionScrollDesktop } from '@/hooks/useSectionScrollDesktop'
+import {
+  animateScrollTop,
+  SECTION_SCROLL_MOUSE_DURATION_MS,
+  SECTION_SCROLL_TOUCHPAD_DURATION_MS,
+} from '@/lib/sectionScrollAnimation'
 
-const SNAP_LOCK_MS = 750
+const SNAP_LOCK_BUFFER_MS = 100
 const EDGE_THRESHOLD = 48
 const PANEL_SELECTOR = '.section-scroll-panel'
 const FOOTER_SELECTOR = '.section-scroll-tail'
+
+/** Desktop wheel — one notch/swipe = one section, same rules for mouse + touchpad. */
+const WHEEL_GESTURE_IDLE_MS = 120
+const WHEEL_GESTURE_IDLE_AFTER_STEP_MS = 180
+const WHEEL_STEP_DELTA_PX = 50
+/** Pixel-mode mouse notches on Windows are usually ±100–120 per click. */
+const MOUSE_WHEEL_PIXEL_NOTCH = 80
+const MOUSE_WHEEL_LINE_HEIGHT_PX = 16
+
+function normalizeWheelDelta(event: WheelEvent, viewportHeight: number): number {
+  if (event.deltaMode === 1) {
+    return event.deltaY * MOUSE_WHEEL_LINE_HEIGHT_PX
+  }
+  if (event.deltaMode === 2) {
+    return event.deltaY * viewportHeight
+  }
+  return event.deltaY
+}
+
+/** Line-mode = mouse wheel. Pixel-mode uses separate mouse-notch vs touchpad paths. */
+function isLineModeMouseWheel(event: WheelEvent): boolean {
+  return event.deltaMode === 1
+}
+
+function isPixelModeMouseNotch(event: WheelEvent, gestureActive: boolean): boolean {
+  if (gestureActive) return false
+  return event.deltaMode === 0 && Math.abs(event.deltaY) >= MOUSE_WHEEL_PIXEL_NOTCH
+}
 
 function getSectionStep(root: HTMLElement): number {
   const cssVar = getComputedStyle(root).getPropertyValue('--section-viewport-h').trim()
@@ -56,14 +89,29 @@ function getActiveHowItWorksPanel(root: HTMLElement): HTMLElement | null {
   return panels[currentIndex]?.querySelector<HTMLElement>('#how-it-works') ?? null
 }
 
-function getHowItWorksRightScroll(event: WheelEvent, root: HTMLElement): HTMLElement | null {
-  const target = event.target instanceof HTMLElement ? event.target : null
+function getWheelPointerTarget(event: WheelEvent): HTMLElement | null {
+  const atPoint = document.elementFromPoint(event.clientX, event.clientY)
+  if (atPoint instanceof HTMLElement) return atPoint
+  return event.target instanceof HTMLElement ? event.target : null
+}
+
+function isWheelOverElement(event: WheelEvent, element: HTMLElement): boolean {
+  const rect = element.getBoundingClientRect()
+  return (
+    event.clientX >= rect.left &&
+    event.clientX <= rect.right &&
+    event.clientY >= rect.top &&
+    event.clientY <= rect.bottom
+  )
+}
+
+function getHowItWorksRightScroll(target: HTMLElement | null, root: HTMLElement): HTMLElement | null {
   const howSection = target?.closest('#how-it-works') ?? getActiveHowItWorksPanel(root)
   return howSection?.querySelector<HTMLElement>('.how-it-works-right-scroll') ?? null
 }
 
 function tryHowItWorksPanelScroll(event: WheelEvent, root: HTMLElement): boolean {
-  const scrollEl = getHowItWorksRightScroll(event, root)
+  const scrollEl = getHowItWorksRightScroll(getWheelPointerTarget(event), root)
   if (!scrollEl) return false
 
   const delta = event.deltaY
@@ -83,13 +131,9 @@ function tryHowItWorksPanelScroll(event: WheelEvent, root: HTMLElement): boolean
   return false
 }
 
-function isHowItWorksPanelActive(root: HTMLElement): boolean {
-  return getActiveHowItWorksPanel(root) != null
-}
-
 function shouldUseNestedScroll(event: WheelEvent, root: HTMLElement): boolean {
   const delta = event.deltaY
-  let el = event.target instanceof HTMLElement ? event.target : null
+  let el = getWheelPointerTarget(event)
 
   while (el && el !== root) {
     if (el.classList.contains('section-faq-list') || el.classList.contains('how-it-works-right-scroll')) {
@@ -117,7 +161,7 @@ function shouldUseNestedScroll(event: WheelEvent, root: HTMLElement): boolean {
   return false
 }
 
-/** Smooth wheel snap between full-viewport panels; footer scrolls freely. */
+/** Smooth wheel snap between full-viewport panels; footer scrolls freely. Desktop only (≥1280px, non-iOS). */
 export function useSectionSnapScroll() {
   const sectionScroll = useSectionScroll()
   const isDesktop = useSectionScrollDesktop()
@@ -130,34 +174,212 @@ export function useSectionSnapScroll() {
     if (!(layout instanceof HTMLElement)) return undefined
 
     const scrollRoot = root
-    const scrollLayout = layout
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reducedMotion) return undefined
 
     let locked = false
     let lockTimer = 0
+    let wheelGestureActive = false
+    let wheelGestureStepped = false
+    let wheelAccumulator = 0
+    let wheelGestureTimer = 0
+    let gestureAnchorIndex: number | null = null
+    let cancelScrollAnimation: (() => void) | null = null
 
     function releaseLock() {
       locked = false
     }
 
-    function scrollToTop(top: number) {
+    function isAnimating() {
+      return locked
+    }
+
+    function endWheelGesture() {
+      wheelGestureActive = false
+      wheelGestureStepped = false
+      wheelAccumulator = 0
+      gestureAnchorIndex = null
+      window.clearTimeout(wheelGestureTimer)
+      wheelGestureTimer = 0
+    }
+
+    function tryFinishWheelGesture() {
+      if (locked) {
+        window.clearTimeout(wheelGestureTimer)
+        wheelGestureTimer = window.setTimeout(tryFinishWheelGesture, 50)
+        return
+      }
+      endWheelGesture()
+    }
+
+    function bumpWheelGestureEndTimer() {
+      window.clearTimeout(wheelGestureTimer)
+      const idleMs = wheelGestureStepped ? WHEEL_GESTURE_IDLE_AFTER_STEP_MS : WHEEL_GESTURE_IDLE_MS
+      wheelGestureTimer = window.setTimeout(tryFinishWheelGesture, idleMs)
+    }
+
+    function scrollToTop(top: number, durationMs = SECTION_SCROLL_MOUSE_DURATION_MS) {
+      if (locked) return
+
+      const maxTop = Math.max(0, scrollRoot.scrollHeight - scrollRoot.clientHeight)
+      const clampedTop = Math.min(Math.max(0, top), maxTop)
+
+      if (Math.abs(scrollRoot.scrollTop - clampedTop) <= EDGE_THRESHOLD) {
+        return
+      }
+
       locked = true
       window.clearTimeout(lockTimer)
-      const maxTop = Math.max(0, scrollRoot.scrollHeight - scrollRoot.clientHeight)
-      scrollRoot.scrollTo({ top: Math.min(Math.max(0, top), maxTop), behavior: 'smooth' })
-      lockTimer = window.setTimeout(releaseLock, SNAP_LOCK_MS)
+      cancelScrollAnimation?.()
+      cancelScrollAnimation = null
+      let scrollFinished = false
+      const lockMs = durationMs + SNAP_LOCK_BUFFER_MS
+
+      const finishScroll = () => {
+        if (scrollFinished) return
+        scrollFinished = true
+        cancelScrollAnimation = null
+        window.clearTimeout(lockTimer)
+        scrollRoot.scrollTop = clampedTop
+        releaseLock()
+        endWheelGesture()
+      }
+
+      cancelScrollAnimation = animateScrollTop(
+        scrollRoot,
+        clampedTop,
+        durationMs,
+        finishScroll,
+      )
+
+      lockTimer = window.setTimeout(finishScroll, lockMs)
+    }
+
+    function beginWheelGesture() {
+      if (wheelGestureActive) return
+
+      const panels = getPanels(scrollRoot)
+      const step = getSectionStep(scrollRoot)
+      wheelGestureActive = true
+      wheelGestureStepped = false
+      wheelAccumulator = 0
+      gestureAnchorIndex = getPanelIndex(
+        scrollRoot.scrollTop,
+        step,
+        Math.max(0, panels.length - 1),
+      )
+    }
+
+    /** One panel from gesture start — never re-read scrollTop mid-animation. */
+    function navigateAnchoredSection(
+      direction: 1 | -1,
+      durationMs = SECTION_SCROLL_MOUSE_DURATION_MS,
+    ) {
+      if (locked || gestureAnchorIndex == null) return
+
+      const panels = getPanels(scrollRoot)
+      if (panels.length === 0) return
+
+      const step = getSectionStep(scrollRoot)
+      const scrollTop = scrollRoot.scrollTop
+      const footerTop = getFooterTop(scrollRoot)
+      const lastIndex = panels.length - 1
+      const anchorIndex = gestureAnchorIndex
+
+      if (direction > 0) {
+        if (footerTop != null && scrollTop >= footerTop - EDGE_THRESHOLD) {
+          return
+        }
+
+        if (isFormFreeScrollZone(scrollRoot, panels, scrollTop, footerTop)) {
+          return
+        }
+
+        if (anchorIndex < lastIndex) {
+          scrollToTop(getPanelTop(anchorIndex + 1, step), durationMs)
+        } else if (footerTop != null) {
+          scrollToTop(footerTop, durationMs)
+        }
+        return
+      }
+
+      if (footerTop != null && scrollTop >= footerTop - EDGE_THRESHOLD) {
+        scrollToTop(getPanelTop(lastIndex, step), durationMs)
+        return
+      }
+
+      if (isFormFreeScrollZone(scrollRoot, panels, scrollTop, footerTop)) {
+        return
+      }
+
+      if (anchorIndex > 0) {
+        scrollToTop(getPanelTop(anchorIndex - 1, step), durationMs)
+      } else {
+        scrollToTop(0, durationMs)
+      }
+    }
+
+    function stepOneSection(direction: 1 | -1) {
+      if (locked) return
+      endWheelGesture()
+      beginWheelGesture()
+      wheelGestureStepped = true
+      navigateAnchoredSection(direction)
+      bumpWheelGestureEndTimer()
+    }
+
+    function scheduleWheelStep(event: WheelEvent) {
+      const deltaPx = normalizeWheelDelta(event, scrollRoot.clientHeight)
+      if (Math.abs(deltaPx) < 1) return
+
+      const gestureBusy = wheelGestureActive || wheelGestureStepped
+      beginWheelGesture()
+
+      if (wheelGestureStepped) {
+        bumpWheelGestureEndTimer()
+        return
+      }
+
+      if (isLineModeMouseWheel(event) || isPixelModeMouseNotch(event, gestureBusy)) {
+        wheelGestureStepped = true
+        navigateAnchoredSection(event.deltaY > 0 ? 1 : -1, SECTION_SCROLL_MOUSE_DURATION_MS)
+        bumpWheelGestureEndTimer()
+        return
+      }
+
+      wheelAccumulator += deltaPx
+
+      if (Math.abs(wheelAccumulator) >= WHEEL_STEP_DELTA_PX) {
+        wheelGestureStepped = true
+        navigateAnchoredSection(wheelAccumulator > 0 ? 1 : -1, SECTION_SCROLL_TOUCHPAD_DURATION_MS)
+      }
+
+      bumpWheelGestureEndTimer()
+    }
+
+    function absorbWheelWhileLocked(event: WheelEvent) {
+      beginWheelGesture()
+      bumpWheelGestureEndTimer()
+      const deltaPx = normalizeWheelDelta(event, scrollRoot.clientHeight)
+      if (Math.abs(deltaPx) >= 1) {
+        wheelAccumulator += deltaPx
+      }
     }
 
     function onWheel(event: WheelEvent) {
-      const target = event.target
-      if (!(target instanceof Node)) return
-      if (!scrollLayout.contains(target)) return
+      if (!isWheelOverElement(event, scrollRoot)) return
+
+      const pointerTarget = getWheelPointerTarget(event)
 
       if (locked) {
         event.preventDefault()
+        absorbWheelWhileLocked(event)
         return
+      }
+
+      if (!locked && wheelGestureStepped) {
+        endWheelGesture()
       }
 
       if (tryHowItWorksPanelScroll(event, scrollRoot)) {
@@ -165,25 +387,27 @@ export function useSectionSnapScroll() {
         return
       }
 
-      const onHowItWorksPanel = isHowItWorksPanelActive(scrollRoot)
-
       if (shouldUseNestedScroll(event, scrollRoot)) return
 
-      const panels = getPanels(scrollRoot)
-      if (panels.length === 0) return
+      if (
+        pointerTarget?.closest('input, textarea, select, [contenteditable="true"]')
+      ) {
+        return
+      }
 
       const delta = event.deltaY
       if (Math.abs(delta) < 1) return
 
-      const step = getSectionStep(scrollRoot)
+      const panels = getPanels(scrollRoot)
+      if (panels.length === 0) return
+
       const scrollTop = scrollRoot.scrollTop
       const footerTop = getFooterTop(scrollRoot)
-      const lastIndex = panels.length - 1
 
       if (footerTop != null && scrollTop >= footerTop - EDGE_THRESHOLD) {
         if (delta < 0 && scrollTop <= footerTop + EDGE_THRESHOLD) {
           event.preventDefault()
-          scrollToTop(getPanelTop(lastIndex, step))
+          stepOneSection(-1)
         }
         return
       }
@@ -193,45 +417,57 @@ export function useSectionSnapScroll() {
       }
 
       event.preventDefault()
-
-      const currentIndex = getPanelIndex(scrollTop, step, lastIndex)
-      const currentTop = getPanelTop(currentIndex, step)
-
-      if (delta > 0) {
-        if (scrollTop > currentTop + EDGE_THRESHOLD && !onHowItWorksPanel) {
-          if (currentIndex < lastIndex) {
-            scrollToTop(getPanelTop(currentIndex + 1, step))
-          } else if (footerTop != null) {
-            scrollToTop(footerTop)
-          }
-          return
-        }
-
-        if (currentIndex < lastIndex) {
-          scrollToTop(getPanelTop(currentIndex + 1, step))
-        } else if (footerTop != null) {
-          scrollToTop(footerTop)
-        }
-        return
-      }
-
-      if (scrollTop > currentTop + EDGE_THRESHOLD && !onHowItWorksPanel) {
-        scrollToTop(currentTop)
-        return
-      }
-
-      if (currentIndex > 0) {
-        scrollToTop(getPanelTop(currentIndex - 1, step))
-      } else {
-        scrollToTop(0)
-      }
+      scheduleWheelStep(event)
     }
 
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.altKey) return
+
+      const key = event.key
+      const goDown = key === 'ArrowDown' || key === 'PageDown'
+      const goUp = key === 'ArrowUp' || key === 'PageUp'
+      if (!goDown && !goUp) return
+
+      const active = document.activeElement
+      if (
+        active instanceof HTMLInputElement ||
+        active instanceof HTMLTextAreaElement ||
+        active instanceof HTMLSelectElement ||
+        active?.closest('[contenteditable="true"]')
+      ) {
+        return
+      }
+
+      if (locked) {
+        event.preventDefault()
+        return
+      }
+
+      const panels = getPanels(scrollRoot)
+      if (panels.length === 0) return
+
+      const scrollTop = scrollRoot.scrollTop
+      const footerTop = getFooterTop(scrollRoot)
+
+      if (isFormFreeScrollZone(scrollRoot, panels, scrollTop, footerTop)) return
+
+      event.preventDefault()
+      stepOneSection(goDown ? 1 : -1)
+    }
+
+    const apiRef = sectionScroll.apiRef
+    apiRef.current = { scrollToY: scrollToTop, isAnimating }
+
     document.addEventListener('wheel', onWheel, { passive: false, capture: true })
+    document.addEventListener('keydown', onKeyDown, { capture: true })
 
     return () => {
+      apiRef.current = null
       document.removeEventListener('wheel', onWheel, { capture: true })
+      document.removeEventListener('keydown', onKeyDown, { capture: true })
+      cancelScrollAnimation?.()
       window.clearTimeout(lockTimer)
+      endWheelGesture()
     }
   }, [sectionScroll, isDesktop])
 }

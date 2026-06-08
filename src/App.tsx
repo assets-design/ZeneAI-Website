@@ -1,139 +1,181 @@
+import { lazy, Suspense, type ComponentProps } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { ScrollToTop } from '@/components/Layout/ScrollToTop'
-import { AboutPage } from '@/pages/AboutPage'
-import { CodeMonkeyPage } from '@/pages/CodeMonkeyPage'
-import { EnglishAiPage } from '@/pages/EnglishAiPage'
-import { TheEdgePage } from '@/pages/TheEdgePage'
 import { AppLayout } from '@/components/Layout/AppLayout'
-import { BlogPage } from '@/pages/BlogPage'
-import { BlogPostPage } from '@/pages/BlogPostPage'
-import { CareerJobPage } from '@/pages/CareerJobPage'
-import { CareersPage } from '@/pages/CareersPage'
-import { ContactPage } from '@/pages/ContactPage'
-import { FaqPage } from '@/pages/FaqPage'
-import { PrivacyPolicyPage } from '@/pages/PrivacyPolicyPage'
-import { HomePage } from '@/pages/HomePage'
-import { NotFoundPage } from '@/pages/NotFoundPage'
-import { ThankYouPage } from '@/pages/ThankYouPage'
+import { ScrollToTop } from '@/components/Layout/ScrollToTop'
+
+const AboutPage = lazy(() =>
+  import('@/pages/AboutPage').then(module => ({ default: module.AboutPage })),
+)
+const CodeMonkeyPage = lazy(() =>
+  import('@/pages/CodeMonkeyPage').then(module => ({ default: module.CodeMonkeyPage })),
+)
+const EnglishAiPage = lazy(() =>
+  import('@/pages/EnglishAiPage').then(module => ({ default: module.EnglishAiPage })),
+)
+const TheEdgePage = lazy(() =>
+  import('@/pages/TheEdgePage').then(module => ({ default: module.TheEdgePage })),
+)
+const BlogPage = lazy(() =>
+  import('@/pages/BlogPage').then(module => ({ default: module.BlogPage })),
+)
+const BlogPostPage = lazy(() =>
+  import('@/pages/BlogPostPage').then(module => ({ default: module.BlogPostPage })),
+)
+const CareerJobPage = lazy(() =>
+  import('@/pages/CareerJobPage').then(module => ({ default: module.CareerJobPage })),
+)
+const CareersPage = lazy(() =>
+  import('@/pages/CareersPage').then(module => ({ default: module.CareersPage })),
+)
+const ContactPage = lazy(() =>
+  import('@/pages/ContactPage').then(module => ({ default: module.ContactPage })),
+)
+const FaqPage = lazy(() =>
+  import('@/pages/FaqPage').then(module => ({ default: module.FaqPage })),
+)
+const PrivacyPolicyPage = lazy(() =>
+  import('@/pages/PrivacyPolicyPage').then(module => ({ default: module.PrivacyPolicyPage })),
+)
+const HomePage = lazy(() =>
+  import('@/pages/HomePage').then(module => ({ default: module.HomePage })),
+)
+const NotFoundPage = lazy(() =>
+  import('@/pages/NotFoundPage').then(module => ({ default: module.NotFoundPage })),
+)
+const ThankYouPage = lazy(() =>
+  import('@/pages/ThankYouPage').then(module => ({ default: module.ThankYouPage })),
+)
+
+function RouteFallback() {
+  return <div className="min-h-screen bg-black" aria-hidden />
+}
+
+type AppLayoutProps = ComponentProps<typeof AppLayout>
+
+function ScrollLayout(props: AppLayoutProps) {
+  return <AppLayout {...props} />
+}
 
 function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <AppLayout sectionScroll>
-              <HomePage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/about"
-          element={
-            <AppLayout sectionScroll>
-              <AboutPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/english-ai"
-          element={
-            <AppLayout sectionScroll>
-              <EnglishAiPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/code-monkey"
-          element={
-            <AppLayout sectionScroll>
-              <CodeMonkeyPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/the-edge"
-          element={
-            <AppLayout sectionScroll>
-              <TheEdgePage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/blog"
-          element={
-            <AppLayout sectionScroll>
-              <BlogPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/blog/:slug"
-          element={
-            <AppLayout>
-              <BlogPostPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/faq"
-          element={
-            <AppLayout sectionScroll>
-              <FaqPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/careers"
-          element={
-            <AppLayout sectionScroll>
-              <CareersPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/careers/:slug"
-          element={
-            <AppLayout>
-              <CareerJobPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/privacy-policy"
-          element={
-            <AppLayout>
-              <PrivacyPolicyPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/contact"
-          element={
-            <AppLayout sectionScroll>
-              <ContactPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="/thank-you"
-          element={
-            <AppLayout showAnnouncement={false} pinHeader sectionScroll>
-              <ThankYouPage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="*"
-          element={
-            <AppLayout sectionScroll>
-              <NotFoundPage />
-            </AppLayout>
-          }
-        />
-      </Routes>
+      <Suspense fallback={<RouteFallback />}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ScrollLayout sectionScroll>
+                <HomePage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <ScrollLayout sectionScroll>
+                <AboutPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/english-ai"
+            element={
+              <ScrollLayout sectionScroll>
+                <EnglishAiPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/code-monkey"
+            element={
+              <ScrollLayout sectionScroll>
+                <CodeMonkeyPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/the-edge"
+            element={
+              <ScrollLayout sectionScroll>
+                <TheEdgePage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/blog"
+            element={
+              <ScrollLayout sectionScroll>
+                <BlogPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/blog/:slug"
+            element={
+              <ScrollLayout>
+                <BlogPostPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/faq"
+            element={
+              <ScrollLayout sectionScroll>
+                <FaqPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/careers"
+            element={
+              <ScrollLayout sectionScroll>
+                <CareersPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/careers/:slug"
+            element={
+              <ScrollLayout>
+                <CareerJobPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/privacy-policy"
+            element={
+              <ScrollLayout>
+                <PrivacyPolicyPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <ScrollLayout sectionScroll>
+                <ContactPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="/thank-you"
+            element={
+              <ScrollLayout showAnnouncement={false} pinHeader sectionScroll>
+                <ThankYouPage />
+              </ScrollLayout>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <ScrollLayout sectionScroll>
+                <NotFoundPage />
+              </ScrollLayout>
+            }
+          />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   )
 }

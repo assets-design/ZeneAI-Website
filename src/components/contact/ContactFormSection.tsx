@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { ContactSearchableSelect } from '@/components/contact/ContactSearchableSelect'
@@ -7,6 +7,7 @@ import {
   getIndianCityOptions,
   getIndianStateLabel,
   INDIAN_STATE_OPTIONS,
+  loadIndiaCities,
 } from '@/data/indiaLocations'
 import { submitContactForm } from '@/lib/leadForm'
 import { cn } from '@/lib/utils'
@@ -111,8 +112,27 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
   const [phone, setPhone] = useState('')
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [cityOptions, setCityOptions] = useState(() => getIndianCityOptions(stateIso))
 
-  const cityOptions = getIndianCityOptions(stateIso)
+  useEffect(() => {
+    void loadIndiaCities().catch(() => undefined)
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+
+    void loadIndiaCities()
+      .then(() => {
+        if (!cancelled) {
+          setCityOptions(getIndianCityOptions(stateIso))
+        }
+      })
+      .catch(() => undefined)
+
+    return () => {
+      cancelled = true
+    }
+  }, [stateIso])
 
   const handleStateChange = (nextState: string) => {
     setStateIso(nextState)

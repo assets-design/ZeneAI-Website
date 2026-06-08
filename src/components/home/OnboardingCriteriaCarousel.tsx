@@ -32,7 +32,7 @@ function CriterionSlide({
       data-node-id={item.nodeId}
     >
       <div
-        className="onboarding-criteria-slide__media flex items-center justify-center overflow-hidden"
+        className="onboarding-criteria-slide__media flex items-center justify-center overflow-hidden bg-white"
         style={{
           width: 'var(--onboard-image-w)',
           height: 'var(--onboard-image-h)',

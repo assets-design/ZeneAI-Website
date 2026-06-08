@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import tabTheEdgeIcon from '@/assets/figma/home/section-2/tab-the-edge.png'
+import codeMonkeyDemoVideo from '@/data/01.mp4'
 import { cn } from '@/lib/utils'
 import { TryFreeSessionButton } from '@/components/home/TryFreeSessionButton'
 
@@ -74,7 +75,7 @@ const PRODUCT_PANELS: Record<ProductTab, ProductPanelContent> = {
     ],
     ctaLabel: 'EXPLORE CODING COURSES',
     ctaLabelSize: 'long',
-    video: '/assets/figma/00%20How%20to%20get%20started_.mp4',
+    video: codeMonkeyDemoVideo,
   },
   'the-edge': {
     title: 'THE EDGE',

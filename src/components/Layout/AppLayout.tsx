@@ -2,7 +2,7 @@ import { useRef, type ReactNode } from 'react'
 import { FloatingActions } from '@/components/Layout/FloatingActions'
 import { Footer } from '@/components/Footer/Footer'
 import { Header } from '@/components/Header/Header'
-import { SectionScrollProvider } from '@/contexts/SectionScrollContext'
+import { SectionScrollProvider, type SectionScrollApi } from '@/contexts/SectionScrollContext'
 import { useSectionScrollDesktop } from '@/hooks/useSectionScrollDesktop'
 import { cn } from '@/lib/utils'
 
@@ -20,6 +20,7 @@ export function AppLayout({
   sectionScroll = false,
 }: AppLayoutProps) {
   const scrollRef = useRef<HTMLElement>(null)
+  const scrollApiRef = useRef<SectionScrollApi | null>(null)
   const isDesktop = useSectionScrollDesktop()
   const useSnapScroll = sectionScroll && isDesktop
   const useScrollLayout = sectionScroll
@@ -34,7 +35,7 @@ export function AppLayout({
 
   if (useScrollLayout) {
     return (
-      <SectionScrollProvider scrollRef={scrollRef}>
+      <SectionScrollProvider scrollRef={scrollRef} apiRef={scrollApiRef}>
         <div className="layout-section-scroll">
           {header}
           <main

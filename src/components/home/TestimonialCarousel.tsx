@@ -40,7 +40,6 @@ export function TestimonialCarousel({ items, variant = 'home' }: TestimonialCaro
   const rafRef = useRef<number | null>(null)
   const slideWidthRef = useRef(0)
   const activeIndexRef = useRef(0)
-  const [slideWidth, setSlideWidth] = useState(0)
 
   const applyOffset = useCallback((offset: number, behavior: ScrollBehavior = 'auto') => {
     const track = trackRef.current
@@ -113,17 +112,19 @@ export function TestimonialCarousel({ items, variant = 'home' }: TestimonialCaro
 
     const syncSlideWidth = () => {
       const width = Math.floor(viewport.clientWidth)
+      if (width <= 0) return
+
+      const widthChanged = Math.abs(width - slideWidthRef.current) >= 2
+      if (!widthChanged && slideWidthRef.current > 0) return
+
+      const activeIndex = activeIndexRef.current
       slideWidthRef.current = width
-      setSlideWidth(width)
-      viewport.style.setProperty('--testimonial-card-w', `${width}px`)
-      activeIndexRef.current = 0
-      applyOffset(0, 'auto')
+      applyOffset(activeIndex * width, 'auto')
     }
 
     syncSlideWidth()
-    const resizeObserver = new ResizeObserver(syncSlideWidth)
-    resizeObserver.observe(viewport)
-    return () => resizeObserver.disconnect()
+    window.addEventListener('resize', syncSlideWidth)
+    return () => window.removeEventListener('resize', syncSlideWidth)
   }, [applyOffset, useMobileHomeLayout])
 
   useEffect(() => {
@@ -257,7 +258,6 @@ export function TestimonialCarousel({ items, variant = 'home' }: TestimonialCaro
                 <div
                   key={`${item.nodeId}-mobile-${index}`}
                   className="testimonial-mobile-slide shrink-0 overflow-hidden"
-                  style={{ width: slideWidth > 0 ? slideWidth : '100%' }}
                   aria-hidden={index !== activeIndexRef.current ? true : undefined}
                 >
                   <TestimonialCard {...item} layout="mobile-home" />

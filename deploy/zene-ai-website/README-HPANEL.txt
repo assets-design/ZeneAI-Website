@@ -18,6 +18,33 @@ IMPORTANT
 - If .htaccess is missing after extract, upload the .htaccess file from this folder manually
 - Enable "Show hidden files" in File Manager if you don't see .htaccess
 
+CONTACT FORM (PRODUCTION)
+-------------------------
+The contact form uses Web3Forms. The access key must be set in .env BEFORE running
+npm run build:deploy (VITE_WEB3FORMS_ACCESS_KEY). Rebuild and re-upload if the form
+does not submit on the live site.
+
+iOS / iPHONE TESTING (INCLUDED IN THIS BUILD)
+---------------------------------------------
+This build includes fixes for blank black/white screens on iPhone/iPad Safari:
+
+1. Main JavaScript bundle size reduced
+   - The contact-form city database is NO LONGER bundled into the homepage JS
+   - India cities load from /assets/data/india-cities.json on the Contact page only
+   - Route pages are code-split so Home loads a smaller initial script
+
+2. iOS layout + reveal fallbacks
+   - html.ios-touch class applied before React loads
+   - Section reveal content shows immediately (no stuck opacity: 0 panels)
+   - Viewport snap scroll disabled on Apple touch devices at all breakpoints
+   - CSS forces normal scroll + visible content inside white section cards
+
+After upload, test on a real iPhone (Safari + Chrome):
+- Home page loads with hero content visible (not an empty black screen)
+- Scroll all sections — white cards show text/images
+- /contact — state + city dropdowns still work
+- English AI, Code Monkey, The Edge, About
+
 PAGES TO REVIEW
 ---------------
 /              Home
@@ -29,4 +56,5 @@ PAGES TO REVIEW
 /contact       Contact
 /thank-you     Thank You
 
-Built: production static export (Vite)
+Built: 2026-06-05 21:50 (production static export, Vite)
+
