@@ -151,6 +151,12 @@ html.section-scroll-active body {
 }
 
 @media (min-width: 1280px) {
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media--fit-video {
+    flex: 0 0 auto !important;
+    height: auto !important;
+    margin-top: auto;
+  }
+
   .section-scroll-panel--snap .action-inner {
     overflow: hidden;
   }
@@ -371,7 +377,8 @@ html.section-scroll-active body {
     --the-edge-platform-mockup-h: min(calc(491px * var(--header-font-scale)), 36dvh);
     --the-edge-multi-rater-image-h: min(calc(216px * var(--media-size)), 18dvh);
     --the-edge-courses-card-image-h: min(calc(326px * var(--media-size)), 28dvh);
-    --the-edge-beyond-track-image-h: min(calc(307px * var(--media-size)), 26dvh);
+    --code-monkey-journey-card-image-h: min(calc(326px * var(--media-size)), 28dvh);
+    --the-edge-beyond-track-card-min-h: min(calc(324px * var(--header-font-scale)), 34dvh);
     --the-edge-testimonials-card-min-h: min(calc(593px * var(--media-size)), 52dvh);
     --how-dashboard-video-h: min(calc(300px * var(--media-size)), 28dvh);
     --english-ai-grid-img-h: min(calc(142px * var(--media-size)), 14dvh);
@@ -427,6 +434,42 @@ html.section-scroll-active body {
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-gains-heading) #english-ai-gains-heading {
     max-width: none;
     white-space: nowrap;
+  }
+
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-journey-heading) {
+    --code-monkey-journey-heading-size: clamp(36px, 4.6dvh, 62px);
+    --code-monkey-journey-card-image-h: min(calc(220px * var(--media-size)), 22dvh);
+    --code-monkey-journey-carousel-to-dots: calc(8px * var(--header-font-scale));
+    --code-monkey-journey-dots-to-footer: calc(8px * var(--header-font-scale));
+    --code-monkey-journey-footer-size: clamp(20px, 2.4dvh, 32px);
+  }
+
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-journey-heading) #code-monkey-journey-heading {
+    max-width: none;
+    white-space: nowrap;
+  }
+
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-journey-heading) .code-monkey-journey-card-image img {
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-reasons-heading) {
+    --code-monkey-reasons-number-size: clamp(32px, 4.5dvh, 52px);
+    --code-monkey-reasons-subtitle-to-grid: calc(24px * var(--header-font-scale));
+    --code-monkey-reasons-row-gap: calc(24px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-why-heading) {
+    --code-monkey-why-stat-value-size: clamp(32px, 4.5dvh, 52px);
+    --code-monkey-why-subtitle-to-stats: calc(24px * var(--header-font-scale));
+    --code-monkey-why-stats-to-carousel: calc(24px * var(--header-font-scale));
+    --code-monkey-why-logo-size: min(calc(150px * var(--media-size)), 12dvh);
+    --code-monkey-why-carousel-to-dots: calc(8px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-why-heading) #code-monkey-why-heading {
+    max-width: none;
   }
 
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-gains-heading) .english-ai-feature-grid-items {
@@ -829,6 +872,9 @@ html.section-scroll-active body {
   .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-platform-inner,
   .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-multi-rater-inner,
   .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-courses-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .code-monkey-journey-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .code-monkey-reasons-inner,
+  .program-page-scroll--code-monkey .section-scroll-panel--snap .code-monkey-why-inner,
   .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-beyond-classroom-inner,
   .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-testimonials-inner,
   .program-page-scroll--the-edge .section-scroll-panel--snap .the-edge-comparison-inner,
@@ -898,7 +944,18 @@ html.section-scroll-active body {
     max-width: none;
   }
 
-  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#the-edge-hero) .the-edge-hero-illustration {
+  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#the-edge-hero) {
+    --english-ai-hero-columns-gap: 30px;
+    --english-ai-hero-illustration-w: 100%;
+  }
+
+  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#the-edge-hero) .program-hero-content-grid {
+    column-gap: 30px;
+  }
+
+  .program-page-scroll--the-edge .section-scroll-panel--snap:has(#the-edge-hero) .english-ai-hero-gif {
+    width: 100% !important;
+    max-width: 100% !important;
     --english-ai-hero-illustration-h: clamp(
       220px,
       36dvh,
@@ -1068,6 +1125,7 @@ html.section-scroll-active body {
     --apply-cta-btn-arrow-size: calc(35px * var(--type-size));
     --apply-cta-heading-max-w: calc(455px * var(--type-size));
     --apply-cta-body-max-w: calc(528px * var(--type-size));
+    --apply-cta-eyebrow-to-heading: calc(24px * var(--header-font-scale));
   }
 
   .program-page-scroll--about .section-scroll-panel--snap:has(#apply) .apply-cta-yellow .rotating-split-border {
@@ -1427,6 +1485,10 @@ html.section-scroll-active body {
     height: var(--action-demo-h) !important;
   }
 
+  .homepage-flow .action-demo-media--fit-video {
+    height: auto !important;
+  }
+
 
   .homepage-flow .apply-cta-inner {
     overflow: visible !important;
@@ -1622,6 +1684,11 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
     flex: none !important;
   }
 
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media--fit-video {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
   /* See it in action — prevent flex collapse hiding content on tablet/mobile */
   .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-inner,
   .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-columns,
@@ -1634,8 +1701,8 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
 
   .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media {
     flex: none !important;
-    min-height: var(--action-demo-h) !important;
-    height: var(--action-demo-h) !important;
+    min-height: 0 !important;
+    height: auto !important;
   }
 
   .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) {
@@ -1650,8 +1717,12 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
     --action-feature-carousel-img-h: calc(var(--action-feature-img-h) * 0.8);
   }
 
-  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media-inner img {
-    object-fit: cover;
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media-inner img,
+  .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-demo-media-inner video {
+    width: 100%;
+    height: auto;
+    object-fit: unset;
+    object-position: center;
   }
 
   .program-page-scroll--home .section-scroll-panel--snap:has(#see-it-in-action) .action-feature-tile {
@@ -1847,6 +1918,7 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
 
   .program-page-scroll--home #why-schools {
     --why-students-w: 100%;
+    --why-padding-top: var(--section-padding-top);
   }
 
   .program-page-scroll--home #why-schools .section-card-shell {
@@ -1867,6 +1939,12 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
     object-fit: contain !important;
     object-position: center center !important;
     margin-inline: auto;
+  }
+
+  #why-schools .why-schools-marquee__bar {
+    height: auto !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 }
 
@@ -2020,20 +2098,22 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   }
 
   .program-page-scroll--home .tracking-items-carousel .track-item-caption__body {
-    display: -webkit-box;
+    display: block;
     margin-top: var(--track-caption-inner-gap);
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    overflow: visible;
   }
 
   .program-page-scroll--home .tracking-items-carousel .track-item-caption__body > span {
-    display: inline;
+    display: block;
   }
 
-  .program-page-scroll--home .tracking-items-carousel .track-item-caption__body > span:not(:last-child)::after {
-    content: ' ';
+  .program-page-scroll--home .tracking-items-carousel .track-item-caption {
+    max-width: 100% !important;
+  }
+
+  .program-page-scroll--home .tracking-items-carousel article {
+    padding-left: calc(12px * var(--header-font-scale)) !important;
+    padding-right: calc(12px * var(--header-font-scale)) !important;
   }
 
   /* Mobile section carousels — white media wells (no tinted/cropped sprite backgrounds) */
@@ -2053,17 +2133,18 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
       calc(240px * var(--media-scale) / var(--header-font-scale)),
       48vw
     );
+    --ai-ready-carousel-title-size: 15px;
     --ai-ready-carousel-title-mt: calc(16px * var(--header-font-scale));
     --ai-ready-carousel-body-mt: calc(10px * var(--header-font-scale));
-    --ai-ready-carousel-body-max-w: min(100%, calc(300px * var(--header-font-scale)));
+    --ai-ready-carousel-body-max-w: 100%;
     --ai-ready-carousel-to-dots: calc(20px * var(--header-font-scale));
     --ai-ready-heading-to-diagram: calc(16px * var(--header-font-scale));
   }
 
   .program-page-scroll--home .ai-ready-stakeholders-carousel,
   .program-page-scroll--about .ai-ready-stakeholders-carousel {
-    padding-left: var(--section-padding-x);
-    padding-right: var(--section-padding-x);
+    padding-left: calc(10px * var(--header-font-scale)) !important;
+    padding-right: calc(10px * var(--header-font-scale)) !important;
     padding-bottom: var(--ai-ready-padding-bottom);
     margin-top: var(--ai-ready-heading-to-diagram);
   }
@@ -2092,11 +2173,23 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
 
   .program-page-scroll--home .ai-ready-stakeholder-slide__body,
   .program-page-scroll--about .ai-ready-stakeholder-slide__body {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    display: block;
+    overflow: visible;
+    width: 100%;
+    max-width: 100% !important;
+    padding-inline: 0;
+    box-sizing: border-box;
+    font-size: clamp(13px, 3.6vw, 15px) !important;
+  }
+
+  .program-page-scroll--home .ai-ready-stakeholder-slide__body > span,
+  .program-page-scroll--about .ai-ready-stakeholder-slide__body > span {
+    display: block;
+  }
+
+  .program-page-scroll--home .ai-ready-stakeholder-slide__body-line,
+  .program-page-scroll--about .ai-ready-stakeholder-slide__body-line {
+    white-space: nowrap;
   }
 }
 
@@ -2116,7 +2209,8 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
 @media (min-width: 640px) and (max-width: 1279px) {
   .program-page-scroll--home #onboarding,
   .program-page-scroll--english-ai #onboarding,
-  .program-page-scroll--code-monkey #onboarding {
+  .program-page-scroll--code-monkey #onboarding,
+  .program-page-scroll--the-edge #onboarding {
     --onboard-columns-gap: calc(24px * var(--header-font-scale));
     --onboard-image-w: 100%;
     --onboard-image-h: auto;
@@ -2125,13 +2219,15 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
 
   .program-page-scroll--home #onboarding .onboarding-criteria-grid,
   .program-page-scroll--english-ai #onboarding .onboarding-criteria-grid,
-  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-grid {
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-grid,
+  .program-page-scroll--the-edge #onboarding .onboarding-criteria-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .program-page-scroll--home #onboarding .onboarding-criteria-grid img,
   .program-page-scroll--english-ai #onboarding .onboarding-criteria-grid img,
-  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-grid img {
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-grid img,
+  .program-page-scroll--the-edge #onboarding .onboarding-criteria-grid img {
     width: 100%;
     height: auto;
     max-height: min(calc(260px * var(--media-size)), 30dvh);
@@ -2157,10 +2253,57 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   .program-page-scroll--about {
     --section-text-body: var(--english-ai-hero-body-size);
     --about-hero-subtitle-size: var(--english-ai-hero-body-size);
-    --about-why-body-size: var(--english-ai-hero-body-size);
     --about-why-tagline-size: var(--english-ai-hero-body-size);
     --about-brings-description-size: var(--english-ai-hero-body-size);
     --apply-cta-body-size: var(--english-ai-hero-body-size);
+  }
+
+  /* Three programs — mobile carousel card titles (matches home tracking carousel title, 15px) */
+  .program-page-scroll--about #about-brings {
+    --about-brings-title-size: 15px;
+  }
+
+  .program-page-scroll--about #about-brings .about-brings-feature__title {
+    font-size: 15px !important;
+  }
+
+  /* Four principles — mobile carousel: 15px titles on one line */
+  .program-page-scroll--about #about-brings-duplicate {
+    --about-brings-title-size: 15px;
+  }
+
+  .program-page-scroll--about #about-brings-duplicate .about-brings-feature__title {
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .program-page-scroll--about #about-brings-duplicate .about-brings-feature__title-line {
+    display: inline;
+  }
+
+  .program-page-scroll--about #about-brings-duplicate .about-brings-feature__title-line:first-child::after {
+    content: ' ';
+  }
+
+  /* English AI gains — mobile carousel: larger feature images */
+  .program-page-scroll--english-ai section:has(#english-ai-gains-heading) {
+    --english-ai-grid-img-w: 100%;
+    --english-ai-grid-img-h: min(calc(260px * var(--media-size)), 34dvh);
+    --english-ai-grid-img-to-title: calc(14px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--english-ai section:has(#english-ai-gains-heading) .english-ai-feature-grid-items article > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .program-page-scroll--english-ai section:has(#english-ai-gains-heading) .english-ai-feature-grid-items article > div img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
   }
 
   /* About "The story" — animated GIF, natural sizing on white background */
@@ -2309,14 +2452,14 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   }
 }
 
-/* English AI + Code Monkey + The Edge comparison — mobile only: larger Without/With card text */
+/* English AI + Code Monkey + The Edge comparison — mobile only: Without/With card text matches role header */
 @media (max-width: 639px) {
   .program-page-scroll--english-ai .section-scroll-panel--snap:has(#english-ai-comparison-heading),
   .program-page-scroll--code-monkey .section-scroll-panel--snap:has(#code-monkey-comparison-heading),
   .program-page-scroll--the-edge .section-scroll-panel--snap:has(#the-edge-comparison-heading) {
-    --english-ai-comparison-mobile-label-size: calc(18px * var(--type-size));
-    --english-ai-comparison-mobile-body-size: 18px;
     --section-text-body: 18px;
+    --english-ai-comparison-mobile-label-size: var(--section-text-body);
+    --english-ai-comparison-mobile-body-size: var(--section-text-body);
   }
 }
 
@@ -2325,17 +2468,17 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   .program-page-scroll--about #about-hero {
     --about-hero-text-offset-top: 0;
     --about-hero-padding-top: calc(12px * var(--header-font-scale));
-    --about-hero-padding-bottom: calc(var(--about-hero-robot-h) + 24px);
+    --about-hero-robot-w: min(56vw, calc(300px * var(--media-size)));
+    --about-hero-robot-h: min(26dvh, calc(300px * var(--media-size)));
+    --about-hero-padding-bottom: calc(var(--about-hero-robot-h) * 0.72 + 8px);
     --about-hero-robot-inset-bottom: calc(8px * var(--header-font-scale));
-    --about-hero-robot-padding-right: 0;
-    --about-hero-subtitle-max-w: calc(100% - var(--about-hero-robot-w) * 0.35);
+    --about-hero-robot-padding-right: 30px;
+    --about-hero-subtitle-indent: 0;
+    --about-hero-subtitle-max-w: 100%;
   }
 
   .program-page-scroll--about #about-hero .about-hero-card {
-    min-height: max(
-      calc(100dvh - var(--header-nav-h) - calc(28px * var(--header-font-scale))),
-      calc(540px * var(--header-font-scale))
-    );
+    min-height: 0;
   }
 
   .program-page-scroll--about #about-hero .hero-top-row {
@@ -2391,17 +2534,34 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   }
 
   .program-page-scroll--about #about-hero .about-hero-body {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     margin-top: 0;
     min-height: 0;
-    padding-right: calc(var(--about-hero-robot-w) * 0.15);
+    padding-right: 0;
+  }
+
+  .program-page-scroll--about #about-hero .about-hero-subtitle {
+    width: 100%;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    text-align: left;
+  }
+
+  .program-page-scroll--about #about-hero .about-hero-subtitle__line {
+    display: block;
+  }
+
+  .program-page-scroll--about #about-hero .about-hero-inner {
+    flex: 0 1 auto;
+    min-height: 0;
   }
 
   .program-page-scroll--about #about-hero .about-hero-robot {
-    right: var(--section-padding-x);
+    left: auto !important;
+    right: calc(var(--section-padding-x) + 30px) !important;
     bottom: var(--about-hero-robot-inset-bottom);
   }
 }
@@ -2571,7 +2731,6 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   }
 
   /* How it works — mobile carousel video boxes: centered, rounded, shadowed, full video visible */
-  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__media,
   .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide__media,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__media {
@@ -2587,7 +2746,6 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
     overflow: hidden;
   }
 
-  .program-page-scroll--home #how-it-works .how-it-works-carousel-slide__media video,
   .program-page-scroll--english-ai #how-it-works .how-it-works-carousel-slide__media video,
   .program-page-scroll--code-monkey #how-it-works .how-it-works-carousel-slide__media video,
   .program-page-scroll--the-edge #how-it-works .how-it-works-carousel-slide__media video {
@@ -2597,26 +2755,66 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
     object-position: center;
   }
 
+  /* Homepage + English AI — mobile carousel video box: shrink to video, minimal vertical padding */
+  .program-page-scroll--home #how-it-works .how-dashboard-media.how-it-works-carousel-slide__media,
+  .program-page-scroll--english-ai #how-it-works .how-dashboard-media.how-it-works-carousel-slide__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    margin-inline: auto;
+    background-color: #fff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    overflow: hidden;
+  }
+
+  .program-page-scroll--home #how-it-works .how-dashboard-media.how-it-works-carousel-slide__media video,
+  .program-page-scroll--english-ai #how-it-works .how-dashboard-media.how-it-works-carousel-slide__media video {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center;
+  }
+
   /* Onboarding — mobile home + English AI + Code Monkey: criteria image carousel */
   .program-page-scroll--home #onboarding,
   .program-page-scroll--english-ai #onboarding,
-  .program-page-scroll--code-monkey #onboarding {
+  .program-page-scroll--code-monkey #onboarding,
+  .program-page-scroll--the-edge #onboarding {
     --onboard-carousel-title-size: calc(26px * var(--type-size));
     --onboard-carousel-to-dots: calc(16px * var(--header-font-scale));
     --onboard-image-h: min(calc(220px * var(--media-scale) / var(--header-font-scale)), 32dvh);
     --onboard-copy-max-w: 100%;
   }
 
+  /* English AI — mobile onboarding carousel image box titles (15px) */
+  .program-page-scroll--english-ai #onboarding {
+    --onboard-carousel-title-size: 15px;
+  }
+
+  .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide h3 {
+    font-size: 15px !important;
+  }
+
   .program-page-scroll--home #onboarding .onboarding-criteria-carousel-track,
   .program-page-scroll--english-ai #onboarding .onboarding-criteria-carousel-track,
-  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-carousel-track {
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-carousel-track,
+  .program-page-scroll--the-edge #onboarding .onboarding-criteria-carousel-track {
     width: 100% !important;
     max-width: 100% !important;
   }
 
   .program-page-scroll--home #onboarding .onboarding-criteria-carousel-slide-wrap,
   .program-page-scroll--english-ai #onboarding .onboarding-criteria-carousel-slide-wrap,
-  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-carousel-slide-wrap {
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-carousel-slide-wrap,
+  .program-page-scroll--the-edge #onboarding .onboarding-criteria-carousel-slide-wrap {
     flex: 0 0 100% !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -2629,7 +2827,9 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide,
   .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide__media,
   .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide,
-  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide__media {
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide__media,
+  .program-page-scroll--the-edge #onboarding .onboarding-criteria-slide,
+  .program-page-scroll--the-edge #onboarding .onboarding-criteria-slide__media {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -2637,7 +2837,8 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
 
   .program-page-scroll--home #onboarding .onboarding-criteria-slide__img,
   .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide__img,
-  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide__img {
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide__img,
+  .program-page-scroll--the-edge #onboarding .onboarding-criteria-slide__img {
     width: 100% !important;
     max-width: 100% !important;
     height: var(--onboard-image-h) !important;
@@ -2649,7 +2850,8 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   }
 
   .program-page-scroll--english-ai #onboarding .onboarding-criteria-slide__img,
-  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide__img {
+  .program-page-scroll--code-monkey #onboarding .onboarding-criteria-slide__img,
+  .program-page-scroll--the-edge #onboarding .onboarding-criteria-slide__img {
     object-fit: contain;
   }
 
@@ -2698,7 +2900,19 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
     box-sizing: border-box;
   }
 
-  .program-page-scroll--home .testimonial-card--mobile-home,
+  .program-page-scroll--home .testimonial-card--mobile-home {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100% !important;
+    height: var(--testimonial-mobile-card-h) !important;
+    min-height: var(--testimonial-mobile-card-h) !important;
+    max-height: var(--testimonial-mobile-card-h) !important;
+    padding: var(--testimonial-mobile-card-padding);
+    padding-bottom: calc(var(--testimonial-logo-h) + var(--testimonial-mobile-card-padding));
+  }
+
   .program-page-scroll--about .testimonial-card--mobile-home {
     display: flex;
     flex-direction: column;
@@ -2712,9 +2926,20 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
     padding-bottom: calc(var(--testimonial-logo-h) + var(--testimonial-mobile-card-padding));
   }
 
+  .program-page-scroll--home .testimonial-card--mobile-home .testimonial-card__content,
+  .program-page-scroll--about .testimonial-card--mobile-home .testimonial-card__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 0;
+  }
+
   .program-page-scroll--home .testimonial-card--mobile-home .testimonial-card__name,
   .program-page-scroll--about .testimonial-card--mobile-home .testimonial-card__name {
-    margin-top: calc(12px * var(--header-font-scale));
+    margin-top: 0;
     padding-top: 0;
     padding-left: 0;
   }
@@ -2765,6 +2990,14 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   .program-page-scroll--about .apply-cta-section--about .apply-cta-yellow .rotating-split-border {
     --apply-cta-btn-padding-x: 20px;
     --apply-cta-btn-arrow-gap-right: 0px;
+  }
+
+  .program-page-scroll--the-edge #apply {
+    --apply-cta-eyebrow-to-heading: calc(16px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--english-ai #apply {
+    --apply-cta-eyebrow-to-heading: calc(16px * var(--header-font-scale));
   }
 
   .program-page-scroll--home .section-scroll-panel--snap .apply-cta-stage,
@@ -2829,6 +3062,25 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
     font-size: calc(26px * var(--type-size)) !important;
   }
 
+  /* Product intro — mobile home only: remove tab CTA inner left/right padding */
+  .program-page-scroll--home #product-intro .product-tab-copy > a {
+    justify-content: center;
+    gap: calc(6px * var(--header-font-scale));
+  }
+
+  .program-page-scroll--home #product-intro .product-tab-copy > a > span:first-of-type {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .program-page-scroll--home #product-intro .product-tab-copy > a > img {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    transform: none !important;
+    flex-shrink: 0;
+  }
+
   /* Code Monkey tab — wider CTA for long label (mobile only) */
   .program-page-scroll--home #product-intro .product-tab-panel[data-active-tab='code-monkey'] .product-tab-copy > a,
   .program-page-scroll--about #product-intro .product-tab-panel[data-active-tab='code-monkey'] .product-tab-copy > a {
@@ -2844,6 +3096,52 @@ html.ios-touch .section-scroll-panel--snap > section > :first-child {
   /* FAQ — mobile: larger question + open item radius */
   .program-page-scroll--home #faqs {
     --faq-question-size: 18px;
+  }
+
+  /* English AI — mobile FAQ question (15px) and answer (14px) */
+  .program-page-scroll--english-ai #faqs {
+    --faq-question-size: 15px;
+    --faq-answer-size: 14px;
+  }
+
+  .program-page-scroll--english-ai #faqs .faq-item-button > div > p:first-of-type {
+    font-size: 15px !important;
+  }
+
+  .program-page-scroll--english-ai #faqs .faq-item-button > div > p:nth-of-type(2) {
+    font-size: 14px !important;
+  }
+
+  /* Code Monkey — mobile journey footer text after carousel (14px) */
+  .program-page-scroll--code-monkey #code-monkey-journey {
+    --code-monkey-journey-footer-size: 13px;
+  }
+
+  .program-page-scroll--code-monkey #code-monkey-journey .code-monkey-journey-inner > p.text-center {
+    font-size: 13px !important;
+  }
+
+  /* The Edge — mobile multi-rater footer text (12px) */
+  .program-page-scroll--the-edge #the-edge-multi-rater {
+    --the-edge-multi-rater-footer-size: 12px;
+  }
+
+  .program-page-scroll--the-edge #the-edge-multi-rater .the-edge-multi-rater-inner > p:last-of-type {
+    font-size: 12px !important;
+  }
+
+  /* The Edge — mobile beyond classroom footer text (12px) */
+  .program-page-scroll--the-edge #the-edge-beyond-classroom {
+    --the-edge-beyond-footer-size: 12px;
+  }
+
+  .program-page-scroll--the-edge #the-edge-beyond-classroom .the-edge-beyond-classroom-inner > p:last-of-type {
+    font-size: 12px !important;
+  }
+
+  /* Feature grid section footers — mobile minimum 12px (uses section-text-body, typically 15px) */
+  .english-ai-feature-grid-footer {
+    font-size: max(12px, var(--section-text-body)) !important;
   }
 
   #faqs .faq-item-button[aria-expanded='true'],

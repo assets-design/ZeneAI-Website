@@ -1,25 +1,23 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import beyondClassroom1 from '@/assets/figma/the-edge/beyond-classroom/beyond-classroom-1.png'
-import beyondClassroom2 from '@/assets/figma/the-edge/beyond-classroom/beyond-classroom-2.png'
 import { cn } from '@/lib/utils'
 
 const TRACKS = [
   {
-    image: beyondClassroom1,
-    title: 'Entrepreneurship track',
+    title: 'Entrepreneurship Track',
     body: 'Students design and pitch a real venture. Market research, business model, prototype, presentation.',
-    imageNodeId: '1126:2476',
-    titleNodeId: '1126:2474',
-    bodyNodeId: '1126:2475',
+    tags: ['Market research', 'Business model', 'Prototype', 'Pitch day'],
+    cardNodeId: '1297:2984',
+    titleNodeId: '1297:2985',
+    bodyNodeId: '1297:2986',
   },
   {
-    image: beyondClassroom2,
-    title: 'Internship track',
+    title: 'Internship Track',
     body: 'Students complete a structured internship challenge. Real problem. Real deliverable.',
-    imageNodeId: '1126:2479',
-    titleNodeId: '1126:2477',
-    bodyNodeId: '1126:2478',
+    tags: ['Brief from host', 'Field work', 'Deliverable', 'Review'],
+    cardNodeId: '1297:3000',
+    titleNodeId: '1297:3002',
+    bodyNodeId: '1297:3003',
   },
 ] as const
 
@@ -30,46 +28,68 @@ const highlightStyle = {
 } as const
 
 function TrackCard({
-  image,
   title,
   body,
-  imageNodeId,
+  tags,
+  cardNodeId,
   titleNodeId,
   bodyNodeId,
 }: (typeof TRACKS)[number]) {
   return (
-    <article className="the-edge-beyond-track flex min-w-0 flex-col items-center text-center">
-      <div className="the-edge-beyond-track-image overflow-hidden" data-node-id={imageNodeId}>
-        <img
-          src={image}
-          alt=""
-          aria-hidden
-          className="size-full object-contain"
-          draggable={false}
-        />
-      </div>
+    <article
+      className="the-edge-beyond-track-card flex min-h-[var(--the-edge-beyond-track-card-min-h)] min-w-0 flex-col bg-[#f0f0f0]"
+      style={{
+        borderRadius: 'var(--the-edge-beyond-track-card-radius)',
+        padding: 'var(--the-edge-beyond-track-card-padding)',
+      }}
+      data-node-id={cardNodeId}
+    >
       <h3
-        className="font-heading font-medium uppercase leading-none text-black"
+        className="font-body font-semibold capitalize leading-normal text-black"
         style={{
-          fontSize: 'var(--the-edge-beyond-track-title-size)',
-          marginTop: 'var(--the-edge-beyond-image-to-title)',
+          fontSize: 'var(--section-text-body)',
+          fontVariationSettings: "'opsz' 14",
         }}
         data-node-id={titleNodeId}
       >
         {title}
       </h3>
       <p
-        className="mb-0 capitalize font-body font-normal leading-normal text-black"
+        className="mb-0 font-body font-normal capitalize leading-normal text-black"
         style={{
           fontSize: 'var(--section-text-body)',
           fontVariationSettings: "'opsz' 14",
-          maxWidth: 'var(--the-edge-beyond-track-body-max-w)',
-          marginTop: 'var(--the-edge-beyond-title-to-body)',
+          marginTop: 'var(--the-edge-beyond-track-title-to-body)',
         }}
         data-node-id={bodyNodeId}
       >
         {body}
       </p>
+      <ul
+        className="the-edge-beyond-track-pills mb-0 flex list-none flex-wrap p-0"
+        style={{
+          gap: 'var(--the-edge-beyond-pill-gap)',
+          marginTop: 'var(--the-edge-beyond-track-body-to-pills)',
+        }}
+        aria-label={`${title} milestones`}
+      >
+        {tags.map((tag) => (
+          <li key={tag}>
+            <span
+              className="the-edge-beyond-track-pill inline-flex items-center justify-center bg-white font-body font-normal capitalize leading-normal text-black"
+              style={{
+                fontSize: 'var(--the-edge-beyond-pill-font-size)',
+                fontVariationSettings: "'opsz' 14",
+                height: 'var(--the-edge-beyond-pill-height)',
+                borderRadius: 'var(--the-edge-beyond-pill-radius)',
+                paddingInline: 'var(--the-edge-beyond-pill-padding-x)',
+              }}
+            >
+              {tag}
+            </span>
+          </li>
+        ))}
+      </ul>
     </article>
   )
 }
@@ -166,12 +186,11 @@ export function TheEdgeBeyondClassroomSection() {
       id="the-edge-beyond-classroom"
       className="the-edge-beyond-classroom w-full px-[5px] pt-[5px]"
       aria-labelledby="the-edge-beyond-classroom-heading"
-      data-node-id="1153:773"
+      data-node-id="1315:825"
     >
       <div
         className="relative mx-auto w-full overflow-hidden section-card-shell bg-white"
         style={{ maxWidth: 'var(--section-card-max-w)' }}
-        data-node-id="1126:2468"
       >
         <div
           className="the-edge-beyond-classroom-inner"
@@ -188,7 +207,7 @@ export function TheEdgeBeyondClassroomSection() {
               fontSize: 'var(--section-text-eyebrow)',
               fontVariationSettings: "'opsz' 14",
             }}
-            data-node-id="1126:2470"
+            data-node-id="1297:2977"
           >
             Beyond the classroom
           </p>
@@ -200,7 +219,7 @@ export function TheEdgeBeyondClassroomSection() {
               fontSize: 'var(--section-text-heading)',
               marginTop: 'var(--english-ai-grid-eyebrow-to-heading)',
             }}
-            data-node-id="1126:2473"
+            data-node-id="1297:2980"
           >
             Where skills{' '}
             <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
@@ -209,14 +228,14 @@ export function TheEdgeBeyondClassroomSection() {
           </h2>
 
           <p
-            className="normal-case font-body font-normal leading-normal text-black"
+            className="capitalize font-body font-normal leading-normal text-black"
             style={{
               fontSize: 'var(--section-text-body)',
               fontVariationSettings: "'opsz' 14",
               maxWidth: 'var(--the-edge-beyond-subtitle-max-w)',
               marginTop: 'var(--english-ai-grid-heading-to-subtitle)',
             }}
-            data-node-id="1126:2469"
+            data-node-id="1297:2981"
           >
             Skills are only real when they&apos;re applied.
           </p>
@@ -255,15 +274,14 @@ export function TheEdgeBeyondClassroomSection() {
           </div>
 
           <p
-            className="text-center capitalize font-body font-semibold leading-normal text-black"
+            className="text-center capitalize font-heading font-normal leading-normal text-black"
             style={{
-              fontSize: 'var(--section-text-body)',
-              fontVariationSettings: "'opsz' 14",
+              fontSize: 'var(--the-edge-beyond-footer-size)',
               maxWidth: 'var(--the-edge-beyond-footer-max-w)',
               marginTop: 'var(--the-edge-beyond-tracks-to-footer)',
               marginInline: 'auto',
             }}
-            data-node-id="1126:2483"
+            data-node-id="1297:3016"
           >
             Both tracks add a documented project to the student&apos;s leadership profile.
           </p>

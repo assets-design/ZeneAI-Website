@@ -4,7 +4,7 @@ const MARQUEE_TEXT =
 export function WhySchoolsMarquee() {
   return (
     <div
-      className="overflow-hidden"
+      className="why-schools-marquee overflow-hidden"
       style={{
         marginTop: 'var(--why-marquee-offset-top)',
         paddingBottom: 'var(--why-marquee-bottom)',
@@ -12,7 +12,7 @@ export function WhySchoolsMarquee() {
       data-node-id="685:1633"
     >
       <div
-        className="flex items-center overflow-hidden"
+        className="why-schools-marquee__bar flex items-center overflow-hidden"
         style={{
           height: 'var(--why-marquee-h)',
           borderRadius: 'var(--why-marquee-radius)',

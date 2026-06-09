@@ -1,4 +1,7 @@
+import { useEffect, useRef } from 'react'
+
 import { ActionFeaturesCarousel } from '@/components/home/ActionFeaturesCarousel'
+import { ENGLISH_AI_TAB_DEMO_VIDEO } from '@/lib/productVideos'
 
 const FEATURES = [
   {
@@ -66,6 +69,32 @@ function ActionFeature({
 }
 
 export function SeeItInActionSection() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const play = () => {
+      void video.play().catch(() => {})
+    }
+
+    play()
+
+    const section = video.closest('section')
+    if (!section) return
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries.some(entry => entry.isIntersecting)) play()
+      },
+      { threshold: 0.2 },
+    )
+    observer.observe(section)
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section
       id="see-it-in-action"
@@ -121,18 +150,23 @@ export function SeeItInActionSection() {
               </h2>
 
               <div
-                className="action-demo-media min-h-0 w-full flex-1 xl:w-full"
+                className="action-demo-media action-demo-media--fit-video min-h-0 w-full xl:mt-auto"
                 style={{
-                  height: 'var(--action-demo-h)',
                   marginTop: 'var(--action-heading-to-demo)',
                 }}
                 data-node-id="642:1324"
               >
-                <div className="action-demo-media-inner size-full overflow-hidden">
-                  <img
-                    src="/assets/figma/home/section-3/main-comp.png"
-                    alt="Zene AI speaking lab demo with student and robot"
-                    className="size-full object-cover xl:object-contain"
+                <div className="action-demo-media-inner w-full overflow-hidden">
+                  <video
+                    ref={videoRef}
+                    src={ENGLISH_AI_TAB_DEMO_VIDEO}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    className="action-demo-media-video block h-auto w-full"
+                    aria-label="Zene AI speaking lab demo with student and robot"
                   />
                 </div>
               </div>

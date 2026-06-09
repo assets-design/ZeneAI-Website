@@ -1,4 +1,4 @@
-import robotSprite from '@/assets/figma/about/robot-sprite.png'
+import robotSprite from '@/assets/figma/about/robot-sprite.gif'
 import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
 
 export function AboutHeroSection() {
@@ -71,7 +71,7 @@ export function AboutHeroSection() {
             </h1>
 
             <p
-              className="w-full max-w-[var(--about-hero-subtitle-max-w)] font-heading font-normal leading-normal text-black"
+              className="about-hero-subtitle w-full max-w-[var(--about-hero-subtitle-max-w)] font-heading font-normal leading-normal text-black"
               style={{
                 fontSize: 'var(--about-hero-subtitle-size)',
                 marginTop: 'var(--about-hero-title-to-subtitle)',
@@ -79,10 +79,19 @@ export function AboutHeroSection() {
               }}
               data-node-id="1047:1950"
             >
-              <span className="block max-sm:whitespace-normal sm:whitespace-nowrap">
+              <span className="about-hero-subtitle__line block sm:hidden">
+                AI-powered English speaking,
+              </span>
+              <span className="about-hero-subtitle__line block sm:hidden">
+                world-class coding, and life-readiness —
+              </span>
+              <span className="about-hero-subtitle__line block sm:hidden">
+                for every student, every day.
+              </span>
+              <span className="hidden sm:block sm:whitespace-nowrap">
                 AI-powered English speaking, world-class coding, and life-readiness —
               </span>
-              <span className="block max-sm:whitespace-normal sm:whitespace-nowrap">
+              <span className="hidden sm:block sm:whitespace-nowrap">
                 for every student, every day.
               </span>
             </p>
@@ -92,24 +101,21 @@ export function AboutHeroSection() {
         <div
           className="about-hero-robot pointer-events-none absolute z-[2]"
           style={{
-            right: 'calc(var(--section-padding-x) + var(--about-hero-robot-padding-right))',
+            right: 'calc(var(--section-padding-x) + 30px)',
             bottom: 'var(--about-hero-robot-inset-bottom)',
+            left: 'auto',
           }}
           data-node-id="1047:2072"
         >
-          <div
-            className="about-hero-robot-wrap relative shrink-0 overflow-hidden"
+          <img
+            src={robotSprite}
+            alt="Zene AI robot mascot"
+            className="about-hero-robot-gif block object-contain object-bottom object-right"
             style={{
               width: 'var(--about-hero-robot-w)',
               height: 'var(--about-hero-robot-h)',
             }}
-          >
-            <img
-              src={robotSprite}
-              alt="Zene AI robot mascot"
-              className="h-full w-full object-cover object-bottom"
-            />
-          </div>
+          />
         </div>
       </div>
     </section>

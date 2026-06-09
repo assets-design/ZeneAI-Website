@@ -6,12 +6,33 @@ import { cn } from '@/lib/utils'
 
 const AUTO_SLIDE_MS = 5000
 const TABLET_CAROUSEL_MQ = '(min-width: 640px)'
+const MOBILE_CAROUSEL_MQ = '(max-width: 639px)'
+
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia(query).matches : false,
+  )
+
+  useEffect(() => {
+    const mq = window.matchMedia(query)
+    const handleChange = () => setMatches(mq.matches)
+    handleChange()
+    mq.addEventListener('change', handleChange)
+    return () => mq.removeEventListener('change', handleChange)
+  }, [query])
+
+  return matches
+}
 
 export const TRACK_ITEMS = [
   {
     image: trackSpeaking,
     title: 'Individual speaking quality',
     bodyLines: ['pronunciation, fluency, and confidence,', 'scored automatically.'],
+    mobileBodyLines: [
+      'pronunciation, fluency, and',
+      'confidence, scored automatically.',
+    ],
     textMaxW: 'var(--track-text-max-w-body)',
     imageOffset: false,
     nodeId: '762:1710',
@@ -37,6 +58,10 @@ export const TRACK_ITEMS = [
       'weakest skill across every section in ',
       'one screen.',
     ],
+    mobileBodyLines: [
+      'your academic head sees the weakest skill',
+      'across every section in one screen.',
+    ],
     textMaxW: 'var(--track-text-max-w-body)',
     imageOffset: false,
     nodeId: '762:1709',
@@ -51,6 +76,7 @@ export function TrackItem({
   image,
   title,
   bodyLines,
+  mobileBodyLines,
   textMaxW,
   imageOffset,
   titleOneLine = false,
@@ -58,6 +84,12 @@ export function TrackItem({
   imageNodeId,
   textNodeId,
 }: TrackItemProps) {
+  const isMobileLayout = useMediaQuery(MOBILE_CAROUSEL_MQ)
+  const captionLines =
+    isMobileLayout && mobileBodyLines && mobileBodyLines.length > 0
+      ? mobileBodyLines
+      : bodyLines
+
   return (
     <article
       className={cn(
@@ -93,7 +125,7 @@ export function TrackItem({
           {title}
         </span>
         <span className="track-item-caption__body block">
-          {bodyLines.map((line) => (
+          {captionLines.map((line) => (
             <span key={line} className="block xl:whitespace-nowrap">
               {line}
             </span>
@@ -105,19 +137,7 @@ export function TrackItem({
 }
 
 function useTabletCarouselLayout() {
-  const [isTabletLayout, setIsTabletLayout] = useState(() =>
-    typeof window !== 'undefined' ? window.matchMedia(TABLET_CAROUSEL_MQ).matches : false,
-  )
-
-  useEffect(() => {
-    const mq = window.matchMedia(TABLET_CAROUSEL_MQ)
-    const handleChange = () => setIsTabletLayout(mq.matches)
-    handleChange()
-    mq.addEventListener('change', handleChange)
-    return () => mq.removeEventListener('change', handleChange)
-  }, [])
-
-  return isTabletLayout
+  return useMediaQuery(TABLET_CAROUSEL_MQ)
 }
 
 function buildSlides(items: readonly TrackItemProps[], pairItems: boolean) {

@@ -310,8 +310,8 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
               {isTheEdge || isCodeMonkey
                 ? 'Teacher Experience'
                 : isEnglishAi
-                  ? 'English data your school could not see before — until now'
-                  : 'Data your school could not see before — until now'}
+                  ? 'See what was always hidden.'
+                  : 'See what was always hidden.'}
             </p>
 
             <h2

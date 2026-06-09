@@ -10,7 +10,10 @@ const STAKEHOLDERS = [
   {
     stakeholderKey: 'student',
     title: 'Student',
-    body: 'Every student gets the 1-on-1 practice no classroom period can offer.',
+    bodyLines: [
+      'Every student gets 1-on-1 practice',
+      'no classroom period can offer.',
+    ],
     image: mobileStudent,
     titleNodeId: '765:1741',
     bodyNodeId: '765:1749',
@@ -18,7 +21,10 @@ const STAKEHOLDERS = [
   {
     stakeholderKey: 'schools',
     title: 'schools',
-    body: 'Your teachers see skill-level data classroom observation can never capture.',
+    bodyLines: [
+      'Your teachers see skill-level data',
+      'classroom observation can never capture.',
+    ],
     image: mobileSchools,
     titleNodeId: '765:1744',
     bodyNodeId: '765:1751',
@@ -26,7 +32,10 @@ const STAKEHOLDERS = [
   {
     stakeholderKey: 'parent',
     title: 'Parent.',
-    body: "Parents see exactly which skills their child is building — and what's next.",
+    bodyLines: [
+      'Parents see exactly which skills',
+      'their child is building and what\'s next.',
+    ],
     image: mobileParent,
     titleNodeId: '765:1754',
     bodyNodeId: '765:1755',
@@ -36,7 +45,7 @@ const STAKEHOLDERS = [
 function StakeholderSlide({
   stakeholderKey,
   title,
-  body,
+  bodyLines,
   image,
   titleNodeId,
   bodyNodeId,
@@ -58,9 +67,9 @@ function StakeholderSlide({
         />
       </div>
       <h3
-        className="font-heading font-medium uppercase leading-none text-black"
+        className="ai-ready-stakeholder-slide__title font-heading font-medium uppercase leading-none text-black"
         style={{
-          fontSize: 'var(--section-text-tab)',
+          fontSize: 'var(--ai-ready-carousel-title-size, var(--section-text-tab))',
           marginTop: 'var(--ai-ready-carousel-title-mt)',
         }}
         data-node-id={titleNodeId}
@@ -77,7 +86,11 @@ function StakeholderSlide({
         }}
         data-node-id={bodyNodeId}
       >
-        {body}
+        {bodyLines.map((line) => (
+          <span key={line} className="ai-ready-stakeholder-slide__body-line block">
+            {line}
+          </span>
+        ))}
       </p>
     </article>
   )

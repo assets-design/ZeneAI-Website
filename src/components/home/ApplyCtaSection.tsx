@@ -4,7 +4,7 @@ import { StartApplicationButton } from '@/components/home/StartApplicationButton
 import { cn } from '@/lib/utils'
 
 type ApplyCtaSectionProps = {
-  variant?: 'home' | 'about' | 'code-monkey' | 'the-edge'
+  variant?: 'home' | 'about' | 'english-ai' | 'code-monkey' | 'the-edge'
 }
 
 function ApplyCtaBodyCopy({ variant }: { variant: ApplyCtaSectionProps['variant'] }) {
@@ -18,7 +18,7 @@ function ApplyCtaBodyCopy({ variant }: { variant: ApplyCtaSectionProps['variant'
   }
 
   if (variant === 'code-monkey') {
-    return <>Limited seats. Decisions rolling. Apply before the cohort closes.</>
+    return <>5-minute application. Selection decisions after a call with your school team.</>
   }
 
   return (
@@ -29,6 +29,7 @@ function ApplyCtaBodyCopy({ variant }: { variant: ApplyCtaSectionProps['variant'
 export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
   const [buttonHover, setButtonHover] = useState(false)
   const isAbout = variant === 'about'
+  const isEnglishAi = variant === 'english-ai'
   const isCodeMonkey = variant === 'code-monkey'
   const isTheEdge = variant === 'the-edge'
   const headingId = isAbout
@@ -37,7 +38,9 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
       ? 'the-edge-apply-heading'
       : isCodeMonkey
         ? 'code-monkey-apply-heading'
-        : 'apply-cta-heading'
+        : isEnglishAi
+          ? 'english-ai-apply-heading'
+          : 'apply-cta-heading'
 
   return (
     <section
@@ -45,7 +48,9 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
       className={cn(
         'w-full px-[5px] pt-[5px]',
         isAbout && 'apply-cta-section--about',
+        isEnglishAi && 'apply-cta-section--english-ai',
         isTheEdge && 'apply-cta-section--the-edge',
+        isCodeMonkey && 'apply-cta-section--code-monkey',
       )}
       aria-labelledby={headingId}
       data-node-id={isAbout ? '642:1331' : isTheEdge ? '1134:3546' : '1025:1892'}
@@ -80,6 +85,28 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
               }}
               data-node-id={isAbout ? '642:1355' : isTheEdge ? '1134:3548' : '975:1977'}
             >
+              <p
+                className="section-eyebrow mx-auto mb-0 uppercase font-body text-black"
+                style={{
+                  fontSize: 'var(--section-text-eyebrow)',
+                  fontVariationSettings: "'opsz' 14",
+                  maxWidth: 'var(--apply-cta-heading-max-w)',
+                  marginBottom: 'var(--apply-cta-eyebrow-to-heading)',
+                }}
+                data-node-id={
+                  isAbout
+                    ? '642:1355-eyebrow'
+                    : isTheEdge
+                      ? '1134:3548-eyebrow'
+                      : isCodeMonkey
+                        ? '1025:1892-eyebrow'
+                        : isEnglishAi
+                          ? '1060:2346-eyebrow'
+                          : '975:1977-eyebrow'
+                }
+              >
+                One last thing before you go
+              </p>
               <h2
                 id={headingId}
                 style={{

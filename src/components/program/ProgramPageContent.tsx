@@ -2,17 +2,18 @@ import { EnglishAiComparisonSection } from '@/components/english-ai/EnglishAiCom
 import { EnglishAiCurriculumSection } from '@/components/english-ai/EnglishAiCurriculumSection'
 import { EnglishAiGainsSection } from '@/components/english-ai/EnglishAiGainsSection'
 import { EnglishAiHeroSection } from '@/components/english-ai/EnglishAiHeroSection'
-import { EnglishAiPlatformSection } from '@/components/english-ai/EnglishAiPlatformSection'
 import { EnglishAiSeeItInActionSection } from '@/components/english-ai/EnglishAiSeeItInActionSection'
 import { EnglishAiToolsSection } from '@/components/english-ai/EnglishAiToolsSection'
 import { ApplyCtaSection } from '@/components/home/ApplyCtaSection'
+import { CodeMonkeyJourneySection } from '@/components/code-monkey/CodeMonkeyJourneySection'
+import { CodeMonkeyReasonsSection } from '@/components/code-monkey/CodeMonkeyReasonsSection'
+import { CodeMonkeyWhySection } from '@/components/code-monkey/CodeMonkeyWhySection'
 import { CohortSection } from '@/components/home/CohortSection'
 import { FaqSection } from '@/components/home/FaqSection'
 import { HowItWorksSection } from '@/components/home/HowItWorksSection'
 import { OnboardingSection } from '@/components/home/OnboardingSection'
 import { TheEdgeBeyondClassroomSection } from '@/components/the-edge/TheEdgeBeyondClassroomSection'
 import { TheEdgeComparisonSection } from '@/components/the-edge/TheEdgeComparisonSection'
-import { TheEdgeCoursesSection } from '@/components/the-edge/TheEdgeCoursesSection'
 import { TheEdgeFrameworkSection } from '@/components/the-edge/TheEdgeFrameworkSection'
 import { TheEdgeMultiRaterSection } from '@/components/the-edge/TheEdgeMultiRaterSection'
 import { TheEdgePlatformSection } from '@/components/the-edge/TheEdgePlatformSection'
@@ -49,11 +50,10 @@ export function ProgramPageContent({ program = 'english-ai' }: ProgramPageConten
         <TheEdgeFrameworkSection />
         <TheEdgePlatformSection />
         <TheEdgeMultiRaterSection />
-        <TheEdgeCoursesSection />
         <TheEdgeBeyondClassroomSection />
+        <OnboardingSection variant={pageVariant} />
         <TheEdgeTestimonialsSection />
         <TheEdgeComparisonSection />
-        <HowItWorksSection variant={pageVariant} />
         <ApplyCtaSection variant={pageVariant} />
       </>
     )
@@ -61,10 +61,23 @@ export function ProgramPageContent({ program = 'english-ai' }: ProgramPageConten
 
   const cohortVariant = getCohortVariant(program)
 
+  if (program === 'code-monkey') {
+    return (
+      <>
+        <EnglishAiHeroSection variant={pageVariant} />
+        <CodeMonkeyJourneySection />
+        <CodeMonkeyReasonsSection />
+        <CodeMonkeyWhySection />
+        <EnglishAiComparisonSection variant={pageVariant} />
+        <OnboardingSection variant={pageVariant} />
+        <ApplyCtaSection variant={pageVariant} />
+      </>
+    )
+  }
+
   return (
     <>
       <EnglishAiHeroSection variant={pageVariant} />
-      <EnglishAiPlatformSection variant={pageVariant} />
       <EnglishAiToolsSection variant={pageVariant} />
       <EnglishAiGainsSection variant={pageVariant} />
       <EnglishAiComparisonSection variant={pageVariant} />
@@ -74,7 +87,7 @@ export function ProgramPageContent({ program = 'english-ai' }: ProgramPageConten
       <OnboardingSection variant={pageVariant} />
       <CohortSection variant={cohortVariant} />
       <FaqSection variant={pageVariant === 'english-ai' ? 'home' : pageVariant} />
-      <ApplyCtaSection variant={pageVariant === 'english-ai' ? 'home' : pageVariant} />
+      <ApplyCtaSection variant={pageVariant === 'english-ai' ? 'english-ai' : pageVariant} />
     </>
   )
 }

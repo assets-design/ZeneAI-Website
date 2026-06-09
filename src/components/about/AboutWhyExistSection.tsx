@@ -1,6 +1,28 @@
 import aboutStoryIllustration from '@/assets/figma/about/story-illustration.gif'
+import './AboutWhyExistSection.css'
+import { useEffect, useState } from 'react'
 
 export function AboutWhyExistSection() {
+  const [isDesktop, setIsDesktop] = useState<boolean>(false)
+
+  useEffect(() => {
+    function update() {
+      if (typeof window === 'undefined') return
+      setIsDesktop(window.matchMedia('(min-width: 640px)').matches)
+    }
+
+    update()
+    const m = window.matchMedia('(min-width: 640px)')
+    const listener = () => update()
+    m.addEventListener?.('change', listener)
+    // fallback for older browsers
+    if (!m.addEventListener) m.addListener?.(listener)
+    return () => {
+      m.removeEventListener?.('change', listener)
+      if (!m.removeEventListener) m.removeListener?.(listener)
+    }
+  }, [])
+
   return (
     <section
       className="w-full px-[5px] pt-[5px]"
@@ -59,10 +81,9 @@ export function AboutWhyExistSection() {
             </h2>
 
             <div
-              className="font-body font-medium leading-normal text-black"
+              className="about-why-body about-why-body-desc normal-case font-body leading-normal text-black sm:text-[22px] sm:font-semibold"
               style={{
-                fontSize: 'var(--about-why-body-size)',
-                fontWeight: 'var(--about-why-body-weight)',
+                ...(isDesktop ? { fontSize: '22px', fontWeight: 600 } : {}),
                 fontVariationSettings: "'opsz' 14",
                 maxWidth: 'var(--about-why-body-max-w)',
                 marginTop: 'var(--about-why-heading-to-body)',

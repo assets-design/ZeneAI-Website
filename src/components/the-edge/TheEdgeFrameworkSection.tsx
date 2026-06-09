@@ -154,6 +154,7 @@ function FrameworkDiagram({
   return (
     <div
       className="the-edge-framework-diagram relative mx-auto aspect-square w-full max-w-[var(--the-edge-framework-diagram-size)]"
+      style={{ marginTop: '0px' }}
       role="tablist"
       aria-label="Five pillars framework"
       onTouchStart={event => {

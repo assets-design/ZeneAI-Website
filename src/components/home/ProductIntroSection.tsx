@@ -2,6 +2,7 @@ import { useState } from 'react'
 import tabTheEdgeIcon from '@/assets/figma/home/section-2/tab-the-edge.png'
 import codeMonkeyDemoVideo from '@/data/01.mp4'
 import { cn } from '@/lib/utils'
+import { ENGLISH_AI_TAB_DEMO_VIDEO } from '@/lib/productVideos'
 import { TryFreeSessionButton } from '@/components/home/TryFreeSessionButton'
 
 type ProductTab = 'english-ai' | 'code-monkey' | 'the-edge'
@@ -65,7 +66,7 @@ const PRODUCT_PANELS: Record<ProductTab, ProductPanelContent> = {
       'One teacher cannot give 1-on-1 speaking practice to 30 students in 40 minutes. Zene does every day, for every student, across seven skill blocks: Speaking, Reading, Grammar, Phonics, Vocabulary, Comprehension, and Live Conversation.',
       'Mapped to NCF and NEP 2020. Runs on the devices your school already owns. No language-lab room required.',
     ],
-    video: '/assets/figma/00%20How%20to%20get%20started_.mp4',
+    video: ENGLISH_AI_TAB_DEMO_VIDEO,
   },
   'code-monkey': {
     title: 'CODE MONKEY',
@@ -84,7 +85,7 @@ const PRODUCT_PANELS: Record<ProductTab, ProductPanelContent> = {
       'Leadership, resilience, financial literacy, and communication are developed through The Edge, an award-winning curriculum for Grades 6–12. Students build social-emotional and practical skills through structured learning. Designed using global frameworks, it includes internships, entrepreneurship challenges, and career readiness experiences that prepare learners for future success.',
     ],
     ctaLabel: 'DISCOVER THE EDGE',
-    video: '/assets/figma/00%20How%20to%20get%20started_.mp4',
+    video: ENGLISH_AI_TAB_DEMO_VIDEO,
   },
 }
 

@@ -1,0 +1,14 @@
+/* Desktop only - 22px font size and bold weight for description text */
+@media (min-width: 640px) {
+  .about-why-body-desc {
+    font-size: 22px !important;
+    font-weight: 500 !important;
+  }
+}
+
+/* Mobile and tablet keep original size */
+@media (max-width: 639px) {
+  .about-why-body-desc {
+    font-size: var(--section-text-body);
+  }
+}

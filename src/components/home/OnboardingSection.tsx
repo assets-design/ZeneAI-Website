@@ -1,5 +1,3 @@
-import onboardingDevice from '@/assets/figma/english-ai/onboarding-device.png'
-import onboardingGrowth from '@/assets/figma/english-ai/onboarding-growth.png'
 import onboardingClassroom from '@/assets/figma/home/section-8/onboarding-classroom.png'
 import onboardingWhoZene1 from '@/assets/figma/home/section-8/onboarding-who-zene-1.png'
 import onboardingWhoZene2 from '@/assets/figma/home/section-8/onboarding-who-zene-2.png'
@@ -28,7 +26,7 @@ const CRITERIA = [
 const CODE_MONKEY_CRITERIA = [
   {
     title: 'A growth mindset',
-    body: 'Leadership that treats English outcomes as measurable, and is willing to look at the data — good or bad.',
+    body: 'You believe English is more than a textbook subject and you\'re ready to elevate your students\' communication skills.',
     nodeId: '767:2048',
     imageNodeId: '767:2041',
     titleNodeId: '767:2032',
@@ -36,7 +34,7 @@ const CODE_MONKEY_CRITERIA = [
   },
   {
     title: 'Device access',
-    body: 'One device per student during the Zene session — a lab, a tablet cart, or BYOD. We work with what you have.',
+    body: 'You have a room with computers, headphones, and internet available once a week per section in your timetable.',
     nodeId: '767:2047',
     imageNodeId: '767:2046',
     titleNodeId: '767:2037',
@@ -44,24 +42,7 @@ const CODE_MONKEY_CRITERIA = [
   },
 ] as const
 
-const THE_EDGE_CRITERIA = [
-  {
-    title: 'Alignment',
-    body: "Your school's vision aligns with developing observable leadership behaviours in every student.",
-    nodeId: '767:2048',
-    imageNodeId: '767:2041',
-    titleNodeId: '767:2032',
-    bodyNodeId: '767:2033',
-  },
-  {
-    title: 'Commitment',
-    body: 'Your school is committed to implementing The Edge without disrupting existing programmes.',
-    nodeId: '767:2047',
-    imageNodeId: '767:2046',
-    titleNodeId: '767:2037',
-    bodyNodeId: '767:2038',
-  },
-] as const
+const THE_EDGE_CRITERIA = CODE_MONKEY_CRITERIA
 
 function CriterionCard({
   title,
@@ -124,7 +105,6 @@ type OnboardingSectionProps = {
   variant?: 'home' | 'english-ai' | 'code-monkey' | 'the-edge'
 }
 
-const ENGLISH_AI_IMAGES = [onboardingGrowth, onboardingDevice] as const
 const HOME_ONBOARDING_IMAGES = [onboardingWhoZene1, onboardingWhoZene2] as const
 
 export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) {
@@ -174,9 +154,7 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
             }}
             data-node-id={isProgramPage ? '1060:2245' : '767:2027'}
           >
-            {isTheEdge || isCodeMonkey
-              ? 'Cohort Selection'
-              : 'Who Zene works with'}
+            Who Zene works with
           </p>
 
           <h2
@@ -210,11 +188,17 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
             }}
             data-node-id="767:2030"
           >
-            {isTheEdge
-              ? 'We look for schools committed to measurable leadership development for every student.'
-              : isCodeMonkey
-                ? 'Zene works best when the whole school is in. So we partner deeply with a few — not lightly with many.'
-                : 'Zene is built around partnership, not transaction. We review every application and select the visionary schools — the ones ready to create real impact in their students&apos; lives.'}
+            {isTheEdge ? (
+              <>
+                Zene does not ask you to change your English curriculum.
+                <br />
+                Every{'\u00a0'}activity maps to the chapter your students are already studying.
+              </>
+            ) : isCodeMonkey ? (
+              'Zene does not ask you to change your English curriculum. Every activity maps to the chapter your students are already studying.'
+            ) : (
+              'Zene is built around partnership, not transaction. We review every application and select the visionary schools — the ones ready to create real impact in their students&apos; lives.'
+            )}
           </p>
 
           {isHome ? (
@@ -224,19 +208,19 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
               images={HOME_ONBOARDING_IMAGES}
               image={HOME_ONBOARDING_IMAGES[0]}
             />
-          ) : isEnglishAi || isCodeMonkey ? (
+          ) : isEnglishAi || isCodeMonkey || isTheEdge ? (
             <OnboardingCriteriaCarousel
               className="sm:hidden"
               criteria={criteria}
-              images={ENGLISH_AI_IMAGES}
-              image={ENGLISH_AI_IMAGES[0]}
+              images={HOME_ONBOARDING_IMAGES}
+              image={HOME_ONBOARDING_IMAGES[0]}
             />
           ) : null}
 
           <div
             className={cn(
               'onboarding-criteria-grid grid min-w-0 grid-cols-1 gap-[var(--onboard-columns-gap)] xl:grid-cols-2',
-              (isHome || isEnglishAi || isCodeMonkey) && 'hidden sm:grid',
+              (isHome || isEnglishAi || isCodeMonkey || isTheEdge) && 'hidden sm:grid',
             )}
             style={{ marginTop: isHome ? undefined : 'var(--onboard-body-to-cards)' }}
           >
@@ -245,11 +229,9 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
                 key={item.nodeId}
                 {...item}
                 image={
-                  isHome
+                  isHome || isEnglishAi || isTheEdge || isCodeMonkey
                     ? HOME_ONBOARDING_IMAGES[index]
-                    : isProgramPage
-                      ? ENGLISH_AI_IMAGES[index]
-                      : onboardingClassroom
+                    : onboardingClassroom
                 }
                 normalCaseBody
               />

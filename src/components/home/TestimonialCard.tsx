@@ -41,7 +41,7 @@ export function TestimonialCard({
         aria-hidden
         className={
           isMobileHome
-            ? 'testimonial-card__quote pointer-events-none object-contain object-left-top'
+            ? 'testimonial-card__quote pointer-events-none shrink-0 object-contain object-left-top'
             : 'pointer-events-none absolute object-contain object-left-top'
         }
         style={
@@ -59,49 +59,53 @@ export function TestimonialCard({
         }
       />
 
-      <h3
-        className={
-          isMobileHome
-            ? 'testimonial-card__name font-heading font-medium uppercase leading-none text-black'
-            : 'absolute font-heading font-medium uppercase leading-none text-black'
-        }
-        style={
-          isMobileHome
-            ? { fontSize: 'var(--testimonial-name-size)' }
-            : {
-                left: 'var(--testimonial-padding-x)',
-                top: 'var(--testimonial-name-top)',
-                maxWidth: 'var(--testimonial-name-max-w)',
-                fontSize: 'var(--testimonial-name-size)',
-              }
-        }
-      >
-        {name}
-      </h3>
+      {isMobileHome ? (
+        <div className="testimonial-card__content min-h-0 w-full">
+          <h3
+            className="testimonial-card__name font-heading font-medium uppercase leading-none text-black"
+            style={{ fontSize: 'var(--testimonial-name-size)' }}
+          >
+            {name}
+          </h3>
 
-      <p
-        className={
-          isMobileHome
-            ? 'testimonial-card__quote-body capitalize font-body font-normal leading-normal text-black'
-            : 'absolute capitalize font-body font-normal leading-normal text-black'
-        }
-        style={
-          isMobileHome
-            ? {
-                fontSize: 'var(--section-text-body)',
-                fontVariationSettings: "'opsz' 14",
-              }
-            : {
-                left: 'var(--testimonial-padding-x)',
-                top: 'var(--testimonial-body-top)',
-                width: 'var(--testimonial-body-w)',
-                fontSize: 'var(--section-text-body)',
-                fontVariationSettings: "'opsz' 14",
-              }
-        }
-      >
-        {quote}
-      </p>
+          <p
+            className="testimonial-card__quote-body capitalize font-body font-normal leading-normal text-black"
+            style={{
+              fontSize: 'var(--section-text-body)',
+              fontVariationSettings: "'opsz' 14",
+            }}
+          >
+            {quote}
+          </p>
+        </div>
+      ) : (
+        <>
+          <h3
+            className="absolute font-heading font-medium uppercase leading-none text-black"
+            style={{
+              left: 'var(--testimonial-padding-x)',
+              top: 'var(--testimonial-name-top)',
+              maxWidth: 'var(--testimonial-name-max-w)',
+              fontSize: 'var(--testimonial-name-size)',
+            }}
+          >
+            {name}
+          </h3>
+
+          <p
+            className="absolute capitalize font-body font-normal leading-normal text-black"
+            style={{
+              left: 'var(--testimonial-padding-x)',
+              top: 'var(--testimonial-body-top)',
+              width: 'var(--testimonial-body-w)',
+              fontSize: 'var(--section-text-body)',
+              fontVariationSettings: "'opsz' 14",
+            }}
+          >
+            {quote}
+          </p>
+        </>
+      )}
 
       <img
         src={cardLogo}

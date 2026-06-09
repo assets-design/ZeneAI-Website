@@ -34,25 +34,25 @@ const CODE_MONKEY_ROWS = [
   {
     role: 'Student',
     roleNodeId: '1060:2311',
-    without: 'English class is grammar drills and textbook reading. They rarely speak.',
+    without: 'Coding learned through one-off \'Hour of Code\' sessions or skipped entirely.',
     withoutNodeId: '1060:2309',
-    with: 'Daily live speaking practice. Every skill measured. Visible progress every week.',
+    with: 'A structured K–12 progression from block coding to Python, AI, and high school CS.',
     withNodeId: '1060:2310',
   },
   {
     role: 'Teacher',
     roleNodeId: '1060:2314',
-    without: '30+ students, no way to hear each one speak or grade every essay.',
+    without: 'Cannot teach coding without a CS background — or buys disconnected tools per grade.',
     withoutNodeId: '1060:2312',
-    with: 'AI handles individual practice. Teacher dashboard surfaces who needs help, on what.',
+    with: 'Lesson plans, auto-grading, and a teacher dashboard. Any teacher can run a coding class.',
     withNodeId: '1060:2313',
   },
   {
     role: 'Principal',
     roleNodeId: '1060:2317',
-    without: 'English outcomes are anecdotal. No data to share with parents or the board.',
+    without: 'Coding is a buzzword, not a measured outcome.',
     withoutNodeId: '1060:2315',
-    with: 'A measurable English program with per-student reports. Board-defensible outcomes.',
+    with: 'A board-defensible coding curriculum aligned to international CS standards, taught Pre-K to Grade 12.',
     withNodeId: '1060:2316',
   },
 ] as const
@@ -127,8 +127,7 @@ function ComparisonMobileCard({
         }}
       >
         <p
-          className="mb-0 font-heading font-medium uppercase leading-none text-black"
-          style={{ fontSize: 'var(--english-ai-comparison-mobile-label-size)' }}
+          className="english-ai-comparison-mobile-col-label mb-0 font-heading font-medium uppercase leading-none text-black"
         >
           {withoutLabel}
         </p>
@@ -147,11 +146,8 @@ function ComparisonMobileCard({
           {without}
         </p>
         <p
-          className="mb-0 font-heading font-medium uppercase leading-none text-black"
-          style={{
-            fontSize: 'var(--english-ai-comparison-mobile-label-size)',
-            marginTop: 'var(--english-ai-comparison-mobile-block-gap)',
-          }}
+          className="english-ai-comparison-mobile-col-label mb-0 font-heading font-medium uppercase leading-none text-black"
+          style={{ marginTop: 'var(--english-ai-comparison-mobile-block-gap)' }}
         >
           {withLabel}
         </p>
@@ -226,7 +222,7 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
             }}
             data-node-id="1060:2241"
           >
-            {isTheEdge ? 'The difference, side by side' : isCustomProgram ? 'The Difference' : 'The difference, side by side'}
+            {isTheEdge ? 'The difference, side by side' : isCustomProgram ? 'The difference, side by side' : 'The difference, side by side'}
           </p>
 
           <h2
@@ -239,7 +235,13 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
             data-node-id="1060:2306"
           >
             {isCodeMonkey ? (
-              'Without Zene. With Zene.'
+              <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
+                What your{' '}
+                <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                  school looks like,
+                </span>{' '}
+                with and without Code Monkey.
+              </span>
             ) : isTheEdge ? (
               <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
                 What your{' '}
@@ -263,11 +265,15 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
             )}
           </h2>
 
-          {isCodeMonkey ? null : isTheEdge || !isCustomProgram ? (
+          {isCodeMonkey || isTheEdge || !isCustomProgram ? (
             <p
               className={cn(
-                'english-ai-comparison-subtitle font-body font-normal leading-normal text-black max-lg:whitespace-normal lg:whitespace-nowrap',
-                isTheEdge || isCustomProgram ? 'normal-case' : 'capitalize',
+                'english-ai-comparison-subtitle font-body leading-normal text-black max-lg:whitespace-normal lg:whitespace-nowrap',
+                isCodeMonkey
+                  ? 'font-medium capitalize'
+                  : isTheEdge || isCustomProgram
+                    ? 'font-normal normal-case'
+                    : 'font-normal capitalize',
               )}
               style={{
                 fontSize: 'var(--section-text-body)',
@@ -277,7 +283,11 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
               }}
               data-node-id="1060:2217"
             >
-              {isTheEdge ? (
+              {isCodeMonkey ? (
+                <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
+                  Three perspectives. Three everyday realities. One clear shift.
+                </span>
+              ) : isTheEdge ? (
                 <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
                   Three perspectives. One clear shift.
                 </span>
@@ -293,9 +303,8 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
             className="flex flex-col md:hidden"
             style={{
               gap: 'var(--english-ai-comparison-mobile-card-gap)',
-              marginTop: isCodeMonkey
-                ? 'var(--english-ai-comparison-heading-to-subtitle)'
-                : isTheEdge || !isCustomProgram
+              marginTop:
+                isCodeMonkey || isTheEdge || !isCustomProgram
                   ? 'var(--english-ai-comparison-subtitle-to-table)'
                   : 'var(--english-ai-comparison-heading-to-subtitle)',
             }}
@@ -314,9 +323,8 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
           <div
             className="hidden overflow-x-auto md:block"
             style={{
-              marginTop: isCodeMonkey
-                ? 'var(--english-ai-comparison-heading-to-subtitle)'
-                : isTheEdge || !isCustomProgram
+              marginTop:
+                isCodeMonkey || isTheEdge || !isCustomProgram
                   ? 'var(--english-ai-comparison-subtitle-to-table)'
                   : 'var(--english-ai-comparison-heading-to-subtitle)',
             }}
@@ -436,6 +444,17 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
               }}
             >
               Life skills stop being a slogan. They become a transcript.
+            </p>
+          ) : isCodeMonkey ? (
+            <p
+              className="capitalize font-body font-semibold leading-normal text-black"
+              style={{
+                fontSize: 'var(--section-text-body)',
+                fontVariationSettings: "'opsz' 14",
+                marginTop: 'var(--english-ai-comparison-table-to-footer)',
+              }}
+            >
+              Coding stops being a side project. It becomes part of how your school teaches.
             </p>
           ) : null}
         </div>

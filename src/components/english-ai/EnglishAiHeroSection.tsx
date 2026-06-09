@@ -1,7 +1,6 @@
-import theEdgeHeroIllustration from '@/assets/figma/the-edge/hero-illustration.png'
-import codeMonkeyHeroIllustration from '@/data/Group 555.png'
-import whySchoolsGif from '@/data/comp_04.gif'
-import theEdgeHeroLogoOverlay from '@/assets/figma/the-edge/hero-logo-overlay.png'
+import codeMonkeyHeroGif from '@/data/KOTHI.gif'
+import englishAiHeroGif from '@/data/ROBO.gif'
+import theEdgeHeroGif from '@/data/LOGO.gif'
 import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
 import { cn } from '@/lib/utils'
 
@@ -9,43 +8,6 @@ import type { ProgramVariant } from '@/types/program'
 
 type EnglishAiHeroSectionProps = {
   variant?: ProgramVariant
-}
-
-function TheEdgeHeroIllustration() {
-  return (
-    <div
-      className="the-edge-hero-illustration relative mx-auto w-full max-w-full shrink-0 bg-transparent lg:mx-0 lg:w-auto"
-      style={{
-        width: 'var(--english-ai-hero-illustration-w)',
-        height: 'var(--english-ai-hero-illustration-h)',
-      }}
-      data-node-id="1060:2209"
-    >
-      <img
-        src={theEdgeHeroIllustration}
-        alt=""
-        aria-hidden
-        className="absolute inset-0 size-full object-contain object-bottom"
-        data-node-id="1100:2107"
-      />
-      <div
-        className="the-edge-hero-logo absolute overflow-hidden"
-        style={{
-          width: 'var(--the-edge-hero-logo-w)',
-          height: 'var(--the-edge-hero-logo-h)',
-          left: 'var(--the-edge-hero-logo-left)',
-          top: 'var(--the-edge-hero-logo-top)',
-        }}
-        data-node-id="1100:2154"
-      >
-        <img
-          src={theEdgeHeroLogoOverlay}
-          alt="Students collaborating around the Zene leadership platform"
-          className="size-full object-contain"
-        />
-      </div>
-    </div>
-  )
 }
 
 function ProgramHeroIllustration({
@@ -80,22 +42,20 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
       : 'english-ai-hero-heading'
 
   const headingContent = isTheEdge ? (
-    <>Every student leaves with documented proof of who they are becoming.</>
+    <>
+      <span className="block max-lg:whitespace-normal xl:whitespace-nowrap">
+        Every student leaves with documented proof
+      </span>
+      <span className="block max-lg:whitespace-normal xl:whitespace-nowrap">
+        of who they are becoming.
+      </span>
+    </>
   ) : isCodeMonkey ? (
     <>
-      <span className="block whitespace-nowrap max-xl:whitespace-normal">Where every student finds</span>
+      <span className="block whitespace-nowrap max-xl:whitespace-normal">Code Monkey — the world's most loved</span>
       <span className="block whitespace-nowrap max-xl:whitespace-normal">
-        <span
-          className="inline-flex items-center bg-zene-cyan"
-          style={{
-            minHeight: 'var(--english-ai-highlight-h)',
-            paddingLeft: 'var(--english-ai-highlight-pad-x)',
-            paddingRight: 'var(--english-ai-highlight-pad-x)',
-          }}
-        >
-          their voice
-        </span>{' '}
-        in English.
+        coding program for kids
+        {', now in your school.'}
       </span>
     </>
   ) : (
@@ -112,7 +72,19 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
   const bodyContent = isTheEdge
     ? 'A research-backed life-readiness program that builds communication, critical thinking, employability, citizenship, and personal development — and gives every student a downloadable leadership profile.'
     : isCodeMonkey
-      ? 'Zene.ai is an AI-powered English program built for Indian classrooms. Every student speaks, listens, reads, and writes — every session. Every skill, measured.'
+      ? (
+          <>
+            <span className="block max-sm:inline">
+              Code Monkey is an award-winning K–12 coding curriculum used by 18,000+ schools globally. Students learn real programming languages through game-based challenges, starting from Pre-K with block coding and building all the way to AI, data science, and high-school computer science.{' '}
+            </span>
+            <span
+              className="block max-sm:inline font-normal"
+              style={{ marginTop: '30px' }}
+            >
+              Zene brings Code Monkey to Indian schools — with localized onboarding, teacher training, and cohort support.
+            </span>
+          </>
+        )
       : (
           <>
             <span className="block max-sm:inline">
@@ -131,7 +103,7 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
   const eyebrowContent = isTheEdge
     ? 'Life-readiness for Grades 6–12'
     : isCodeMonkey
-      ? 'For Schools · Grades 3–10'
+      ? 'In partnership with CodeMonkey Studios'
       : 'The AI English Speaking Lab'
 
   return (
@@ -223,7 +195,10 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
                 </div>
 
                 <div className="flex w-full min-w-0 items-end justify-center sm:justify-end">
-                  <TheEdgeHeroIllustration />
+                  <ProgramHeroIllustration
+                    src={theEdgeHeroGif}
+                    alt="Students collaborating around the Zene leadership platform"
+                  />
                 </div>
               </div>
             </div>
@@ -282,7 +257,7 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
 
                 <div className="flex w-full min-w-0 items-end justify-center sm:justify-end">
                   <ProgramHeroIllustration
-                    src={isCodeMonkey ? codeMonkeyHeroIllustration : whySchoolsGif}
+                    src={isCodeMonkey ? codeMonkeyHeroGif : englishAiHeroGif}
                     alt={
                       isCodeMonkey
                         ? 'CodeMonkey students with the monkey mascot'

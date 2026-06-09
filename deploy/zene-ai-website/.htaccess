@@ -1,4 +1,10 @@
 # Zene AI — React SPA routing for Apache (Hostinger hPanel)
+<IfModule mod_mime.c>
+  AddType video/mp4 .mp4
+  AddType video/webm .webm
+  AddType image/gif .gif
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /

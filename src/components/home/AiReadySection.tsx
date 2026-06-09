@@ -98,7 +98,7 @@ export function AiReadySection({ variant = 'default' }: { variant?: 'home' | 'de
             }}
             data-node-id="765:1863"
           >
-            Data your school could not see before — until now
+            See what was always hidden.
           </p>
 
           <h2

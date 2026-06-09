@@ -566,8 +566,8 @@
   --about-hero-robot-padding-right  : 30px;
   --about-hero-robot-inset-bottom   : var(--about-hero-padding-bottom);
   --about-hero-apply-margin-right   : 50px;
-  --about-hero-robot-w              : calc(360px * var(--media-size));
-  --about-hero-robot-h              : calc(440px * var(--media-size));
+  --about-hero-robot-w              : calc(520px * var(--media-size));
+  --about-hero-robot-h              : calc(640px * var(--media-size));
 
   /* About page — Why we exist — Figma 1054:2191 / 1047:1944 */
   --about-why-padding-top           : 80px;
@@ -580,8 +580,8 @@
   --about-why-exist-highlight-pad-x : calc(16px * var(--header-font-scale));
   --about-why-heading-to-body       : calc(30px * var(--header-font-scale));
   --about-why-body-paragraph-gap    : calc(20px * var(--header-font-scale));
-  --about-why-body-size             : 18px;
-  --about-why-body-weight           : 500;
+  --about-why-body-size             : var(--section-text-body);
+  --about-why-body-weight           : 400;
   --about-why-body-max-w            : calc(697px * var(--header-font-scale));
   --about-why-body-to-tagline       : calc(48px * var(--header-font-scale));
   --about-why-tagline-size          : calc(38px * var(--type-size));
@@ -732,7 +732,7 @@
   /* --- Typography scale ------------------------------------ */
   --text-xs   : 0.6rem;
   --text-sm   : 0.7rem;
-  --text-base : 0.8rem;
+  --text-base : 1.2rem;
   --text-lg   : 0.9rem;
   --text-xl   : 1rem;
   --text-2xl  : 1.2rem;
@@ -914,7 +914,6 @@
     --about-why-exist-highlight-h   : calc(58px * var(--header-font-scale));
     --about-why-exist-highlight-pad-x: calc(12px * var(--header-font-scale));
     --about-why-heading-to-body     : calc(24px * var(--header-font-scale));
-    --about-why-body-size           : 18px;
     --about-why-body-max-w          : 100%;
     --about-why-body-to-tagline     : calc(28px * var(--header-font-scale));
     --about-why-tagline-size        : calc(28px * var(--type-size));
@@ -1050,6 +1049,7 @@
 
 @media (max-width: 639px) {
   :root {
+    --text-base : 0.9rem;
     --section-text-eyebrow        : calc(20px * var(--type-size));
     --header-font-scale           : 0.62;
     --header-announcement-h       : auto;
@@ -1078,6 +1078,7 @@
     --section-heading-line-gap      : 8px;
     --hero-padding-x                : 20px;
     --footer-padding-x              : 20px;
+    --footer-text-body              : 16px;
     --cohort-logo-padding-x         : 12px;
     --cohort-logo-row-gap             : calc(40px * var(--media-size));
     --cohort-grid-col-gap             : calc(16px * var(--header-font-scale));
@@ -1117,8 +1118,8 @@
     --action-feature-img-h          : calc(80px * var(--media-scale) / var(--header-font-scale));
 
     --why-marquee-text              : var(--section-text-heading);
-    --why-marquee-bottom            : calc(24px * var(--header-font-scale));
-    --why-marquee-offset-top        : 0px;
+    --why-marquee-bottom            : 10px;
+    --why-marquee-offset-top        : 10px;
     --why-students-w                : min(100%, calc(640px * var(--media-size)));
     --why-gif-offset-left           : 0px;
 
@@ -1268,7 +1269,6 @@
     --about-why-exist-highlight-h   : calc(44px * var(--header-font-scale));
     --about-why-exist-highlight-pad-x: calc(10px * var(--header-font-scale));
     --about-why-heading-to-body     : calc(16px * var(--header-font-scale));
-    --about-why-body-size           : 18px;
     --about-why-body-max-w          : 100%;
     --about-why-body-to-tagline     : calc(20px * var(--header-font-scale));
     --about-why-tagline-size        : calc(20px * var(--type-size));
@@ -1288,7 +1288,7 @@
     --about-brings-feature-img-w    : min(100%, calc(360px * var(--media-size)));
     --about-brings-feature-img-h    : calc(240px * var(--media-size));
     --about-brings-feature-img-to-label: calc(20px * var(--media-size));
-    --about-brings-title-size       : calc(20px * var(--type-size));
+    --about-brings-title-size       : 15px;
     --about-brings-description-size : calc(16px * var(--type-size));
     --about-brings-label-max-w      : 100%;
     --about-brings-carousel-to-dots : calc(20px * var(--header-font-scale));

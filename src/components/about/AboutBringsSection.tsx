@@ -132,22 +132,22 @@ function AboutBringsFeatureTitle({ feature }: { feature: AboutBringsFeature }) {
   if (feature.titleLines) {
     return (
       <div
-        className="mb-0 w-full max-w-[var(--about-brings-label-max-w)] text-center font-heading font-medium uppercase leading-normal text-black"
+        className="about-brings-feature__title mb-0 w-full max-w-[var(--about-brings-label-max-w)] text-center font-heading font-medium uppercase leading-normal text-black"
         style={{
           fontSize: 'var(--about-brings-title-size)',
           marginTop: 'var(--about-brings-feature-img-to-label)',
         }}
         data-node-id={feature.titleNodeId}
       >
-        <span className="block">{feature.titleLines[0]}</span>
-        <span className="block">{feature.titleLines[1]}</span>
+        <span className="about-brings-feature__title-line block">{feature.titleLines[0]}</span>
+        <span className="about-brings-feature__title-line block">{feature.titleLines[1]}</span>
       </div>
     )
   }
 
   return (
     <p
-      className="mb-0 w-full max-w-[var(--about-brings-label-max-w)] text-center font-heading font-medium uppercase leading-normal text-black"
+      className="about-brings-feature__title mb-0 w-full max-w-[var(--about-brings-label-max-w)] text-center font-heading font-medium uppercase leading-normal text-black"
       style={{
         fontSize: 'var(--about-brings-title-size)',
         marginTop: 'var(--about-brings-feature-img-to-label)',
@@ -447,6 +447,7 @@ export function AboutBringsSection({
 
   return (
     <section
+      id={sectionId}
       className="w-full px-[5px] pt-[5px]"
       aria-labelledby={headingId}
       data-node-id="1055:2192"

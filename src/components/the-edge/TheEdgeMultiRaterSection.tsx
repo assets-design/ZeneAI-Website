@@ -270,6 +270,9 @@ export function TheEdgeMultiRaterSection() {
               fontSize: 'var(--the-edge-multi-rater-footer-size)',
               maxWidth: 'var(--the-edge-multi-rater-footer-max-w)',
               marginTop: 'var(--the-edge-multi-rater-items-to-footer)',
+              textAlign: 'center',
+              marginLeft: 'auto',
+              marginRight: 'auto',
             }}
             data-node-id="1126:2467"
           >
