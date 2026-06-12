@@ -190,12 +190,6 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
   const withoutLabel = isTheEdge ? 'Without The Edge' : 'Without Zene'
   const withLabel = isTheEdge ? 'With The Edge' : 'With Zene'
 
-  const highlightStyle = {
-    minHeight: 'var(--english-ai-highlight-h)',
-    paddingLeft: 'var(--english-ai-highlight-pad-x)',
-    paddingRight: 'var(--english-ai-highlight-pad-x)',
-  } as const
-
   return (
     <section
       className="w-full px-[5px] pt-[5px]"
@@ -235,33 +229,32 @@ export function EnglishAiComparisonSection({ variant = 'english-ai' }: EnglishAi
             data-node-id="1060:2306"
           >
             {isCodeMonkey ? (
-              <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
+              <>
                 What your{' '}
-                <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                <span className="heading-highlight">
                   school looks like,
                 </span>{' '}
                 with and without Code Monkey.
-              </span>
+              </>
             ) : isTheEdge ? (
-              <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
+              <>
                 What your{' '}
-                <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                <span className="heading-highlight">
                   school looks like,
                 </span>{' '}
                 with and without The Edge.
-              </span>
+              </>
             ) : (
-              <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
+              <>
                 What your{' '}
                 <span
-                  className="inline-flex items-center bg-zene-cyan"
-                  style={highlightStyle}
+                  className="heading-highlight"
                   data-node-id="1060:2305"
                 >
                   school looks like,
                 </span>{' '}
                 with and without Zene.
-              </span>
+              </>
             )}
           </h2>
 

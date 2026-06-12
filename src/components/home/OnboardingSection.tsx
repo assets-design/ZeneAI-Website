@@ -121,12 +121,6 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
       ? 'code-monkey-onboarding-heading'
       : 'onboarding-heading'
 
-  const highlightStyle = {
-    minHeight: 'var(--english-ai-highlight-h)',
-    paddingLeft: 'var(--english-ai-highlight-pad-x)',
-    paddingRight: 'var(--english-ai-highlight-pad-x)',
-  } as const
-
   return (
     <section
       id="onboarding"
@@ -169,8 +163,7 @@ export function OnboardingSection({ variant = 'home' }: OnboardingSectionProps) 
           >
             We onboard{' '}
             <span
-              className={isCustomProgram ? 'inline-flex items-center bg-zene-cyan' : 'bg-[#78F3FA]'}
-              style={isCustomProgram ? highlightStyle : undefined}
+              className='heading-highlight'
               data-node-id={isProgramPage ? '1060:2344' : '767:1879'}
             >
               a limited number

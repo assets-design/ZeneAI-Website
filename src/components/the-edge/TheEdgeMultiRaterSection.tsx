@@ -41,12 +41,6 @@ const FEATURES = [
   },
 ] as const
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 function FeatureCard({
   image,
   title,
@@ -236,7 +230,7 @@ export function TheEdgeMultiRaterSection() {
             data-node-id="1100:2166"
           >
             Multi-rater.{' '}
-            <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+            <span className="heading-highlight">
               Research-backed.
             </span>
           </h2>

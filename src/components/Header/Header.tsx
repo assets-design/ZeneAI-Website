@@ -301,8 +301,10 @@ export function Header({
           <div className={navOverlayMode ? undefined : 'min-h-0 overflow-hidden'}>
             <div
               className={cn(
-                'flex h-header-nav items-center justify-between overflow-hidden bg-header-gradient px-6 sm:px-10 lg:px-[115px]',
-                showAnnouncement ? '-mt-[10px] rounded-b-header-nav' : 'rounded-header-nav shadow-[0_0_4px_rgba(0,0,0,0.25)]',
+                'site-header-nav flex h-header-nav items-center justify-between overflow-hidden bg-header-gradient px-6 sm:px-10 lg:px-[115px]',
+                showAnnouncement
+                  ? 'site-header-nav--below-announcement -mt-[10px] rounded-b-header-nav'
+                  : 'rounded-header-nav shadow-[0_0_4px_rgba(0,0,0,0.25)]',
               )}
               data-node-id="967:1777"
             >
@@ -321,7 +323,7 @@ export function Header({
           <div className="flex items-center gap-2 sm:gap-4 lg:gap-8">
             <a
               href="#pdf"
-              className="hidden items-center justify-center rounded-header-pdf bg-white px-4 font-heading capitalize leading-none text-black sm:inline-flex sm:px-6"
+              className="relative hidden items-center justify-center px-4 font-heading capitalize leading-none text-black no-underline transition-none hover:text-black sm:inline-flex sm:px-6"
               style={{
                 height: 'var(--header-pdf-h)',
                 minWidth: 'var(--header-pdf-min-w)',
@@ -329,7 +331,17 @@ export function Header({
               }}
               data-node-id="967:1779"
             >
-              <span data-node-id="967:1780">Get the PDF</span>
+              <span
+                className="rotating-split-border absolute inset-0"
+                style={{
+                  borderWidth: 'calc(2px * var(--header-font-scale))',
+                  borderRadius: 'var(--header-pdf-radius)',
+                }}
+                aria-hidden
+              />
+              <span className="relative z-[1]" data-node-id="967:1780">
+                Get the PDF
+              </span>
             </a>
 
             <button

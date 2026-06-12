@@ -102,8 +102,9 @@ export function HeroSection() {
             }}
             data-node-id="642:1130"
           >
-            <span className="block">The English speaking practice</span>
-            <span className="block">your timetable cannot fit.</span>
+            The English speaking practice
+            <br />
+            your timetable cannot fit.
           </h1>
 
           <p
@@ -133,7 +134,7 @@ export function HeroSection() {
             }}
           >
             {TRUST_BADGES.map(badge => (
-              <li key={badge.lines.join(' ')} className="flex min-w-0 flex-col items-center text-center">
+              <li key={badge.lines.join(' ')} className="hero-badge-item flex min-w-0 flex-col items-center text-center">
                 <img
                   src={badge.image}
                   alt={badge.alt}

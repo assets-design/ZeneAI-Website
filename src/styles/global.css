@@ -6,18 +6,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Section titles — extra breathing room between wrapped/stacked lines */
+/* Section titles — shared line-height (see --section-heading-line-height) */
 @layer utilities {
-  :is(h1, h2, h3).font-heading.font-medium.uppercase.leading-none {
+  :is(h1, h2, h3).font-heading.font-medium.uppercase {
     line-height: var(--section-heading-line-height);
   }
 
-  :is(h1, h2, h3).font-heading > .block + .block {
-    margin-top: var(--section-heading-line-gap);
+  /* Cyan highlight — background hugs highlighted words only (no fixed-height box) */
+  .heading-highlight {
+    background-color: var(--color-zene-cyan);
   }
 }
 
-/* Animated 50/50 conic border — sweeps left→right, then right→left, loops */
+/* Animated header-gradient pill border — same motion as Apply Now */
 @property --border-angle {
   syntax: '<angle>';
   initial-value: 0deg;
@@ -98,29 +99,24 @@
     .container { padding: 0 var(--spacing-md); }
   }
 
-  /* 50% #177EC0 + 50% #78F3FA — sweeps L→R, then R→L, loops */
+  /* Header gradient on border; angle rotates via --border-angle (Apply Now pill) */
   .rotating-split-border {
     --border-angle: 0deg;
+    --rotating-split-border-fill: #ffffff;
     border-style: solid;
     border-color: transparent;
     background:
-      linear-gradient(#ffffff, #ffffff) padding-box,
-      conic-gradient(
-        from var(--border-angle),
-        #177EC0 0deg 180deg,
-        #78F3FA 180deg 360deg
+      linear-gradient(var(--rotating-split-border-fill), var(--rotating-split-border-fill)) padding-box,
+      linear-gradient(
+        calc(var(--border-angle) + var(--gradient-header-angle)),
+        var(--color-zene-blue) var(--gradient-header-blue-stop),
+        var(--color-zene-cyan) 100%
       ) border-box;
     animation: rotating-split-border-angle 2.5s linear infinite alternate;
   }
 
   .apply-cta-yellow .rotating-split-border {
-    background:
-      linear-gradient(var(--color-zene-yellow), var(--color-zene-yellow)) padding-box,
-      conic-gradient(
-        from var(--border-angle),
-        #177EC0 0deg 180deg,
-        #78F3FA 180deg 360deg
-      ) border-box;
+    --rotating-split-border-fill: var(--color-zene-yellow);
   }
 
   @media (min-width: 1280px) {
@@ -202,9 +198,43 @@
 
   /* Footer — mobile: larger body text (tagline, links, copyright) */
   @media (max-width: 639px) {
+    header .site-header-nav.site-header-nav--below-announcement {
+      margin-top: -3px;
+    }
+
     footer .font-body {
       font-size: var(--footer-text-body) !important;
       font-variation-settings: 'opsz' 16;
+    }
+
+    footer .footer-link-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: calc(24px * var(--header-font-scale));
+      row-gap: calc(40px * var(--header-font-scale));
+    }
+
+    footer .footer-link-columns > :last-child {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Footer — tablet: brand left, link columns right */
+  @media (min-width: 640px) and (max-width: 1279px) {
+    footer .footer-top {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: calc(48px * var(--header-font-scale));
+    }
+
+    footer .footer-brand {
+      flex: 0 0 auto;
+      max-width: min(var(--footer-tagline-max-w), 38%);
+    }
+
+    footer .footer-link-columns {
+      flex: 1 1 auto;
+      min-width: 0;
     }
   }
 
@@ -281,7 +311,7 @@
     --the-edge-framework-title-to-body: calc(14px * var(--media-size));
     --the-edge-framework-detail-body-max-w: calc(625px * var(--media-size));
     --the-edge-framework-detail-copy-min-h: calc(118px * var(--media-size));
-    --the-edge-framework-indicator-size: calc(10px * var(--media-size));
+    --the-edge-framework-ring-dot-size: 15px;
   }
 
   .the-edge-framework-diagram {
@@ -337,8 +367,9 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: var(--the-edge-framework-indicator-size);
-    height: var(--the-edge-framework-indicator-size);
+    display: block;
+    width: var(--the-edge-framework-ring-dot-size);
+    height: var(--the-edge-framework-ring-dot-size);
     transform: translateX(var(--the-edge-framework-ring-radius)) translate(-50%, -50%);
     border-radius: 9999px;
     background: #000;
@@ -358,20 +389,33 @@
     }
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    .the-edge-framework-ring-dot {
+      animation: none;
+    }
+
+    .the-edge-framework-dot-orbit {
+      transition: none;
+    }
+  }
+
   .the-edge-framework-detail-image {
     flex-shrink: 0;
     width: var(--the-edge-framework-detail-image-w);
     max-width: 100%;
-    height: var(--the-edge-framework-detail-image-h);
+    height: auto;
+    max-height: var(--the-edge-framework-detail-image-h);
     border-radius: var(--the-edge-framework-detail-image-radius);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.12);
+    overflow: visible;
   }
 
   .the-edge-framework-detail-image img {
     display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-height: var(--the-edge-framework-detail-image-h);
+    object-fit: contain;
     object-position: center;
   }
 
@@ -418,13 +462,15 @@
       margin-inline: auto;
       padding: 0;
       background-color: #fff;
+      height: auto;
+      max-height: var(--the-edge-framework-detail-image-h);
     }
 
     .the-edge-framework-detail-image img {
       width: 100%;
-      height: 100%;
+      height: auto;
       max-width: 100%;
-      max-height: 100%;
+      max-height: var(--the-edge-framework-detail-image-h);
       object-fit: contain;
       object-position: center;
     }
@@ -1020,7 +1066,6 @@
   /* The Edge testimonials — heading left, two cards, partner logos */
   .the-edge-testimonials {
     --the-edge-testimonials-heading-col-w: calc(413px * var(--header-font-scale));
-    --the-edge-testimonials-heading-line-gap: calc(14px * var(--header-font-scale));
     --the-edge-testimonials-columns-gap: calc(48px * var(--header-font-scale));
     --the-edge-testimonials-row-gap: calc(32px * var(--header-font-scale));
     --the-edge-testimonials-card-gap: calc(45px * var(--header-font-scale));
@@ -1316,6 +1361,31 @@
 
 #home-hero .hero-badge-description__line {
   display: block;
+}
+
+/* Home hero badges — tablet + desktop: align description text on one line across columns */
+@media (min-width: 640px) {
+  #home-hero .hero-badge-item {
+    display: grid;
+    grid-template-rows: var(--hero-badge-image-slot-h) auto;
+    justify-items: center;
+    row-gap: var(--hero-gap);
+    align-content: start;
+  }
+
+  #home-hero .hero-badge-item > img {
+    grid-row: 1;
+    align-self: end;
+    justify-self: center;
+    height: auto !important;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  #home-hero .hero-badge-item > .hero-badge-description {
+    grid-row: 2;
+    margin-top: 0 !important;
+  }
 }
 
 #home-hero .home-hero-description {
@@ -2147,6 +2217,18 @@
     object-fit: cover;
     object-position: top center;
   }
+
+  /* Product intro — mobile home + about: video above copy in tab panels */
+  .program-page-scroll--home #product-intro .product-tab-panel,
+  .program-page-scroll--about #product-intro .product-tab-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .program-page-scroll--home #product-intro .product-tab-media,
+  .program-page-scroll--about #product-intro .product-tab-media {
+    order: -1;
+  }
 }
 
 /* Section white cards — flat top, rounded bottom corners only */
@@ -2276,11 +2358,75 @@
   max-width: 100%;
 }
 
+.blog-post-page .blog-post-feature-wrap {
+  display: block;
+  width: calc(var(--blog-post-feature-h) * 1024 / 682);
+  max-width: 100%;
+  height: var(--blog-post-feature-h);
+  vertical-align: top;
+  overflow: hidden;
+  border-radius: var(--blog-card-image-radius);
+  background-color: #ffffff;
+}
+
+.blog-post-page .blog-post-feature-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left center;
+  background-color: #ffffff;
+}
+
+.blog-post-page .blog-post-feature-caption {
+  container-type: inline-size;
+  container-name: blog-post-caption;
+}
+
+.blog-post-page .blog-post-page__title {
+  margin-top: var(--blog-card-image-to-title);
+  max-width: 100%;
+  line-height: 1.15;
+  white-space: nowrap;
+  font-size: min(
+    var(--blog-post-title-size),
+    calc(100cqw / 52)
+  );
+}
+
 .blog-post-page .blog-post-content p,
 .blog-post-page .blog-post-content h2,
 .content-page .blog-post-content p,
 .content-page .blog-post-content h2 {
   max-width: 100%;
+}
+
+/* Blog listing — clamp card title and description to two lines */
+.blog-page .blog-post-card__title,
+.blog-page .blog-post-card__description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-page .blog-post-card__image-wrap {
+  background-color: #ffffff;
+  isolation: isolate;
+}
+
+.blog-page .blog-post-card__image-wrap img {
+  display: block;
+  background-color: #ffffff;
+}
+
+.blog-page .blog-post-card__title {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.blog-page .blog-post-card__description {
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
 }
 
 /* Blog + Careers listing — tablet: Apply Now top-right, three cards per row */

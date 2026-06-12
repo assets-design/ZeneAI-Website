@@ -311,12 +311,6 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
     setOpenIndex(index)
   }
 
-  const highlightStyle = {
-    minHeight: 'var(--english-ai-highlight-h)',
-    paddingLeft: 'var(--english-ai-highlight-pad-x)',
-    paddingRight: 'var(--english-ai-highlight-pad-x)',
-  } as const
-
   return (
     <section
       id="faqs"
@@ -361,8 +355,7 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
               <>
                 <span data-node-id="975:1947">Frequently asked </span>
                 <span
-                  className="inline-flex items-center bg-zene-cyan"
-                  style={highlightStyle}
+                  className="heading-highlight"
                   data-node-id="975:1950"
                 >
                   questions.
@@ -371,7 +364,7 @@ export function FaqSection({ variant = 'home' }: FaqSectionProps) {
             ) : (
               <>
                 <span data-node-id="975:1947">Frequently asked </span>
-                <span className="bg-[#78F3FA]" data-node-id="975:1950">
+                <span className="heading-highlight" data-node-id="975:1950">
                   Questions
                 </span>
               </>

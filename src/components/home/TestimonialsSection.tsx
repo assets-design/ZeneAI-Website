@@ -15,10 +15,25 @@ const TESTIMONIALS: Testimonial[] = [
     nodeId: '218:1373',
   },
   {
-    name: 'Priya M.',
-    quote: "My daughter's confidence has soared. The personalized approach really works.",
+    name: 'Fr. Thomas Mathew',
+    quote:
+      "Our students don't feel like they're studying — they think they're playing. But the results in reading and comprehension after just one term tell a different story.",
     bg: '#fef18b',
     nodeId: '218:1383',
+  },
+  {
+    name: 'Sunita Rao',
+    quote:
+      "The AI doesn't just flag errors — it tells students exactly how to fix them. That's what makes kids practice on their own without being pushed.",
+    bg: '#c9e4fe',
+    nodeId: '218:1393',
+  },
+  {
+    name: 'Rahim Shaikh',
+    quote:
+      "Easy to roll out, great support team. But the best part? Parents are calling us to say their children are reading at home. That doesn't happen often.",
+    bg: '#e8d4fc',
+    nodeId: '218:1403',
   },
 ]
 
@@ -49,16 +64,12 @@ function TestimonialsHeader({ variant }: { variant: 'home' | 'about' }) {
           }}
           data-node-id="642:1344"
         >
-        <span className="block" data-node-id="642:1345">
+        <span data-node-id="642:1345">
           Real Students.
         </span>
+        <br />
         <span
-          className="mt-[var(--section-gap)] inline-flex items-center bg-zene-cyan"
-          style={{
-            minHeight: 'var(--about-highlight-h)',
-            paddingLeft: 'var(--about-highlight-pad-x)',
-            paddingRight: 'var(--about-highlight-pad-x)',
-          }}
+          className="heading-highlight"
           data-node-id="642:1348"
         >
           Real Progress.
@@ -92,7 +103,7 @@ function TestimonialsHeader({ variant }: { variant: 'home' | 'about' }) {
         data-node-id="767:1953"
       >
         What schools{' '}
-        <span className="bg-[#78F3FA]" data-node-id="767:1955">
+        <span className="heading-highlight" data-node-id="767:1955">
           say after their first
         </span>{' '}
         term with Zene.

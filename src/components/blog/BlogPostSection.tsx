@@ -140,29 +140,20 @@ export function BlogPostSection({ post }: BlogPostSectionProps) {
           </div>
 
           <div
-            className="blog-post-feature-wrap w-full overflow-hidden"
-            style={{
-              marginTop: 'var(--blog-post-header-to-feature)',
-              borderRadius: 'var(--blog-card-image-radius)',
-              maxHeight: 'var(--blog-post-feature-h)',
-            }}
+            className="blog-post-feature-wrap"
+            style={{ marginTop: 'var(--blog-post-header-to-feature)' }}
           >
             <img
               src={post.image}
               alt=""
-              className="h-full w-full object-cover"
-              style={{ minHeight: 'var(--blog-post-feature-h)' }}
+              className="blog-post-feature-image"
             />
           </div>
 
           <div className="blog-post-feature-caption w-full min-w-0 max-w-none">
             <h1
               id="blog-post-heading"
-              className="blog-post-card__title w-full max-w-none capitalize font-body font-semibold leading-normal text-black"
-              style={{
-                fontSize: 'var(--blog-card-title-size)',
-                marginTop: 'var(--blog-card-image-to-title)',
-              }}
+              className="blog-post-page__title blog-post-card__title w-full max-w-none capitalize font-body font-semibold text-black"
             >
               {post.title}
             </h1>
@@ -170,7 +161,7 @@ export function BlogPostSection({ post }: BlogPostSectionProps) {
             <p
               className="blog-post-card__description w-full max-w-none capitalize font-body font-normal leading-normal text-black"
               style={{
-                fontSize: 'var(--blog-card-body-size)',
+                fontSize: 'var(--blog-post-description-size)',
                 fontVariationSettings: "'opsz' 14",
                 marginTop: 'var(--blog-card-title-to-body)',
               }}

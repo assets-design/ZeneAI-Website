@@ -9,12 +9,6 @@ type BlogSectionProps = {
   panel?: boolean
 }
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 const BLOG_COUNT = BLOG_POSTS.length
 const LOOP_SETS = 3
 const AUTO_SLIDE_MS = 4500
@@ -435,8 +429,7 @@ export function BlogSection({ panel = false }: BlogSectionProps) {
               >
                 Ideas, Skills &{' '}
                 <span
-                  className="inline-flex items-center bg-zene-cyan"
-                  style={highlightStyle}
+                  className="heading-highlight"
                   data-node-id="1147:3604"
                 >
                   Innovation for Future-

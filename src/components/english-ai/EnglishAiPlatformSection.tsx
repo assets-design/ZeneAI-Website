@@ -103,15 +103,11 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
               >
                 {isTheEdge ? (
                   <>
-                    <span className="block whitespace-nowrap">One platform. Every</span>
-                    <span className="block whitespace-nowrap">
+                    <span className="whitespace-nowrap">One platform. Every</span>
+                    <br />
+                    <span className="whitespace-nowrap">
                       <span
-                        className="inline-flex items-center bg-zene-cyan"
-                        style={{
-                          minHeight: 'var(--english-ai-highlight-h)',
-                          paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                          paddingRight: 'var(--english-ai-highlight-pad-x)',
-                        }}
+                        className="heading-highlight"
                       >
                         leadership skill
                       </span>{' '}
@@ -120,16 +116,12 @@ export function EnglishAiPlatformSection({ variant = 'english-ai' }: EnglishAiPl
                   </>
                 ) : (
                   <>
-                    <span className="block whitespace-nowrap">One platform. Every</span>
-                    <span className="block whitespace-nowrap">
+                    <span className="whitespace-nowrap">One platform. Every</span>
+                    <br />
+                    <span className="whitespace-nowrap">
                       English{' '}
                       <span
-                        className="inline-flex items-center bg-zene-cyan"
-                        style={{
-                          minHeight: 'var(--english-ai-highlight-h)',
-                          paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                          paddingRight: 'var(--english-ai-highlight-pad-x)',
-                        }}
+                        className="heading-highlight"
                         data-node-id="1060:2223"
                       >
                         skill covered.

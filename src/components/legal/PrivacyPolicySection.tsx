@@ -1,5 +1,5 @@
 import { ContentArticle } from '@/components/content/ContentArticle'
-import { ContentPageShell, highlightStyle } from '@/components/content/ContentPageShell'
+import { ContentPageShell } from '@/components/content/ContentPageShell'
 import { PRIVACY_POLICY_META, PRIVACY_POLICY_SECTIONS } from '@/data/privacyPolicy'
 import { Link } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ export function PrivacyPolicySection() {
       title={
         <>
           Privacy{' '}
-          <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+          <span className="heading-highlight">
             Policy
           </span>
         </>

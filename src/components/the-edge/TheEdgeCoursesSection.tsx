@@ -37,12 +37,6 @@ const COURSE_COUNT = COURSES.length
 const LOOP_SETS = 3
 const AUTO_SLIDE_MS = 4500
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 function getVisibleCount(width: number) {
   if (width >= 1280) return 4
   if (width >= 640) return 2
@@ -418,7 +412,7 @@ export function TheEdgeCoursesSection() {
             data-node-id="1100:2236"
           >
             The edge{' '}
-            <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+            <span className="heading-highlight">
               courses
             </span>
           </h2>

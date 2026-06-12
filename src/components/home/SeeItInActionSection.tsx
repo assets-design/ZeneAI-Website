@@ -143,7 +143,7 @@ export function SeeItInActionSection() {
                 data-node-id="751:1650"
               >
                 Watch what{' '}
-                <span className="bg-[#78F3FA]" data-node-id="751:1649">
+                <span className="heading-highlight" data-node-id="751:1649">
                   your school
                 </span>{' '}
                 has never been able to measure.

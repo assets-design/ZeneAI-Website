@@ -636,20 +636,16 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
           }}
           data-node-id="642:1396"
         >
-        <span className="block" data-node-id="642:1397">
+        <span data-node-id="642:1397">
           trusted by
         </span>
+        <br />
         <span
-          className="mt-[var(--section-gap)] flex flex-nowrap items-end"
+          className="flex flex-nowrap items-end"
           style={{ gap: 'var(--about-partners-heading-word-gap)' }}
         >
           <span
-            className="inline-flex shrink-0 items-center bg-zene-cyan"
-            style={{
-              minHeight: 'var(--about-highlight-h)',
-              paddingLeft: 'var(--about-highlight-pad-x)',
-              paddingRight: 'var(--about-highlight-pad-x)',
-            }}
+            className="heading-highlight shrink-0"
             data-node-id="642:1400"
           >
             education
@@ -664,11 +660,6 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
   }
 
   const isCustomProgram = variant === 'code-monkey' || variant === 'the-edge'
-  const highlightStyle = {
-    minHeight: 'var(--english-ai-highlight-h)',
-    paddingLeft: 'var(--english-ai-highlight-pad-x)',
-    paddingRight: 'var(--english-ai-highlight-pad-x)',
-  } as const
 
   return (
     <>
@@ -700,14 +691,14 @@ function CohortHeader({ variant }: { variant: 'home' | 'about' | 'code-monkey' |
         {variant === 'the-edge' ? (
           <>
             Real students.{' '}
-            <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+            <span className="heading-highlight">
               Real progress.
             </span>
           </>
         ) : (
           <>
             Schools currently in the{' '}
-            <span className="bg-[#78F3FA]" data-node-id="975:1930">
+            <span className="heading-highlight" data-node-id="975:1930">
               Zene cohort.
             </span>
           </>

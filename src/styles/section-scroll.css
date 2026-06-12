@@ -1300,6 +1300,14 @@ html.section-scroll-active body {
     justify-content: flex-end;
     margin-bottom: 30px;
   }
+
+  /* Home + About testimonials — desktop: keep arrows inside section padding, cards closer to nav */
+  .program-page-scroll--home .testimonials-carousel-wrap,
+  .program-page-scroll--about .testimonials-carousel-wrap {
+    --testimonial-carousel-pl: var(--section-padding-x);
+    --testimonial-arrow-to-track: calc(24px * var(--header-font-scale));
+    --testimonial-fade-w: calc(40px * var(--header-font-scale));
+  }
 }
 
 @media (max-width: 1279px) {

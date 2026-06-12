@@ -2,11 +2,7 @@ import { ApplyNowButton } from '@/components/ApplyNowButton/ApplyNowButton'
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
+const HEADING_HIGHLIGHT_CLASS = 'heading-highlight'
 
 type ContentPageShellProps = {
   headingId: string
@@ -116,4 +112,4 @@ export function ContentPageShell({
   )
 }
 
-export { highlightStyle }
+export { HEADING_HIGHLIGHT_CLASS }

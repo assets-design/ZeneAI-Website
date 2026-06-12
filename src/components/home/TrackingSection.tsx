@@ -42,7 +42,7 @@ export function TrackingSection() {
             data-node-id="762:1691"
           >
             What schools can now{' '}
-            <span className="bg-[#78F3FA]" data-node-id="762:1690">
+            <span className="heading-highlight" data-node-id="762:1690">
               TRACK
             </span>{' '}
             for the first time

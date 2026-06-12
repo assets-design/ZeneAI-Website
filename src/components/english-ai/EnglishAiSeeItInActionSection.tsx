@@ -157,12 +157,7 @@ export function EnglishAiSeeItInActionSection({
               <>
                 Where skills{' '}
                 <span
-                  className="inline-flex items-center bg-zene-cyan"
-                  style={{
-                    minHeight: 'var(--english-ai-highlight-h)',
-                    paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                    paddingRight: 'var(--english-ai-highlight-pad-x)',
-                  }}
+                  className="heading-highlight"
                 >
                   become experience.
                 </span>
@@ -171,12 +166,7 @@ export function EnglishAiSeeItInActionSection({
               <>
                 One session.{' '}
                 <span
-                  className={isCustomProgram ? 'inline-flex items-center bg-zene-cyan' : 'inline-block bg-[#78F3FA]'}
-                  style={{
-                    minHeight: 'var(--english-ai-highlight-h)',
-                    paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                    paddingRight: 'var(--english-ai-highlight-pad-x)',
-                  }}
+                  className='heading-highlight'
                   data-node-id="1060:2324"
                 >
                   One student.

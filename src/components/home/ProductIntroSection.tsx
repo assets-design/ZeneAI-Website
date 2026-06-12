@@ -220,7 +220,7 @@ export function ProductIntroSection() {
               data-node-id="751:510"
             >
               Built for{' '}
-              <span className="bg-[#78F3FA]" data-node-id="751:509">
+              <span className="heading-highlight" data-node-id="751:509">
                 every learner
               </span>{' '}
               in your school.

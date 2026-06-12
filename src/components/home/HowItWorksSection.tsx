@@ -327,12 +327,7 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
                 <>
                   How{' '}
                   <span
-                    className="inline-flex items-center bg-zene-cyan"
-                    style={{
-                      minHeight: 'var(--english-ai-highlight-h)',
-                      paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                      paddingRight: 'var(--english-ai-highlight-pad-x)',
-                    }}
+                    className="heading-highlight"
                     data-node-id="1060:2328"
                   >
                     Zene Works.
@@ -342,12 +337,7 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
                 <>
                   How{' '}
                   <span
-                    className="inline-flex items-center bg-zene-cyan"
-                    style={{
-                      minHeight: 'var(--english-ai-highlight-h)',
-                      paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                      paddingRight: 'var(--english-ai-highlight-pad-x)',
-                    }}
+                    className="heading-highlight"
                     data-node-id="1060:2328"
                   >
                     Zene
@@ -357,14 +347,14 @@ export function HowItWorksSection({ variant = 'home' }: HowItWorksSectionProps) 
               ) : isEnglishAi ? (
                 <>
                   How{' '}
-                  <span className="bg-[#78F3FA]" data-node-id="1060:2328">
+                  <span className="heading-highlight" data-node-id="1060:2328">
                     Zene Works.
                   </span>
                 </>
               ) : (
                 <>
                   How{' '}
-                  <span className="bg-[#78F3FA]" data-node-id="642:1270">
+                  <span className="heading-highlight" data-node-id="642:1270">
                     ZENE AI
                   </span>{' '}
                   Works

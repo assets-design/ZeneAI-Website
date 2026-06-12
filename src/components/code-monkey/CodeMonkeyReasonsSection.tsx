@@ -33,12 +33,6 @@ const REASONS = [
   },
 ] as const
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 function ReasonItem({
   number,
   title,
@@ -124,7 +118,7 @@ export function CodeMonkeyReasonsSection() {
             data-node-id="1294:888"
           >
             Four reasons{' '}
-            <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+            <span className="heading-highlight">
               schools choose
             </span>{' '}
             Code Monkey.

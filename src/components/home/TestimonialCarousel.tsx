@@ -33,6 +33,9 @@ export function TestimonialCarousel({ items, variant = 'home' }: TestimonialCaro
   const useMobileHomeLayout = useMobileHomeCarousel(variant)
   const trackRef = useRef<HTMLDivElement>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
+  const touchStartXRef = useRef<number | null>(null)
+  const touchDeltaRef = useRef(0)
+  const isDraggingRef = useRef(false)
   const offsetRef = useRef(0)
   const loopWidthRef = useRef(0)
   const pausedRef = useRef(false)
@@ -126,6 +129,70 @@ export function TestimonialCarousel({ items, variant = 'home' }: TestimonialCaro
     window.addEventListener('resize', syncSlideWidth)
     return () => window.removeEventListener('resize', syncSlideWidth)
   }, [applyOffset, useMobileHomeLayout])
+
+  // Touch / swipe handling for mobile: allow finger drag to change slides
+  useEffect(() => {
+    if (!useMobileHomeLayout) return
+
+    const viewport = viewportRef.current
+    if (!viewport) return
+
+    let startX = 0
+    let startOffset = 0
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return
+      manualNavUntilRef.current = Date.now() + MANUAL_NAV_PAUSE_MS
+      isDraggingRef.current = true
+      startX = e.touches[0].clientX
+      touchStartXRef.current = startX
+      touchDeltaRef.current = 0
+      startOffset = activeIndexRef.current * slideWidthRef.current
+    }
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!isDraggingRef.current) return
+      const x = e.touches[0].clientX
+      const delta = x - (touchStartXRef.current ?? 0)
+      touchDeltaRef.current = delta
+      // apply a live drag transform for feedback
+      applyOffset(wrapOffset(startOffset - delta), 'auto')
+    }
+
+    const onTouchEnd = () => {
+      if (!isDraggingRef.current) return
+      isDraggingRef.current = false
+      const delta = touchDeltaRef.current
+      const width = slideWidthRef.current || 1
+      const threshold = Math.max(50, width * 0.15)
+
+      if (Math.abs(delta) > threshold) {
+        if (delta < 0) {
+          goToIndex(activeIndexRef.current + 1)
+        } else {
+          goToIndex(activeIndexRef.current - 1)
+        }
+      } else {
+        // snap back to current
+        goToIndex(activeIndexRef.current)
+      }
+
+      touchDeltaRef.current = 0
+      touchStartXRef.current = null
+    }
+
+    viewport.addEventListener('touchstart', onTouchStart, { passive: true })
+    viewport.addEventListener('touchmove', onTouchMove, { passive: true })
+    viewport.addEventListener('touchend', onTouchEnd)
+    viewport.addEventListener('touchcancel', onTouchEnd)
+
+    return () => {
+      viewport.removeEventListener('touchstart', onTouchStart)
+      viewport.removeEventListener('touchmove', onTouchMove)
+      viewport.removeEventListener('touchend', onTouchEnd)
+      viewport.removeEventListener('touchcancel', onTouchEnd)
+    }
+  }, [applyOffset, goToIndex, useMobileHomeLayout, wrapOffset])
 
   useEffect(() => {
     if (useMobileHomeLayout) {

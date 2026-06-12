@@ -1,4 +1,6 @@
-import blogCardImage from '@/assets/figma/blog/card-image.png'
+import blogNep2020Image from '@/assets/figma/blog/blog-nep-2020.png'
+import blogReadsEverythingImage from '@/assets/figma/blog/blog-reads-everything.png'
+import blogSilentEnglishImage from '@/assets/figma/blog/blog-silent-english.png'
 
 export type BlogPostSection = {
   heading?: string
@@ -23,13 +25,13 @@ export type BlogPost = {
 export const BLOG_POSTS: BlogPost[] = [
   {
     id: '1163:892',
-    slug: 'why-coding-is-the-new-literacy-for-students',
-    title: 'Why Coding is the New Literacy for Students',
+    slug: 'why-your-child-goes-silent-when-someone-speaks-english',
+    title: 'Why Your Child Goes Silent the Moment Someone Speaks English to Them',
     description:
-      'Coding helps students develop logical thinking, creativity, and problem-solving skills.',
-    image: blogCardImage,
+      'Is your child fluent on paper but silent in conversation? Discover why Indian school students struggle with spoken English — and how AI-powered learning is changing that.',
+    image: blogSilentEnglishImage,
     published: 'March 12, 2026',
-    readTime: '6 min read',
+    readTime: '3 min read',
     imageNodeId: '1163:894',
     titleNodeId: '1163:892',
     bodyNodeId: '1163:893',
@@ -37,48 +39,43 @@ export const BLOG_POSTS: BlogPost[] = [
     sections: [
       {
         paragraphs: [
-          'In the same way reading and writing opened doors for previous generations, coding is becoming the literacy that helps young people understand and shape the digital world around them. Schools that treat coding as a core skill—not an optional enrichment—give students tools to think clearly, create confidently, and participate in an economy transformed by software and artificial intelligence.',
+          'Picture this: a Class 7 student who scores 90% in English grammar tests. She knows her tenses, her articles, her prepositions. But ask her to introduce herself in English at a school event — and she freezes.',
+          "This isn't a rare case. It's the silent epidemic in India's English classrooms.",
         ],
       },
       {
-        heading: 'From consumers to creators',
+        heading: 'The Gap Between Knowing English and Using It',
         paragraphs: [
-          'Most students grow up using apps, games, and AI tools without seeing how they work. Learning to code shifts that relationship. When learners write, test, and refine programs, they move from passive consumption to active creation. Research on coding in K–12 settings consistently links this shift to stronger creativity, persistence, and student agency.',
-          'Block-based platforms and physical computing kits lower the entry point for younger grades, while text-based languages in middle and high school deepen abstraction and debugging skills. The goal is not to turn every student into a software engineer, but to ensure every student understands how digital systems behave.',
+          'English education in Indian schools has long been built around one goal: passing the exam. Students memorise rules, complete exercises, and move to the next chapter. What never gets practised is English as a living language — something you speak, respond to, and think in.',
+          "The result? Students who understand English perfectly on paper but shut down the moment they need to use it in real life. This gap between passive knowledge and active fluency is well-documented in language research — and it's rarely addressed in a traditional classroom.",
         ],
       },
       {
-        heading: 'Computational thinking across subjects',
+        heading: "Why the Classroom Alone Can't Fix This",
         paragraphs: [
-          'Coding builds computational thinking: breaking problems into steps, spotting patterns, and designing solutions that can be tested and improved. These habits support mathematics, science, writing, and project-based learning. Students learn to anticipate errors, revise work systematically, and explain their reasoning—skills that transfer far beyond the computer lab.',
-          'Recent curriculum reviews emphasize that coding and computational thinking should not live in a single elective silo. When integrated across subjects, schools see stronger engagement and more authentic problem-solving in everyday lessons.',
+          "With 40+ students per class, there simply isn't time for every child to practise speaking and receive individual feedback. Add to that the fear of being judged — one mispronounced word, a few laughs, and a child stops trying altogether. Not because they can't learn, but because the environment makes trying feel risky.",
         ],
       },
       {
-        heading: 'Why it still matters in the age of AI',
+        heading: 'What AI Changes',
         paragraphs: [
-          'Generative AI can write code snippets on demand, but it cannot replace the learning that happens when a student struggles through a bug, redesigns an algorithm, or explains a program to a peer. Understanding code remains the most reliable path to fluency with technology—and to critical judgment about what machines get right and wrong.',
-          'Workforce trends point to growing demand for people who combine programming with domain expertise in health, agriculture, design, and public service. Early coding literacy widens who can access those opportunities and helps prevent a future where only a small group understands the systems that affect everyone.',
-        ],
-      },
-      {
-        heading: 'What schools can do now',
-        paragraphs: [
-          'Start with clear progression from unplugged activities to guided projects, then to open-ended builds aligned to your timetable. Pair coding blocks with reflection: What failed? What changed? What would you do differently? Celebrate process, not only finished products.',
-          'Programs like Code Monkey are designed for Indian classrooms—structured weekly paths, teacher dashboards, and practice that fits existing schedules. The outcome is not just better coders, but young people who can program rather than be programmed.',
+          'AI-powered language tools give every student something no classroom can: unlimited, judgment-free speaking practice. When a child practises pronunciation with AI, there\'s no audience to judge, no pressure to perform. The system listens, responds, and gives precise, immediate feedback — not just "wrong," but how to fix it.',
+          'This creates the low-stakes repetition that fluency actually requires. Research in second language acquisition consistently shows that fluency comes not from studying rules, but from practising in safe, repeated contexts over time.',
+          "The students who grow up speaking confidently aren't those who studied harder. They're the ones who practised more — in environments where making mistakes was allowed.",
+          "Zene AI's English Language Lab gives every school student exactly that — a personalised, judgment-free space to speak, practise, and grow. Learn more at zene.ai.",
         ],
       },
     ],
   },
   {
     id: '1163:895',
-    slug: 'building-confident-communicators-with-english-ai',
-    title: 'Building Confident Communicators with English AI',
+    slug: 'nep-2020-wants-students-to-communicate-not-just-memorise',
+    title: 'NEP 2020 Wants Students to Communicate, Not Just Memorise. Is Your School Ready?',
     description:
-      'AI speaking practice gives every student a safe space to build fluency, pronunciation, and classroom confidence.',
-    image: blogCardImage,
+      'NEP 2020 shifts English education from rote learning to real communication. Here\'s what that means in practice — and what schools need to change.',
+    image: blogNep2020Image,
     published: 'March 5, 2026',
-    readTime: '7 min read',
+    readTime: '4 min read',
     imageNodeId: '1163:897',
     titleNodeId: '1163:895',
     bodyNodeId: '1163:896',
@@ -86,48 +83,45 @@ export const BLOG_POSTS: BlogPost[] = [
     sections: [
       {
         paragraphs: [
-          'Ask any English teacher what they wish they had more of, and the answer is almost always the same: time for each student to speak. In a class of thirty, many learners get minutes of oral practice per week—far below what research suggests for meaningful gains in fluency and confidence. AI-powered English speaking labs are changing that equation without replacing the teacher.',
+          'When NEP 2020 was released, it used a word that rarely appears in Indian education policy: communication.',
+          'Not comprehension. Not grammar. Not exam performance. Communication.',
+          'The policy explicitly endorses the Communicative Language Teaching (CLT) approach — the global standard in language education, built on the principle that language is best learned by using it in real, meaningful contexts. For most Indian schools, this requires a genuine shift.',
         ],
       },
       {
-        heading: 'The speaking gap in traditional classrooms',
+        heading: 'What CLT Means in Practice',
         paragraphs: [
-          'Reading and writing dominate timetables because they scale. Speaking does not. Shy students avoid volunteering; advanced learners dominate pair work; homework rarely includes sustained oral production. Meanwhile, boards and parents expect clear communication skills that exams only partially measure.',
-          'The result is a persistent gap between what students study and what they can actually say under pressure—in interviews, presentations, and everyday English.',
+          'CLT says language learning happens best when students are doing something with the language — solving a problem, telling a story, having a conversation — not just filling in blanks about it. Grammar is still taught, but through use rather than isolation.',
+          "Most Indian classrooms aren't designed this way. Textbooks, assessments, and teacher training have historically been grammar-first. Shifting to CLT isn't just a curriculum update — it's a rethink of how English is taught from the ground up.",
         ],
       },
       {
-        heading: 'How AI practice complements live teaching',
+        heading: 'Why CEFR Alignment Matters',
         paragraphs: [
-          'Modern AI English tools offer 24/7 conversation practice, pronunciation feedback, and adaptive difficulty in a low-anxiety environment. Students can repeat lines, slow down prompts, and try again without fear of judgment from peers. Teachers retain control of curriculum and assessment while the platform handles volume: hundreds of short speaking turns per week, per child.',
-          'Effective school models use AI for daily micro-practice—often ten to fifteen minutes—and reserve classroom time for discussion, drama, debate, and human feedback on higher-order skills. AI handles repetition; teachers handle meaning, culture, and motivation.',
+          'NEP 2020 also encourages alignment with the CEFR — the global language proficiency benchmark that measures what students can do in English, not just what rules they can recite. Can the student hold a conversation? Describe an experience? Write a coherent opinion? These are the competencies that matter in the real world.',
+          'Schools aligning with CEFR will need to track progress differently — less about marks, more about developmental milestones in speaking, reading, and writing.',
         ],
       },
       {
-        heading: 'What to measure beyond scores',
+        heading: 'The Teacher Burden Problem — and How Technology Helps',
         paragraphs: [
-          'Strong implementations track speaking time, completion of assigned oral tasks, pronunciation trends, and participation rates across the class—not only test marks. Heatmaps and term reports help coordinators see which sections need support before board exams.',
-          'When students see their own progress in dashboards, confidence compounds. Research on AI conversation practice in schools reports gains in willingness to speak, clearer pronunciation, and more regular practice outside the classroom compared with textbook-only routines.',
-        ],
-      },
-      {
-        heading: 'Privacy, purpose, and balance',
-        paragraphs: [
-          'Schools should choose platforms built for education, with clear data policies and alignment to your syllabus—not generic chatbots. Set expectations with parents: AI supplements the teacher, it does not replace human connection or cultural nuance in language learning.',
-          'Zene’s English AI program is designed for this balance: speaking, listening, reading, and writing in one place; personalised paths; visibility for teachers and leaders; and practice that maps to how Indian schools actually run. The aim is simple—every student heard, every skill measured, every teacher in control.',
+          'CLT asks teachers to listen to students speak, give pronunciation feedback, and track individual communication progress. For a teacher managing 45 students across six periods a day, that\'s not realistic without support.',
+          "This is where AI becomes essential, not optional. AI tools handle the individual practice layer — pronunciation coaching, spontaneous speaking prompts, real-time feedback — while teachers focus on what technology can't replace: relationships, group discussion, and human context.",
+          'The model that works is blended. NEP 2020 has set the direction. The question is whether the tools your school has chosen can actually take you there.',
+          "Zene AI's English curriculum is built in alignment with NEP 2020, NCERT, and CEFR standards. Learn more at zene.ai.",
         ],
       },
     ],
   },
   {
     id: '1163:898',
-    slug: 'preparing-students-for-an-ai-shaped-future',
-    title: 'Preparing Students for an AI-Shaped Future',
+    slug: 'the-child-who-reads-everything-but-says-nothing',
+    title: 'The Child Who Reads Everything But Says Nothing',
     description:
-      'Schools must blend digital literacy, communication, and life-ready skills so learners thrive alongside intelligent systems.',
-    image: blogCardImage,
+      "Many students read English fluently but can't speak it. Here's the science behind why — and how the right reading programme builds both comprehension and confidence.",
+    image: blogReadsEverythingImage,
     published: 'February 28, 2026',
-    readTime: '6 min read',
+    readTime: '3 min read',
     imageNodeId: '1163:900',
     titleNodeId: '1163:898',
     bodyNodeId: '1163:899',
@@ -135,33 +129,32 @@ export const BLOG_POSTS: BlogPost[] = [
     sections: [
       {
         paragraphs: [
-          'Artificial intelligence is no longer a chapter in a computer science textbook—it is embedded in search, writing tools, hiring screens, and everyday decisions. Students entering secondary school today will graduate into workplaces where working with AI is as normal as working with email. The question for schools is not whether to respond, but how comprehensively to prepare learners for shared work with intelligent systems.',
+          "There's a particular kind of student every English teacher knows well.",
+          'She reads every book she can find. Her vocabulary is extraordinary for her age. She understands everything the teacher says. But in spoken English — when she needs to form a sentence in real time, with someone waiting — she goes quiet.',
+          "Reading and speaking are not the same skill. But they're far more connected than most people realise.",
         ],
       },
       {
-        heading: 'Beyond tool training',
+        heading: 'What Reading Does to the Brain',
         paragraphs: [
-          'Teaching students to “use ChatGPT” is not a strategy. A durable approach combines technical literacy (how systems work, what data they use, where errors appear), communication skills (explaining ideas, interviewing, presenting), and judgment (ethics, sourcing, verification). Coding literacy fits here: students who understand logic and algorithms are better equipped to evaluate AI outputs and design solutions.',
-          'Life-ready programs add structured practice in leadership, collaboration, and reflection—documented in portfolios parents and universities can trust.',
+          'When a child reads a word repeatedly in context — woven into a story, in a sentence that carries emotion and meaning — something specific happens in the brain. The word gets attached to an experience, not just a definition. That kind of memory is far more durable, and far more accessible in conversation.',
+          "This is why reading matters for speaking. Not because reading is speaking, but because it builds the raw material that speaking draws from. A child who has encountered \"reluctant\" in a story will use that word far more naturally in conversation than one who memorised it from a word list.",
         ],
       },
       {
-        heading: 'Skills that stay valuable',
+        heading: 'The Problem With How Schools Use Reading',
         paragraphs: [
-          'Reports from education and industry bodies converge on a short list of durable capabilities: critical thinking, creativity, collaboration, digital fluency, and adaptability. AI accelerates routine tasks; humans still set goals, choose values, and resolve conflict. Schools that double down on these human skills while adopting AI for practice and measurement avoid the trap of chasing every new app without a coherent graduate profile.',
+          'Most school reading programmes focus on comprehension — answering questions about the passage, finding the main idea. These are valuable skills. But they treat text as a source of information rather than a vehicle for language experience.',
+          "When reading is reduced to comprehension exercises, students learn to extract meaning. What they don't develop is the ability to generate language — to produce sentences that sound like the language they've been reading.",
         ],
       },
       {
-        heading: 'Building school-wide coherence',
+        heading: 'Why Stories Work Better Than Textbooks',
         paragraphs: [
-          'Fragmented pilots—one class using an AI tutor, another ignoring technology—confuse families and limit impact. Stronger models align English practice, coding pathways, and leadership development under one vision of graduate outcomes. Leaders get aggregate data; teachers keep autonomy in the classroom; students see consistent expectations from grade to grade.',
-        ],
-      },
-      {
-        heading: 'A practical path forward',
-        paragraphs: [
-          'Audit what you already teach that maps to digital and life-ready skills. Identify gaps in speaking volume, coding exposure, and documented leadership. Pilot with clear metrics: participation, skill growth, teacher workload. Scale what proves sustainable for your timetable and community.',
-          'Zene partners with schools to implement this stack—English AI, Code Monkey, and The Edge—so innovation is integrated, measurable, and aligned to the learners you serve. The future is AI-shaped; your students can be ready to shape it in return.',
+          'Stories create emotional investment. When a child cares about a character, they read more carefully, remember more deeply, and — crucially — want to talk about what they read. That natural desire to share and retell is spoken English practice happening organically.',
+          'Well-curated reading material should stretch vocabulary, sustain attention, and build naturally into classroom discussion. This isn\'t about making reading "fun" in a superficial sense — it\'s about using literature the way it has always worked: as a doorway into language that feels lived-in, not studied.',
+          "The child who reads everything and says nothing isn't missing motivation or intelligence. She's missing the bridge between what she takes in and what she puts out. The right reading programme builds that bridge — one story at a time.",
+          "Zene AI's English Reader uses a CLT approach with curated, NEP-aligned stories for Grades 1–8 — designed to develop not just comprehension, but the vocabulary and confidence that make students want to speak. Learn more at zene.ai.",
         ],
       },
     ],

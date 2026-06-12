@@ -50,9 +50,9 @@ export function Footer() {
         data-node-id="975:2514"
       >
         {/* Top section — brand + link columns */}
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
+        <div className="footer-top flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-between">
           {/* Brand column */}
-          <div className="shrink-0">
+          <div className="footer-brand shrink-0">
             <a href="/" aria-label="Zene AI — Home" data-node-id="975:2515">
               <img
                 src="/assets/figma/footer/logo.png"
@@ -78,7 +78,7 @@ export function Footer() {
           </div>
 
           {/* Link columns */}
-          <div className="flex flex-col gap-y-10 sm:flex-row sm:flex-wrap sm:gap-x-[var(--footer-col-gap)] sm:gap-y-10">
+          <div className="footer-link-columns flex flex-col gap-y-10 sm:flex-row sm:flex-wrap sm:gap-x-[var(--footer-col-gap)] sm:gap-y-10">
             {FOOTER_COLUMNS.map(column => (
               <div key={column.title}>
                 <p

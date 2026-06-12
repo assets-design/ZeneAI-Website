@@ -7,12 +7,6 @@ type FaqPageSectionProps = {
   panel?: boolean
 }
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 export function FaqPageSection({ panel = false }: FaqPageSectionProps) {
   return (
     <section
@@ -71,7 +65,7 @@ export function FaqPageSection({ panel = false }: FaqPageSectionProps) {
                 }}
               >
                 Answers For{' '}
-                <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                <span className="heading-highlight">
                   Schools & Families
                 </span>
               </h1>

@@ -47,14 +47,17 @@ After upload, test on a real iPhone (Safari + Chrome):
 
 PAGES TO REVIEW
 ---------------
-/              Home
-/about         About
-/english-ai    English AI
-/code-monkey   Code Monkey
-/the-edge      The Edge
-/blog          Blog
-/contact       Contact
-/thank-you     Thank You
+/                  Home
+/about             About
+/english-ai        English AI
+/code-monkey       Code Monkey
+/the-edge          The Edge
+/blog              Blog
+/faq               FAQ
+/careers           Careers
+/privacy-policy    Privacy Policy
+/contact           Contact
+/thank-you         Thank You
 
-Built: 2026-06-09 18:05 (production static export, Vite)
+Built: 2026-06-12 14:55 (production static export, Vite)
 

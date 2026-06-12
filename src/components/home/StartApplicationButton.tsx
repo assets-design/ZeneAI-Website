@@ -21,13 +21,11 @@ export function StartApplicationButton({
     <a
       href={href}
       className={cn(
-        'rotating-split-border relative inline-flex w-full max-w-[var(--apply-cta-btn-w)] items-center justify-between text-black no-underline transition-none hover:text-black sm:w-[var(--apply-cta-btn-w)]',
+        'relative inline-flex w-full max-w-[var(--apply-cta-btn-w)] items-center justify-between text-black no-underline transition-none hover:text-black sm:w-[var(--apply-cta-btn-w)]',
         className,
       )}
       style={{
         height: 'var(--apply-cta-btn-h)',
-        borderWidth: 'var(--apply-cta-btn-border)',
-        borderRadius: 'var(--apply-cta-btn-radius)',
         paddingLeft: 'var(--apply-cta-btn-padding-x-left)',
         paddingRight: 'var(--apply-cta-btn-padding-x)',
       }}
@@ -36,6 +34,15 @@ export function StartApplicationButton({
       data-node-id="975:1981"
       aria-label="Start application"
     >
+      <span
+        className="rotating-split-border absolute inset-0"
+        style={{
+          borderWidth: 'var(--apply-cta-btn-border)',
+          borderRadius: 'var(--apply-cta-btn-radius)',
+        }}
+        aria-hidden
+      />
+
       <span
         className="relative z-[1] shrink-0 font-heading font-normal uppercase leading-none"
         style={{

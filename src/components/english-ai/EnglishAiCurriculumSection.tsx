@@ -270,12 +270,6 @@ export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAi
       ? 'code-monkey-curriculum-heading'
       : 'english-ai-curriculum-heading'
 
-  const highlightStyle = {
-    minHeight: 'var(--english-ai-highlight-h)',
-    paddingLeft: 'var(--english-ai-highlight-pad-x)',
-    paddingRight: 'var(--english-ai-highlight-pad-x)',
-  } as const
-
   return (
     <section
       className="w-full px-[5px] pt-[5px]"
@@ -317,7 +311,7 @@ export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAi
             {isTheEdge ? (
               <>
                 the edge{' '}
-                <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                <span className="heading-highlight">
                   courses
                 </span>
                 .
@@ -325,11 +319,11 @@ export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAi
             ) : isCodeMonkey ? (
               <>
                 Your{' '}
-                <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                <span className="heading-highlight">
                   textbook
                 </span>
                 , your{' '}
-                <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                <span className="heading-highlight">
                   scope
                 </span>
                 , your sequence.
@@ -338,8 +332,7 @@ export function EnglishAiCurriculumSection({ variant = 'english-ai' }: EnglishAi
               <>
                 Your textbook,{' '}
                 <span
-                  className="inline-block bg-[#78F3FA]"
-                  style={highlightStyle}
+                  className="heading-highlight"
                   data-node-id="1060:2338"
                 >
                   your scope,

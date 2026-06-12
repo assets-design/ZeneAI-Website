@@ -60,15 +60,17 @@ export function ContactHeroSection({ panel = false }: ContactHeroSectionProps) {
               </p>
               <h1
                 id="contact-hero-heading"
-                className="reveal-left font-heading font-medium uppercase leading-none text-black"
+                className="reveal-left section-heading font-heading font-medium uppercase text-black"
                 style={{
                   fontSize: 'var(--hero-text-headline)',
+                  lineHeight: 'var(--section-heading-line-height)',
                   marginTop: 'var(--section-eyebrow-to-heading)',
                 }}
                 data-node-id="642:2091"
               >
-                <span className="block">Bring AI-powered</span>
-                <span className="block w-max max-w-none whitespace-nowrap max-sm:whitespace-normal">
+                Bring AI-powered
+                <br />
+                <span className="max-sm:whitespace-normal sm:whitespace-nowrap">
                   learning to your school
                 </span>
               </h1>

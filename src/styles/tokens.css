@@ -29,7 +29,13 @@
   --color-surface       : #f9fafb;
 
   /* --- Header (Figma Group 511 — node 967:1776) -------------- */
-  --gradient-header: linear-gradient(93.16deg, #177ec0 39.23%, #78f3fa 100%);
+  --gradient-header-angle    : 93.16deg;
+  --gradient-header-blue-stop: 39.23%;
+  --gradient-header          : linear-gradient(
+    var(--gradient-header-angle),
+    var(--color-zene-blue) var(--gradient-header-blue-stop),
+    var(--color-zene-cyan) 100%
+  );
   --header-max-width     : 1910px;
   --header-announcement-h: 55px;
   --header-announcement-padding-y: calc(10px * var(--header-font-scale));
@@ -141,6 +147,7 @@
   --hero-badge-3-h              : calc(114px * var(--media-scale) / var(--header-font-scale));
   --hero-badge-4-w              : calc(215px * var(--media-scale) / var(--header-font-scale));
   --hero-badge-4-h              : calc(118px * var(--media-scale) / var(--header-font-scale));
+  --hero-badge-image-slot-h     : var(--hero-badge-2-h);
   --hero-badge-carousel-to-dots : calc(20px * var(--header-font-scale));
   --hero-badge-dot-size         : calc(10px * var(--header-font-scale));
   --hero-badge-dot-gap          : calc(10px * var(--header-font-scale));
@@ -266,7 +273,7 @@
   /* Home section 7 — Become an AI-Ready School (765:1838 / 765:1839) */
   --ai-ready-padding-top        : 60px;
   --ai-ready-padding-bottom     : 80px;
-  --ai-ready-heading-max-w      : calc(425px * var(--header-font-scale));
+  --ai-ready-heading-max-w      : calc(560px * var(--header-font-scale));
   --ai-ready-heading-to-diagram : calc(-8px * var(--media-size));
   --ai-ready-diagram-aspect     : 1910 / 854;
   --ai-ready-diagram-max-h      : calc(854px * var(--media-size));
@@ -298,7 +305,7 @@
   --testimonial-eyebrow-to-heading  : calc(44px * var(--header-font-scale) * var(--section-eyebrow-gap-scale));
   --testimonial-heading-to-carousel : calc(30px * var(--header-font-scale));
   --testimonial-track-width         : 100%;
-  --testimonial-carousel-pl         : var(--section-padding-x);
+  --testimonial-carousel-pl         : 20px; /* reduced left padding for carousel */
   --testimonial-card-w              : calc(482px * var(--media-size));
   --testimonial-card-h              : calc(593px * var(--media-size));
   --testimonial-card-gap            : calc(45px * var(--header-font-scale));
@@ -383,7 +390,7 @@
   --faq-question-size               : calc(28px * var(--type-size));
   --faq-answer-size                 : var(--section-text-body);
   --faq-question-to-answer          : calc(25px * var(--header-font-scale));
-  --faq-answer-max-w                : calc(812px * var(--header-font-scale));
+  --faq-answer-max-w                : 100%;
 
   /* Home section 12 — Apply CTA (1025:1892) */
   --apply-cta-padding-top           : calc(102px * var(--header-font-scale));
@@ -537,6 +544,7 @@
   --blog-post-header-to-feature     : calc(40px * var(--type-size));
   --blog-post-feature-h             : calc(420px * var(--media-size));
   --blog-post-feature-to-content    : calc(48px * var(--type-size));
+  --blog-post-description-size        : 15px;
   --blog-post-content-max-w         : calc(874px * var(--header-font-scale));
   --blog-post-heading-size          : calc(32px * var(--type-size));
   --blog-post-heading-to-body       : calc(20px * var(--type-size));
@@ -1449,6 +1457,7 @@
     --hero-badge-3-h                : 95px;
     --hero-badge-4-w                : 178px;
     --hero-badge-4-h                : 98px;
+    --hero-badge-image-slot-h       : 100px;
     --hero-badge-text-max-w         : 100%;
 
     /* See it in action */

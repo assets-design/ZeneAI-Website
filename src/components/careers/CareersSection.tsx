@@ -9,12 +9,6 @@ type CareersSectionProps = {
   panel?: boolean
 }
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 const JOB_COUNT = CAREER_JOBS.length
 const LOOP_SETS = 3
 const AUTO_SLIDE_MS = 4500
@@ -416,7 +410,7 @@ export function CareersSection({ panel = false }: CareersSectionProps) {
                 }}
               >
                 Build The Future Of{' '}
-                <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                <span className="heading-highlight">
                   AI-Powered Learning
                 </span>
               </h1>

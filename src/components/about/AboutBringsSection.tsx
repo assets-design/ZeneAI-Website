@@ -489,29 +489,20 @@ export function AboutBringsSection({
               <span className="flex flex-wrap items-end gap-[var(--about-brings-heading-word-gap)]">
                 <span>{content.headingLine1}</span>
                 <span
-                  className="inline-flex items-center bg-zene-cyan"
-                  style={{
-                    minHeight: 'var(--about-brings-highlight-h)',
-                    paddingLeft: 'var(--about-brings-highlight-pad-x)',
-                    paddingRight: 'var(--about-brings-highlight-pad-x)',
-                  }}
+                  className="heading-highlight"
                 >
                   {content.headingHighlight}
                 </span>
               </span>
             ) : (
               <>
-                <span className="block max-sm:whitespace-normal sm:whitespace-nowrap">
+                <span className="max-sm:whitespace-normal sm:whitespace-nowrap">
                   {content.headingLine1}
                 </span>
-                <span className="block max-sm:whitespace-normal sm:whitespace-nowrap">
+                <br />
+                <span className="max-sm:whitespace-normal sm:whitespace-nowrap">
                   <span
-                    className="inline-flex items-center bg-zene-cyan"
-                    style={{
-                      minHeight: 'var(--about-brings-highlight-h)',
-                      paddingLeft: 'var(--about-brings-highlight-pad-x)',
-                      paddingRight: 'var(--about-brings-highlight-pad-x)',
-                    }}
+                    className="heading-highlight"
                   >
                     {content.headingHighlight}
                   </span>

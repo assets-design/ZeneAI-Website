@@ -177,12 +177,7 @@ export function EnglishAiToolsSection({ variant = 'english-ai' }: EnglishAiTools
           <>
             Multi-rater.{' '}
             <span
-              className="inline-flex items-center bg-zene-cyan"
-              style={{
-                minHeight: 'var(--english-ai-highlight-h)',
-                paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                paddingRight: 'var(--english-ai-highlight-pad-x)',
-              }}
+              className="heading-highlight"
             >
               Research-backed.
             </span>
@@ -191,12 +186,7 @@ export function EnglishAiToolsSection({ variant = 'english-ai' }: EnglishAiTools
           <>
             Every{' '}
             <span
-              className="inline-flex items-center bg-zene-cyan"
-              style={{
-                minHeight: 'var(--english-ai-highlight-h)',
-                paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                paddingRight: 'var(--english-ai-highlight-pad-x)',
-              }}
+              className="heading-highlight"
             >
               English skill
             </span>
@@ -206,12 +196,7 @@ export function EnglishAiToolsSection({ variant = 'english-ai' }: EnglishAiTools
           <>
             Every{' '}
             <span
-              className="inline-block bg-[#78F3FA]"
-              style={{
-                minHeight: 'var(--english-ai-highlight-h)',
-                paddingLeft: 'var(--english-ai-highlight-pad-x)',
-                paddingRight: 'var(--english-ai-highlight-pad-x)',
-              }}
+              className="heading-highlight"
               data-node-id="1060:2238"
             >
               English skill,

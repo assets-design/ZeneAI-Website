@@ -71,6 +71,7 @@ const PILLAR_SWIPE_ORDER = [...PILLARS.keys()].sort(
 )
 
 const SWIPE_THRESHOLD_PX = 48
+const AUTO_ROTATE_MS = 4500
 
 /** Middle (second) ring radius — dot sits on this stroke (diameter = 56.7%). */
 const RING_RADIUS_PERCENT = 28.35
@@ -94,12 +95,6 @@ function shortestAngleDelta(fromDeg: number, toDeg: number) {
   return ((((toDeg - fromDeg) % 360) + 540) % 360) - 180
 }
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 function stepOrbitIndex(current: number, direction: 1 | -1) {
   const orderIndex = PILLAR_SWIPE_ORDER.indexOf(current)
   const nextOrderIndex =
@@ -114,15 +109,14 @@ function FrameworkDiagram({
   selectedIndex: number
   onSelect: (index: number) => void
 }) {
-  const [orbitIndex, setOrbitIndex] = useState(selectedIndex)
   const [dotAngleDeg, setDotAngleDeg] = useState(PILLARS[selectedIndex].angleDeg)
   const pointerStartXRef = useRef<number | null>(null)
   const didSwipeRef = useRef(false)
 
   useEffect(() => {
-    const target = PILLARS[orbitIndex].angleDeg
+    const target = PILLARS[selectedIndex].angleDeg
     setDotAngleDeg(prev => prev + shortestAngleDelta(prev, target))
-  }, [orbitIndex])
+  }, [selectedIndex])
 
   const handlePointerDown = (clientX: number) => {
     pointerStartXRef.current = clientX
@@ -138,7 +132,7 @@ function FrameworkDiagram({
     if (Math.abs(deltaX) < SWIPE_THRESHOLD_PX) return
 
     didSwipeRef.current = true
-    setOrbitIndex(prev => stepOrbitIndex(prev, deltaX < 0 ? 1 : -1))
+    onSelect(stepOrbitIndex(selectedIndex, deltaX < 0 ? 1 : -1))
   }
 
   const handlePillarClick = (index: number) => {
@@ -147,7 +141,6 @@ function FrameworkDiagram({
       return
     }
 
-    setOrbitIndex(index)
     onSelect(index)
   }
 
@@ -215,11 +208,11 @@ function FrameworkDiagram({
         aria-hidden
         style={{ transform: `rotate(${dotAngleDeg}deg)` }}
       >
-        <span className="the-edge-framework-ring-dot" />
+        <span className="the-edge-framework-ring-dot" aria-hidden />
       </div>
 
       {PILLARS.map((pillar, index) => {
-        const isOrbitActive = orbitIndex === index
+        const isOrbitActive = selectedIndex === index
         const position = polarPosition(pillar.angleDeg, ICON_RADIUS_PERCENT)
 
         return (
@@ -252,7 +245,56 @@ function FrameworkDiagram({
 
 export function TheEdgeFrameworkSection() {
   const [activeIndex, setActiveIndex] = useState(0)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const isHoveredRef = useRef(false)
   const activePillar = PILLARS[activeIndex]
+
+  useEffect(() => {
+    const content = contentRef.current
+    const section = content?.closest('section')
+    if (!content || !section) return
+
+    let timer: ReturnType<typeof setInterval> | undefined
+
+    const advance = () => {
+      if (isHoveredRef.current) return
+      setActiveIndex(prev => stepOrbitIndex(prev, 1))
+    }
+
+    const startAutoplay = () => {
+      if (timer != null) return
+      timer = window.setInterval(advance, AUTO_ROTATE_MS)
+    }
+
+    const stopAutoplay = () => {
+      if (timer == null) return
+      window.clearInterval(timer)
+      timer = undefined
+    }
+
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= 0.15)) {
+          startAutoplay()
+        } else {
+          stopAutoplay()
+        }
+      },
+      { threshold: [0, 0.15, 0.35] },
+    )
+
+    observer.observe(section)
+
+    const rect = content.getBoundingClientRect()
+    if (rect.width > 0 && rect.top < window.innerHeight && rect.bottom > 0) {
+      startAutoplay()
+    }
+
+    return () => {
+      stopAutoplay()
+      observer.disconnect()
+    }
+  }, [])
 
   return (
     <section
@@ -292,7 +334,7 @@ export function TheEdgeFrameworkSection() {
             data-node-id="1100:2335"
           >
             Five pillars.{' '}
-            <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+            <span className="heading-highlight">
               Every skill a graduate
             </span>{' '}
             needs.
@@ -312,8 +354,15 @@ export function TheEdgeFrameworkSection() {
           </p>
 
           <div
+            ref={contentRef}
             className="the-edge-framework-content grid min-w-0 items-start gap-x-[var(--the-edge-framework-columns-gap)] gap-y-[var(--the-edge-framework-row-gap)] lg:grid-cols-2"
             style={{ marginTop: 'var(--the-edge-framework-subtitle-to-content)' }}
+            onMouseEnter={() => {
+              isHoveredRef.current = true
+            }}
+            onMouseLeave={() => {
+              isHoveredRef.current = false
+            }}
           >
             <FrameworkDiagram selectedIndex={activeIndex} onSelect={setActiveIndex} />
 
@@ -323,7 +372,7 @@ export function TheEdgeFrameworkSection() {
               aria-labelledby={`the-edge-framework-pillar-${activePillar.id}`}
             >
               <div
-                className="the-edge-framework-detail-image overflow-hidden"
+                className="the-edge-framework-detail-image"
                 data-node-id="1100:2341"
               >
                 <img

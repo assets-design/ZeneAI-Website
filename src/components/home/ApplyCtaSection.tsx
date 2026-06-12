@@ -118,23 +118,27 @@ export function ApplyCtaSection({ variant = 'home' }: ApplyCtaSectionProps) {
               >
                 {isAbout ? (
                   <>
-                    <span className="block whitespace-nowrap">Let&apos;s Build</span>
-                    <span className="block whitespace-nowrap">Skills That Matter</span>
+                    <span className="whitespace-nowrap">Let&apos;s Build</span>
+                    <br />
+                    <span className="whitespace-nowrap">Skills That Matter</span>
                   </>
                 ) : isTheEdge ? (
                   <>
-                    <span className="block sm:whitespace-nowrap">Apply to the AY</span>
-                    <span className="block sm:whitespace-nowrap">2026–27 Cohort</span>
+                    <span className="sm:whitespace-nowrap">Apply to the AY</span>
+                    <br />
+                    <span className="sm:whitespace-nowrap">2026–27 Cohort</span>
                   </>
                 ) : isCodeMonkey ? (
                   <>
-                    <span className="block sm:whitespace-nowrap">Apply to the AY</span>
-                    <span className="block sm:whitespace-nowrap">2026–27 cohort</span>
+                    <span className="sm:whitespace-nowrap">Apply to the AY</span>
+                    <br />
+                    <span className="sm:whitespace-nowrap">2026–27 cohort</span>
                   </>
                 ) : (
                   <>
-                    <span className="block sm:whitespace-nowrap">Apply to the AY</span>
-                    <span className="block sm:whitespace-nowrap">2026–27 Cohort</span>
+                    <span className="sm:whitespace-nowrap">Apply to the AY</span>
+                    <br />
+                    <span className="sm:whitespace-nowrap">2026–27 Cohort</span>
                   </>
                 )}
               </h2>

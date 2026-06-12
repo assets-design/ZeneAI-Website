@@ -56,24 +56,19 @@ export function AboutWhyExistSection() {
 
             <h2
               id="about-why-heading"
-              className="flex flex-wrap items-end font-heading font-medium uppercase leading-none text-black"
+              className="font-heading font-medium uppercase leading-none text-black"
               style={{
                 fontSize: 'var(--section-text-heading)',
-                gap: 'var(--about-why-heading-word-gap)',
                 marginTop: 'var(--about-why-eyebrow-to-heading)',
               }}
               data-node-id="1047:2030"
             >
-              <span className="block max-sm:whitespace-normal sm:whitespace-nowrap">
+              <span className="max-sm:whitespace-normal sm:whitespace-nowrap">
                 Zene was born to
               </span>
+              <br />
               <span
-                className="inline-flex items-center bg-zene-cyan"
-                style={{
-                  minHeight: 'var(--about-why-exist-highlight-h)',
-                  paddingLeft: 'var(--about-why-exist-highlight-pad-x)',
-                  paddingRight: 'var(--about-why-exist-highlight-pad-x)',
-                }}
+                className="heading-highlight"
                 data-node-id="1047:2033"
               >
                 <span data-node-id="1047:2035">create impact.</span>

@@ -172,12 +172,6 @@ export function EnglishAiGainsSection({ variant = 'english-ai' }: EnglishAiGains
   const isCustomProgram = isCodeMonkey || isTheEdge
   const items = isTheEdge ? THE_EDGE_GAINS : isCodeMonkey ? CODE_MONKEY_GAINS : GAINS
 
-  const highlightStyle = {
-    minHeight: 'var(--english-ai-highlight-h)',
-    paddingLeft: 'var(--english-ai-highlight-pad-x)',
-    paddingRight: 'var(--english-ai-highlight-pad-x)',
-  } as const
-
   return (
     <EnglishAiFeatureGridSection
       variant={variant}
@@ -192,23 +186,22 @@ export function EnglishAiGainsSection({ variant = 'english-ai' }: EnglishAiGains
         isTheEdge ? (
           <>
             Five pillars.{' '}
-            <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+            <span className="heading-highlight">
               Every skill a graduate
             </span>{' '}
             needs.
           </>
         ) : (
-          <span className="block max-lg:whitespace-normal lg:whitespace-nowrap">
+          <>
             Six things your{' '}
             <span
-              className="inline-flex items-center bg-zene-cyan"
-              style={highlightStyle}
+              className="heading-highlight"
               data-node-id="1060:2302"
             >
               English program
             </span>{' '}
             gains in one term.
-          </span>
+          </>
         )
       }
       subtitle={

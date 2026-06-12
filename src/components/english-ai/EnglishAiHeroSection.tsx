@@ -43,27 +43,30 @@ export function EnglishAiHeroSection({ variant = 'english-ai' }: EnglishAiHeroSe
 
   const headingContent = isTheEdge ? (
     <>
-      <span className="block max-lg:whitespace-normal xl:whitespace-nowrap">
+      <span className="max-lg:whitespace-normal xl:whitespace-nowrap">
         Every student leaves with documented proof
       </span>
-      <span className="block max-lg:whitespace-normal xl:whitespace-nowrap">
+      <br />
+      <span className="max-lg:whitespace-normal xl:whitespace-nowrap">
         of who they are becoming.
       </span>
     </>
   ) : isCodeMonkey ? (
     <>
-      <span className="block whitespace-nowrap max-xl:whitespace-normal">Code Monkey — the world's most loved</span>
-      <span className="block whitespace-nowrap max-xl:whitespace-normal">
+      <span className="whitespace-nowrap max-xl:whitespace-normal">Code Monkey — the world's most loved</span>
+      <br />
+      <span className="whitespace-nowrap max-xl:whitespace-normal">
         coding program for kids
         {', now in your school.'}
       </span>
     </>
   ) : (
     <>
-      <span className="block max-lg:whitespace-normal xl:whitespace-nowrap">
+      <span className="max-lg:whitespace-normal xl:whitespace-nowrap">
         Where every student finds
       </span>
-      <span className="block max-lg:whitespace-normal xl:whitespace-nowrap">
+      <br />
+      <span className="max-lg:whitespace-normal xl:whitespace-nowrap">
         their voice in English.
       </span>
     </>

@@ -113,7 +113,7 @@ export function AiReadySection({ variant = 'default' }: { variant?: 'home' | 'de
           >
             Become an
             <br />
-            <span className="bg-[#78F3FA]" data-node-id="765:1873">
+            <span className="heading-highlight" data-node-id="765:1873">
               AI-Ready
             </span>{' '}
             School

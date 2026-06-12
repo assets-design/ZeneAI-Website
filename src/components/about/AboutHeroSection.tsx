@@ -62,10 +62,11 @@ export function AboutHeroSection() {
               }}
               data-node-id="1047:1949"
             >
-              <span className="block max-sm:whitespace-normal sm:whitespace-nowrap">
+              <span className="max-sm:whitespace-normal sm:whitespace-nowrap">
                 Built to give every student the
               </span>
-              <span className="block max-sm:whitespace-normal sm:whitespace-nowrap">
+              <br />
+              <span className="max-sm:whitespace-normal sm:whitespace-nowrap">
                 practice classroom time cannot.
               </span>
             </h1>

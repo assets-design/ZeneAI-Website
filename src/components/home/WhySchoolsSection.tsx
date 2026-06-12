@@ -134,7 +134,7 @@ export function WhySchoolsSection() {
                 data-node-id="642:1152"
               >
                 Why schools Choose{' '}
-                <span className="bg-[#78F3FA]" data-node-id="642:1154">
+                <span className="heading-highlight" data-node-id="642:1154">
                   ZENE AI
                 </span>
               </h2>

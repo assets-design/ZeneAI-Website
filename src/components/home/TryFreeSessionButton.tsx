@@ -25,19 +25,26 @@ export function TryFreeSessionButton({
     <a
       href={href}
       className={cn(
-        'rotating-split-border relative inline-flex w-full max-w-[var(--section-try-btn-w)] items-center text-black no-underline transition-none hover:text-black sm:w-[var(--section-try-btn-w)]',
+        'relative inline-flex w-full max-w-[var(--section-try-btn-w)] items-center text-black no-underline transition-none hover:text-black sm:w-[var(--section-try-btn-w)]',
         className,
       )}
       style={{
         height: 'var(--section-try-btn-h)',
-        borderWidth: 'var(--section-try-btn-border)',
-        borderRadius: 'var(--section-try-btn-radius)',
         ...style,
       }}
       data-node-id="642:1289"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
+      <span
+        className="rotating-split-border absolute inset-0"
+        style={{
+          borderWidth: 'var(--section-try-btn-border)',
+          borderRadius: 'var(--section-try-btn-radius)',
+        }}
+        aria-hidden
+      />
+
       <span
         className={cn(
           'relative z-[1] font-heading font-normal uppercase leading-none',

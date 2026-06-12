@@ -108,12 +108,6 @@ const LOOP_SETS = 3
 const AUTO_SLIDE_MS = 4500
 const SLIDE_STEP = 2
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 function getVisibleLogoCount(width: number) {
   if (width >= 640) return 8
   return 4
@@ -518,7 +512,7 @@ export function CodeMonkeyWhySection() {
             data-node-id="1294:891"
           >
             Why bring{' '}
-            <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+            <span className="heading-highlight">
               Code Monkey
             </span>{' '}
             to your school.

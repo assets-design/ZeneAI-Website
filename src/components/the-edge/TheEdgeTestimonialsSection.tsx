@@ -70,12 +70,6 @@ const PARTNER_LOGOS = [
   },
 ] as const
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 function TestimonialCard({
   name,
   role,
@@ -216,12 +210,12 @@ export function TheEdgeTestimonialsSection() {
                 }}
                 data-node-id="1126:2505"
               >
-              <span className="block" data-node-id="1126:2506">
+              <span data-node-id="1126:2506">
                 Real Students.
               </span>
+              <br />
               <span
-                className="mt-[var(--the-edge-testimonials-heading-line-gap)] inline-flex items-center bg-zene-cyan"
-                style={highlightStyle}
+                className="heading-highlight"
                 data-node-id="1126:2509"
               >
                 Real Progress.

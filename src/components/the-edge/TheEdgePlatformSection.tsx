@@ -1,12 +1,6 @@
 import platformMockup from '@/assets/figma/the-edge/platform-mockup.png'
 import { SectionEyebrow } from '@/components/SectionEyebrow'
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 export function TheEdgePlatformSection() {
   return (
     <section
@@ -42,9 +36,10 @@ export function TheEdgePlatformSection() {
                 }}
                 data-node-id="1100:2163"
               >
-                <span className="block whitespace-nowrap">One platform. Every</span>
-                <span className="block whitespace-nowrap">
-                  <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+                <span className="whitespace-nowrap">One platform. Every</span>
+                <br />
+                <span className="whitespace-nowrap">
+                  <span className="heading-highlight">
                     leadership skill
                   </span>{' '}
                   measured.

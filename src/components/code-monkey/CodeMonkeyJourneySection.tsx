@@ -127,12 +127,6 @@ const COURSE_COUNT = COURSES.length
 const LOOP_SETS = 3
 const AUTO_SLIDE_MS = 4500
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 function getVisibleCount(width: number) {
   if (width >= 640) return 3
   return 1
@@ -561,7 +555,7 @@ export function CodeMonkeyJourneySection() {
             data-node-id="1294:824"
           >
             A coding journey{' '}
-            <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+            <span className="heading-highlight">
               that grows
             </span>{' '}
             with every student.

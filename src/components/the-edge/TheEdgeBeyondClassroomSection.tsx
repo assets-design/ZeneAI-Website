@@ -21,12 +21,6 @@ const TRACKS = [
   },
 ] as const
 
-const highlightStyle = {
-  minHeight: 'var(--english-ai-highlight-h)',
-  paddingLeft: 'var(--english-ai-highlight-pad-x)',
-  paddingRight: 'var(--english-ai-highlight-pad-x)',
-} as const
-
 function TrackCard({
   title,
   body,
@@ -222,7 +216,7 @@ export function TheEdgeBeyondClassroomSection() {
             data-node-id="1297:2980"
           >
             Where skills{' '}
-            <span className="inline-flex items-center bg-zene-cyan" style={highlightStyle}>
+            <span className="heading-highlight">
               become experience.
             </span>
           </h2>

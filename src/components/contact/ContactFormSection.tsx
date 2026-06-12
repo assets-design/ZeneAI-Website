@@ -278,15 +278,22 @@ export function ContactFormSection({ panel = false }: ContactFormSectionProps) {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full max-w-[var(--contact-form-button-w)] bg-gradient-to-b from-zene-cyan to-zene-blue font-heading uppercase leading-none text-black transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-70"
+                className="relative inline-flex w-full max-w-[var(--contact-form-button-w)] items-center justify-center font-heading uppercase leading-none text-black transition-opacity hover:opacity-90 disabled:cursor-wait disabled:opacity-70"
                 style={{
                   height: 'var(--contact-form-button-h)',
-                  borderRadius: 'var(--contact-form-button-radius)',
                   fontSize: 'var(--contact-form-button-text)',
                 }}
                 data-node-id="642:2120"
               >
-                <span data-node-id="642:2121">
+                <span
+                  className="rotating-split-border absolute inset-0"
+                  style={{
+                    borderWidth: 'var(--apply-cta-btn-border)',
+                    borderRadius: 'var(--contact-form-button-radius)',
+                  }}
+                  aria-hidden
+                />
+                <span className="relative z-[1]" data-node-id="642:2121">
                   {submitting ? 'Sending…' : 'Request a Demo'}
                 </span>
               </button>

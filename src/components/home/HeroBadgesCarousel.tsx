@@ -17,7 +17,7 @@ type HeroBadgesCarouselProps = {
 
 function HeroBadgeSlide({ badge }: { badge: HeroBadge }) {
   return (
-    <div className="flex w-full shrink-0 snap-center snap-always flex-col items-center px-2 text-center">
+    <div className="hero-badge-item flex w-full shrink-0 snap-center snap-always flex-col items-center px-2 text-center">
       <img
         src={badge.image}
         alt={badge.alt}
